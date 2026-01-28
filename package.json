@@ -1,40 +1,43 @@
 {
   "name": "roiba-villas",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "description": "Grupo Roiba - Plataforma de villas de lujo en Punta Cana",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@sanity/client": "^6.8.0",
+    "@hookform/resolvers": "^3.3.2",
     "@supabase/ssr": "^0.0.10",
-    "@supabase/supabase-js": "^2.90.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.562.0",
-    "next": "^13.5.6",
+    "@supabase/supabase-js": "^2.39.0",
+    "clsx": "^2.0.0",
+    "next": "13.5.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "resend": "^2.0.0",
-    "tailwind-merge": "^3.4.0",
+    "react-hook-form": "^7.48.2",
+    "tailwind-merge": "^2.1.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/node": "^20.19.30",
-    "@types/react": "^18.3.27",
-    "@types/react-dom": "^18.3.7",
-    "autoprefixer": "^10.4.23",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^13.5.6",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5.3.3"
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.39",
+    "@types/react-dom": "^18.2.17",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.54.0",
+    "eslint-config-next": "13.5.6",
+    "postcss": "^8.4.31",
+    "prettier": "^3.1.0",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.3.2"
   },
-  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
-  "main": "next.config.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

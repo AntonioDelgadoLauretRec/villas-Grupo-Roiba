@@ -1,284 +1,176 @@
-import { Metadata } from 'next'
-import { Phone, Mail, MapPin, Clock, MessageCircle, Building2 } from 'lucide-react'
-import { ContactForm } from '@/components/sections/ContactForm'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Contacto | Grupo Roiba Villas',
-  description: 'Contáctenos para invertir en villas de lujo en Punta Cana. Asesoramiento personalizado para inversores de alto patrimonio.',
-  openGraph: {
-    title: 'Contacto | Grupo Roiba Villas',
-    description: 'Contáctenos para invertir en villas de lujo en Punta Cana.',
-  },
-}
-
-const CONTACT_INFO = [
-  {
-    icon: Phone,
-    label: 'Teléfono',
-    value: '+1 (809) 555-0123',
-    href: 'tel:+18095550123',
-    description: 'Línea directa de inversiones',
-  },
-  {
-    icon: MessageCircle,
-    label: 'WhatsApp',
-    value: '+1 (809) 555-0124',
-    href: 'https://wa.me/18095550124',
-    description: 'Respuesta en menos de 2 horas',
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'inversiones@gruporoiba.com',
-    href: 'mailto:inversiones@gruporoiba.com',
-    description: 'Para consultas detalladas',
-  },
-  {
-    icon: MapPin,
-    label: 'Oficina Principal',
-    value: 'Punta Cana Village, Cap Cana',
-    href: 'https://maps.google.com/?q=Cap+Cana+Punta+Cana',
-    description: 'República Dominicana',
-  },
-]
-
-const OFFICE_HOURS = [
-  { day: 'Lunes - Viernes', hours: '9:00 AM - 6:00 PM' },
-  { day: 'Sábado', hours: '10:00 AM - 2:00 PM' },
-  { day: 'Domingo', hours: 'Cita previa' },
-]
-
-const FAQ_ITEMS = [
-  {
-    question: '¿Cuál es la inversión mínima requerida?',
-    answer: 'Nuestras villas están diseñadas para inversores con capacidad desde $500,000 USD. Ofrecemos opciones de financiamiento flexibles.',
-  },
-  {
-    question: '¿Cuánto tiempo tarda el proceso de compra?',
-    answer: 'El proceso completo, desde la reserva hasta la escrituración, toma aproximadamente 60-90 días, dependiendo de la modalidad de pago.',
-  },
-  {
-    question: '¿Puedo visitar las propiedades antes de comprar?',
-    answer: 'Absolutamente. Organizamos tours privados con recogida en aeropuerto, alojamiento cortesía y visita guiada a todas las propiedades de interés.',
-  },
-  {
-    question: '¿Qué rentabilidad puedo esperar?',
-    answer: 'Nuestras villas en zonas premium de Punta Cana generan entre 6% y 9% de rentabilidad anual neta por alquiler vacacional.',
-  },
-  {
-    question: '¿Ofrecen gestión de alquileres?',
-    answer: 'Sí, contamos con un servicio integral de property management que incluye mantenimiento, limpieza, marketing y gestión de reservas.',
-  },
-]
+import { useSearchParams } from 'next/navigation'
+import { ContactForm } from '@/components/sections'
+import { TrustSignals } from '@/components/sections'
+import { COMPANY } from '@/lib/utils'
 
 export default function ContactoPage() {
+  const searchParams = useSearchParams()
+  const hasLand = searchParams.get('has_land')
+  const situation = searchParams.get('situation')
+
+  // Determine default situation based on URL params
+  let defaultSituation: 'has_land' | 'full_investment' | 'info_only' | undefined
+  if (hasLand === 'true') {
+    defaultSituation = 'has_land'
+  } else if (hasLand === 'false') {
+    defaultSituation = 'full_investment'
+  } else if (situation === 'info_only') {
+    defaultSituation = 'info_only'
+  }
+
   return (
-    <main>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-oceano via-oceano/95 to-oceano-dark py-20 lg:py-28">
-        <div className="absolute inset-0 bg-[url('/images/pattern-tropical.svg')] opacity-5" />
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 bg-dorado/20 text-dorado rounded-full text-sm font-medium mb-6">
-              Estamos aquí para ayudarle
-            </span>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6">
-              Contáctenos
-            </h1>
-            <p className="text-xl text-white/80 leading-relaxed">
-              Nuestro equipo de asesores de inversión está listo para guiarle 
-              en su camino hacia la propiedad perfecta en el Caribe.
-            </p>
-          </div>
+    <>
+      {/* Hero */}
+      <section className="relative pt-32 pb-16 bg-roiba-verde overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-luxury opacity-90" />
+        <div className="absolute top-0 right-0 w-1/3 h-1 bg-gradient-to-l from-roiba-dorado to-transparent" />
+        
+        <div className="relative z-10 container-wide text-center">
+          <h1 className="font-serif text-4xl md:text-5xl text-roiba-arena mb-4">
+            Empezar Proyecto
+          </h1>
+          <p className="text-lg text-roiba-arena/80 max-w-2xl mx-auto">
+            Cuéntanos sobre tu situación y objetivos. Un asesor de inversión 
+            se pondrá en contacto contigo en las próximas 24 horas.
+          </p>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-16 lg:py-24 bg-arena/30">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Contact Form */}
+      <section className="section bg-roiba-arena">
+        <div className="container-wide">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Form */}
             <div className="order-2 lg:order-1">
-              <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
-                <h2 className="font-serif text-2xl lg:text-3xl text-carbon mb-2">
-                  Solicite Información
-                </h2>
-                <p className="text-carbon/60 mb-8">
-                  Complete el formulario y un asesor le contactará en menos de 24 horas.
-                </p>
-                <ContactForm sourceContext="pagina-contacto" />
-              </div>
+              <ContactForm 
+                locale="es" 
+                defaultSituation={defaultSituation}
+                variant="light"
+              />
             </div>
 
-            {/* Contact Info */}
-            <div className="order-1 lg:order-2 space-y-8">
-              {/* Contact Cards */}
-              <div className="grid sm:grid-cols-2 gap-4">
-                {CONTACT_INFO.map((info) => {
-                  const Icon = info.icon
-                  return (
-                    <a
-                      key={info.label}
-                      href={info.href}
-                      target={info.href.startsWith('http') ? '_blank' : undefined}
-                      rel={info.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="group bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all hover:-translate-y-1"
-                    >
-                      <div className="w-12 h-12 bg-oceano/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-oceano/20 transition-colors">
-                        <Icon className="w-6 h-6 text-oceano" />
-                      </div>
-                      <h3 className="font-semibold text-carbon mb-1">{info.label}</h3>
-                      <p className="text-oceano font-medium mb-1">{info.value}</p>
-                      <p className="text-sm text-carbon/50">{info.description}</p>
-                    </a>
-                  )
-                })}
+            {/* Info Sidebar */}
+            <div className="order-1 lg:order-2 lg:sticky lg:top-32">
+              {/* Trust Stats */}
+              <div className="bg-roiba-verde p-8 rounded-sm mb-8">
+                <h3 className="font-serif text-xl text-roiba-arena mb-6">
+                  Por qué confiar en nosotros
+                </h3>
+                <TrustSignals locale="es" variant="stats" />
               </div>
 
-              {/* Office Hours */}
-              <div className="bg-white rounded-xl p-6 shadow-md">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-dorado/20 rounded-lg flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-dorado" />
-                  </div>
-                  <h3 className="font-semibold text-carbon">Horario de Atención</h3>
-                </div>
-                <div className="space-y-3">
-                  {OFFICE_HOURS.map((schedule) => (
-                    <div key={schedule.day} className="flex justify-between items-center">
-                      <span className="text-carbon/70">{schedule.day}</span>
-                      <span className="font-medium text-carbon">{schedule.hours}</span>
+              {/* Direct Contact */}
+              <div className="bg-white p-8 rounded-sm shadow-card">
+                <h3 className="font-serif text-xl text-roiba-verde mb-6">
+                  Contacto directo
+                </h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-roiba-dorado/10 flex items-center justify-center flex-shrink-0">
+                      <PhoneIcon className="w-5 h-5 text-roiba-dorado" />
                     </div>
-                  ))}
-                </div>
-                <p className="text-sm text-carbon/50 mt-4 pt-4 border-t border-arena">
-                  * Horario Eastern Standard Time (EST/UTC-4)
-                </p>
-              </div>
-
-              {/* International Offices */}
-              <div className="bg-gradient-to-br from-oceano to-oceano-dark rounded-xl p-6 text-white">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                    <Building2 className="w-5 h-5 text-white" />
+                    <div>
+                      <p className="text-sm text-roiba-verde/60">Teléfono</p>
+                      <p className="text-roiba-verde font-medium">{COMPANY.phone}</p>
+                    </div>
                   </div>
-                  <h3 className="font-semibold">Oficinas Internacionales</h3>
-                </div>
-                <p className="text-white/80 text-sm mb-4">
-                  Contamos con representantes en las principales ciudades europeas y americanas.
-                </p>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <span className="text-white/70">🇪🇸 Madrid</span>
-                  <span className="text-white/70">🇺🇸 Miami</span>
-                  <span className="text-white/70">🇩🇪 Frankfurt</span>
-                  <span className="text-white/70">🇬🇧 Londres</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Map Placeholder */}
-      <section className="h-[400px] bg-arena/50 relative">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <MapPin className="w-12 h-12 text-oceano/30 mx-auto mb-4" />
-            <p className="text-carbon/50">
-              Mapa interactivo
-              <br />
-              <span className="text-sm">(Integración Google Maps pendiente)</span>
-            </p>
-          </div>
-        </div>
-        {/* TODO: Integrar Google Maps con marcadores de oficinas y propiedades */}
-      </section>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-roiba-dorado/10 flex items-center justify-center flex-shrink-0">
+                      <EmailIcon className="w-5 h-5 text-roiba-dorado" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-roiba-verde/60">Email</p>
+                      <p className="text-roiba-verde font-medium">{COMPANY.email}</p>
+                    </div>
+                  </div>
 
-      {/* FAQ Section */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 bg-oceano/10 text-oceano rounded-full text-sm font-medium mb-4">
-                Resolvemos sus dudas
-              </span>
-              <h2 className="font-serif text-3xl lg:text-4xl text-carbon">
-                Preguntas Frecuentes
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {FAQ_ITEMS.map((faq, index) => (
-                <details
-                  key={index}
-                  className="group bg-arena/30 rounded-xl overflow-hidden"
-                >
-                  <summary className="flex items-center justify-between p-6 cursor-pointer hover:bg-arena/50 transition-colors">
-                    <h3 className="font-medium text-carbon pr-4">{faq.question}</h3>
-                    <span className="flex-shrink-0 w-8 h-8 bg-oceano/10 rounded-full flex items-center justify-center group-open:bg-oceano group-open:text-white transition-colors">
-                      <svg
-                        className="w-4 h-4 transform group-open:rotate-180 transition-transform"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-roiba-dorado/10 flex items-center justify-center flex-shrink-0">
+                      <WhatsAppIcon className="w-5 h-5 text-roiba-dorado" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-roiba-verde/60">WhatsApp</p>
+                      <a 
+                        href={`https://wa.me/${COMPANY.whatsapp}`}
+                        className="text-roiba-dorado hover:text-roiba-dorado-oscuro font-medium"
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </span>
-                  </summary>
-                  <div className="px-6 pb-6">
-                    <p className="text-carbon/70 leading-relaxed">{faq.answer}</p>
+                        Hablar con un Arquitecto →
+                      </a>
+                    </div>
                   </div>
-                </details>
-              ))}
-            </div>
 
-            <div className="text-center mt-12 pt-8 border-t border-arena">
-              <p className="text-carbon/60 mb-4">
-                ¿Tiene más preguntas? Estamos aquí para ayudarle.
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-roiba-dorado/10 flex items-center justify-center flex-shrink-0">
+                      <LocationIcon className="w-5 h-5 text-roiba-dorado" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-roiba-verde/60">Ubicación</p>
+                      <p className="text-roiba-verde font-medium">{COMPANY.address}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Response Time */}
+                <div className="mt-8 pt-6 border-t border-roiba-verde/10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                    <p className="text-sm text-roiba-verde/70">
+                      Tiempo de respuesta: <strong className="text-roiba-verde">menos de 24 horas</strong>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Privacy Note */}
+              <p className="text-xs text-roiba-verde/50 mt-6 text-center">
+                Tus datos están protegidos. Cumplimos con GDPR y la Ley 172-13 
+                de Protección de Datos de República Dominicana.
               </p>
-              <a
-                href="https://wa.me/18095550124"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-xl font-medium hover:bg-[#20BD5A] transition-colors"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Chatear por WhatsApp
-              </a>
             </div>
           </div>
         </div>
       </section>
+    </>
+  )
+}
 
-      {/* Trust Indicators */}
-      <section className="py-12 bg-oceano text-white">
-        <div className="container mx-auto px-4">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-dorado mb-2">400+</div>
-              <p className="text-white/70">Villas Desarrolladas</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-dorado mb-2">15+</div>
-              <p className="text-white/70">Años de Experiencia</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-dorado mb-2">98%</div>
-              <p className="text-white/70">Clientes Satisfechos</p>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-dorado mb-2">8.5%</div>
-              <p className="text-white/70">Rentabilidad Promedio</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+/* ===== ICONS ===== */
+function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+    </svg>
+  )
+}
+
+function EmailIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+      <path d="M22 6l-10 7L2 6" />
+    </svg>
+  )
+}
+
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  )
+}
+
+function LocationIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
   )
 }

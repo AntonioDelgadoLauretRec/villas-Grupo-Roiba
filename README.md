@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏝️ Grupo Roiba Villas
 
-## Getting Started
+**Plataforma de Inversión Inmobiliaria Premium en Punta Cana**
 
-First, run the development server:
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/roiba-villas)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🎯 Descripción
+
+Sitio web corporativo para Grupo Roiba, empresa especializada en construcción boutique de villas de lujo en Punta Cana, República Dominicana. Diseñado para inversores de alto patrimonio (>$500K USD) que buscan inversión patrimonial con seguridad jurídica.
+
+## ✨ Características
+
+- **Sistema de Diseño "Lujo Tropical"** - Paleta premium con colores Arena, Verde Profundo y Dorado Mate
+- **Formulario Inteligente de Leads** - Con lead scoring automático y lógica condicional
+- **Bento Grid Asimétrico** - Sección "Punta Cana Privileges" con diseño editorial
+- **Optimizado para Conversión** - CTAs estratégicos y flujos de usuario optimizados
+- **Seguridad Enterprise** - Headers de seguridad, CSP, rate limiting, validación Zod
+- **SEO Optimizado** - Meta tags, Schema.org ready, Core Web Vitals
+
+## 🛠️ Stack Tecnológico
+
+| Tecnología | Uso |
+|------------|-----|
+| **Next.js 13.5.6** | Framework React (App Router) |
+| **TypeScript** | Type safety |
+| **Tailwind CSS** | Estilos utility-first |
+| **Supabase** | Base de datos + Auth (SSR) |
+| **Sanity.io** | CMS Headless |
+| **Zod** | Validación de schemas |
+| **Vercel** | Deployment |
+
+## 📁 Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── (public)/           # Páginas públicas
+│   │   ├── page.tsx        # Homepage
+│   │   ├── proceso/        # Método Roiba
+│   │   ├── coleccion/      # Catálogo villas
+│   │   ├── contacto/       # Formulario leads
+│   │   ├── inversores/     # Centro de confianza
+│   │   └── por-que-punta-cana/  # Lifestyle
+│   ├── api/
+│   │   └── leads/          # API endpoints
+│   └── layout.tsx
+├── components/
+│   ├── ui/                 # Componentes base
+│   ├── sections/           # Secciones de página
+│   └── layouts/            # Layouts
+├── lib/
+│   ├── utils/              # Utilidades
+│   └── validation/         # Schemas Zod
+└── middleware.ts           # Security headers
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Instalación
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Clonar repositorio
+git clone https://github.com/YOUR_USERNAME/roiba-villas.git
+cd roiba-villas
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Instalar dependencias
+npm install
 
-## Learn More
+# Configurar variables de entorno
+cp .env.example .env.local
+# Editar .env.local con tus credenciales
 
-To learn more about Next.js, take a look at the following resources:
+# Iniciar servidor de desarrollo
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Variables de Entorno
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
 
-## Deploy on Vercel
+# Sanity
+NEXT_PUBLIC_SANITY_PROJECT_ID=4yudb2wo
+NEXT_PUBLIC_SANITY_DATASET=production
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Cloudflare Stream
+CLOUDFLARE_ACCOUNT_ID=
+CLOUDFLARE_API_TOKEN=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Resend (Email)
+RESEND_API_KEY=
+```
+
+## 📊 Páginas Implementadas
+
+| Página | Ruta | Estado |
+|--------|------|--------|
+| Homepage | `/` | ✅ |
+| Proceso Roiba | `/proceso` | ✅ |
+| Colección Villas | `/coleccion` | ✅ |
+| Contacto | `/contacto` | ✅ |
+| Centro Inversores | `/inversores` | ✅ |
+| Por Qué Punta Cana | `/por-que-punta-cana` | ✅ |
+
+## 🔒 Seguridad
+
+- ✅ Auth Server-Side Only (@supabase/ssr)
+- ✅ RLS Ready en todas las tablas
+- ✅ Validación Zod en API routes
+- ✅ Rate Limiting (5 req/min)
+- ✅ Honeypot anti-spam
+- ✅ Headers de seguridad (CSP, HSTS, X-Frame-Options)
+
+## 📈 Deployment
+
+El proyecto está configurado para deployment automático en Vercel:
+
+1. Conectar repositorio en Vercel
+2. Configurar variables de entorno
+3. Deploy automático en cada push a `main`
+
+## 🎨 Design System
+
+**Colores:**
+- Verde Profundo: `#122620`
+- Arena: `#F5E6D3`
+- Dorado Mate: `#C9A95A`
+- Océano: `#1A4D5C`
+- Carbón: `#2B2B2B`
+
+**Tipografía:**
+- Títulos: Playfair Display (Serif)
+- Cuerpo: Lato (Sans-serif)
+
+## 📝 Licencia
+
+Proyecto privado - Grupo Roiba © 2026
+
+---
+
+**Desarrollado con ❤️ por el AI Squad:**
+- 🧠 Gemini (Estratega UX)
+- 🛡️ DeepSeek (Auditor Seguridad)
+- 🏗️ Claude (Constructor)
+- 👤 Antonio Delgado (PM)

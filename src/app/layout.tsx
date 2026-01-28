@@ -1,52 +1,46 @@
-import type { Metadata } from 'next'
-import '@/styles/globals.css'
-import { DEFAULT_SEO, SITE_CONFIG } from '@/lib/utils/constants'
-
-// NOTE: Google Fonts disabled due to network restrictions in dev environment
-// When deploying to production with internet access, uncomment the Google Fonts import:
-// import { Lato, Playfair_Display } from 'next/font/google'
-// const lato = Lato({ subsets: ['latin'], weight: ['300', '400', '700'], variable: '--font-lato', display: 'swap' })
-// const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-playfair', display: 'swap' })
-
-// System font fallbacks configured in tailwind.config.ts and globals.css
+import { type Metadata } from 'next'
+import './globals.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gruporoiba.com'),
   title: {
-    default: DEFAULT_SEO.title,
-    template: `%s | ${SITE_CONFIG.name}`,
+    default: 'Grupo Roiba | Villas de Lujo en Punta Cana',
+    template: '%s | Grupo Roiba',
   },
-  description: DEFAULT_SEO.description,
+  description: 'Construcción boutique de villas de lujo en Punta Cana. Inversión patrimonial con seguridad jurídica, diseño personalizado y gestión integral. Desde $500,000 USD.',
   keywords: [
     'villas punta cana',
-    'inversión inmobiliaria república dominicana',
-    'propiedades de lujo caribe',
+    'inversión inmobiliaria caribe',
+    'construcción lujo dominicana',
     'real estate punta cana',
     'luxury villas caribbean',
+    'grupo roiba',
   ],
-  authors: [{ name: SITE_CONFIG.name }],
-  creator: SITE_CONFIG.name,
+  authors: [{ name: 'Grupo Roiba' }],
+  creator: 'Grupo Roiba',
+  publisher: 'Grupo Roiba',
+  metadataBase: new URL('https://gruporoiba.com'),
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: SITE_CONFIG.url,
-    siteName: SITE_CONFIG.name,
-    title: DEFAULT_SEO.title,
-    description: DEFAULT_SEO.description,
+    alternateLocale: 'en_US',
+    url: 'https://gruporoiba.com',
+    siteName: 'Grupo Roiba',
+    title: 'Grupo Roiba | Villas de Lujo en Punta Cana',
+    description: 'Construcción boutique de villas de lujo en Punta Cana. Inversión patrimonial con seguridad jurídica y diseño personalizado.',
     images: [
       {
-        url: DEFAULT_SEO.ogImage,
+        url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: SITE_CONFIG.name,
+        alt: 'Grupo Roiba - Villas de Lujo en Punta Cana',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: DEFAULT_SEO.title,
-    description: DEFAULT_SEO.description,
-    images: [DEFAULT_SEO.ogImage],
+    title: 'Grupo Roiba | Villas de Lujo en Punta Cana',
+    description: 'Construcción boutique de villas de lujo en Punta Cana. Inversión patrimonial con seguridad jurídica.',
+    images: ['/images/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -59,6 +53,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    // google: 'your-google-verification-code',
+  },
 }
 
 export default function RootLayout({
@@ -67,8 +64,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
-      <body className="font-sans antialiased">
+    <html lang="es" className="scroll-smooth">
+      <head>
+        {/* Preconnect to external resources */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        
+        {/* Theme color */}
+        <meta name="theme-color" content="#122620" />
+      </head>
+      <body className="bg-roiba-arena text-roiba-verde antialiased">
         {children}
       </body>
     </html>
