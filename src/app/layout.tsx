@@ -1,32 +1,33 @@
-import { type Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from 'next'
+import '@/styles/globals.css'
+import { Navbar } from '@/components/layouts/Navbar'
+import { Footer } from '@/components/layouts/Footer'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Grupo Roiba | Villas de Lujo en Punta Cana',
+    default: 'Grupo Roiba | Inversión Patrimonial en el Caribe',
     template: '%s | Grupo Roiba',
   },
-  description: 'Construcción boutique de villas de lujo en Punta Cana. Inversión patrimonial con seguridad jurídica, diseño personalizado y gestión integral. Desde $500,000 USD.',
+  description: 'Construcción boutique de villas de lujo en Punta Cana. Inversión inmobiliaria con control total, transparencia y seguridad jurídica garantizada. Tickets desde $500,000 USD.',
   keywords: [
-    'villas punta cana',
-    'inversión inmobiliaria caribe',
-    'construcción lujo dominicana',
-    'real estate punta cana',
-    'luxury villas caribbean',
-    'grupo roiba',
+    'villas Punta Cana',
+    'inversión inmobiliaria Caribe',
+    'construcción villas lujo',
+    'real estate Dominican Republic',
+    'Cap Cana investment',
+    'luxury villa construction',
+    'Confotur benefits',
   ],
   authors: [{ name: 'Grupo Roiba' }],
   creator: 'Grupo Roiba',
-  publisher: 'Grupo Roiba',
-  metadataBase: new URL('https://gruporoiba.com'),
   openGraph: {
     type: 'website',
     locale: 'es_ES',
     alternateLocale: 'en_US',
     url: 'https://gruporoiba.com',
     siteName: 'Grupo Roiba',
-    title: 'Grupo Roiba | Villas de Lujo en Punta Cana',
-    description: 'Construcción boutique de villas de lujo en Punta Cana. Inversión patrimonial con seguridad jurídica y diseño personalizado.',
+    title: 'Grupo Roiba | Inversión Patrimonial en el Caribe',
+    description: 'Construcción boutique de villas de lujo en Punta Cana. Sin intermediarios. Control total. Seguridad jurídica.',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -38,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Grupo Roiba | Villas de Lujo en Punta Cana',
-    description: 'Construcción boutique de villas de lujo en Punta Cana. Inversión patrimonial con seguridad jurídica.',
+    title: 'Grupo Roiba | Inversión Patrimonial en el Caribe',
+    description: 'Construcción boutique de villas de lujo en Punta Cana.',
     images: ['/images/og-image.jpg'],
   },
   robots: {
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // google: 'your-google-verification-code',
+    google: 'your-google-verification-code',
   },
 }
 
@@ -66,21 +67,22 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <head>
-        {/* Preconnect to external resources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-        
-        {/* Theme color */}
         <meta name="theme-color" content="#122620" />
       </head>
-      <body className="bg-roiba-arena text-roiba-verde antialiased">
-        {children}
+      <body className="min-h-screen flex flex-col">
+        {/* Grain overlay for texture */}
+        <div className="grain-overlay" aria-hidden="true" />
+        
+        <Navbar />
+        
+        <main className="flex-1">
+          {children}
+        </main>
+        
+        <Footer />
       </body>
     </html>
   )

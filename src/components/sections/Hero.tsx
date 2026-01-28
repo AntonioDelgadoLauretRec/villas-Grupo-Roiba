@@ -1,188 +1,153 @@
 'use client'
 
-import { type FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
+import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { Button } from '@/components/ui'
-import { cn } from '@/lib/utils'
 
-export interface HeroProps {
-  locale?: 'es' | 'en'
-}
+export const Hero: FC = () => {
+  const [isLoaded, setIsLoaded] = useState(false)
 
-const content = {
-  es: {
-    headline: 'Inversión Patrimonial y Construcción Boutique en Punta Cana',
-    subheadline: 'Rentabilidad sólida, seguridad jurídica absoluta y diseño personalizado. Sin intermediarios, sin sorpresas.',
-    ctaPrimary: 'Iniciar Proyecto Personalizado',
-    ctaSecondary: 'Ver Colección de Villas',
-    filterQuestion: '¿Ya dispones de terreno?',
-    filterYes: 'Sí, gestionar construcción',
-    filterNo: 'No, buscar inversión completa',
-  },
-  en: {
-    headline: 'Boutique Construction & Legacy Investment in Punta Cana',
-    subheadline: 'Solid returns, absolute legal security, and custom design. No middlemen, no surprises.',
-    ctaPrimary: 'Start Custom Project',
-    ctaSecondary: 'View Villa Collection',
-    filterQuestion: 'Do you own land?',
-    filterYes: 'Yes, manage construction',
-    filterNo: 'No, full investment search',
-  },
-}
-
-export const Hero: FC<HeroProps> = ({ locale = 'es' }) => {
-  const t = content[locale]
-  const [selectedFilter, setSelectedFilter] = useState<'yes' | 'no' | null>(null)
+  useEffect(() => {
+    setIsLoaded(true)
+  }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Video/Image Placeholder */}
+    <section className="relative min-h-screen flex flex-col justify-end pb-12 md:pb-20 overflow-hidden">
+      {/* Background con overlay */}
       <div className="absolute inset-0 z-0">
-        {/* Video background - replace src with actual video */}
-        <div className="absolute inset-0 bg-roiba-verde">
-          {/* Placeholder gradient - will be replaced with video */}
-          <div className="absolute inset-0 bg-gradient-verde opacity-90" />
-          
-          {/* Decorative pattern overlay */}
-          <div 
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F4EBD0' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-        </div>
-        
-        {/* Dark overlay for text contrast */}
-        <div className="absolute inset-0 bg-roiba-verde/40" />
+        <div 
+          className="absolute inset-0 bg-roiba-verde"
+          style={{
+            backgroundImage: `url('/images/hero-villa.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde via-roiba-verde/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-roiba-verde/80 via-transparent to-transparent" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container-wide text-center px-4">
-        {/* Main Content */}
-        <div className="max-w-4xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-roiba-dorado/20 rounded-full animate-fade-in">
-            <span className="w-2 h-2 bg-roiba-dorado rounded-full animate-pulse" />
-            <span className="text-sm text-roiba-arena font-medium tracking-wide">
-              {locale === 'es' ? 'Cupo limitado 2026' : 'Limited availability 2026'}
-            </span>
-          </div>
-
-          {/* Headline */}
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-roiba-arena leading-tight mb-6 animate-fade-up">
-            {t.headline.split(' ').map((word, i) => (
-              <span
-                key={i}
-                className={cn(
-                  'inline-block',
-                  word === 'Boutique' || word === 'Legacy' ? 'text-roiba-dorado' : ''
-                )}
-              >
-                {word}{' '}
+      {/* Contenido */}
+      <div className="container-editorial relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-end">
+          {/* Columna izquierda - Contenido principal */}
+          <div className="space-y-8">
+            {/* Eyebrow */}
+            <div 
+              className={`flex items-center gap-4 transition-all duration-700 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: '0.2s' }}
+            >
+              <span className="w-12 h-px bg-roiba-dorado" />
+              <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-arena/80">
+                Punta Cana, República Dominicana
               </span>
-            ))}
-          </h1>
+            </div>
 
-          {/* Subheadline */}
-          <p className="text-lg md:text-xl text-roiba-arena/80 max-w-2xl mx-auto mb-10 animate-fade-up animate-delay-100">
-            {t.subheadline}
-          </p>
+            {/* Headline */}
+            <h1 
+              className={`font-serif font-normal text-roiba-arena transition-all duration-1000 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: '0.4s' }}
+            >
+              <span className="block text-display-lg leading-[0.95]">
+                Inversión
+              </span>
+              <span className="block text-display-xl leading-[0.95] text-roiba-dorado-light">
+                Patrimonial
+              </span>
+              <span className="block text-display-lg leading-[0.95] mt-2">
+                en el Caribe
+              </span>
+            </h1>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 animate-fade-up animate-delay-200">
-            <Link href="/contacto">
-              <Button variant="primary" size="lg">
-                {t.ctaPrimary}
-              </Button>
-            </Link>
-            <Link href="/coleccion">
-              <Button variant="ghost" size="lg">
-                {t.ctaSecondary}
-              </Button>
-            </Link>
-          </div>
-
-          {/* Land Filter - Binary Choice */}
-          <div className="animate-fade-up animate-delay-300">
-            <p className="text-roiba-arena/60 text-sm mb-4 uppercase tracking-wider">
-              {t.filterQuestion}
+            {/* Subtítulo */}
+            <p 
+              className={`text-body-lg text-roiba-arena/80 max-w-md font-light transition-all duration-700 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: '0.6s' }}
+            >
+              Construcción boutique de villas. Sin intermediarios. 
+              Control total del proceso. Seguridad jurídica garantizada.
             </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link href="/contacto?has_land=true">
-                <button
-                  className={cn(
-                    'group relative px-6 py-4 min-w-[220px] rounded-sm border-2 transition-all duration-300',
-                    selectedFilter === 'yes'
-                      ? 'border-roiba-dorado bg-roiba-dorado/20'
-                      : 'border-roiba-arena/30 hover:border-roiba-dorado/50 hover:bg-roiba-verde-light'
-                  )}
-                  onClick={() => setSelectedFilter('yes')}
-                >
-                  <span className="flex items-center justify-center gap-3">
-                    <CheckIcon className={cn(
-                      'w-5 h-5 transition-colors',
-                      selectedFilter === 'yes' ? 'text-roiba-dorado' : 'text-roiba-arena/50 group-hover:text-roiba-dorado'
-                    )} />
-                    <span className="text-roiba-arena font-medium">{t.filterYes}</span>
-                  </span>
-                </button>
-              </Link>
 
-              <Link href="/contacto?has_land=false">
-                <button
-                  className={cn(
-                    'group relative px-6 py-4 min-w-[220px] rounded-sm border-2 transition-all duration-300',
-                    selectedFilter === 'no'
-                      ? 'border-roiba-dorado bg-roiba-dorado/20'
-                      : 'border-roiba-arena/30 hover:border-roiba-dorado/50 hover:bg-roiba-verde-light'
-                  )}
-                  onClick={() => setSelectedFilter('no')}
+            {/* CTAs */}
+            <div 
+              className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{ transitionDelay: '0.8s' }}
+            >
+              <Link href="/contacto">
+                <Button variant="primary" size="lg">
+                  <span>Solicitar Análisis</span>
+                </Button>
+              </Link>
+              <Link href="/proceso">
+                <Button 
+                  variant="secondary" 
+                  size="lg"
+                  className="border-roiba-arena/30 text-roiba-arena hover:bg-roiba-arena hover:text-roiba-verde"
                 >
-                  <span className="flex items-center justify-center gap-3">
-                    <SearchIcon className={cn(
-                      'w-5 h-5 transition-colors',
-                      selectedFilter === 'no' ? 'text-roiba-dorado' : 'text-roiba-arena/50 group-hover:text-roiba-dorado'
-                    )} />
-                    <span className="text-roiba-arena font-medium">{t.filterNo}</span>
-                  </span>
-                </button>
+                  <span>Ver Proceso</span>
+                </Button>
               </Link>
             </div>
           </div>
-        </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronDownIcon className="w-8 h-8 text-roiba-arena/50" />
+          {/* Columna derecha - Stats o filtro */}
+          <div 
+            className={`hidden lg:block transition-all duration-1000 ${
+              isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+            }`}
+            style={{ transitionDelay: '1s' }}
+          >
+            <div className="bg-roiba-arena/5 backdrop-blur-md border border-roiba-arena/10 p-8 md:p-10">
+              <p className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-arena/60 mb-6">
+                Inversión desde
+              </p>
+              <p className="text-display-md font-serif text-roiba-dorado-light mb-8">
+                $500,000 USD
+              </p>
+              
+              <ul className="space-y-4 mb-8">
+                {[
+                  'Terreno + Diseño + Construcción',
+                  'Supervisión 24/7 vía Dashboard',
+                  'Rentabilidad proyectada 8-12%',
+                  'Beneficios fiscales Confotur',
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-roiba-arena/80 text-body">
+                    <span className="w-1.5 h-1.5 rounded-full bg-roiba-dorado mt-2 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              
+              <div className="pt-6 border-t border-roiba-arena/10">
+                <p className="text-caption text-roiba-arena/60">
+                  Tickets cualificados &gt;$500K USD
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-1 bg-gradient-to-l from-roiba-dorado to-transparent" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-1 bg-gradient-to-r from-roiba-dorado to-transparent" />
+      {/* Scroll indicator */}
+      <div 
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all duration-700 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{ transitionDelay: '1.2s' }}
+      >
+        <span className="text-micro text-roiba-arena/40 tracking-widest">SCROLL</span>
+        <div className="w-px h-8 bg-gradient-to-b from-roiba-arena/40 to-transparent" />
+      </div>
     </section>
   )
 }
-
-/* ===== ICONS ===== */
-const CheckIcon: FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M20 6L9 17l-5-5" />
-  </svg>
-)
-
-const SearchIcon: FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <circle cx="11" cy="11" r="8" />
-    <path d="M21 21l-4.35-4.35" />
-  </svg>
-)
-
-const ChevronDownIcon: FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M6 9l6 6 6-6" />
-  </svg>
-)
-
-export default Hero

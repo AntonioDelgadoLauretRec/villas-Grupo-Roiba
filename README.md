@@ -1,64 +1,42 @@
-# 🏝️ Grupo Roiba Villas
+# Grupo Roiba - Villas Website
 
-**Plataforma de Inversión Inmobiliaria Premium en Punta Cana**
+Plataforma web para Grupo Roiba, especializada en inversión patrimonial y construcción boutique de villas en Punta Cana.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/roiba-villas)
+## Stack Tecnológico
 
-## 🎯 Descripción
+- **Framework:** Next.js 13.5.6 (App Router)
+- **Lenguaje:** TypeScript (Strict Mode)
+- **Estilos:** Tailwind CSS
+- **Base de Datos:** Supabase (PostgreSQL)
+- **CMS:** Sanity.io
+- **Validación:** Zod
+- **Hosting:** Vercel
 
-Sitio web corporativo para Grupo Roiba, empresa especializada en construcción boutique de villas de lujo en Punta Cana, República Dominicana. Diseñado para inversores de alto patrimonio (>$500K USD) que buscan inversión patrimonial con seguridad jurídica.
-
-## ✨ Características
-
-- **Sistema de Diseño "Lujo Tropical"** - Paleta premium con colores Arena, Verde Profundo y Dorado Mate
-- **Formulario Inteligente de Leads** - Con lead scoring automático y lógica condicional
-- **Bento Grid Asimétrico** - Sección "Punta Cana Privileges" con diseño editorial
-- **Optimizado para Conversión** - CTAs estratégicos y flujos de usuario optimizados
-- **Seguridad Enterprise** - Headers de seguridad, CSP, rate limiting, validación Zod
-- **SEO Optimizado** - Meta tags, Schema.org ready, Core Web Vitals
-
-## 🛠️ Stack Tecnológico
-
-| Tecnología | Uso |
-|------------|-----|
-| **Next.js 13.5.6** | Framework React (App Router) |
-| **TypeScript** | Type safety |
-| **Tailwind CSS** | Estilos utility-first |
-| **Supabase** | Base de datos + Auth (SSR) |
-| **Sanity.io** | CMS Headless |
-| **Zod** | Validación de schemas |
-| **Vercel** | Deployment |
-
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 src/
-├── app/
-│   ├── (public)/           # Páginas públicas
-│   │   ├── page.tsx        # Homepage
-│   │   ├── proceso/        # Método Roiba
-│   │   ├── coleccion/      # Catálogo villas
-│   │   ├── contacto/       # Formulario leads
-│   │   ├── inversores/     # Centro de confianza
-│   │   └── por-que-punta-cana/  # Lifestyle
-│   ├── api/
-│   │   └── leads/          # API endpoints
-│   └── layout.tsx
+├── app/                    # App Router pages
+│   ├── api/               # API Routes
+│   ├── contacto/          # Página de contacto
+│   ├── proceso/           # The Roiba Method
+│   ├── villas/            # Colección de villas
+│   └── page.tsx           # Homepage
 ├── components/
-│   ├── ui/                 # Componentes base
-│   ├── sections/           # Secciones de página
-│   └── layouts/            # Layouts
+│   ├── layouts/           # Navbar, Footer
+│   ├── sections/          # Hero, ProcessTimeline, etc.
+│   └── ui/                # Button, Card, etc.
 ├── lib/
-│   ├── utils/              # Utilidades
-│   └── validation/         # Schemas Zod
-└── middleware.ts           # Security headers
+│   └── utils.ts           # Utilidades
+└── styles/
+    └── globals.css        # Estilos globales
 ```
 
-## 🚀 Instalación
+## Instalación
 
 ```bash
 # Clonar repositorio
-git clone https://github.com/YOUR_USERNAME/roiba-villas.git
+git clone https://github.com/grupo-roiba/roiba-villas.git
 cd roiba-villas
 
 # Instalar dependencias
@@ -68,79 +46,61 @@ npm install
 cp .env.example .env.local
 # Editar .env.local con tus credenciales
 
-# Iniciar servidor de desarrollo
+# Iniciar desarrollo
 npm run dev
 ```
 
-## ⚙️ Variables de Entorno
+## Variables de Entorno
 
-```env
-# Supabase
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
+Copiar `.env.example` a `.env.local` y configurar:
 
-# Sanity
-NEXT_PUBLIC_SANITY_PROJECT_ID=4yudb2wo
-NEXT_PUBLIC_SANITY_DATASET=production
+- **Supabase:** URL y keys de tu proyecto
+- **Sanity:** Project ID (4yudb2wo) y token
+- **Cloudflare:** Credenciales para Stream
+- **Resend:** API key para emails
 
-# Cloudflare Stream
-CLOUDFLARE_ACCOUNT_ID=
-CLOUDFLARE_API_TOKEN=
+## Scripts Disponibles
 
-# Resend (Email)
-RESEND_API_KEY=
+```bash
+npm run dev       # Desarrollo (localhost:3000)
+npm run build     # Build de producción
+npm run start     # Iniciar build de producción
+npm run lint      # ESLint
+npm run type-check # Verificar tipos TypeScript
 ```
 
-## 📊 Páginas Implementadas
+## Despliegue en Vercel
 
-| Página | Ruta | Estado |
-|--------|------|--------|
-| Homepage | `/` | ✅ |
-| Proceso Roiba | `/proceso` | ✅ |
-| Colección Villas | `/coleccion` | ✅ |
-| Contacto | `/contacto` | ✅ |
-| Centro Inversores | `/inversores` | ✅ |
-| Por Qué Punta Cana | `/por-que-punta-cana` | ✅ |
-
-## 🔒 Seguridad
-
-- ✅ Auth Server-Side Only (@supabase/ssr)
-- ✅ RLS Ready en todas las tablas
-- ✅ Validación Zod en API routes
-- ✅ Rate Limiting (5 req/min)
-- ✅ Honeypot anti-spam
-- ✅ Headers de seguridad (CSP, HSTS, X-Frame-Options)
-
-## 📈 Deployment
-
-El proyecto está configurado para deployment automático en Vercel:
-
-1. Conectar repositorio en Vercel
-2. Configurar variables de entorno
+1. Conectar repositorio en [vercel.com](https://vercel.com)
+2. Configurar variables de entorno en Vercel Dashboard
 3. Deploy automático en cada push a `main`
 
-## 🎨 Design System
+## Design System
 
-**Colores:**
-- Verde Profundo: `#122620`
-- Arena: `#F5E6D3`
-- Dorado Mate: `#C9A95A`
-- Océano: `#1A4D5C`
-- Carbón: `#2B2B2B`
+### Colores (Manual de Marca)
 
-**Tipografía:**
-- Títulos: Playfair Display (Serif)
-- Cuerpo: Lato (Sans-serif)
+- **Verde Profundo:** `#122620` (primario)
+- **Arena Clara:** `#F4EBD0` (base)
+- **Dorado Arena:** `#B68D40` (acento)
+- **Dorado Claro:** `#FFCC53` (CTA)
 
-## 📝 Licencia
+### Tipografía
 
-Proyecto privado - Grupo Roiba © 2026
+- **Títulos:** Cormorant Garamond (serif)
+- **Cuerpo:** Inter (sans-serif)
+
+## Seguridad
+
+- Auth server-side con `@supabase/ssr`
+- Validación con Zod en API routes
+- Headers de seguridad en `next.config.js`
+- RLS activo en Supabase
+
+## Contacto
+
+- **PM:** Antonio Delgado
+- **Email:** inversiones@gruporoiba.com
 
 ---
 
-**Desarrollado con ❤️ por el AI Squad:**
-- 🧠 Gemini (Estratega UX)
-- 🛡️ DeepSeek (Auditor Seguridad)
-- 🏗️ Claude (Constructor)
-- 👤 Antonio Delgado (PM)
+© 2026 Grupo Roiba. Todos los derechos reservados.

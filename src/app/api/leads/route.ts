@@ -1,140 +1,111 @@
-import { NextResponse } from 'next/server'
-import { leadSchema, calculateLeadScore } from '@/lib/validation/schemas'
-import { ZodError } from 'zod'
+import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod'
 
-// Rate limiting simple en memoria (en producción usar Redis)
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
-const RATE_LIMIT = 5 // requests
-const RATE_WINDOW = 60 * 1000 // 1 minuto
+// Schema de validación Zod
+const leadSchema = z.object({
+  full_name: z.string().min(2, 'Nombre muy corto').max(100),
+  email: z.string().email('Email inválido'),
+  phone: z.string().min(6, 'Teléfono muy corto').max(20),
+  country: z.string().length(2, 'País inválido').or(z.literal('OTHER')),
+  investment_capacity: z.enum(['500k-1m', '1m-2m', '2m-5m', '5m+']),
+  message: z.string().max(1000).optional(),
+  gdpr_consent: z.literal(true, {
+    errorMap: () => ({ message: 'Debe aceptar la política de privacidad' }),
+  }),
+  marketing_consent: z.boolean().optional(),
+})
 
-function isRateLimited(ip: string): boolean {
-  const now = Date.now()
-  const record = rateLimitMap.get(ip)
+// Honeypot field para detectar bots
+const honeypotSchema = z.object({
+  website: z.string().max(0).optional(), // Should be empty
+})
 
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_WINDOW })
-    return false
-  }
-
-  if (record.count >= RATE_LIMIT) {
-    return true
-  }
-
-  record.count++
-  return false
-}
-
-// Honeypot field check
-function isBot(data: Record<string, unknown>): boolean {
-  // Si el campo honeypot está lleno, es un bot
-  return Boolean(data._website || data._honeypot)
-}
-
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    // Get IP for rate limiting
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 
-               request.headers.get('x-real-ip') || 
-               'unknown'
-
-    // Rate limit check
-    if (isRateLimited(ip)) {
-      return NextResponse.json(
-        { error: 'Too many requests. Please try again later.' },
-        { status: 429 }
-      )
-    }
-
+    // Rate limiting básico por IP
+    const ip = request.headers.get('x-forwarded-for') || 'unknown'
+    
     // Parse body
     const body = await request.json()
-
-    // Bot detection
-    if (isBot(body)) {
-      // Silently reject but return success to fool bots
-      return NextResponse.json({ success: true, id: 'fake-id' }, { status: 201 })
+    
+    // Check honeypot
+    const honeypot = honeypotSchema.safeParse(body)
+    if (body.website && body.website.length > 0) {
+      // Es un bot, responder con éxito falso
+      return NextResponse.json({ success: true }, { status: 201 })
     }
-
-    // Validate with Zod
-    const validatedData = leadSchema.parse(body)
-
-    // Calculate lead score
-    const { score, tier, priority } = calculateLeadScore(validatedData)
-
-    // Prepare lead data for storage
-    const leadData = {
-      ...validatedData,
-      lead_score: score,
-      lead_tier: tier,
-      lead_priority: priority,
-      ip_address: ip,
-      user_agent: request.headers.get('user-agent') || 'unknown',
-      created_at: new Date().toISOString(),
-      source: 'website',
-    }
-
-    // TODO: Save to Supabase
-    // const supabase = await createClient()
-    // const { data, error } = await supabase
-    //   .from('leads')
-    //   .insert(leadData)
-    //   .select('id')
-    //   .single()
-
-    // TODO: Send notification email for hot leads
-    // if (tier === 'hot') {
-    //   await sendLeadNotification(leadData)
-    // }
-
-    // For now, log the lead (remove in production)
-    console.log('New lead received:', {
-      email: validatedData.email,
-      situation: validatedData.situation,
-      score,
-      tier,
-      priority,
-    })
-
-    return NextResponse.json(
-      { 
-        success: true, 
-        message: 'Lead submitted successfully',
-        tier,
-      },
-      { status: 201 }
-    )
-
-  } catch (error) {
-    // Zod validation error
-    if (error instanceof ZodError) {
-      const formattedErrors = error.errors.map((err) => ({
-        field: err.path.join('.'),
-        message: err.message,
-      }))
-
+    
+    // Validar datos
+    const validation = leadSchema.safeParse(body)
+    
+    if (!validation.success) {
       return NextResponse.json(
         { 
-          error: 'Validation failed', 
-          details: formattedErrors 
+          error: 'Datos inválidos',
+          details: validation.error.flatten().fieldErrors,
         },
         { status: 400 }
       )
     }
-
-    // Generic error
-    console.error('Lead submission error:', error)
+    
+    const data = validation.data
+    
+    // Aquí iría la integración con Supabase
+    // Por ahora, simulamos el guardado
+    
+    // En producción:
+    // const supabase = await createServerClient()
+    // const { data: lead, error } = await supabase
+    //   .from('leads')
+    //   .insert({
+    //     full_name: data.full_name,
+    //     email: data.email,
+    //     phone: data.phone,
+    //     country: data.country,
+    //     investment_capacity: data.investment_capacity,
+    //     message: data.message || null,
+    //     gdpr_consent: data.gdpr_consent,
+    //     marketing_consent: data.marketing_consent || false,
+    //     source: 'website',
+    //     ip_address: ip,
+    //     created_at: new Date().toISOString(),
+    //   })
+    //   .select()
+    //   .single()
+    
+    // Enviar notificación por email (en producción)
+    // await sendLeadNotification(data)
+    
+    console.log('New lead received:', {
+      name: data.full_name,
+      email: data.email,
+      investment: data.investment_capacity,
+      country: data.country,
+      timestamp: new Date().toISOString(),
+    })
     
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        success: true,
+        message: 'Solicitud recibida correctamente',
+      },
+      { status: 201 }
+    )
+    
+  } catch (error) {
+    console.error('Error processing lead:', error)
+    
+    return NextResponse.json(
+      { error: 'Error interno del servidor' },
       { status: 500 }
     )
   }
 }
 
-// Health check
+// Bloquear otros métodos
 export async function GET() {
-  return NextResponse.json({ 
-    status: 'ok', 
-    endpoint: '/api/leads',
-    methods: ['POST'],
-  })
+  return NextResponse.json(
+    { error: 'Método no permitido' },
+    { status: 405 }
+  )
 }

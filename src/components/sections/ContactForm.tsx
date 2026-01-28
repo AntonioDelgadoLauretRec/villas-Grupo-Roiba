@@ -1,420 +1,350 @@
 'use client'
 
-import { type FC, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Input, Select, Checkbox, Textarea } from '@/components/ui'
-import { 
-  leadSchema, 
-  type Lead,
-  calculateLeadScore 
-} from '@/lib/validation/schemas'
-import { INVESTMENT_RANGES, TIMELINES, LOCATIONS } from '@/lib/utils'
+import { FC, useState } from 'react'
+import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
-type Situation = 'has_land' | 'full_investment' | 'info_only'
-
-export interface ContactFormProps {
-  locale?: 'es' | 'en'
-  defaultSituation?: Situation
-  variant?: 'light' | 'dark'
-  onSuccess?: (data: Lead) => void
+interface FormData {
+  full_name: string
+  email: string
+  phone: string
+  country: string
+  investment_capacity: string
+  message: string
+  gdpr_consent: boolean
+  marketing_consent: boolean
 }
 
-const content = {
-  es: {
-    title: 'Empezar Proyecto',
-    subtitle: '¿Cuál es tu situación actual?',
-    situations: {
-      has_land: 'Tengo terreno, busco constructor',
-      full_investment: 'Busco terreno y proyecto llave en mano',
-      info_only: 'Solo busco información / Estudio de mercado',
-    },
-    fields: {
-      full_name: 'Nombre completo',
-      email: 'Email',
-      phone: 'Teléfono (con código país)',
-      country: 'País de residencia',
-      land_location: 'Ubicación del terreno',
-      land_size: 'Superficie aproximada (m²)',
-      project_description: 'Descripción del proyecto (opcional)',
-      investment_capacity: 'Rango de inversión',
-      preferred_location: 'Ubicación preferida',
-      timeline: 'Plazo de inversión',
-    },
-    consents: {
-      gdpr: 'Acepto la política de privacidad y el tratamiento de mis datos.',
-      aml: 'Confirmo que los fondos de inversión tienen origen lícito.',
-      marketing: 'Acepto recibir comunicaciones comerciales (opcional).',
-    },
-    submit: {
-      has_land: 'Cotizar Construcción de Villa',
-      full_investment: 'Solicitar Asesoría de Inversión',
-      info_only: 'Acceder al Dossier de Inversor',
-    },
-    success: {
-      title: '¡Solicitud enviada!',
-      message: 'Nuestro equipo se pondrá en contacto contigo en las próximas 24 horas.',
-    },
-    error: 'Ha ocurrido un error. Por favor, inténtalo de nuevo.',
-  },
-  en: {
-    title: 'Start Project',
-    subtitle: "What's your current situation?",
-    situations: {
-      has_land: 'I have land, looking for a builder',
-      full_investment: 'Looking for land and turnkey project',
-      info_only: 'Just looking for information / Market study',
-    },
-    fields: {
-      full_name: 'Full name',
-      email: 'Email',
-      phone: 'Phone (with country code)',
-      country: 'Country of residence',
-      land_location: 'Land location',
-      land_size: 'Approximate area (sqm)',
-      project_description: 'Project description (optional)',
-      investment_capacity: 'Investment range',
-      preferred_location: 'Preferred location',
-      timeline: 'Investment timeline',
-    },
-    consents: {
-      gdpr: 'I accept the privacy policy and data processing.',
-      aml: 'I confirm that investment funds are from legitimate sources.',
-      marketing: 'I agree to receive commercial communications (optional).',
-    },
-    submit: {
-      has_land: 'Quote Villa Construction',
-      full_investment: 'Request Investment Advisory',
-      info_only: 'Access Investor Dossier',
-    },
-    success: {
-      title: 'Request sent!',
-      message: 'Our team will contact you within 24 hours.',
-    },
-    error: 'An error occurred. Please try again.',
-  },
-}
+const INVESTMENT_OPTIONS = [
+  { value: '500k-1m', label: '$500,000 - $1,000,000 USD' },
+  { value: '1m-2m', label: '$1,000,000 - $2,000,000 USD' },
+  { value: '2m-5m', label: '$2,000,000 - $5,000,000 USD' },
+  { value: '5m+', label: 'Más de $5,000,000 USD' },
+]
 
-export const ContactForm: FC<ContactFormProps> = ({
-  locale = 'es',
-  defaultSituation,
-  variant = 'light',
-  onSuccess,
-}) => {
-  const t = content[locale]
-  const [situation, setSituation] = useState<Situation | null>(defaultSituation || null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+const COUNTRIES = [
+  { value: 'ES', label: 'España' },
+  { value: 'US', label: 'Estados Unidos' },
+  { value: 'DE', label: 'Alemania' },
+  { value: 'FR', label: 'Francia' },
+  { value: 'UK', label: 'Reino Unido' },
+  { value: 'MX', label: 'México' },
+  { value: 'AR', label: 'Argentina' },
+  { value: 'CO', label: 'Colombia' },
+  { value: 'OTHER', label: 'Otro' },
+]
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<Lead>({
-    resolver: zodResolver(leadSchema),
-    defaultValues: {
-      situation: defaultSituation,
-      country: 'ES',
-      gdpr_consent: false,
-      marketing_consent: false,
-    },
+export const ContactForm: FC = () => {
+  const [formData, setFormData] = useState<FormData>({
+    full_name: '',
+    email: '',
+    phone: '',
+    country: '',
+    investment_capacity: '',
+    message: '',
+    gdpr_consent: false,
+    marketing_consent: false,
   })
+  
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  const onSubmit = async (data: Lead) => {
+  const validateForm = (): boolean => {
+    const newErrors: Partial<Record<keyof FormData, string>> = {}
+    
+    if (!formData.full_name.trim() || formData.full_name.length < 2) {
+      newErrors.full_name = 'Nombre completo requerido'
+    }
+    
+    if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+      newErrors.email = 'Email inválido'
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Teléfono requerido'
+    }
+    
+    if (!formData.country) {
+      newErrors.country = 'Seleccione un país'
+    }
+    
+    if (!formData.investment_capacity) {
+      newErrors.investment_capacity = 'Seleccione capacidad de inversión'
+    }
+    
+    if (!formData.gdpr_consent) {
+      newErrors.gdpr_consent = 'Debe aceptar la política de privacidad'
+    }
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!validateForm()) return
+    
     setIsSubmitting(true)
-    setError(null)
-
+    
     try {
-      // Calculate lead score for prioritization
-      const { score, tier, priority } = calculateLeadScore(data)
-      
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...data,
-          lead_score: score,
-          lead_tier: tier,
-          lead_priority: priority,
-        }),
+        body: JSON.stringify(formData),
       })
-
-      if (!response.ok) {
-        throw new Error('Failed to submit')
-      }
-
-      setIsSuccess(true)
-      reset()
-      onSuccess?.(data)
-    } catch (err) {
-      setError(t.error)
+      
+      if (!response.ok) throw new Error('Error al enviar')
+      
+      setSubmitStatus('success')
+      setFormData({
+        full_name: '',
+        email: '',
+        phone: '',
+        country: '',
+        investment_capacity: '',
+        message: '',
+        gdpr_consent: false,
+        marketing_consent: false,
+      })
+    } catch (error) {
+      setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  // Success State
-  if (isSuccess) {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type } = e.target
+    const checked = (e.target as HTMLInputElement).checked
+    
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value,
+    }))
+    
+    if (errors[name as keyof FormData]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }))
+    }
+  }
+
+  if (submitStatus === 'success') {
     return (
-      <div className={cn(
-        'p-8 rounded-sm text-center',
-        variant === 'dark' ? 'bg-roiba-verde-light' : 'bg-white'
-      )}>
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
-          <CheckIcon className="w-8 h-8 text-green-600" />
+      <div className="p-8 md:p-12 bg-roiba-verde/5 text-center">
+        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-roiba-verde/10 flex items-center justify-center">
+          <svg className="w-8 h-8 text-roiba-verde" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
         </div>
-        <h3 className={cn(
-          'font-serif text-2xl mb-2',
-          variant === 'dark' ? 'text-roiba-arena' : 'text-roiba-verde'
-        )}>
-          {t.success.title}
+        <h3 className="text-heading font-serif text-roiba-verde mb-3">
+          Solicitud Recibida
         </h3>
-        <p className={cn(
-          variant === 'dark' ? 'text-roiba-arena/70' : 'text-roiba-verde/70'
-        )}>
-          {t.success.message}
+        <p className="text-body text-roiba-verde/70 mb-6">
+          Nuestro equipo revisará su información y se pondrá en contacto 
+          en las próximas 24-48 horas hábiles.
         </p>
+        <button
+          onClick={() => setSubmitStatus('idle')}
+          className="text-caption font-medium text-roiba-dorado hover:text-roiba-verde transition-colors"
+        >
+          Enviar otra solicitud
+        </button>
       </div>
     )
   }
 
   return (
-    <div className={cn(
-      'rounded-sm overflow-hidden',
-      variant === 'dark' ? 'bg-roiba-verde' : 'bg-white shadow-luxury'
-    )}>
-      {/* Header */}
-      <div className={cn(
-        'p-6 border-b',
-        variant === 'dark' ? 'border-roiba-arena/10' : 'border-roiba-verde/10'
-      )}>
-        <h3 className={cn(
-          'font-serif text-2xl',
-          variant === 'dark' ? 'text-roiba-arena' : 'text-roiba-verde'
-        )}>
-          {t.title}
-        </h3>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Nombre y Email */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-caption font-medium text-roiba-verde mb-2">
+            Nombre completo *
+          </label>
+          <input
+            type="text"
+            name="full_name"
+            value={formData.full_name}
+            onChange={handleChange}
+            className={cn(
+              'w-full px-4 py-3 bg-white border text-roiba-verde',
+              'focus:outline-none focus:border-roiba-dorado transition-colors',
+              errors.full_name ? 'border-red-500' : 'border-roiba-verde/20'
+            )}
+            placeholder="Su nombre"
+          />
+          {errors.full_name && (
+            <p className="mt-1 text-micro text-red-500">{errors.full_name}</p>
+          )}
+        </div>
+        
+        <div>
+          <label className="block text-caption font-medium text-roiba-verde mb-2">
+            Email *
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={cn(
+              'w-full px-4 py-3 bg-white border text-roiba-verde',
+              'focus:outline-none focus:border-roiba-dorado transition-colors',
+              errors.email ? 'border-red-500' : 'border-roiba-verde/20'
+            )}
+            placeholder="correo@ejemplo.com"
+          />
+          {errors.email && (
+            <p className="mt-1 text-micro text-red-500">{errors.email}</p>
+          )}
+        </div>
       </div>
 
-      {/* Form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
-        {/* Situation Selector */}
+      {/* Teléfono y País */}
+      <div className="grid md:grid-cols-2 gap-6">
         <div>
-          <p className={cn(
-            'text-sm font-medium mb-3',
-            variant === 'dark' ? 'text-roiba-arena' : 'text-roiba-verde'
-          )}>
-            {t.subtitle}
-          </p>
-          <div className="space-y-2">
-            {(['has_land', 'full_investment', 'info_only'] as Situation[]).map((option) => (
-              <label
-                key={option}
-                className={cn(
-                  'flex items-center gap-3 p-4 rounded-sm border-2 cursor-pointer transition-all',
-                  situation === option
-                    ? 'border-roiba-dorado bg-roiba-dorado/10'
-                    : variant === 'dark'
-                      ? 'border-roiba-arena/20 hover:border-roiba-arena/40'
-                      : 'border-roiba-verde/20 hover:border-roiba-verde/40'
-                )}
-              >
-                <input
-                  type="radio"
-                  {...register('situation')}
-                  value={option}
-                  checked={situation === option}
-                  onChange={() => setSituation(option)}
-                  className="sr-only"
-                />
-                <div className={cn(
-                  'w-5 h-5 rounded-full border-2 flex items-center justify-center',
-                  situation === option
-                    ? 'border-roiba-dorado bg-roiba-dorado'
-                    : variant === 'dark'
-                      ? 'border-roiba-arena/40'
-                      : 'border-roiba-verde/40'
-                )}>
-                  {situation === option && (
-                    <div className="w-2 h-2 rounded-full bg-white" />
-                  )}
-                </div>
-                <span className={variant === 'dark' ? 'text-roiba-arena' : 'text-roiba-verde'}>
-                  {t.situations[option]}
-                </span>
-              </label>
-            ))}
-          </div>
+          <label className="block text-caption font-medium text-roiba-verde mb-2">
+            Teléfono *
+          </label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className={cn(
+              'w-full px-4 py-3 bg-white border text-roiba-verde',
+              'focus:outline-none focus:border-roiba-dorado transition-colors',
+              errors.phone ? 'border-red-500' : 'border-roiba-verde/20'
+            )}
+            placeholder="+34 600 000 000"
+          />
+          {errors.phone && (
+            <p className="mt-1 text-micro text-red-500">{errors.phone}</p>
+          )}
         </div>
-
-        {/* Dynamic Fields Based on Situation */}
-        {situation && (
-          <>
-            {/* Base Contact Fields */}
-            <div className="grid md:grid-cols-2 gap-4">
-              <Input
-                {...register('full_name')}
-                label={t.fields.full_name}
-                placeholder="Juan García"
-                error={errors.full_name?.message}
-                variant={variant}
-              />
-              <Input
-                {...register('email')}
-                type="email"
-                label={t.fields.email}
-                placeholder="juan@empresa.com"
-                error={errors.email?.message}
-                variant={variant}
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <Input
-                {...register('phone')}
-                type="tel"
-                label={t.fields.phone}
-                placeholder="+34 600 000 000"
-                error={errors.phone?.message}
-                variant={variant}
-              />
-              <Select
-                {...register('country')}
-                label={t.fields.country}
-                options={[
-                  { value: 'ES', label: 'España' },
-                  { value: 'US', label: 'Estados Unidos' },
-                  { value: 'MX', label: 'México' },
-                  { value: 'CO', label: 'Colombia' },
-                  { value: 'AR', label: 'Argentina' },
-                  { value: 'DO', label: 'República Dominicana' },
-                  { value: 'OTHER', label: locale === 'es' ? 'Otro' : 'Other' },
-                ]}
-                error={errors.country?.message}
-                variant={variant}
-              />
-            </div>
-
-            {/* Has Land - Extra Fields */}
-            {situation === 'has_land' && (
-              <>
-                <Input
-                  {...register('land_location' as any)}
-                  label={t.fields.land_location}
-                  placeholder="Cap Cana, Punta Cana"
-                  error={(errors as any).land_location?.message}
-                  variant={variant}
-                />
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Input
-                    {...register('land_size' as any)}
-                    label={t.fields.land_size}
-                    placeholder="1,500"
-                    error={(errors as any).land_size?.message}
-                    variant={variant}
-                  />
-                </div>
-                <Textarea
-                  {...(register('project_description' as any) as any)}
-                  label={t.fields.project_description}
-                  placeholder={locale === 'es' 
-                    ? 'Cuéntanos sobre tu proyecto ideal...'
-                    : 'Tell us about your ideal project...'}
-                  rows={3}
-                  variant={variant}
-                />
-              </>
+        
+        <div>
+          <label className="block text-caption font-medium text-roiba-verde mb-2">
+            País de residencia *
+          </label>
+          <select
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            className={cn(
+              'w-full px-4 py-3 bg-white border text-roiba-verde appearance-none',
+              'focus:outline-none focus:border-roiba-dorado transition-colors',
+              errors.country ? 'border-red-500' : 'border-roiba-verde/20'
             )}
+          >
+            <option value="">Seleccionar país</option>
+            {COUNTRIES.map(country => (
+              <option key={country.value} value={country.value}>
+                {country.label}
+              </option>
+            ))}
+          </select>
+          {errors.country && (
+            <p className="mt-1 text-micro text-red-500">{errors.country}</p>
+          )}
+        </div>
+      </div>
 
-            {/* Full Investment - Extra Fields */}
-            {situation === 'full_investment' && (
-              <>
-                <Select
-                  {...register('investment_capacity' as any)}
-                  label={t.fields.investment_capacity}
-                  placeholder={locale === 'es' ? 'Seleccionar rango' : 'Select range'}
-                  options={INVESTMENT_RANGES.map(r => ({
-                    value: r.value,
-                    label: locale === 'es' ? r.label : r.labelEN,
-                  }))}
-                  error={(errors as any).investment_capacity?.message}
-                  variant={variant}
-                />
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Select
-                    {...register('preferred_location' as any)}
-                    label={t.fields.preferred_location}
-                    placeholder={locale === 'es' ? 'Seleccionar ubicación' : 'Select location'}
-                    options={LOCATIONS.map(l => ({ value: l.value, label: l.label }))}
-                    variant={variant}
-                  />
-                  <Select
-                    {...register('timeline' as any)}
-                    label={t.fields.timeline}
-                    placeholder={locale === 'es' ? 'Seleccionar plazo' : 'Select timeline'}
-                    options={TIMELINES.map(t => ({
-                      value: t.value,
-                      label: locale === 'es' ? t.label : t.labelEN,
-                    }))}
-                    variant={variant}
-                  />
-                </div>
-              </>
-            )}
-
-            {/* Consents */}
-            <div className="space-y-3 pt-4 border-t border-roiba-verde/10">
-              <Checkbox
-                {...register('gdpr_consent')}
-                label={t.consents.gdpr}
-                error={errors.gdpr_consent?.message}
-                variant={variant}
-              />
-              {situation !== 'info_only' && (
-                <Checkbox
-                  {...register('aml_consent' as any)}
-                  label={t.consents.aml}
-                  error={(errors as any).aml_consent?.message}
-                  variant={variant}
-                />
-              )}
-              <Checkbox
-                {...register('marketing_consent')}
-                label={t.consents.marketing}
-                variant={variant}
-              />
-            </div>
-
-            {/* Error Message */}
-            {error && (
-              <p className="text-red-500 text-sm">{error}</p>
-            )}
-
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              variant="primary"
-              size="lg"
-              className="w-full"
-              isLoading={isSubmitting}
-            >
-              {t.submit[situation]}
-            </Button>
-          </>
+      {/* Capacidad de inversión */}
+      <div>
+        <label className="block text-caption font-medium text-roiba-verde mb-2">
+          Capacidad de inversión *
+        </label>
+        <select
+          name="investment_capacity"
+          value={formData.investment_capacity}
+          onChange={handleChange}
+          className={cn(
+            'w-full px-4 py-3 bg-white border text-roiba-verde appearance-none',
+            'focus:outline-none focus:border-roiba-dorado transition-colors',
+            errors.investment_capacity ? 'border-red-500' : 'border-roiba-verde/20'
+          )}
+        >
+          <option value="">Seleccionar rango</option>
+          {INVESTMENT_OPTIONS.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+        {errors.investment_capacity && (
+          <p className="mt-1 text-micro text-red-500">{errors.investment_capacity}</p>
         )}
-      </form>
-    </div>
+      </div>
+
+      {/* Mensaje */}
+      <div>
+        <label className="block text-caption font-medium text-roiba-verde mb-2">
+          Mensaje (opcional)
+        </label>
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          rows={4}
+          className="w-full px-4 py-3 bg-white border border-roiba-verde/20 text-roiba-verde focus:outline-none focus:border-roiba-dorado transition-colors resize-none"
+          placeholder="Cuéntenos sobre su proyecto o consulta..."
+        />
+      </div>
+
+      {/* Consentimientos */}
+      <div className="space-y-4">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            name="gdpr_consent"
+            checked={formData.gdpr_consent}
+            onChange={handleChange}
+            className="mt-1 w-4 h-4 accent-roiba-dorado"
+          />
+          <span className="text-caption text-roiba-verde/70">
+            He leído y acepto la{' '}
+            <a href="/privacidad" className="text-roiba-dorado hover:underline">
+              Política de Privacidad
+            </a>
+            . *
+          </span>
+        </label>
+        {errors.gdpr_consent && (
+          <p className="text-micro text-red-500">{errors.gdpr_consent}</p>
+        )}
+        
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            name="marketing_consent"
+            checked={formData.marketing_consent}
+            onChange={handleChange}
+            className="mt-1 w-4 h-4 accent-roiba-dorado"
+          />
+          <span className="text-caption text-roiba-verde/70">
+            Deseo recibir información sobre nuevos proyectos y oportunidades de inversión.
+          </span>
+        </label>
+      </div>
+
+      {/* Submit */}
+      {submitStatus === 'error' && (
+        <div className="p-4 bg-red-50 border border-red-200 text-red-600 text-caption">
+          Ha ocurrido un error. Por favor, inténtelo de nuevo o contacte directamente a inversiones@gruporoiba.com
+        </div>
+      )}
+      
+      <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting} className="w-full">
+        <span>Solicitar Análisis Personalizado</span>
+      </Button>
+      
+      <p className="text-micro text-roiba-verde/50 text-center">
+        Su información es confidencial y está protegida bajo estándares GDPR.
+      </p>
+    </form>
   )
 }
-
-/* ===== ICONS ===== */
-const CheckIcon: FC<{ className?: string }> = ({ className }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M20 6L9 17l-5-5" />
-  </svg>
-)
-
-export default ContactForm

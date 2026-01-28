@@ -9,76 +9,48 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ══════════════════════════════════════════════════════════
-        // PALETA OFICIAL - MANUAL DE MARCA V3 GRUPO ROIBA
-        // Fuente: Manual_Maestro_Marca_Grupo_Roiba_V3_Logo_RI.pdf
-        // ══════════════════════════════════════════════════════════
+        // Paleta Grupo Roiba - Manual de Marca V2
         roiba: {
-          // Verde Profundo (Primario) - Autoridad, Solidez
-          verde: {
-            DEFAULT: '#122620',
-            light: '#1A3830',
-            dark: '#0A1613',
-            50: '#E8EDEB',
-            100: '#C5D1CC',
-            200: '#9FB3AB',
-            300: '#79958A',
-            400: '#5D7D71',
-            500: '#122620',
-            600: '#0E1E1A',
-            700: '#0A1613',
-            800: '#060E0D',
-            900: '#020606',
-          },
-          // Arena Claro (Base) - Fondos, Espacios
-          arena: {
-            DEFAULT: '#F4EBD0',
-            light: '#FAF7EE',
-            dark: '#E8DEC4',
-          },
-          // Dorado Claro (Acento Premium) - CTAs, Highlights
-          dorado: {
-            DEFAULT: '#FFCC53',
-            claro: '#FFCC53',
-            arena: '#B68D40',
-            mate: '#B68D40',
-          },
+          verde: '#122620',      // Verde profundo (primario)
+          'verde-light': '#1A4D5C',
+          arena: '#F4EBD0',      // Arena claro (base)
+          'arena-dark': '#E5DCC5',
+          dorado: '#B68D40',     // Dorado arena (secundario)
+          'dorado-light': '#FFCC53', // Dorado claro (acento)
+          negro: '#0A0A0A',
+          blanco: '#FEFEFE',
         },
-        // Alias semánticos para facilidad de uso
-        primary: '#122620',
-        secondary: '#F4EBD0',
-        accent: '#FFCC53',
-        'accent-muted': '#B68D40',
       },
       fontFamily: {
-        // Tipografía Manual V3: Gotham (con fallbacks web)
-        serif: ['Cormorant Garamond', 'Playfair Display', 'Georgia', 'serif'],
-        sans: ['Inter', 'Lato', 'system-ui', 'sans-serif'],
-        display: ['Montserrat', 'Gotham', 'sans-serif'],
+        // Tipografía editorial - NO genérica
+        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Cormorant Garamond', 'Georgia', 'serif'],
       },
       fontSize: {
-        'display-xl': ['4rem', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        'display-lg': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'display': ['2.25rem', { lineHeight: '1.15', letterSpacing: '-0.01em' }],
-        'heading': ['1.75rem', { lineHeight: '1.25' }],
-        'subheading': ['1.25rem', { lineHeight: '1.4' }],
-        'body-lg': ['1.125rem', { lineHeight: '1.6' }],
+        // Sistema tipográfico editorial
+        'display-xl': ['clamp(3rem, 8vw, 7rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
+        'display-lg': ['clamp(2.5rem, 6vw, 5rem)', { lineHeight: '1', letterSpacing: '-0.02em' }],
+        'display-md': ['clamp(2rem, 4vw, 3.5rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        'heading': ['clamp(1.5rem, 3vw, 2.25rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'subheading': ['clamp(1.125rem, 2vw, 1.5rem)', { lineHeight: '1.4' }],
+        'body-lg': ['1.125rem', { lineHeight: '1.7' }],
+        'body': ['1rem', { lineHeight: '1.7' }],
         'caption': ['0.875rem', { lineHeight: '1.5' }],
-        'legal': ['0.75rem', { lineHeight: '1.4' }],
+        'micro': ['0.75rem', { lineHeight: '1.4', letterSpacing: '0.05em' }],
       },
       spacing: {
         '18': '4.5rem',
         '22': '5.5rem',
-        '26': '6.5rem',
         '30': '7.5rem',
-        '128': '32rem',
+        '34': '8.5rem',
       },
       animation: {
-        'fade-in': 'fadeIn 0.6s ease-out forwards',
-        'fade-up': 'fadeUp 0.6s ease-out forwards',
-        'scale-in': 'scaleIn 0.5s ease-out forwards',
-        'slide-right': 'slideRight 0.5s ease-out forwards',
-        'pulse-subtle': 'pulseSubtle 2s ease-in-out infinite',
+        'fade-in': 'fadeIn 0.8s ease-out forwards',
+        'fade-up': 'fadeUp 0.8s ease-out forwards',
+        'slide-in': 'slideIn 0.6s ease-out forwards',
+        'reveal': 'reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'line-grow': 'lineGrow 0.8s ease-out forwards',
       },
       keyframes: {
         fadeIn: {
@@ -86,40 +58,27 @@ const config: Config = {
           '100%': { opacity: '1' },
         },
         fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(16px)' },
+          '0%': { opacity: '0', transform: 'translateY(30px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        scaleIn: {
-          '0%': { opacity: '0', transform: 'scale(0.96)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        slideRight: {
-          '0%': { opacity: '0', transform: 'translateX(-16px)' },
+        slideIn: {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
-        pulseSubtle: {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.85' },
+        reveal: {
+          '0%': { clipPath: 'inset(0 100% 0 0)' },
+          '100%': { clipPath: 'inset(0 0% 0 0)' },
+        },
+        lineGrow: {
+          '0%': { transform: 'scaleX(0)' },
+          '100%': { transform: 'scaleX(1)' },
         },
       },
+      transitionTimingFunction: {
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-verde': 'linear-gradient(135deg, #122620 0%, #1A3830 100%)',
-        'gradient-dorado': 'linear-gradient(135deg, #B68D40 0%, #FFCC53 100%)',
-        'gradient-arena': 'linear-gradient(180deg, #FAF7EE 0%, #F4EBD0 100%)',
-      },
-      boxShadow: {
-        'luxury': '0 25px 50px -12px rgba(18, 38, 32, 0.2)',
-        'gold': '0 10px 40px -10px rgba(182, 141, 64, 0.25)',
-        'card': '0 4px 24px rgba(18, 38, 32, 0.06)',
-        'card-hover': '0 8px 32px rgba(18, 38, 32, 0.12)',
-        'inner-light': 'inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-      },
-      borderRadius: {
-        'sm': '2px',
-        'DEFAULT': '4px',
-        'md': '6px',
-        'lg': '8px',
+        'grain': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
       },
     },
   },
