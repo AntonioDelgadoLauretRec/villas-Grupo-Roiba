@@ -25,3 +25,7 @@ export function formatDate(date: Date | string, locale: string = 'es-ES'): strin
 export const COMPANY: Record<string, string> = {
   name: "Grupo Roiba",
 };
+
+export function formatArea(m2: number): string {
+  return `${m2.toLocaleString()} m²`
+}

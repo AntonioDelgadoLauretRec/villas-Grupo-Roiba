@@ -161,7 +161,7 @@ const VillaCard: FC<VillaCardProps> = ({ villa }) => {
   )
 }
 
-const VillaGrid = (_props: VillaGridProps) => {
+export const VillaGrid = (_props: VillaGridProps) => {
   return (
     <section className="py-24 md:py-32 bg-roiba-arena">
       <div className="container-editorial">
