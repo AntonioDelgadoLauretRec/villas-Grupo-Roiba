@@ -16,7 +16,8 @@ interface FormData {
 }
 
 const INVESTMENT_OPTIONS = [
-  { value: '500k-1m', label: '$250,000 - $500,000 USDn            <option value="500k-1m">$250,000 - $500,000 USDn            <option value="500k-1m">$500,000 - $1,000,000 USD' },
+  { value: '250k-500k', label: '$250,000 - $500,000 USD' },
+  { value: '500k-1m', label: '$500,000 - $1,000,000 USD' },
   { value: '1m-2m', label: '$1,000,000 - $2,000,000 USD' },
   { value: '2m-5m', label: '$2,000,000 - $5,000,000 USD' },
   { value: '5m+', label: 'Más de $5,000,000 USD' },
