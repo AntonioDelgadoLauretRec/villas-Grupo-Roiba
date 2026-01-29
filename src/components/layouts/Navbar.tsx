@@ -43,24 +43,15 @@ export const Navbar: FC = () => {
               className="relative z-10"
             >
               <div className="flex items-center gap-3">
-                {/* Monograma */}
-                <div 
-                  className={cn(
-                    'w-10 h-10 flex items-center justify-center border transition-colors duration-300',
-                    isScrolled 
-                      ? 'border-roiba-verde bg-roiba-verde' 
-                      : 'border-roiba-arena bg-transparent'
-                  )}
-                >
-                  <span 
-                    className={cn(
-                      'font-serif text-xl font-medium transition-colors duration-300',
-                      isScrolled ? 'text-roiba-arena' : 'text-roiba-arena'
-                    )}
-                  >
-                    R
-                  </span>
-                </div>
+{/* Logo */}
+<img 
+src="/images/logo.png" 
+alt="Grupo Roiba" 
+className={cn(
+"h-12 w-auto transition-all duration-300",
+isScrolled ? "brightness-100" : "brightness-100"
+)}
+/>
                 
                 {/* Nombre */}
                 <div>
