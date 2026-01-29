@@ -1,9 +1,9 @@
-import { Hero } from '@/components/sections/Hero'
-import { ProcessTimeline } from '@/components/sections/ProcessTimeline'
-import { VillaGrid } from '@/components/sections/VillaGrid'
-import { WhyPuntaCana } from '@/components/sections/WhyPuntaCana'
-import { TrustCenter } from '@/components/sections/TrustCenter'
-import { ContactForm } from '@/components/sections/ContactForm'
+import Hero from '@/components/sections/Hero'
+import ProcessTimeline from '@/components/sections/ProcessTimeline'
+import VillaGrid from '@/components/sections/VillaGrid'
+import WhyPuntaCana from '@/components/sections/WhyPuntaCana'
+import TrustCenter from '@/components/sections/TrustCenter'
+import ContactForm from '@/components/sections/ContactForm'
 
 export default function HomePage() {
   return (
