@@ -10,6 +10,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@sanity/client": "^7.14.1",
+    "@sanity/image-url": "^2.0.3",
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.39.0",
     "clsx": "^2.1.0",

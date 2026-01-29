@@ -29,6 +29,8 @@ export const Navbar: FC = () => {
     <>
       <header
         className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
           isScrolled 
@@ -49,6 +51,8 @@ export const Navbar: FC = () => {
 src="/images/logo.png" 
 alt="Grupo Roiba" 
 className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
 "h-12 w-auto transition-all duration-300",
 isScrolled ? "brightness-100" : "brightness-100"
@@ -59,6 +63,8 @@ isScrolled ? "brightness-100" : "brightness-100"
                 <div>
                   <span 
                     className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                       'block text-micro font-sans tracking-widest uppercase transition-colors duration-300',
                       isScrolled ? 'text-roiba-verde/60' : 'text-roiba-arena/60'
@@ -68,6 +74,8 @@ isScrolled ? "brightness-100" : "brightness-100"
                   </span>
                   <span 
                     className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                       'block text-subheading font-serif -mt-1 transition-colors duration-300',
                       isScrolled ? 'text-roiba-verde' : 'text-roiba-arena'
@@ -86,6 +94,8 @@ isScrolled ? "brightness-100" : "brightness-100"
                   key={link.href}
                   href={link.href}
                   className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                     'text-caption font-sans font-medium tracking-wide transition-colors duration-300',
                     isScrolled 
@@ -105,6 +115,8 @@ isScrolled ? "brightness-100" : "brightness-100"
                   variant={isScrolled ? 'primary' : 'secondary'} 
                   size="sm"
                   className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                     !isScrolled && 'border-roiba-arena/50 text-roiba-arena hover:bg-roiba-arena hover:text-roiba-verde'
                   )}
@@ -122,6 +134,8 @@ isScrolled ? "brightness-100" : "brightness-100"
                 <div className="w-6 h-5 relative flex flex-col justify-between">
                   <span 
                     className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                       'w-full h-px transition-all duration-300 origin-left',
                       isScrolled ? 'bg-roiba-verde' : 'bg-roiba-arena',
@@ -130,6 +144,8 @@ isScrolled ? "brightness-100" : "brightness-100"
                   />
                   <span 
                     className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                       'w-full h-px transition-all duration-300',
                       isScrolled ? 'bg-roiba-verde' : 'bg-roiba-arena',
@@ -138,6 +154,8 @@ isScrolled ? "brightness-100" : "brightness-100"
                   />
                   <span 
                     className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                       'w-full h-px transition-all duration-300 origin-left',
                       isScrolled ? 'bg-roiba-verde' : 'bg-roiba-arena',
@@ -154,6 +172,8 @@ isScrolled ? "brightness-100" : "brightness-100"
       {/* Mobile menu overlay */}
       <div
         className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
           'fixed inset-0 z-40 bg-roiba-verde transition-all duration-500 lg:hidden',
           isMobileMenuOpen 
@@ -169,6 +189,8 @@ isScrolled ? "brightness-100" : "brightness-100"
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                   'text-display-md font-serif text-roiba-arena hover:text-roiba-dorado-light transition-all duration-300',
                   'opacity-0 translate-y-4',
@@ -184,6 +206,8 @@ isScrolled ? "brightness-100" : "brightness-100"
               href="/contacto"
               onClick={() => setIsMobileMenuOpen(false)}
               className={cn(
+                    "mix-blend-multiply dark:mix-blend-normal",
+                    !isScrolled && "invert brightness-0 invert",
                     !isScrolled && "brightness-0 invert",
                 'mt-8 opacity-0 translate-y-4 transition-all duration-300',
                 isMobileMenuOpen && 'opacity-100 translate-y-0'
