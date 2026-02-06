@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════════════════
+   GRUPO ROIBA - SISTEMA DE DISEÑO OFICIAL
+   Manual de Marca V3 + Arquitectura UX Gemini
+   Fecha: Enero 2026
+   ══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  :root {
+    /* ══════════════════════════════════════════════════════════
+       PALETA OFICIAL - MANUAL DE MARCA V3
+       Fuente: Manual_Maestro_Marca_Grupo_Roiba_V3_Logo_RI.pdf
+       ══════════════════════════════════════════════════════════ */
+    
+    /* Verde Profundo (Primario) - Autoridad, Solidez, Permanencia */
+    --color-verde: #122620;
+    --color-verde-light: #1A3830;
+    --color-verde-dark: #0A1613;
+    
+    /* Arena Claro (Base) - Fondos, Espacios, Calma */
+    --color-arena: #F4EBD0;
+    --color-arena-light: #FAF7EE;
+    --color-arena-dark: #E8DEC4;
+    
+    /* Dorado (Acento Premium) - CTAs, Destacados, Lujo */
+    --color-dorado: #FFCC53;
+    --color-dorado-arena: #B68D40;
+    --color-dorado-mate: #B68D40;
+    
+    /* ══════════════════════════════════════════════════════════
+       TIPOGRAFÍA - MANUAL DE MARCA V3
+       Primaria: Gotham → Fallback: Montserrat, Inter
+       ══════════════════════════════════════════════════════════ */
+    --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', 'Lato', system-ui, sans-serif;
+    --font-display: 'Montserrat', 'Gotham', sans-serif;
+    
+    /* Espaciado base (múltiplos de 8px - Manual V3) */
+    --spacing-unit: 8px;
+    
+    /* Transiciones suaves */
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-roiba-arena text-roiba-verde antialiased;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    @apply font-normal tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-display-lg;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-display;
+  }
+
+  h3 {
+    @apply text-2xl md:text-heading;
+  }
+
+  /* Focus states accesibles */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-roiba-dorado;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-roiba-dorado/30 text-roiba-verde;
+  }
+}
+
+@layer components {
+  /* ===== BOTONES ===== */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 
+           font-sans font-semibold text-base tracking-wide
+           rounded-sm transition-all duration-300 ease-out
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-roiba-dorado focus-visible:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-roiba-dorado text-roiba-verde 
+           hover:bg-roiba-dorado-claro hover:shadow-gold
+           active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-roiba-dorado text-roiba-dorado bg-transparent
+           hover:bg-roiba-dorado hover:text-roiba-verde
+           active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn text-roiba-arena border border-roiba-arena/30 bg-transparent
+           hover:bg-roiba-arena/10 hover:border-roiba-arena/50;
+  }
+
+  /* ===== CARDS ===== */
+  .card {
+    @apply bg-roiba-arena-light rounded-sm shadow-card 
+           transition-all duration-300 ease-out
+           hover:shadow-luxury hover:-translate-y-1;
+  }
+
+  .card-dark {
+    @apply bg-roiba-verde text-roiba-arena rounded-sm shadow-luxury;
+  }
+
+  /* ===== INPUTS ===== */
+  .input {
+    @apply w-full px-4 py-3 bg-white border border-roiba-verde/20 
+           rounded-sm text-roiba-verde placeholder:text-roiba-verde/50
+           transition-all duration-200
+           focus:border-roiba-dorado focus:ring-1 focus:ring-roiba-dorado focus:outline-none;
+  }
+
+  .input-dark {
+    @apply input bg-roiba-verde-light border-roiba-arena/20 text-roiba-arena
+           placeholder:text-roiba-arena/50
+           focus:border-roiba-dorado;
+  }
+
+  .select {
+    @apply input appearance-none cursor-pointer
+           bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23122620%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
+           bg-no-repeat bg-[right_1rem_center] bg-[length:1.25rem];
+  }
+
+  .label {
+    @apply block text-sm font-medium text-roiba-verde mb-2;
+  }
+
+  /* ===== SECCIONES ===== */
+  .section {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .section-dark {
+    @apply section bg-roiba-verde text-roiba-arena;
+  }
+
+  .container-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* ===== DECORATIVOS ===== */
+  .gold-line {
+    @apply h-px bg-gradient-to-r from-transparent via-roiba-dorado to-transparent;
+  }
+
+  .divider {
+    @apply w-16 h-1 bg-roiba-dorado mx-auto;
+  }
+
+  /* ===== ANIMACIONES ===== */
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
+}
+
+@layer utilities {
+  /* Texto con gradiente dorado */
+  .text-gradient-gold {
+    @apply bg-gradient-dorado bg-clip-text text-transparent;
+  }
+
+  /* Overlay para videos/imágenes */
+  .overlay-dark {
+    @apply absolute inset-0 bg-roiba-verde/70;
+  }
+
+  .overlay-gradient {
+    @apply absolute inset-0 bg-gradient-to-t from-roiba-verde via-roiba-verde/50 to-transparent;
+  }
+
+  /* Aspect ratios */
+  .aspect-villa {
+    aspect-ratio: 4/3;
+  }
+
+  .aspect-hero {
+    aspect-ratio: 16/9;
+  }
+
+  /* Scrollbar personalizada */
+  .scrollbar-luxury {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-dorado) var(--color-arena);
+  }
+
+  .scrollbar-luxury::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .scrollbar-luxury::-webkit-scrollbar-track {
+    background: var(--color-arena);
+  }
+
+  .scrollbar-luxury::-webkit-scrollbar-thumb {
+    background: var(--color-dorado);
+    border-radius: 4px;
+  }
+}
+
+/* ===== FUENTES GOOGLE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');

@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colores Grupo Roiba */
+  --color-verde: #122620;
+  --color-verde-light: #1A4D5C;
+  --color-arena: #F4EBD0;
+  --color-arena-dark: #E5DCC5;
+  --color-dorado: #B68D40;
+  --color-dorado-light: #FFCC53;
+  --color-negro: #0A0A0A;
+  --color-blanco: #FEFEFE;
+  
+  /* Espaciado base */
+  --spacing-unit: 8px;
+  --container-padding: clamp(1.5rem, 5vw, 4rem);
+  
+  /* Transiciones */
+  --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-duration: 0.6s;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-roiba-arena text-roiba-verde font-sans;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+  
+  /* Tipografía editorial */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-normal;
+    text-wrap: balance;
+  }
+  
+  p {
+    text-wrap: pretty;
+  }
+  
+  /* Selección de texto */
+  ::selection {
+    @apply bg-roiba-dorado/30 text-roiba-verde;
+  }
+  
+  /* Scrollbar personalizada */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-roiba-arena;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-roiba-verde/20 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-roiba-verde/40;
+  }
+}
+
+@layer components {
+  /* Container editorial */
+  .container-editorial {
+    @apply w-full mx-auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+    max-width: 1600px;
+  }
+  
+  /* Grid editorial asimétrico */
+  .grid-editorial {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+  
+  @media (min-width: 768px) {
+    .grid-editorial {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .grid-editorial {
+      grid-template-columns: 1fr 1.2fr;
+    }
+  }
+  
+  /* Botón principal */
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center;
+    @apply px-8 py-4 text-caption font-sans font-medium tracking-wider uppercase;
+    @apply bg-roiba-verde text-roiba-arena;
+    @apply transition-all duration-500 ease-out-expo;
+    @apply overflow-hidden;
+  }
+  
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 bg-roiba-dorado;
+    @apply transform -translate-x-full transition-transform duration-500 ease-out-expo;
+  }
+  
+  .btn-primary:hover::before {
+    @apply translate-x-0;
+  }
+  
+  .btn-primary span {
+    @apply relative z-10 transition-colors duration-300;
+  }
+  
+  .btn-primary:hover span {
+    @apply text-roiba-verde;
+  }
+  
+  /* Botón secundario (outline) */
+  .btn-secondary {
+    @apply relative inline-flex items-center justify-center;
+    @apply px-8 py-4 text-caption font-sans font-medium tracking-wider uppercase;
+    @apply border border-roiba-verde text-roiba-verde bg-transparent;
+    @apply transition-all duration-500 ease-out-expo;
+  }
+  
+  .btn-secondary:hover {
+    @apply bg-roiba-verde text-roiba-arena;
+  }
+  
+  /* Línea decorativa animada */
+  .line-accent {
+    @apply block w-12 h-px bg-roiba-dorado origin-left;
+    @apply transform scale-x-0 animate-line-grow;
+    animation-delay: 0.3s;
+  }
+  
+  /* Texto con reveal */
+  .text-reveal {
+    @apply opacity-0 translate-y-8;
+    animation: fadeUp 0.8s var(--transition-smooth) forwards;
+  }
+  
+  /* Imagen con reveal */
+  .image-reveal {
+    @apply relative overflow-hidden;
+  }
+  
+  .image-reveal::after {
+    content: '';
+    @apply absolute inset-0 bg-roiba-arena;
+    @apply transform translate-x-0;
+    animation: imageReveal 1.2s var(--transition-smooth) forwards;
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes imageReveal {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(101%); }
+  }
+  
+  /* Overlay de textura grain */
+  .grain-overlay {
+    @apply pointer-events-none fixed inset-0 z-50 opacity-[0.03];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+  
+/* Card de villa */
+.villa-card {
+@apply relative cursor-pointer;
+}
+
+
+.villa-card-image {
+@apply relative overflow-hidden aspect-[4/5];
+}
+.villa-card-image {
+    @apply relative overflow-hidden aspect-[4/5];
+  }
+  
+  .villa-card-image img {
+    @apply w-full h-full object-cover;
+    @apply transition-transform duration-700 ease-out-expo;
+  }
+  
+  .villa-card:hover .villa-card-image img {
+    @apply scale-105;
+  }
+  
+  /* Número de sección editorial */
+  .section-number {
+    @apply font-serif text-display-xl text-roiba-verde/10;
+    @apply absolute -left-4 md:-left-8 top-0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  
+  /* Separador editorial */
+  .editorial-divider {
+    @apply w-full h-px bg-roiba-verde/10;
+  }
+  
+  /* Badge de estado */
+  .badge {
+    @apply inline-flex items-center px-3 py-1;
+    @apply text-micro font-sans font-medium uppercase tracking-widest;
+    @apply border border-roiba-verde/20;
+  }
+  
+  .badge-gold {
+    @apply border-roiba-dorado bg-roiba-dorado/10 text-roiba-dorado;
+  }
+}
+
+@layer utilities {
+  /* Stagger animations */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+  
+  /* Aspect ratios personalizados */
+  .aspect-villa { aspect-ratio: 4/5; }
+  .aspect-hero { aspect-ratio: 16/10; }
+  .aspect-square { aspect-ratio: 1/1; }
+  
+  /* Clip paths */
+  .clip-reveal {
+    clip-path: inset(0 100% 0 0);
+  }
+  
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-roiba-verde to-roiba-verde-light;
+  }
+}
+
+/* Focus states accesibles */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-roiba-dorado;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
