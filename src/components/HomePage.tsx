@@ -357,11 +357,16 @@ const PROCESS = [
 ];
 
 const PROJECTS = [
-  { name: "Villa Coral Bay", location: "Cap Cana, República Dominicana", size: "450 m²", status: "Completada", beds: 5, type: "Villa unifamiliar", year: "2024", gradient: "135deg, #0C2340 0%, #143558 40%, #1B4B7A 100%", image: "/images/projects/proyecto-1.jpg" },
-  { name: "Residencia Mar Sereno", location: "Bávaro, Punta Cana", size: "380 m²", status: "Completada", beds: 4, type: "Villa con piscina infinity", year: "2025", gradient: "135deg, #061525 0%, #0C2340 50%, #1B4B7A 100%", image: "/images/projects/proyecto-2.jpg" },
-  { name: "Villa Puerto Banús", location: "Marbella, España", size: "520 m²", status: "Completada", beds: 6, type: "Residencia premium", year: "2023", gradient: "135deg, #061525 0%, #0C2340 60%, #143558 100%", image: "/images/projects/proyecto-3.jpg" },
-  { name: "Villa Estepona Hills", location: "Estepona, España", size: "410 m²", status: "Completada", beds: 4, type: "Villa contemporánea", year: "2024", gradient: "135deg, #0C2340 0%, #143558 40%, #1B4B7A 100%", image: "/images/projects/proyecto-4.jpg" },
-  { name: "Residencia Almería Bay", location: "Almería, España", size: "340 m²", status: "En construcción", beds: 3, type: "Villa minimalista", year: "2026", gradient: "135deg, #061525 0%, #0C2340 50%, #143558 100%", image: "/images/projects/proyecto-1.jpg" },
+  { name: "Excellence Oyster Bay", location: "Jamaica", status: "Completada", type: "Resort premium", year: "2024", image: "/images/projects/excellence-oyster-bay.jpg" },
+  { name: "Iguanas 45", location: "Cap Cana, República Dominicana", status: "Completada", type: "Villa unifamiliar", year: "2024", image: "/images/projects/iguanas-45-cap-cana.png" },
+  { name: "14 Villas Banus Bay", location: "Puerto Banús, España", status: "Completada", type: "Villas premium", year: "2023", image: "/images/projects/villas-banus-bay.png" },
+  { name: "Finest Punta Cana", location: "Punta Cana, República Dominicana", status: "Completada", type: "Resort & Residencias", year: "2024", image: "/images/projects/finest-punta-cana.jpg" },
+  { name: "Excellence El Carmen", location: "República Dominicana", status: "Completada", type: "Resort premium", year: "2023", image: "/images/projects/excellence-el-carmen.jpg" },
+  { name: "Terrazas de Cortessín", location: "Estepona, España", status: "Completada", type: "Residencial 64 apartamentos", year: "2024", image: "/images/projects/terrazas-cortessin.png" },
+  { name: "Mar de Pulpí Fase 7", location: "Almería, España", status: "Completada", type: "Residencial costero", year: "2024", image: "/images/projects/mar-de-pulpi.png" },
+  { name: "Cayuco 11", location: "Cap Cana, República Dominicana", status: "Completada", type: "Villa unifamiliar", year: "2024", image: "/images/projects/cayuco-11-cap-cana.png" },
+  { name: "Hotel Live Aqua", location: "Uvero Alto, República Dominicana", status: "Completada", type: "Hotel resort", year: "2024", image: "/images/projects/hotel-live-aqua.png" },
+  { name: "Atalaya Emotion", location: "Puerto Banús, España", status: "Completada", type: "64 apartamentos premium", year: "2024", image: "/images/projects/atalaya-emotion.png" },
 ];
 
 const STATS = [
@@ -1509,48 +1514,24 @@ export default function HomePage() {
                   style={{
                     width: "100%",
                     aspectRatio: "21/9",
-                    background: `linear-gradient(${proj.gradient})`,
+                    background: C.verde,
                     position: "relative",
                     overflow: "hidden",
                   }}
-                  className="grain"
                 >
-                  {/* Architectural overlay grid */}
-                  <div style={{
-                    position: "absolute",
-                    inset: 0,
-                    backgroundImage: `
-                      linear-gradient(${C.arena}05 1px, transparent 1px),
-                      linear-gradient(90deg, ${C.arena}05 1px, transparent 1px)
-                    `,
-                    backgroundSize: "80px 80px",
-                  }} />
-
-                  {/* Centered placeholder text */}
-                  <div style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 12,
-                  }}>
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke={`${C.arena}25`} strokeWidth="1">
-                      <rect x="4" y="8" width="40" height="32" rx="2" />
-                      <circle cx="16" cy="20" r="4" />
-                      <path d="M4 36 L16 26 L24 32 L36 20 L44 28" />
-                    </svg>
-                    <span style={{
-                      fontFamily: "'Montserrat'",
-                      fontSize: 10,
-                      color: `${C.arena}25`,
-                      letterSpacing: "0.3em",
-                      textTransform: "uppercase",
-                    }}>
-                      Fotografía del proyecto
-                    </span>
-                  </div>
+                  {/* Project photo */}
+                  <img
+                    src={proj.image}
+                    alt={proj.name}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
 
                   {/* Bottom gradient overlay for text legibility */}
                   <div style={{
@@ -1612,30 +1593,24 @@ export default function HomePage() {
 
                     {/* Right: specs */}
                     <div style={{ display: "flex", gap: 40, paddingBottom: 4 }}>
-                      {[
-                        { label: "Superficie", value: proj.size },
-                        { label: "Dormitorios", value: proj.beds },
-                        { label: "Tipología", value: proj.type },
-                      ].map((spec) => (
-                        <div key={spec.label} style={{ textAlign: "right" }}>
-                          <span style={{
-                            fontFamily: "'Montserrat', sans-serif",
-                            fontSize: 9,
-                            fontWeight: 600,
-                            letterSpacing: "0.2em",
-                            textTransform: "uppercase",
-                            color: C.doradoArena,
-                            display: "block",
-                            marginBottom: 4,
-                          }}>{spec.label}</span>
-                          <span style={{
-                            fontFamily: "'Cormorant Garamond', serif",
-                            fontSize: 20,
-                            fontWeight: 500,
-                            color: C.arena,
-                          }}>{spec.value}</span>
-                        </div>
-                      ))}
+                      <div style={{ textAlign: "right" }}>
+                        <span style={{
+                          fontFamily: "'Montserrat', sans-serif",
+                          fontSize: 9,
+                          fontWeight: 600,
+                          letterSpacing: "0.2em",
+                          textTransform: "uppercase",
+                          color: C.doradoArena,
+                          display: "block",
+                          marginBottom: 4,
+                        }}>Tipología</span>
+                        <span style={{
+                          fontFamily: "'Cormorant Garamond', serif",
+                          fontSize: 20,
+                          fontWeight: 500,
+                          color: C.arena,
+                        }}>{proj.type}</span>
+                      </div>
                     </div>
                   </div>
 
