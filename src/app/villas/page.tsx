@@ -1,15 +1,52 @@
 import { VillaGrid } from '@/components/sections/VillaGrid'
+import Link from 'next/link'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Colección de Villas | Grupo Roiba',
+  description: 'Proyectos exclusivos de villas premium en Punta Cana. Diseño contemporáneo, ejecución precisa y gestión integral.',
+}
 
 export default function VillasPage() {
   return (
     <main className="pt-20">
-      <section className="bg-roiba-verde text-roiba-arena py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-serif mb-6">Colección de Villas</h1>
-          <p className="text-xl opacity-80">Proyectos exclusivos en Punta Cana</p>
+      {/* Hero */}
+      <section className="relative bg-roiba-verde py-24 md:py-32 px-6 overflow-hidden">
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <p className="text-roiba-dorado uppercase tracking-[0.3em] text-xs font-medium mb-6">
+            Portfolio
+          </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-6">
+            Colección de Villas
+          </h1>
+          <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
+          <p className="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+            Proyectos exclusivos en Punta Cana. Cada villa es un proyecto único,
+            desarrollado con un enfoque totalmente personalizado.
+          </p>
         </div>
       </section>
+
+      {/* Villa Grid */}
       <VillaGrid />
+
+      {/* CTA */}
+      <section className="py-20 bg-roiba-verde">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-serif text-white mb-6">
+            ¿Tiene un proyecto en mente?
+          </h2>
+          <p className="text-white/60 text-lg mb-10">
+            Cuéntenos su visión. Nuestro equipo técnico le asesorará sin compromiso.
+          </p>
+          <Link
+            href="/contacto"
+            className="inline-block px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold hover:bg-roiba-dorado-light transition-all duration-300 text-sm uppercase tracking-wider"
+          >
+            Solicitar consulta
+          </Link>
+        </div>
+      </section>
     </main>
   )
 }

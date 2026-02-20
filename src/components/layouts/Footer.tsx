@@ -2,6 +2,7 @@
 
 import { FC } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const FOOTER_LINKS = {
   empresa: [
@@ -25,32 +26,28 @@ export const Footer: FC = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-roiba-verde text-roiba-arena">
+    <footer className="bg-roiba-verde text-white">
       {/* Main footer */}
       <div className="container-editorial py-16 md:py-24">
         <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 flex items-center justify-center border border-roiba-arena">
-                <span className="font-serif text-xl font-medium text-roiba-arena">R</span>
-              </div>
-              <div>
-                <span className="block text-micro font-sans tracking-widest uppercase text-roiba-arena/60">
-                  Grupo
-                </span>
-                <span className="block text-subheading font-serif -mt-1 text-roiba-arena">
-                  Roiba
-                </span>
-              </div>
+            <div className="mb-6">
+              <Image
+                src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
+                alt="Grupo Roiba"
+                width={140}
+                height={76}
+                className="h-10 w-auto brightness-0 invert"
+              />
             </div>
             
-            <p className="text-body text-roiba-arena/60 font-light mb-6 max-w-sm">
+            <p className="text-body text-white/60 font-light mb-6 max-w-sm">
               Construcción boutique de villas en el Caribe. 
               Inversión patrimonial con control total y seguridad jurídica garantizada.
             </p>
 
-            <div className="space-y-2 text-caption text-roiba-arena/50">
+            <div className="space-y-2 text-caption text-white/50">
               <p>Punta Cana, República Dominicana</p>
               <p>
                 <a 
@@ -65,7 +62,7 @@ export const Footer: FC = () => {
 
           {/* Links columns */}
           <div className="lg:col-span-2">
-            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-arena/40 mb-4">
+            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-white/40 mb-4">
               Empresa
             </h4>
             <ul className="space-y-3">
@@ -73,7 +70,7 @@ export const Footer: FC = () => {
                 <li key={link.href}>
                   <Link 
                     href={link.href}
-                    className="text-body text-roiba-arena/70 hover:text-roiba-arena transition-colors"
+                    className="text-body text-white/70 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -83,7 +80,7 @@ export const Footer: FC = () => {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-arena/40 mb-4">
+            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-white/40 mb-4">
               Servicios
             </h4>
             <ul className="space-y-3">
@@ -91,7 +88,7 @@ export const Footer: FC = () => {
                 <li key={link.href}>
                   <Link 
                     href={link.href}
-                    className="text-body text-roiba-arena/70 hover:text-roiba-arena transition-colors"
+                    className="text-body text-white/70 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -101,7 +98,7 @@ export const Footer: FC = () => {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-arena/40 mb-4">
+            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-white/40 mb-4">
               Legal
             </h4>
             <ul className="space-y-3">
@@ -109,7 +106,7 @@ export const Footer: FC = () => {
                 <li key={link.href}>
                   <Link 
                     href={link.href}
-                    className="text-body text-roiba-arena/70 hover:text-roiba-arena transition-colors"
+                    className="text-body text-white/70 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -120,7 +117,7 @@ export const Footer: FC = () => {
 
           {/* Newsletter / Contact */}
           <div className="lg:col-span-2">
-            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-arena/40 mb-4">
+            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-white/40 mb-4">
               Conectar
             </h4>
             <div className="flex gap-4">
@@ -128,7 +125,7 @@ export const Footer: FC = () => {
                 href="https://linkedin.com/company/gruporoiba" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center border border-roiba-arena/20 text-roiba-arena/60 hover:border-roiba-dorado-light hover:text-roiba-dorado-light transition-colors"
+                className="w-10 h-10 flex items-center justify-center border border-white/20 text-white/60 hover:border-roiba-dorado-light hover:text-roiba-dorado-light transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -139,7 +136,7 @@ export const Footer: FC = () => {
                 href="https://instagram.com/gruporoiba" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center border border-roiba-arena/20 text-roiba-arena/60 hover:border-roiba-dorado-light hover:text-roiba-dorado-light transition-colors"
+                className="w-10 h-10 flex items-center justify-center border border-white/20 text-white/60 hover:border-roiba-dorado-light hover:text-roiba-dorado-light transition-colors"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -152,13 +149,13 @@ export const Footer: FC = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-roiba-arena/10">
+      <div className="border-t border-white/10">
         <div className="container-editorial py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-caption text-roiba-arena/40">
+            <p className="text-caption text-white/40">
               © {currentYear} Grupo Roiba. Todos los derechos reservados.
             </p>
-            <p className="text-caption text-roiba-arena/40">
+            <p className="text-caption text-white/40">
               Las visualizaciones mostradas pueden ser conceptualizaciones arquitectónicas.
             </p>
           </div>

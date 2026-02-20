@@ -28,8 +28,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         focus:border-roiba-dorado focus:ring-roiba-dorado
       `,
       dark: `
-        bg-roiba-verde-light border border-roiba-arena/20 text-roiba-arena
-        placeholder:text-roiba-arena/50
+        bg-roiba-verde-light border border-white/20 text-white
+        placeholder:text-white/50
         focus:border-roiba-dorado focus:ring-roiba-dorado
       `,
     }
@@ -45,7 +45,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             htmlFor={inputId}
             className={cn(
               'block text-sm font-medium mb-2',
-              variant === 'dark' ? 'text-roiba-arena' : 'text-roiba-verde'
+              variant === 'dark' ? 'text-white' : 'text-roiba-verde'
             )}
           >
             {label}
@@ -69,7 +69,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             id={`${inputId}-hint`}
             className={cn(
               'mt-1 text-sm',
-              variant === 'dark' ? 'text-roiba-arena/60' : 'text-roiba-verde/60'
+              variant === 'dark' ? 'text-white/60' : 'text-roiba-verde/60'
             )}
           >
             {hint}
@@ -111,12 +111,12 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       light: `
         bg-white border border-roiba-verde/20 text-roiba-verde
         focus:border-roiba-dorado focus:ring-roiba-dorado
-        bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23122620%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
+        bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%230C2340%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
       `,
       dark: `
-        bg-roiba-verde-light border border-roiba-arena/20 text-roiba-arena
+        bg-roiba-verde-light border border-white/20 text-white
         focus:border-roiba-dorado focus:ring-roiba-dorado
-        bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23F4EBD0%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
+        bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
       `,
     }
 
@@ -131,7 +131,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             htmlFor={selectId}
             className={cn(
               'block text-sm font-medium mb-2',
-              variant === 'dark' ? 'text-roiba-arena' : 'text-roiba-verde'
+              variant === 'dark' ? 'text-white' : 'text-roiba-verde'
             )}
           >
             {label}
@@ -190,7 +190,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               'focus:ring-2 focus:ring-roiba-dorado focus:ring-offset-2',
               'checked:bg-roiba-dorado checked:border-roiba-dorado',
               variant === 'dark'
-                ? 'border-roiba-arena/30 bg-transparent'
+                ? 'border-white/30 bg-transparent'
                 : 'border-roiba-verde/30 bg-white',
               error && 'border-red-500',
               className
@@ -201,7 +201,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <span
             className={cn(
               'text-sm leading-relaxed',
-              variant === 'dark' ? 'text-roiba-arena/80' : 'text-roiba-verde/80'
+              variant === 'dark' ? 'text-white/80' : 'text-roiba-verde/80'
             )}
           >
             {label}
@@ -245,8 +245,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         focus:border-roiba-dorado focus:ring-roiba-dorado
       `,
       dark: `
-        bg-roiba-verde-light border border-roiba-arena/20 text-roiba-arena
-        placeholder:text-roiba-arena/50
+        bg-roiba-verde-light border border-white/20 text-white
+        placeholder:text-white/50
         focus:border-roiba-dorado focus:ring-roiba-dorado
       `,
     }
@@ -258,7 +258,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             htmlFor={textareaId}
             className={cn(
               'block text-sm font-medium mb-2',
-              variant === 'dark' ? 'text-roiba-arena' : 'text-roiba-verde'
+              variant === 'dark' ? 'text-white' : 'text-roiba-verde'
             )}
           >
             {label}
@@ -285,7 +285,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           <p
             className={cn(
               'mt-1 text-sm',
-              variant === 'dark' ? 'text-roiba-arena/60' : 'text-roiba-verde/60'
+              variant === 'dark' ? 'text-white/60' : 'text-roiba-verde/60'
             )}
           >
             {hint}
