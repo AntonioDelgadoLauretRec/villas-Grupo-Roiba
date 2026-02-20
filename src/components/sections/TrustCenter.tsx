@@ -57,7 +57,7 @@ const LEGAL_BADGES = [
 
 export const TrustCenter: FC = () => {
   return (
-    <section className="py-24 md:py-32 bg-roiba-verde text-white relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-roiba-verde text-roiba-arena relative overflow-hidden">
       {/* Patrón decorativo */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div 
@@ -67,15 +67,15 @@ export const TrustCenter: FC = () => {
               90deg,
               transparent,
               transparent 100px,
-              rgba(255,255,255,0.5) 100px,
-              rgba(255,255,255,0.5) 101px
+              rgba(244,235,208,0.5) 100px,
+              rgba(244,235,208,0.5) 101px
             ),
             repeating-linear-gradient(
               0deg,
               transparent,
               transparent 100px,
-              rgba(255,255,255,0.5) 100px,
-              rgba(255,255,255,0.5) 101px
+              rgba(244,235,208,0.5) 100px,
+              rgba(244,235,208,0.5) 101px
             )`,
           }}
         />
@@ -90,7 +90,7 @@ export const TrustCenter: FC = () => {
           <h2 className="text-display-md md:text-display-lg font-serif mb-6">
             Centro de Confianza
           </h2>
-          <p className="text-body-lg text-white/70 font-light">
+          <p className="text-body-lg text-roiba-arena/70 font-light">
             La seguridad jurídica no es una promesa, es un proceso documentado. 
             Operamos bajo el marco legal más estricto del Caribe para proteger su inversión.
           </p>
@@ -101,7 +101,7 @@ export const TrustCenter: FC = () => {
           {LEGAL_BADGES.map((badge, idx) => (
             <div 
               key={idx}
-              className="group p-6 md:p-8 bg-white/5 border border-white/10 hover:border-roiba-dorado/30 transition-all duration-500"
+              className="group p-6 md:p-8 bg-roiba-arena/5 border border-roiba-arena/10 hover:border-roiba-dorado/30 transition-all duration-500"
             >
               <div className="text-roiba-dorado-light mb-6 transition-transform duration-300 group-hover:scale-110">
                 {badge.icon}
@@ -115,7 +115,7 @@ export const TrustCenter: FC = () => {
                 {badge.subtitle}
               </p>
               
-              <p className="text-body text-white/60 font-light">
+              <p className="text-body text-roiba-arena/60 font-light">
                 {badge.description}
               </p>
             </div>
@@ -123,19 +123,19 @@ export const TrustCenter: FC = () => {
         </div>
 
         {/* CTA */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-8 border-t border-white/10">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-8 border-t border-roiba-arena/10">
           <div>
             <p className="text-body-lg font-serif mb-1">
               Dossier Legal Completo
             </p>
-            <p className="text-caption text-white/60">
+            <p className="text-caption text-roiba-arena/60">
               Documentación detallada sobre el marco jurídico de inversión en República Dominicana.
             </p>
           </div>
           <Link href="/inversores">
             <Button 
               variant="secondary" 
-              className="border-white/30 text-white hover:bg-white hover:text-roiba-verde flex-shrink-0"
+              className="border-roiba-arena/30 text-roiba-arena hover:bg-roiba-arena hover:text-roiba-verde flex-shrink-0"
             >
               <span>Descargar Dossier</span>
               <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -1,12 +1,12 @@
 export default function CookiesPage() {
   return (
     <main className="pt-20">
-      <section className="bg-roiba-verde text-white py-20 px-6">
+      <section className="bg-roiba-verde text-roiba-arena py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-serif mb-6">Política de Cookies</h1>
         </div>
       </section>
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-roiba-arena">
         <div className="max-w-4xl mx-auto prose prose-lg text-roiba-verde/80">
           <p>Última actualización: Enero 2026</p>
           <h2 className="text-roiba-verde">¿Qué son las cookies?</h2>

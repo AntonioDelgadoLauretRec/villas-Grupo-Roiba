@@ -9,18 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Paleta Grupo Roiba — Azul + Blanco + Dorado
+        // Paleta Grupo Roiba - Manual de Marca V2
         roiba: {
-          verde: '#0C2340',        // Azul marino profundo (primario)
-          'verde-light': '#1B4B7A', // Azul medio
-          'verde-dark': '#061525',  // Azul oscuro
-          arena: '#FFFFFF',        // Blanco (base)
-          'arena-light': '#F5F7FA', // Gris muy claro
-          'arena-dark': '#E2E8F0',  // Gris medio
-          dorado: '#C9A96E',       // Dorado refinado (secundario)
-          'dorado-light': '#E8C877', // Dorado claro (acento CTA)
+          verde: '#122620',      // Verde profundo (primario)
+          'verde-light': '#1A4D5C',
+          arena: '#F4EBD0',      // Arena claro (base)
+          'arena-dark': '#E5DCC5',
+          dorado: '#B68D40',     // Dorado arena (secundario)
+          'dorado-light': '#FFCC53', // Dorado claro (acento)
           negro: '#0A0A0A',
-          blanco: '#FFFFFF',
+          blanco: '#FEFEFE',
         },
       },
       fontFamily: {
