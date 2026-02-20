@@ -532,6 +532,7 @@ export default function HomePage() {
             }}
           >
             <button
+              onClick={() => window.location.href = '/contacto'}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -556,9 +557,10 @@ export default function HomePage() {
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
-              Solicitar Análisis
+              Contáctanos
             </button>
             <button
+              onClick={() => document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -762,31 +764,16 @@ export default function HomePage() {
                   justifyContent: "center",
                 }}
               >
-                <div style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: 72,
-                      fontWeight: 300,
-                      color: C.doradoArena,
-                      lineHeight: 1,
-                    }}
-                  >
-                    RI
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontSize: 9,
-                      letterSpacing: "0.5em",
-                      color: `${C.arena}50`,
-                      marginTop: 12,
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    Espacio para Logo
-                  </div>
-                </div>
+                <img
+                  src="/images/logo-white.png"
+                  alt="Grupo Roiba"
+                  style={{
+                    width: "60%",
+                    maxWidth: 220,
+                    height: "auto",
+                    opacity: 0.9,
+                  }}
+                />
               </div>
             </div>
             {/* Offset accent */}
@@ -861,296 +848,63 @@ export default function HomePage() {
             </span>
           </div>
 
-          {/* BENTO GRID — Featured top row + 2 rows below */}
-          {/* ROW 1: Hero card (wide) + 2 stacked cards */}
+          {/* Services grid — icon left, text right, compact */}
           <div
             className="animate-on-scroll"
             style={{
               display: "grid",
-              gridTemplateColumns: "1.35fr 1fr",
-              gap: 20,
-              marginBottom: 20,
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gap: 16,
             }}
           >
-            {/* Featured card — Diseño Arquitectónico */}
-            <div
-              className="service-card"
-              onMouseEnter={() => setHoveredService("design")}
-              onMouseLeave={() => setHoveredService(null)}
-              style={{
-                background: hoveredService === "design" ? C.verde : C.blanco,
-                border: `1px solid ${C.doradoArena}15`,
-                padding: "clamp(32px, 4vw, 56px)",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                minHeight: 340,
-                transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                <div style={{ width: 44, height: 44, color: hoveredService === "design" ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
-                  {ServiceIcons.design}
-                </div>
-                <span style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: 64,
-                  fontWeight: 300,
-                  color: hoveredService === "design" ? `${C.doradoArena}20` : `${C.doradoArena}12`,
-                  lineHeight: 1,
-                  transition: "color 0.5s",
-                }}>01</span>
-              </div>
-              <div>
-                <h3 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "clamp(26px, 3vw, 34px)",
-                  fontWeight: 600,
-                  color: hoveredService === "design" ? C.arena : C.verde,
-                  marginBottom: 12,
-                  transition: "color 0.5s",
-                }}>Diseño Arquitectónico</h3>
-                <p style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontSize: 14,
-                  lineHeight: 1.8,
-                  color: hoveredService === "design" ? `${C.arena}bb` : C.gris,
-                  maxWidth: 400,
-                  transition: "color 0.5s",
-                }}>
-                  Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva. Cada diseño nace de su terreno, su visión y nuestro rigor técnico.
-                </p>
-              </div>
-            </div>
-
-            {/* Right column: 2 stacked cards */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              {[
-                { key: "build", icon: ServiceIcons.build, num: "02", title: "Construcción", desc: "Ejecución integral con materiales premium y control en cada fase." },
-                { key: "direction", icon: ServiceIcons.direction, num: "03", title: "Dirección Técnica", desc: "Supervisión que garantiza plazos, calidad y normativa." },
-              ].map((svc) => (
-                <div
-                  key={svc.key}
-                  className="service-card"
-                  onMouseEnter={() => setHoveredService(svc.key)}
-                  onMouseLeave={() => setHoveredService(null)}
-                  style={{
-                    flex: 1,
-                    background: hoveredService === svc.key ? C.verde : C.blanco,
-                    border: `1px solid ${C.doradoArena}15`,
-                    padding: "clamp(24px, 3vw, 36px)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
-                    <div style={{ width: 36, height: 36, color: hoveredService === svc.key ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
-                      {svc.icon}
-                    </div>
-                    <span style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: 42,
-                      fontWeight: 300,
-                      color: hoveredService === svc.key ? `${C.doradoArena}20` : `${C.doradoArena}10`,
-                      lineHeight: 1,
-                      transition: "color 0.5s",
-                    }}>{svc.num}</span>
-                  </div>
-                  <div>
-                    <h3 style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: 22,
-                      fontWeight: 600,
-                      color: hoveredService === svc.key ? C.arena : C.verde,
-                      marginBottom: 6,
-                      transition: "color 0.5s",
-                    }}>{svc.title}</h3>
-                    <p style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontSize: 12,
-                      lineHeight: 1.7,
-                      color: hoveredService === svc.key ? `${C.arena}aa` : C.gris,
-                      transition: "color 0.5s",
-                    }}>{svc.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ROW 2: 3 equal cards */}
-          <div className="animate-on-scroll delay-1" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
-            {[
-              { key: "turnkey", icon: ServiceIcons.turnkey, num: "04", title: "Gestión Llave en Mano", desc: "Un solo interlocutor. Desde el concepto hasta la entrega." },
-              { key: "develop", icon: ServiceIcons.develop, num: "05", title: "Desarrollo de Proyectos", desc: "Viabilidad técnica y económica para su inversión." },
-              { key: "quality", icon: ServiceIcons.quality, num: "06", title: "Control de Calidad", desc: "Protocolos de inspección. Estándares medibles." },
-            ].map((svc) => (
+            {SERVICES.map((svc, i) => (
               <div
                 key={svc.key}
-                className="service-card"
+                className={`service-card animate-on-scroll delay-${Math.min(i % 3 + 1, 6)}`}
                 onMouseEnter={() => setHoveredService(svc.key)}
                 onMouseLeave={() => setHoveredService(null)}
                 style={{
                   background: hoveredService === svc.key ? C.verde : C.blanco,
                   border: `1px solid ${C.doradoArena}15`,
-                  padding: "clamp(28px, 3vw, 40px)",
-                  minHeight: 220,
+                  padding: "24px 28px",
                   display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+                  alignItems: "flex-start",
+                  gap: 20,
+                  transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
-                  <div style={{ width: 36, height: 36, color: hoveredService === svc.key ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
-                    {svc.icon}
-                  </div>
-                  <span style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: 42,
-                    fontWeight: 300,
-                    color: hoveredService === svc.key ? `${C.doradoArena}20` : `${C.doradoArena}10`,
-                    lineHeight: 1,
-                    transition: "color 0.5s",
-                  }}>{svc.num}</span>
+                {/* Icon */}
+                <div style={{
+                  width: 36,
+                  height: 36,
+                  minWidth: 36,
+                  color: hoveredService === svc.key ? C.dorado : C.doradoArena,
+                  transition: "color 0.5s",
+                  marginTop: 2,
+                }}>
+                  {svc.icon}
                 </div>
+                {/* Text */}
                 <div>
                   <h3 style={{
                     fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: 600,
                     color: hoveredService === svc.key ? C.arena : C.verde,
-                    marginBottom: 8,
+                    marginBottom: 6,
+                    lineHeight: 1.2,
                     transition: "color 0.5s",
                   }}>{svc.title}</h3>
                   <p style={{
                     fontFamily: "'Montserrat', sans-serif",
                     fontSize: 12,
-                    lineHeight: 1.7,
+                    lineHeight: 1.65,
                     color: hoveredService === svc.key ? `${C.arena}aa` : C.gris,
                     transition: "color 0.5s",
                   }}>{svc.desc}</p>
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* ROW 3: 2 stacked cards + 1 featured */}
-          <div
-            className="animate-on-scroll delay-2"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1.35fr",
-              gap: 20,
-            }}
-          >
-            {/* Left column: 2 stacked */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              {[
-                { key: "installations", icon: ServiceIcons.installations, num: "07", title: "Gestión de Instalaciones", desc: "Sistemas eléctricos, hidráulicos, climatización y domótica." },
-                { key: "cost", icon: ServiceIcons.cost, num: "08", title: "Control de Costes", desc: "Presupuestos detallados y seguimiento en tiempo real." },
-              ].map((svc) => (
-                <div
-                  key={svc.key}
-                  className="service-card"
-                  onMouseEnter={() => setHoveredService(svc.key)}
-                  onMouseLeave={() => setHoveredService(null)}
-                  style={{
-                    flex: 1,
-                    background: hoveredService === svc.key ? C.verde : C.blanco,
-                    border: `1px solid ${C.doradoArena}15`,
-                    padding: "clamp(24px, 3vw, 36px)",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
-                    <div style={{ width: 36, height: 36, color: hoveredService === svc.key ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
-                      {svc.icon}
-                    </div>
-                    <span style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: 42,
-                      fontWeight: 300,
-                      color: hoveredService === svc.key ? `${C.doradoArena}20` : `${C.doradoArena}10`,
-                      lineHeight: 1,
-                      transition: "color 0.5s",
-                    }}>{svc.num}</span>
-                  </div>
-                  <div>
-                    <h3 style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: 22,
-                      fontWeight: 600,
-                      color: hoveredService === svc.key ? C.arena : C.verde,
-                      marginBottom: 6,
-                      transition: "color 0.5s",
-                    }}>{svc.title}</h3>
-                    <p style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontSize: 12,
-                      lineHeight: 1.7,
-                      color: hoveredService === svc.key ? `${C.arena}aa` : C.gris,
-                      transition: "color 0.5s",
-                    }}>{svc.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Featured card — Asesoría Técnica */}
-            <div
-              className="service-card"
-              onMouseEnter={() => setHoveredService("advisory")}
-              onMouseLeave={() => setHoveredService(null)}
-              style={{
-                background: hoveredService === "advisory" ? C.verde : C.blanco,
-                border: `1px solid ${C.doradoArena}15`,
-                padding: "clamp(32px, 4vw, 56px)",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                <div style={{ width: 44, height: 44, color: hoveredService === "advisory" ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
-                  {ServiceIcons.advisory}
-                </div>
-                <span style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: 64,
-                  fontWeight: 300,
-                  color: hoveredService === "advisory" ? `${C.doradoArena}20` : `${C.doradoArena}12`,
-                  lineHeight: 1,
-                  transition: "color 0.5s",
-                }}>09</span>
-              </div>
-              <div>
-                <h3 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "clamp(26px, 3vw, 34px)",
-                  fontWeight: 600,
-                  color: hoveredService === "advisory" ? C.arena : C.verde,
-                  marginBottom: 12,
-                  transition: "color 0.5s",
-                }}>Asesoría Técnica</h3>
-                <p style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontSize: 14,
-                  lineHeight: 1.8,
-                  color: hoveredService === "advisory" ? `${C.arena}bb` : C.gris,
-                  maxWidth: 400,
-                  transition: "color 0.5s",
-                }}>
-                  Consultoría experta en normativa urbanística, evaluación de terrenos, gestión de permisos y viabilidad integral para su inversión inmobiliaria.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -1724,6 +1478,7 @@ export default function HomePage() {
 
           <div className="animate-on-scroll delay-3" style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             <button
+              onClick={() => window.location.href = '/contacto'}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -1748,9 +1503,10 @@ export default function HomePage() {
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
-              Solicitar Análisis Personalizado
+              Contáctanos
             </button>
             <button
+              onClick={() => window.location.href = 'mailto:info@gruporoiba.com'}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -1773,7 +1529,7 @@ export default function HomePage() {
                 (e.currentTarget as HTMLElement).style.color = C.arena;
               }}
             >
-              Agendar Llamada
+              Escribir Email
             </button>
           </div>
         </div>

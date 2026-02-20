@@ -38,7 +38,7 @@ export default function ContactoPage() {
         <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
           <div>
             <p className="text-micro font-medium tracking-widest uppercase text-roiba-dorado mb-2">Email</p>
-            <p className="text-roiba-verde">inversiones@gruporoiba.com</p>
+            <a href="mailto:info@gruporoiba.com" className="text-roiba-verde hover:text-roiba-dorado transition-colors block">info@gruporoiba.com</a>
           </div>
           <div>
             <p className="text-micro font-medium tracking-widest uppercase text-roiba-dorado mb-2">Ubicación</p>
