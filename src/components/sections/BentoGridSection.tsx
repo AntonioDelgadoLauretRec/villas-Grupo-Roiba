@@ -154,13 +154,13 @@ const BentoCard: FC<{ card: BentoCard }> = ({ card }) => {
         </span>
 
         {/* Title - SEO H3 */}
-        <h3 className="font-serif text-xl lg:text-2xl text-roiba-arena mb-3 group-hover:text-roiba-dorado-claro transition-colors duration-300">
+        <h3 className="font-serif text-xl lg:text-2xl text-white mb-3 group-hover:text-roiba-dorado-claro transition-colors duration-300">
           {card.title}
         </h3>
 
         {/* Description (visible on large cards or on hover for smaller) */}
         <p className={`
-          text-roiba-arena/70 text-sm leading-relaxed
+          text-white/70 text-sm leading-relaxed
           ${card.size === 'large' ? 'block' : 'opacity-0 group-hover:opacity-100 transition-opacity duration-300'}
         `}>
           {card.description}

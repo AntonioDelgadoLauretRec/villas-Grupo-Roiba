@@ -7,50 +7,50 @@ const ROIBA_PHASES = [
   {
     number: '01',
     title: 'Análisis de Terreno',
-    subtitle: 'Due Diligence Completo',
+    subtitle: 'Seguridad jurídica en la adquisición',
     duration: '2-4 semanas',
     deliverable: 'Informe de viabilidad legal y técnica',
-    description: 'Identificamos y analizamos parcelas que cumplan con sus criterios de inversión. Verificación jurídica completa, estudio topográfico y análisis de retorno.',
+    description: 'La adquisición del terreno es el primer paso y uno de los más críticos del proyecto. Grupo Roiba trabaja con un equipo de profesionales especializados en seguridad jurídica inmobiliaria en República Dominicana, encargado de verificar la situación legal de la propiedad antes de su adquisición. Este proceso permite confirmar la titularidad, detectar posibles cargas y asegurar que el terreno es apto para el desarrollo previsto.',
   },
   {
     number: '02',
-    title: 'Validación Legal',
-    subtitle: 'Seguridad Jurídica',
+    title: 'Validación del Proyecto',
+    subtitle: 'Viabilidad técnica y normativa',
     duration: '1-2 semanas',
-    deliverable: 'Certificado de título + Compliance AML',
-    description: 'Proceso exhaustivo de verificación de titulación, cargas y gravámenes. Estructuración óptima para beneficios Confotur.',
+    deliverable: 'Informe de viabilidad técnica y urbanística',
+    description: 'Analizamos el proyecto desde un punto de vista técnico y urbanístico para asegurar su viabilidad antes de avanzar en el desarrollo. Evaluamos condicionantes del terreno, normativa aplicable y criterios constructivos, garantizando que el proyecto puede ejecutarse conforme a los estándares requeridos.',
   },
   {
     number: '03',
     title: 'Co-Diseño',
-    subtitle: 'Arquitectura Personalizada',
+    subtitle: 'Arquitectura e interiorismo a medida',
     duration: '4-6 semanas',
-    deliverable: 'Planos finales aprobados',
-    description: 'Colaboración directa con nuestro equipo de arquitectura. Adaptamos cada villa a sus necesidades, respetando la normativa local.',
+    deliverable: 'Proyecto arquitectónico personalizado',
+    description: 'Definimos el proyecto junto al cliente, adaptando la vivienda a sus necesidades, estilo de vida y objetivos de inversión. Desde esta fase se integran arquitectura, interiorismo y funcionalidad, asegurando coherencia en el diseño y facilitando su correcta ejecución en obra. Cada proyecto es único y se desarrolla con un enfoque totalmente personalizado.',
   },
   {
     number: '04',
     title: 'Presupuesto Detallado',
-    subtitle: 'Transparencia Total',
-    duration: '1 semana',
-    deliverable: 'Desglose por partida + cronograma financiero',
-    description: 'Modelo "Open Book": cada partida presupuestaria visible y justificada. Sin sorpresas ni costos ocultos.',
+    subtitle: 'Control económico desde el inicio',
+    duration: '1-2 semanas',
+    deliverable: 'Desglose por partidas + cronograma financiero',
+    description: 'Desarrollamos un presupuesto desglosado por partidas, que permite conocer el alcance real de la inversión antes del inicio de la obra. Este enfoque aporta transparencia y facilita la toma de decisiones, evitando desviaciones y permitiendo mantener el control económico durante todo el proceso.',
   },
   {
     number: '05',
     title: 'Construcción',
-    subtitle: 'Supervisión en Tiempo Real',
+    subtitle: 'Ejecución bajo control técnico',
     duration: '12-18 meses',
-    deliverable: 'Dashboard 24/7 + Reportes semanales',
-    description: 'Acceso a su portal privado con fotos de avance, cronograma actualizado y comunicación directa con el director de obra.',
+    deliverable: 'Informes periódicos de avance',
+    description: 'Ejecutamos la obra bajo un modelo basado en planificación rigurosa, supervisión continua y control de calidad en cada fase. Coordinamos todos los agentes del proyecto, realizando un seguimiento técnico y económico que garantiza el cumplimiento de plazos, costes y estándares de ejecución. El cliente dispone de información periódica sobre el avance de la obra.',
   },
   {
     number: '06',
     title: 'Roiba Care',
-    subtitle: 'Gestión Post-Entrega',
-    duration: 'Permanente (opcional)',
-    deliverable: 'Mantenimiento + Gestión de rentas',
-    description: 'Servicio integral de property management: mantenimiento preventivo, gestión de alquileres turísticos y maximización de retorno.',
+    subtitle: 'Gestión y mantenimiento post-entrega',
+    duration: 'Permanente',
+    deliverable: 'Mantenimiento + Gestión operativa',
+    description: 'El proyecto no finaliza con la entrega de la vivienda. A través de Roiba Care, ofrecemos un servicio de gestión y mantenimiento orientado a preservar el valor de la propiedad y garantizar su correcto funcionamiento a lo largo del tiempo. Este servicio está especialmente pensado para propietarios que no residen de forma permanente.',
   },
 ]
 
@@ -74,8 +74,7 @@ export const ProcessTimeline: FC = () => {
             The Roiba Method
           </h2>
           <p className="text-body-lg text-roiba-verde/70 font-light">
-            Seis fases estructuradas que transforman la incertidumbre en previsibilidad. 
-            Cada etapa con entregables claros y supervisión experta.
+            The Roiba Method estructura cada proyecto en seis fases definidas, diseñadas para eliminar la incertidumbre y garantizar control, transparencia y previsibilidad en todo el proceso constructivo.
           </p>
         </div>
 

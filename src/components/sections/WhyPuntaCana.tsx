@@ -81,10 +81,10 @@ export const WhyPuntaCana: FC = () => {
                 <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado-light mb-2 block">
                   {PRIVILEGES[0].subtitle}
                 </span>
-                <h3 className="text-heading md:text-display-md font-serif text-roiba-arena mb-3">
+                <h3 className="text-heading md:text-display-md font-serif text-white mb-3">
                   {PRIVILEGES[0].title}
                 </h3>
-                <p className="text-body text-roiba-arena/80 max-w-md">
+                <p className="text-body text-white/80 max-w-md">
                   {PRIVILEGES[0].description}
                 </p>
               </div>
@@ -108,7 +108,7 @@ export const WhyPuntaCana: FC = () => {
                   <span className="text-micro font-sans tracking-widest uppercase text-roiba-dorado-light/80 block mb-1">
                     {PRIVILEGES[1].subtitle}
                   </span>
-                  <h3 className="text-subheading font-serif text-roiba-arena">
+                  <h3 className="text-subheading font-serif text-white">
                     {PRIVILEGES[1].title}
                   </h3>
                 </div>
@@ -130,7 +130,7 @@ export const WhyPuntaCana: FC = () => {
                   <span className="text-micro font-sans tracking-widest uppercase text-roiba-dorado-light/80 block mb-1">
                     {PRIVILEGES[2].subtitle}
                   </span>
-                  <h3 className="text-subheading font-serif text-roiba-arena">
+                  <h3 className="text-subheading font-serif text-white">
                     {PRIVILEGES[2].title}
                   </h3>
                 </div>
@@ -153,7 +153,7 @@ export const WhyPuntaCana: FC = () => {
                 <span className="text-micro font-sans tracking-widest uppercase text-roiba-dorado-light/80 block mb-1">
                   {PRIVILEGES[3].subtitle}
                 </span>
-                <h3 className="text-subheading font-serif text-roiba-arena">
+                <h3 className="text-subheading font-serif text-white">
                   {PRIVILEGES[3].title}
                 </h3>
               </div>
@@ -174,7 +174,7 @@ export const WhyPuntaCana: FC = () => {
                 <span className="text-micro font-sans tracking-widest uppercase text-roiba-dorado-light/80 block mb-1">
                   {PRIVILEGES[4].subtitle}
                 </span>
-                <h3 className="text-subheading font-serif text-roiba-arena">
+                <h3 className="text-subheading font-serif text-white">
                   {PRIVILEGES[4].title}
                 </h3>
               </div>

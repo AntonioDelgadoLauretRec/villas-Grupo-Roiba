@@ -2,18 +2,18 @@
 
 import { useState, useEffect } from 'react'
 
-// ─── BRAND PALETTE (Manual Maestro V3) ───
+// ─── BRAND PALETTE — Azul + Blanco + Dorado ───
 const C = {
-  verde: "#122620",
-  verdeMid: "#1a3a30",
-  verdeLight: "#234d3f",
-  arena: "#F4EBD0",
-  arenaLight: "#faf6ea",
-  dorado: "#FFCC53",
-  doradoArena: "#B68D40",
+  verde: "#0C2340",
+  verdeMid: "#143558",
+  verdeLight: "#1B4B7A",
+  arena: "#FFFFFF",
+  arenaLight: "#F5F7FA",
+  dorado: "#E8C877",
+  doradoArena: "#C9A96E",
   blanco: "#FFFFFF",
   negro: "#0a0a0a",
-  gris: "#8a8a7c",
+  gris: "#64748B",
 };
 
 // ─── KEYFRAMES (injected once) ───
@@ -294,74 +294,74 @@ const ServiceIcons = {
 
 // ─── CONTENT DATA ───
 const SERVICES = [
-  { key: "design", icon: ServiceIcons.design, title: "Diseño Arquitectónico", desc: "Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva." },
-  { key: "build", icon: ServiceIcons.build, title: "Construcción", desc: "Ejecución integral con materiales premium y control exhaustivo en cada fase del proceso." },
-  { key: "direction", icon: ServiceIcons.direction, title: "Dirección Técnica", desc: "Supervisión especializada que garantiza el cumplimiento de plazos, calidad y normativa vigente." },
-  { key: "turnkey", icon: ServiceIcons.turnkey, title: "Gestión Llave en Mano", desc: "Un solo interlocutor. Desde el concepto hasta la entrega de llaves, sin intermediarios." },
-  { key: "develop", icon: ServiceIcons.develop, title: "Desarrollo de Proyectos", desc: "Identificación de oportunidades, viabilidad técnica y económica para inversiones inmobiliarias." },
-  { key: "quality", icon: ServiceIcons.quality, title: "Control de Calidad", desc: "Protocolos de inspección en cada etapa. Estándares medibles. Resultado predecible." },
-  { key: "installations", icon: ServiceIcons.installations, title: "Gestión de Instalaciones", desc: "Coordinación de sistemas eléctricos, hidráulicos, climatización y domótica de última generación." },
-  { key: "cost", icon: ServiceIcons.cost, title: "Control de Costes", desc: "Presupuestos detallados, seguimiento en tiempo real y optimización de recursos sin comprometer calidad." },
+  { key: "design", icon: ServiceIcons.design, title: "Diseño Arquitectónico", desc: "Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva. Cada diseño nace de su terreno, su visión y nuestro rigor técnico." },
+  { key: "build", icon: ServiceIcons.build, title: "Construcción", desc: "Ejecución integral con materiales premium y control en cada fase." },
+  { key: "direction", icon: ServiceIcons.direction, title: "Dirección Técnica", desc: "Supervisión que garantiza plazos, calidad y normativa." },
+  { key: "turnkey", icon: ServiceIcons.turnkey, title: "Gestión Llave en Mano", desc: "Un solo interlocutor. Desde el concepto hasta la entrega." },
+  { key: "develop", icon: ServiceIcons.develop, title: "Desarrollo de Proyectos", desc: "Viabilidad técnica y económica para su inversión." },
+  { key: "quality", icon: ServiceIcons.quality, title: "Control de Calidad", desc: "Protocolos de inspección. Estándares medibles." },
+  { key: "installations", icon: ServiceIcons.installations, title: "Gestión de Instalaciones", desc: "Sistemas eléctricos, hidráulicos, climatización y domótica." },
+  { key: "cost", icon: ServiceIcons.cost, title: "Control de Costes", desc: "Presupuestos detallados y seguimiento en tiempo real." },
   { key: "advisory", icon: ServiceIcons.advisory, title: "Asesoría Técnica", desc: "Consultoría experta en normativa, terrenos, permisos y viabilidad para su inversión." },
 ];
 
 const PROCESS = [
   {
     num: "01",
-    title: "Consulta Inicial",
-    subtitle: "Escuchamos su visión",
-    desc: "Reunión personalizada para comprender sus objetivos, presupuesto y expectativas. Analizamos el terreno, normativa local y viabilidad del proyecto.",
-    detail: "Estudio de suelo · Análisis normativo · Informe de viabilidad",
-    duration: "1-2 semanas",
-  },
-  {
-    num: "02",
-    title: "Diseño Personalizado",
-    subtitle: "Arquitectura a medida",
-    desc: "Nuestro equipo de arquitectos desarrolla un proyecto exclusivo que refleja su estilo de vida, optimizando espacios, luz natural y eficiencia energética.",
-    detail: "Anteproyecto 3D · Planos ejecutivos · Selección de materiales",
-    duration: "3-4 semanas",
-  },
-  {
-    num: "03",
-    title: "Planificación y Permisos",
-    subtitle: "Gestión integral",
-    desc: "Tramitamos todas las licencias y permisos necesarios. Definimos cronograma detallado, presupuesto cerrado y plan de ejecución sin sorpresas.",
-    detail: "Licencias · Cronograma · Presupuesto definitivo",
+    title: "Análisis de Terreno",
+    subtitle: "Seguridad jurídica en la adquisición",
+    desc: "La adquisición del terreno es el primer paso y uno de los más críticos del proyecto. Verificamos la situación legal de la propiedad antes de su adquisición, confirmando titularidad y detectando posibles cargas.",
+    detail: "Due diligence legal · Verificación de titularidad · Análisis de viabilidad",
     duration: "2-4 semanas",
   },
   {
+    num: "02",
+    title: "Validación del Proyecto",
+    subtitle: "Viabilidad técnica y normativa",
+    desc: "Analizamos el proyecto desde un punto de vista técnico y urbanístico para asegurar su viabilidad antes de avanzar en el desarrollo. Evaluamos condicionantes del terreno y normativa aplicable.",
+    detail: "Estudio técnico · Normativa urbanística · Criterios constructivos",
+    duration: "1-2 semanas",
+  },
+  {
+    num: "03",
+    title: "Co-Diseño",
+    subtitle: "Arquitectura e interiorismo a medida",
+    desc: "Definimos el proyecto junto al cliente, adaptando la vivienda a sus necesidades, estilo de vida y objetivos de inversión. Cada proyecto es único y se desarrolla con un enfoque totalmente personalizado.",
+    detail: "Arquitectura · Interiorismo · Funcionalidad · Diseño personalizado",
+    duration: "4-6 semanas",
+  },
+  {
     num: "04",
-    title: "Construcción",
-    subtitle: "Ejecución de excelencia",
-    desc: "Proceso constructivo supervisado por nuestro equipo técnico. Control de calidad en cada etapa. Reportes periódicos con fotografías y avance de obra.",
-    detail: "Cimentación · Estructura · Acabados · Instalaciones",
-    duration: "6-10 meses",
+    title: "Presupuesto Detallado",
+    subtitle: "Control económico desde el inicio",
+    desc: "Desarrollamos un presupuesto desglosado por partidas, que permite conocer el alcance real de la inversión antes del inicio de la obra, aportando transparencia y facilitando la toma de decisiones.",
+    detail: "Desglose por partidas · Cronograma financiero · Control de costes",
+    duration: "1-2 semanas",
   },
   {
     num: "05",
-    title: "Supervisión Continua",
-    subtitle: "Transparencia total",
-    desc: "Acceso a reportes de progreso en tiempo real. Inspecciones independientes de calidad. Comunicación directa con el director de obra.",
-    detail: "Reportes semanales · Inspecciones · Fotografías de avance",
-    duration: "Continuo",
+    title: "Construcción",
+    subtitle: "Ejecución bajo control técnico",
+    desc: "Ejecutamos la obra bajo un modelo basado en planificación rigurosa, supervisión continua y control de calidad en cada fase. El cliente dispone de información periódica sobre el avance.",
+    detail: "Supervisión continua · Control de calidad · Informes de avance",
+    duration: "12-18 meses",
   },
   {
     num: "06",
-    title: "Entrega de Llaves",
-    subtitle: "Su villa, lista para vivir",
-    desc: "Inspección final detallada, entrega de documentación completa y garantías. Su villa premium, exactamente como fue diseñada.",
-    detail: "Inspección final · Documentación · Garantías · Postventa",
-    duration: "1-2 semanas",
+    title: "Roiba Care",
+    subtitle: "Gestión y mantenimiento post-entrega",
+    desc: "El proyecto no finaliza con la entrega. Ofrecemos un servicio de gestión y mantenimiento orientado a preservar el valor de la propiedad y garantizar su correcto funcionamiento a lo largo del tiempo.",
+    detail: "Mantenimiento · Supervisión · Gestión operativa · Informes periódicos",
+    duration: "Permanente",
   },
 ];
 
 const PROJECTS = [
-  { name: "Villa Coral Bay", location: "Cap Cana, República Dominicana", size: "450 m²", status: "Completada", beds: 5, type: "Villa unifamiliar", year: "2024", gradient: "135deg, #1a3a30 0%, #234d3f 40%, #2d6b55 100%" },
-  { name: "Residencia Mar Sereno", location: "Bávaro, Punta Cana", size: "380 m²", status: "Completada", beds: 4, type: "Villa con piscina infinity", year: "2025", gradient: "135deg, #122620 0%, #1a3a30 50%, #2d6b55 100%" },
-  { name: "Villa Puerto Banús", location: "Marbella, España", size: "520 m²", status: "Completada", beds: 6, type: "Residencia premium", year: "2023", gradient: "135deg, #0d1f1a 0%, #1a3a30 60%, #234d3f 100%" },
-  { name: "Villa Estepona Hills", location: "Estepona, España", size: "410 m²", status: "Completada", beds: 4, type: "Villa contemporánea", year: "2024", gradient: "135deg, #122620 0%, #1e4435 40%, #2a5c48 100%" },
-  { name: "Residencia Almería Bay", location: "Almería, España", size: "340 m²", status: "En construcción", beds: 3, type: "Villa minimalista", year: "2026", gradient: "135deg, #0a1a15 0%, #162e25 50%, #1a3a30 100%" },
+  { name: "Villa Coral Bay", location: "Cap Cana, República Dominicana", size: "450 m²", status: "Completada", beds: 5, type: "Villa unifamiliar", year: "2024", gradient: "135deg, #0C2340 0%, #143558 40%, #1B4B7A 100%", image: "/images/projects/proyecto-1.jpg" },
+  { name: "Residencia Mar Sereno", location: "Bávaro, Punta Cana", size: "380 m²", status: "Completada", beds: 4, type: "Villa con piscina infinity", year: "2025", gradient: "135deg, #061525 0%, #0C2340 50%, #1B4B7A 100%", image: "/images/projects/proyecto-2.jpg" },
+  { name: "Villa Puerto Banús", location: "Marbella, España", size: "520 m²", status: "Completada", beds: 6, type: "Residencia premium", year: "2023", gradient: "135deg, #061525 0%, #0C2340 60%, #143558 100%", image: "/images/projects/proyecto-3.jpg" },
+  { name: "Villa Estepona Hills", location: "Estepona, España", size: "410 m²", status: "Completada", beds: 4, type: "Villa contemporánea", year: "2024", gradient: "135deg, #0C2340 0%, #143558 40%, #1B4B7A 100%", image: "/images/projects/proyecto-4.jpg" },
+  { name: "Residencia Almería Bay", location: "Almería, España", size: "340 m²", status: "En construcción", beds: 3, type: "Villa minimalista", year: "2026", gradient: "135deg, #061525 0%, #0C2340 50%, #143558 100%", image: "/images/projects/proyecto-1.jpg" },
 ];
 
 const STATS = [
@@ -515,7 +515,7 @@ export default function HomePage() {
           >
             Villas premium llave en mano. Diseño contemporáneo,
             <br />
-            gestión integral y un proceso totalmente supervisado.
+            gestión integral y un proceso totalmente personalizado.
           </p>
 
           <div
@@ -720,10 +720,7 @@ export default function HomePage() {
                 marginBottom: 20,
               }}
             >
-              Grupo Roiba es una empresa especializada en el desarrollo y construcción de villas
-              premium en el Caribe. Nuestro modelo de servicio llave en mano integra arquitectura
-              contemporánea con gestión integral, garantizando control, calidad y tranquilidad
-              en cada proyecto.
+              Grupo Roiba es una firma especializada en dirección técnica y supervisión de obra, así como en la construcción de villas premium en la zona este de República Dominicana, con especial enfoque en Punta Cana.
             </p>
             <p
               className="animate-on-scroll delay-4"
@@ -735,9 +732,7 @@ export default function HomePage() {
                 fontWeight: 400,
               }}
             >
-              Con operaciones en España y República Dominicana, ofrecemos un proceso
-              supervisado de principio a fin, donde cada decisión se respalda con transparencia,
-              metodología probada y estándares de ejecución medibles.
+              Paralelamente, desarrollamos y construimos villas premium totalmente personalizadas, definiendo cada proyecto en función de los requerimientos técnicos, funcionales y estéticos del cliente, bajo un modelo de ejecución basado en precisión constructiva, planificación rigurosa y altos estándares de acabado.
             </p>
           </div>
 

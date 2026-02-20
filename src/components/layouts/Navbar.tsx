@@ -37,7 +37,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-[#122620]/95 backdrop-blur-md shadow-lg py-3'
+          ? 'bg-[#0C2340]/95 backdrop-blur-md shadow-lg py-3'
           : 'bg-transparent py-5'
       }`}
     >
@@ -51,8 +51,8 @@ export function Navbar() {
             height={40}
             className="transition-transform group-hover:scale-105"
           />
-          <span className="text-[#F4EBD0] font-bold text-lg tracking-wide">
-            Grupo<span className="text-[#FFCC53]">Roiba</span>
+          <span className="text-white font-bold text-lg tracking-wide">
+            Grupo<span className="text-[#E8C877]">Roiba</span>
           </span>
         </Link>
 
@@ -64,8 +64,8 @@ export function Navbar() {
               href={item.href}
               className={`text-sm font-medium tracking-wide transition-colors ${
                 pathname === item.href
-                  ? 'text-[#FFCC53]'
-                  : 'text-[#F4EBD0]/80 hover:text-[#FFCC53]'
+                  ? 'text-[#E8C877]'
+                  : 'text-white/80 hover:text-[#E8C877]'
               }`}
             >
               {item.name}
@@ -76,7 +76,7 @@ export function Navbar() {
         {/* CTA Desktop */}
         <Link
           href="/contacto"
-          className="hidden md:inline-block px-6 py-2.5 bg-[#FFCC53] text-[#122620] text-sm font-semibold rounded-lg hover:bg-[#B68D40] transition-all duration-300"
+          className="hidden md:inline-block px-6 py-2.5 bg-[#E8C877] text-[#0C2340] text-sm font-semibold rounded-lg hover:bg-[#C9A96E] transition-all duration-300"
         >
           Contactar
         </Link>
@@ -84,7 +84,7 @@ export function Navbar() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-[#F4EBD0] p-2"
+          className="md:hidden text-white p-2"
           aria-label="Menú"
         >
           <svg
@@ -106,7 +106,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed inset-0 top-0 bg-[#122620] z-40 transition-transform duration-300 ${
+        className={`md:hidden fixed inset-0 top-0 bg-[#0C2340] z-40 transition-transform duration-300 ${
           mobileOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -118,8 +118,8 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)}
               className={`text-2xl font-medium transition-colors ${
                 pathname === item.href
-                  ? 'text-[#FFCC53]'
-                  : 'text-[#F4EBD0] hover:text-[#FFCC53]'
+                  ? 'text-[#E8C877]'
+                  : 'text-white hover:text-[#E8C877]'
               }`}
             >
               {item.name}
@@ -128,7 +128,7 @@ export function Navbar() {
           <Link
             href="/contacto"
             onClick={() => setMobileOpen(false)}
-            className="mt-4 px-8 py-3 bg-[#FFCC53] text-[#122620] font-semibold rounded-lg"
+            className="mt-4 px-8 py-3 bg-[#E8C877] text-[#0C2340] font-semibold rounded-lg"
           >
             Contactar
           </Link>

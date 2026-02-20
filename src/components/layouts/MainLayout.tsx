@@ -66,8 +66,8 @@ const Header: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
               <span className="font-serif text-roiba-verde font-bold text-xl">R</span>
             </div>
             <div>
-              <span className="text-roiba-arena text-xs uppercase tracking-widest">Grupo</span>
-              <span className="block font-serif text-roiba-arena text-xl -mt-1">Roiba</span>
+              <span className="text-white text-xs uppercase tracking-widest">Grupo</span>
+              <span className="block font-serif text-white text-xl -mt-1">Roiba</span>
             </div>
           </Link>
 
@@ -77,7 +77,7 @@ const Header: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-roiba-arena/80 hover:text-roiba-dorado transition-colors text-sm font-medium"
+                className="text-white/80 hover:text-roiba-dorado transition-colors text-sm font-medium"
               >
                 {item.label}
               </Link>
@@ -102,19 +102,19 @@ const Header: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
             <div className="w-6 h-5 flex flex-col justify-between">
               <span
                 className={cn(
-                  'w-full h-0.5 bg-roiba-arena transition-all',
+                  'w-full h-0.5 bg-white transition-all',
                   isMenuOpen && 'rotate-45 translate-y-2'
                 )}
               />
               <span
                 className={cn(
-                  'w-full h-0.5 bg-roiba-arena transition-all',
+                  'w-full h-0.5 bg-white transition-all',
                   isMenuOpen && 'opacity-0'
                 )}
               />
               <span
                 className={cn(
-                  'w-full h-0.5 bg-roiba-arena transition-all',
+                  'w-full h-0.5 bg-white transition-all',
                   isMenuOpen && '-rotate-45 -translate-y-2'
                 )}
               />
@@ -134,7 +134,7 @@ const Header: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-roiba-arena/80 hover:text-roiba-dorado transition-colors text-lg font-medium"
+                className="text-white/80 hover:text-roiba-dorado transition-colors text-lg font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
@@ -196,7 +196,7 @@ const Footer: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
   const t = footerLinks[locale]
 
   return (
-    <footer className="bg-roiba-verde text-roiba-arena">
+    <footer className="bg-roiba-verde text-white">
       {/* Main Footer */}
       <div className="container-wide py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -207,14 +207,14 @@ const Footer: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
                 <span className="font-serif text-roiba-verde font-bold text-2xl">R</span>
               </div>
               <div>
-                <span className="text-roiba-arena/60 text-xs uppercase tracking-widest">Grupo</span>
-                <span className="block font-serif text-roiba-arena text-2xl -mt-1">Roiba</span>
+                <span className="text-white/60 text-xs uppercase tracking-widest">Grupo</span>
+                <span className="block font-serif text-white text-2xl -mt-1">Roiba</span>
               </div>
             </Link>
-            <p className="text-roiba-arena/70 max-w-md mb-6">
+            <p className="text-white/70 max-w-md mb-6">
               {COMPANY.tagline}
             </p>
-            <div className="space-y-2 text-sm text-roiba-arena/60">
+            <div className="space-y-2 text-sm text-white/60">
               <p>{COMPANY.email}</p>
               <p>{COMPANY.phone}</p>
               <p>{COMPANY.address}</p>
@@ -223,13 +223,13 @@ const Footer: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
 
           {/* Company Links */}
           <div>
-            <h4 className="font-semibold text-roiba-arena mb-4">{t.company}</h4>
+            <h4 className="font-semibold text-white mb-4">{t.company}</h4>
             <ul className="space-y-3">
               {t.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-roiba-arena/70 hover:text-roiba-dorado transition-colors text-sm"
+                    className="text-white/70 hover:text-roiba-dorado transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -240,13 +240,13 @@ const Footer: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
 
           {/* Legal Links */}
           <div>
-            <h4 className="font-semibold text-roiba-arena mb-4">{t.legal}</h4>
+            <h4 className="font-semibold text-white mb-4">{t.legal}</h4>
             <ul className="space-y-3">
               {t.legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-roiba-arena/70 hover:text-roiba-dorado transition-colors text-sm"
+                    className="text-white/70 hover:text-roiba-dorado transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -258,40 +258,40 @@ const Footer: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
       </div>
 
       {/* Disclaimer */}
-      <div className="border-t border-roiba-arena/10">
+      <div className="border-t border-white/10">
         <div className="container-wide py-6">
-          <p className="text-xs text-roiba-arena/40 text-center max-w-4xl mx-auto">
+          <p className="text-xs text-white/40 text-center max-w-4xl mx-auto">
             {t.disclaimer}
           </p>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-roiba-arena/10">
+      <div className="border-t border-white/10">
         <div className="container-wide py-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-roiba-arena/50">
+            <p className="text-sm text-white/50">
               © {currentYear} {COMPANY.name}. {t.rights}
             </p>
             {/* Social Links Placeholder */}
             <div className="flex items-center gap-4">
               <a
                 href="#"
-                className="text-roiba-arena/50 hover:text-roiba-dorado transition-colors"
+                className="text-white/50 hover:text-roiba-dorado transition-colors"
                 aria-label="Instagram"
               >
                 <InstagramIcon className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="text-roiba-arena/50 hover:text-roiba-dorado transition-colors"
+                className="text-white/50 hover:text-roiba-dorado transition-colors"
                 aria-label="LinkedIn"
               >
                 <LinkedInIcon className="w-5 h-5" />
               </a>
               <a
                 href={`https://wa.me/${COMPANY.whatsapp}`}
-                className="text-roiba-arena/50 hover:text-roiba-dorado transition-colors"
+                className="text-white/50 hover:text-roiba-dorado transition-colors"
                 aria-label="WhatsApp"
               >
                 <WhatsAppIcon className="w-5 h-5" />
