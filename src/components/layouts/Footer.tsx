@@ -2,6 +2,7 @@
 
 import { FC } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const FOOTER_LINKS = {
   empresa: [
@@ -31,18 +32,14 @@ export const Footer: FC = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 flex items-center justify-center border border-white">
-                <span className="font-serif text-xl font-medium text-white">R</span>
-              </div>
-              <div>
-                <span className="block text-micro font-sans tracking-widest uppercase text-white/60">
-                  Grupo
-                </span>
-                <span className="block text-subheading font-serif -mt-1 text-white">
-                  Roiba
-                </span>
-              </div>
+            <div className="mb-6">
+              <Image
+                src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
+                alt="Grupo Roiba"
+                width={140}
+                height={76}
+                className="h-10 w-auto brightness-0 invert"
+              />
             </div>
             
             <p className="text-body text-white/60 font-light mb-6 max-w-sm">
