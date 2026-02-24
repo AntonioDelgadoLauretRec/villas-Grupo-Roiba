@@ -437,12 +437,46 @@ const STATS = [
   { value: "0", label: "Retrasos en entrega" },
 ];
 
+const TESTIMONIALS = [
+  {
+    quote: "Grupo Roiba nos ofreció algo que no habíamos encontrado en ningún otro promotor en Punta Cana: transparencia real. Cada semana recibíamos informes detallados con fotos, costes actualizados y un cronograma que se cumplió al día. La villa superó nuestras expectativas.",
+    name: "Carlos M.",
+    role: "Inversor privado",
+    location: "Madrid, España",
+  },
+  {
+    quote: "Lo que más valoramos fue la dirección técnica. Iván y Ramón tienen un conocimiento profundo de la construcción en el Caribe y eso se nota en cada decisión. No hubo improvisación, todo estaba planificado. Nuestro proyecto se entregó en plazo y sin sobrecostes.",
+    name: "Alejandra & Thomas R.",
+    role: "Propietarios de villa en Cap Cana",
+    location: "Zúrich, Suiza",
+  },
+  {
+    quote: "Invertir en República Dominicana desde el extranjero parecía complejo, pero Grupo Roiba simplificó todo el proceso: la due diligence legal, la gestión de permisos, la coordinación con arquitectos locales. Fue como tener un socio de confianza en destino.",
+    name: "Jean-Pierre L.",
+    role: "Inversor inmobiliario",
+    location: "París, Francia",
+  },
+  {
+    quote: "Buscábamos un equipo que entendiera nuestras expectativas europeas de calidad y las aplicara en el Caribe. Roiba lo consiguió. La atención al detalle en los acabados, la selección de materiales y el control de calidad fueron impecables.",
+    name: "Elena V.",
+    role: "Propietaria de villa",
+    location: "Marbella, España",
+  },
+  {
+    quote: "El servicio Roiba Care fue decisivo en nuestra decisión. Saber que nuestra propiedad estará supervisada y mantenida profesionalmente cuando no estamos en Punta Cana nos da una tranquilidad absoluta. Es un servicio post-venta que realmente marca la diferencia.",
+    name: "Michael & Sarah K.",
+    role: "Propietarios e inversores",
+    location: "Miami, EE.UU.",
+  },
+];
+
 export default function HomePage() {
   const [activeProcess, setActiveProcess] = useState(0)
   const [hoveredService, setHoveredService] = useState<string | null>(null)
   const [scrollY, setScrollY] = useState(0)
   const [carouselIdx, setCarouselIdx] = useState(0)
   const [carouselPaused, setCarouselPaused] = useState(false)
+  const [testimonialIdx, setTestimonialIdx] = useState(0)
 
   useEffect(() => {
     injectStyles()
@@ -458,6 +492,14 @@ export default function HomePage() {
     }, 5000)
     return () => clearInterval(timer)
   }, [carouselPaused])
+
+  // Testimonial auto-advance
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTestimonialIdx((prev) => (prev + 1) % TESTIMONIALS.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [])
 
   useScrollReveal()
 
@@ -1487,6 +1529,170 @@ export default function HomePage() {
               }}
             />
           ))}
+        </div>
+      </section>
+
+      {/* ═══ TESTIMONIALS ═══ */}
+      <section
+        style={{
+          padding: "clamp(80px, 10vw, 120px) clamp(24px, 8vw, 120px)",
+          background: C.verde,
+          position: "relative",
+          overflow: "hidden",
+        }}
+        className="grain"
+      >
+        {/* Decorative quote mark */}
+        <div
+          style={{
+            position: "absolute",
+            top: "10%",
+            left: "8%",
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "clamp(200px, 25vw, 400px)",
+            fontWeight: 300,
+            color: `${C.doradoArena}06`,
+            lineHeight: 1,
+            userSelect: "none",
+            pointerEvents: "none",
+          }}
+        >
+          &ldquo;
+        </div>
+
+        <div style={{ maxWidth: 900, margin: "0 auto", position: "relative", zIndex: 2 }}>
+          {/* Header */}
+          <div className="animate-on-scroll" style={{ textAlign: "center", marginBottom: 56 }}>
+            <span
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 10,
+                fontWeight: 600,
+                letterSpacing: "0.3em",
+                textTransform: "uppercase",
+                color: C.doradoArena,
+                display: "block",
+                marginBottom: 16,
+              }}
+            >
+              Testimonios
+            </span>
+            <h2
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 400,
+                color: C.arena,
+              }}
+            >
+              Lo que dicen{" "}
+              <span style={{ fontStyle: "italic", color: C.dorado }}>nuestros clientes</span>
+            </h2>
+          </div>
+
+          {/* Testimonial card */}
+          <div className="animate-on-scroll delay-1" style={{ position: "relative", minHeight: 280 }}>
+            {TESTIMONIALS.map((t, i) => (
+              <div
+                key={i}
+                style={{
+                  position: i === testimonialIdx ? "relative" : "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  opacity: i === testimonialIdx ? 1 : 0,
+                  transform: i === testimonialIdx ? "translateY(0)" : "translateY(20px)",
+                  transition: "all 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
+                  pointerEvents: i === testimonialIdx ? "auto" : "none",
+                  textAlign: "center",
+                }}
+              >
+                {/* Stars */}
+                <div style={{ marginBottom: 24, display: "flex", justifyContent: "center", gap: 4 }}>
+                  {[...Array(5)].map((_, s) => (
+                    <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill={C.doradoArena}>
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <p
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "clamp(20px, 2.5vw, 26px)",
+                    fontWeight: 400,
+                    fontStyle: "italic",
+                    color: `${C.arena}dd`,
+                    lineHeight: 1.65,
+                    marginBottom: 32,
+                    maxWidth: 720,
+                    margin: "0 auto 32px",
+                  }}
+                >
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+
+                {/* Divider */}
+                <div style={{ width: 40, height: 1, background: C.doradoArena, margin: "0 auto 24px", opacity: 0.4 }} />
+
+                {/* Author */}
+                <p
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    color: C.arena,
+                    letterSpacing: "0.05em",
+                    marginBottom: 4,
+                  }}
+                >
+                  {t.name}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 400,
+                    color: C.doradoArena,
+                    marginBottom: 2,
+                  }}
+                >
+                  {t.role}
+                </p>
+                <p
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: 11,
+                    fontWeight: 400,
+                    color: `${C.arena}50`,
+                  }}
+                >
+                  {t.location}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Dots */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 40 }}>
+            {TESTIMONIALS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setTestimonialIdx(i)}
+                aria-label={`Testimonio ${i + 1}`}
+                style={{
+                  width: testimonialIdx === i ? 32 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  background: testimonialIdx === i ? C.doradoArena : `${C.arena}20`,
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "all 0.4s ease",
+                }}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
