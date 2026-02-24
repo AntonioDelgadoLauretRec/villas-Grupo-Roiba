@@ -1,64 +1,15 @@
 import { ProcessTimeline } from '@/components/sections/ProcessTimeline'
-import Link from 'next/link'
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'The Roiba Method | Grupo Roiba',
-  description: 'Seis fases que transforman su inversión en un proceso controlado. Control, transparencia y previsibilidad en cada etapa del proyecto.',
-}
 
 export default function ProcesoPage() {
   return (
     <main className="pt-20">
-      {/* Hero */}
-      <section className="relative bg-roiba-verde py-24 md:py-32 px-6 overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <p className="text-roiba-dorado uppercase tracking-[0.3em] text-xs font-medium mb-6">
-            Nuestro Proceso
-          </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-6">
-            The Roiba Method
-          </h1>
-          <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
-          <p className="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-            Seis fases que transforman su inversión en un proceso controlado
-          </p>
-        </div>
-      </section>
-
-      {/* Intro */}
-      <section className="py-20 px-6 bg-white">
+      <section className="bg-roiba-verde text-roiba-arena py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-lg text-roiba-verde/70 leading-relaxed">
-            The Roiba Method estructura cada proyecto en seis fases definidas, diseñadas para
-            eliminar la incertidumbre y garantizar control, transparencia y previsibilidad en
-            todo el proceso constructivo. Cada etapa cuenta con entregables claros, supervisión
-            técnica y toma de decisiones fundamentadas, permitiendo al cliente mantener visibilidad
-            y control desde el inicio hasta la entrega y gestión de la propiedad.
-          </p>
+          <h1 className="text-4xl md:text-5xl font-serif mb-6">The Roiba Method</h1>
+          <p className="text-xl opacity-80">Seis fases que transforman su visión en realidad</p>
         </div>
       </section>
-
-      {/* Timeline */}
       <ProcessTimeline />
-
-      {/* CTA */}
-      <section className="py-20 bg-roiba-verde">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-serif text-white mb-6">
-            ¿Listo para empezar?
-          </h2>
-          <p className="text-white/60 text-lg mb-10">
-            Solicite una consulta inicial sin compromiso y descubra cómo podemos ayudarle.
-          </p>
-          <Link
-            href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold hover:bg-roiba-dorado-light transition-all duration-300 text-sm uppercase tracking-wider"
-          >
-            Solicitar Análisis
-          </Link>
-        </div>
-      </section>
     </main>
   )
 }

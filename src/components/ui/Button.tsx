@@ -28,12 +28,12 @@ export const Button: FC<ButtonProps> = ({
 
   const variants = {
     primary: cn(
-      'bg-roiba-verde text-white overflow-hidden group',
+      'bg-roiba-verde text-roiba-arena overflow-hidden group',
       'hover:text-roiba-verde'
     ),
     secondary: cn(
       'border border-roiba-verde text-roiba-verde bg-transparent',
-      'hover:bg-roiba-verde hover:text-white'
+      'hover:bg-roiba-verde hover:text-roiba-arena'
     ),
     text: cn(
       'text-roiba-verde bg-transparent',

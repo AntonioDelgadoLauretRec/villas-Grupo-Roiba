@@ -2,18 +2,18 @@
 
 import { useState, useEffect } from 'react'
 
-// ─── BRAND PALETTE — Azul + Blanco + Dorado ───
+// ─── BRAND PALETTE (Manual Maestro V3) ───
 const C = {
-  verde: "#0C2340",
-  verdeMid: "#143558",
-  verdeLight: "#1B4B7A",
-  arena: "#FFFFFF",
-  arenaLight: "#F5F7FA",
-  dorado: "#E8C877",
-  doradoArena: "#C9A96E",
+  verde: "#122620",
+  verdeMid: "#1a3a30",
+  verdeLight: "#234d3f",
+  arena: "#F4EBD0",
+  arenaLight: "#faf6ea",
+  dorado: "#FFCC53",
+  doradoArena: "#B68D40",
   blanco: "#FFFFFF",
   negro: "#0a0a0a",
-  gris: "#64748B",
+  gris: "#8a8a7c",
 };
 
 // ─── KEYFRAMES (injected once) ───
@@ -294,79 +294,74 @@ const ServiceIcons = {
 
 // ─── CONTENT DATA ───
 const SERVICES = [
-  { key: "design", icon: ServiceIcons.design, title: "Diseño Arquitectónico", desc: "Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva. Cada diseño nace de su terreno, su visión y nuestro rigor técnico." },
-  { key: "build", icon: ServiceIcons.build, title: "Construcción", desc: "Ejecución integral con materiales premium y control en cada fase." },
-  { key: "direction", icon: ServiceIcons.direction, title: "Dirección Técnica", desc: "Supervisión que garantiza plazos, calidad y normativa." },
-  { key: "turnkey", icon: ServiceIcons.turnkey, title: "Gestión Llave en Mano", desc: "Un solo interlocutor. Desde el concepto hasta la entrega." },
-  { key: "develop", icon: ServiceIcons.develop, title: "Desarrollo de Proyectos", desc: "Viabilidad técnica y económica para su inversión." },
-  { key: "quality", icon: ServiceIcons.quality, title: "Control de Calidad", desc: "Protocolos de inspección. Estándares medibles." },
-  { key: "installations", icon: ServiceIcons.installations, title: "Gestión de Instalaciones", desc: "Sistemas eléctricos, hidráulicos, climatización y domótica." },
-  { key: "cost", icon: ServiceIcons.cost, title: "Control de Costes", desc: "Presupuestos detallados y seguimiento en tiempo real." },
+  { key: "design", icon: ServiceIcons.design, title: "Diseño Arquitectónico", desc: "Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva." },
+  { key: "build", icon: ServiceIcons.build, title: "Construcción", desc: "Ejecución integral con materiales premium y control exhaustivo en cada fase del proceso." },
+  { key: "direction", icon: ServiceIcons.direction, title: "Dirección Técnica", desc: "Supervisión especializada que garantiza el cumplimiento de plazos, calidad y normativa vigente." },
+  { key: "turnkey", icon: ServiceIcons.turnkey, title: "Gestión Llave en Mano", desc: "Un solo interlocutor. Desde el concepto hasta la entrega de llaves, sin intermediarios." },
+  { key: "develop", icon: ServiceIcons.develop, title: "Desarrollo de Proyectos", desc: "Identificación de oportunidades, viabilidad técnica y económica para inversiones inmobiliarias." },
+  { key: "quality", icon: ServiceIcons.quality, title: "Control de Calidad", desc: "Protocolos de inspección en cada etapa. Estándares medibles. Resultado predecible." },
+  { key: "installations", icon: ServiceIcons.installations, title: "Gestión de Instalaciones", desc: "Coordinación de sistemas eléctricos, hidráulicos, climatización y domótica de última generación." },
+  { key: "cost", icon: ServiceIcons.cost, title: "Control de Costes", desc: "Presupuestos detallados, seguimiento en tiempo real y optimización de recursos sin comprometer calidad." },
   { key: "advisory", icon: ServiceIcons.advisory, title: "Asesoría Técnica", desc: "Consultoría experta en normativa, terrenos, permisos y viabilidad para su inversión." },
 ];
 
 const PROCESS = [
   {
     num: "01",
-    title: "Análisis de Terreno",
-    subtitle: "Seguridad jurídica en la adquisición",
-    desc: "La adquisición del terreno es el primer paso y uno de los más críticos del proyecto. Verificamos la situación legal de la propiedad antes de su adquisición, confirmando titularidad y detectando posibles cargas.",
-    detail: "Due diligence legal · Verificación de titularidad · Análisis de viabilidad",
-    duration: "2-4 semanas",
+    title: "Consulta Inicial",
+    subtitle: "Escuchamos su visión",
+    desc: "Reunión personalizada para comprender sus objetivos, presupuesto y expectativas. Analizamos el terreno, normativa local y viabilidad del proyecto.",
+    detail: "Estudio de suelo · Análisis normativo · Informe de viabilidad",
+    duration: "1-2 semanas",
   },
   {
     num: "02",
-    title: "Validación del Proyecto",
-    subtitle: "Viabilidad técnica y normativa",
-    desc: "Analizamos el proyecto desde un punto de vista técnico y urbanístico para asegurar su viabilidad antes de avanzar en el desarrollo. Evaluamos condicionantes del terreno y normativa aplicable.",
-    detail: "Estudio técnico · Normativa urbanística · Criterios constructivos",
-    duration: "1-2 semanas",
+    title: "Diseño Personalizado",
+    subtitle: "Arquitectura a medida",
+    desc: "Nuestro equipo de arquitectos desarrolla un proyecto exclusivo que refleja su estilo de vida, optimizando espacios, luz natural y eficiencia energética.",
+    detail: "Anteproyecto 3D · Planos ejecutivos · Selección de materiales",
+    duration: "3-4 semanas",
   },
   {
     num: "03",
-    title: "Co-Diseño",
-    subtitle: "Arquitectura e interiorismo a medida",
-    desc: "Definimos el proyecto junto al cliente, adaptando la vivienda a sus necesidades, estilo de vida y objetivos de inversión. Cada proyecto es único y se desarrolla con un enfoque totalmente personalizado.",
-    detail: "Arquitectura · Interiorismo · Funcionalidad · Diseño personalizado",
-    duration: "4-6 semanas",
+    title: "Planificación y Permisos",
+    subtitle: "Gestión integral",
+    desc: "Tramitamos todas las licencias y permisos necesarios. Definimos cronograma detallado, presupuesto cerrado y plan de ejecución sin sorpresas.",
+    detail: "Licencias · Cronograma · Presupuesto definitivo",
+    duration: "2-4 semanas",
   },
   {
     num: "04",
-    title: "Presupuesto Detallado",
-    subtitle: "Control económico desde el inicio",
-    desc: "Desarrollamos un presupuesto desglosado por partidas, que permite conocer el alcance real de la inversión antes del inicio de la obra, aportando transparencia y facilitando la toma de decisiones.",
-    detail: "Desglose por partidas · Cronograma financiero · Control de costes",
-    duration: "1-2 semanas",
+    title: "Construcción",
+    subtitle: "Ejecución de excelencia",
+    desc: "Proceso constructivo supervisado por nuestro equipo técnico. Control de calidad en cada etapa. Reportes periódicos con fotografías y avance de obra.",
+    detail: "Cimentación · Estructura · Acabados · Instalaciones",
+    duration: "6-10 meses",
   },
   {
     num: "05",
-    title: "Construcción",
-    subtitle: "Ejecución bajo control técnico",
-    desc: "Ejecutamos la obra bajo un modelo basado en planificación rigurosa, supervisión continua y control de calidad en cada fase. El cliente dispone de información periódica sobre el avance.",
-    detail: "Supervisión continua · Control de calidad · Informes de avance",
-    duration: "12-18 meses",
+    title: "Supervisión Continua",
+    subtitle: "Transparencia total",
+    desc: "Acceso a reportes de progreso en tiempo real. Inspecciones independientes de calidad. Comunicación directa con el director de obra.",
+    detail: "Reportes semanales · Inspecciones · Fotografías de avance",
+    duration: "Continuo",
   },
   {
     num: "06",
-    title: "Roiba Care",
-    subtitle: "Gestión y mantenimiento post-entrega",
-    desc: "El proyecto no finaliza con la entrega. Ofrecemos un servicio de gestión y mantenimiento orientado a preservar el valor de la propiedad y garantizar su correcto funcionamiento a lo largo del tiempo.",
-    detail: "Mantenimiento · Supervisión · Gestión operativa · Informes periódicos",
-    duration: "Permanente",
+    title: "Entrega de Llaves",
+    subtitle: "Su villa, lista para vivir",
+    desc: "Inspección final detallada, entrega de documentación completa y garantías. Su villa premium, exactamente como fue diseñada.",
+    detail: "Inspección final · Documentación · Garantías · Postventa",
+    duration: "1-2 semanas",
   },
 ];
 
 const PROJECTS = [
-  { name: "Excellence Oyster Bay", location: "Jamaica", status: "Completada", type: "Resort premium", year: "2024", image: "/images/projects/excellence-oyster-bay.jpg" },
-  { name: "Iguanas 45", location: "Cap Cana, República Dominicana", status: "Completada", type: "Villa unifamiliar", year: "2024", image: "/images/projects/iguanas-45-cap-cana.png" },
-  { name: "14 Villas Banus Bay", location: "Puerto Banús, España", status: "Completada", type: "Villas premium", year: "2023", image: "/images/projects/villas-banus-bay.png" },
-  { name: "Finest Punta Cana", location: "Punta Cana, República Dominicana", status: "Completada", type: "Resort & Residencias", year: "2024", image: "/images/projects/finest-punta-cana.jpg" },
-  { name: "Excellence El Carmen", location: "República Dominicana", status: "Completada", type: "Resort premium", year: "2023", image: "/images/projects/excellence-el-carmen.jpg" },
-  { name: "Terrazas de Cortessín", location: "Estepona, España", status: "Completada", type: "Residencial 64 apartamentos", year: "2024", image: "/images/projects/terrazas-cortessin.png" },
-  { name: "Mar de Pulpí Fase 7", location: "Almería, España", status: "Completada", type: "Residencial costero", year: "2024", image: "/images/projects/mar-de-pulpi.png" },
-  { name: "Cayuco 11", location: "Cap Cana, República Dominicana", status: "Completada", type: "Villa unifamiliar", year: "2024", image: "/images/projects/cayuco-11-cap-cana.png" },
-  { name: "Hotel Live Aqua", location: "Uvero Alto, República Dominicana", status: "Completada", type: "Hotel resort", year: "2024", image: "/images/projects/hotel-live-aqua.png" },
-  { name: "Atalaya Emotion", location: "Puerto Banús, España", status: "Completada", type: "64 apartamentos premium", year: "2024", image: "/images/projects/atalaya-emotion.png" },
+  { name: "Villa Coral Bay", location: "Cap Cana, República Dominicana", size: "450 m²", status: "Completada", beds: 5, type: "Villa unifamiliar", year: "2024", gradient: "135deg, #1a3a30 0%, #234d3f 40%, #2d6b55 100%" },
+  { name: "Residencia Mar Sereno", location: "Bávaro, Punta Cana", size: "380 m²", status: "Completada", beds: 4, type: "Villa con piscina infinity", year: "2025", gradient: "135deg, #122620 0%, #1a3a30 50%, #2d6b55 100%" },
+  { name: "Villa Puerto Banús", location: "Marbella, España", size: "520 m²", status: "Completada", beds: 6, type: "Residencia premium", year: "2023", gradient: "135deg, #0d1f1a 0%, #1a3a30 60%, #234d3f 100%" },
+  { name: "Villa Estepona Hills", location: "Estepona, España", size: "410 m²", status: "Completada", beds: 4, type: "Villa contemporánea", year: "2024", gradient: "135deg, #122620 0%, #1e4435 40%, #2a5c48 100%" },
+  { name: "Residencia Almería Bay", location: "Almería, España", size: "340 m²", status: "En construcción", beds: 3, type: "Villa minimalista", year: "2026", gradient: "135deg, #0a1a15 0%, #162e25 50%, #1a3a30 100%" },
 ];
 
 const STATS = [
@@ -520,7 +515,7 @@ export default function HomePage() {
           >
             Villas premium llave en mano. Diseño contemporáneo,
             <br />
-            gestión integral y un proceso totalmente personalizado.
+            gestión integral y un proceso totalmente supervisado.
           </p>
 
           <div
@@ -532,7 +527,6 @@ export default function HomePage() {
             }}
           >
             <button
-              onClick={() => window.location.href = '/contacto'}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -557,10 +551,9 @@ export default function HomePage() {
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
-              Contáctanos
+              Solicitar Análisis
             </button>
             <button
-              onClick={() => document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -727,7 +720,10 @@ export default function HomePage() {
                 marginBottom: 20,
               }}
             >
-              Grupo Roiba es una firma especializada en dirección técnica y supervisión de obra, así como en la construcción de villas premium en la zona este de República Dominicana, con especial enfoque en Punta Cana.
+              Grupo Roiba es una empresa especializada en el desarrollo y construcción de villas
+              premium en el Caribe. Nuestro modelo de servicio llave en mano integra arquitectura
+              contemporánea con gestión integral, garantizando control, calidad y tranquilidad
+              en cada proyecto.
             </p>
             <p
               className="animate-on-scroll delay-4"
@@ -739,7 +735,9 @@ export default function HomePage() {
                 fontWeight: 400,
               }}
             >
-              Paralelamente, desarrollamos y construimos villas premium totalmente personalizadas, definiendo cada proyecto en función de los requerimientos técnicos, funcionales y estéticos del cliente, bajo un modelo de ejecución basado en precisión constructiva, planificación rigurosa y altos estándares de acabado.
+              Con operaciones en España y República Dominicana, ofrecemos un proceso
+              supervisado de principio a fin, donde cada decisión se respalda con transparencia,
+              metodología probada y estándares de ejecución medibles.
             </p>
           </div>
 
@@ -764,16 +762,31 @@ export default function HomePage() {
                   justifyContent: "center",
                 }}
               >
-                <img
-                  src="/images/logo-white.png"
-                  alt="Grupo Roiba"
-                  style={{
-                    width: "60%",
-                    maxWidth: 220,
-                    height: "auto",
-                    opacity: 0.9,
-                  }}
-                />
+                <div style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 72,
+                      fontWeight: 300,
+                      color: C.doradoArena,
+                      lineHeight: 1,
+                    }}
+                  >
+                    RI
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontSize: 9,
+                      letterSpacing: "0.5em",
+                      color: `${C.arena}50`,
+                      marginTop: 12,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Espacio para Logo
+                  </div>
+                </div>
               </div>
             </div>
             {/* Offset accent */}
@@ -848,63 +861,296 @@ export default function HomePage() {
             </span>
           </div>
 
-          {/* Services grid — icon left, text right, compact */}
+          {/* BENTO GRID — Featured top row + 2 rows below */}
+          {/* ROW 1: Hero card (wide) + 2 stacked cards */}
           <div
             className="animate-on-scroll"
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              gap: 16,
+              gridTemplateColumns: "1.35fr 1fr",
+              gap: 20,
+              marginBottom: 20,
             }}
           >
-            {SERVICES.map((svc, i) => (
+            {/* Featured card — Diseño Arquitectónico */}
+            <div
+              className="service-card"
+              onMouseEnter={() => setHoveredService("design")}
+              onMouseLeave={() => setHoveredService(null)}
+              style={{
+                background: hoveredService === "design" ? C.verde : C.blanco,
+                border: `1px solid ${C.doradoArena}15`,
+                padding: "clamp(32px, 4vw, 56px)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                minHeight: 340,
+                transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <div style={{ width: 44, height: 44, color: hoveredService === "design" ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
+                  {ServiceIcons.design}
+                </div>
+                <span style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: 64,
+                  fontWeight: 300,
+                  color: hoveredService === "design" ? `${C.doradoArena}20` : `${C.doradoArena}12`,
+                  lineHeight: 1,
+                  transition: "color 0.5s",
+                }}>01</span>
+              </div>
+              <div>
+                <h3 style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "clamp(26px, 3vw, 34px)",
+                  fontWeight: 600,
+                  color: hoveredService === "design" ? C.arena : C.verde,
+                  marginBottom: 12,
+                  transition: "color 0.5s",
+                }}>Diseño Arquitectónico</h3>
+                <p style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: 14,
+                  lineHeight: 1.8,
+                  color: hoveredService === "design" ? `${C.arena}bb` : C.gris,
+                  maxWidth: 400,
+                  transition: "color 0.5s",
+                }}>
+                  Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva. Cada diseño nace de su terreno, su visión y nuestro rigor técnico.
+                </p>
+              </div>
+            </div>
+
+            {/* Right column: 2 stacked cards */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              {[
+                { key: "build", icon: ServiceIcons.build, num: "02", title: "Construcción", desc: "Ejecución integral con materiales premium y control en cada fase." },
+                { key: "direction", icon: ServiceIcons.direction, num: "03", title: "Dirección Técnica", desc: "Supervisión que garantiza plazos, calidad y normativa." },
+              ].map((svc) => (
+                <div
+                  key={svc.key}
+                  className="service-card"
+                  onMouseEnter={() => setHoveredService(svc.key)}
+                  onMouseLeave={() => setHoveredService(null)}
+                  style={{
+                    flex: 1,
+                    background: hoveredService === svc.key ? C.verde : C.blanco,
+                    border: `1px solid ${C.doradoArena}15`,
+                    padding: "clamp(24px, 3vw, 36px)",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
+                    <div style={{ width: 36, height: 36, color: hoveredService === svc.key ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
+                      {svc.icon}
+                    </div>
+                    <span style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 42,
+                      fontWeight: 300,
+                      color: hoveredService === svc.key ? `${C.doradoArena}20` : `${C.doradoArena}10`,
+                      lineHeight: 1,
+                      transition: "color 0.5s",
+                    }}>{svc.num}</span>
+                  </div>
+                  <div>
+                    <h3 style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 22,
+                      fontWeight: 600,
+                      color: hoveredService === svc.key ? C.arena : C.verde,
+                      marginBottom: 6,
+                      transition: "color 0.5s",
+                    }}>{svc.title}</h3>
+                    <p style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontSize: 12,
+                      lineHeight: 1.7,
+                      color: hoveredService === svc.key ? `${C.arena}aa` : C.gris,
+                      transition: "color 0.5s",
+                    }}>{svc.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ROW 2: 3 equal cards */}
+          <div className="animate-on-scroll delay-1" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
+            {[
+              { key: "turnkey", icon: ServiceIcons.turnkey, num: "04", title: "Gestión Llave en Mano", desc: "Un solo interlocutor. Desde el concepto hasta la entrega." },
+              { key: "develop", icon: ServiceIcons.develop, num: "05", title: "Desarrollo de Proyectos", desc: "Viabilidad técnica y económica para su inversión." },
+              { key: "quality", icon: ServiceIcons.quality, num: "06", title: "Control de Calidad", desc: "Protocolos de inspección. Estándares medibles." },
+            ].map((svc) => (
               <div
                 key={svc.key}
-                className={`service-card animate-on-scroll delay-${Math.min(i % 3 + 1, 6)}`}
+                className="service-card"
                 onMouseEnter={() => setHoveredService(svc.key)}
                 onMouseLeave={() => setHoveredService(null)}
                 style={{
                   background: hoveredService === svc.key ? C.verde : C.blanco,
                   border: `1px solid ${C.doradoArena}15`,
-                  padding: "24px 28px",
+                  padding: "clamp(28px, 3vw, 40px)",
+                  minHeight: 220,
                   display: "flex",
-                  alignItems: "flex-start",
-                  gap: 20,
-                  transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
-                {/* Icon */}
-                <div style={{
-                  width: 36,
-                  height: 36,
-                  minWidth: 36,
-                  color: hoveredService === svc.key ? C.dorado : C.doradoArena,
-                  transition: "color 0.5s",
-                  marginTop: 2,
-                }}>
-                  {svc.icon}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
+                  <div style={{ width: 36, height: 36, color: hoveredService === svc.key ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
+                    {svc.icon}
+                  </div>
+                  <span style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: 42,
+                    fontWeight: 300,
+                    color: hoveredService === svc.key ? `${C.doradoArena}20` : `${C.doradoArena}10`,
+                    lineHeight: 1,
+                    transition: "color 0.5s",
+                  }}>{svc.num}</span>
                 </div>
-                {/* Text */}
                 <div>
                   <h3 style={{
                     fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: 20,
+                    fontSize: 22,
                     fontWeight: 600,
                     color: hoveredService === svc.key ? C.arena : C.verde,
-                    marginBottom: 6,
-                    lineHeight: 1.2,
+                    marginBottom: 8,
                     transition: "color 0.5s",
                   }}>{svc.title}</h3>
                   <p style={{
                     fontFamily: "'Montserrat', sans-serif",
                     fontSize: 12,
-                    lineHeight: 1.65,
+                    lineHeight: 1.7,
                     color: hoveredService === svc.key ? `${C.arena}aa` : C.gris,
                     transition: "color 0.5s",
                   }}>{svc.desc}</p>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* ROW 3: 2 stacked cards + 1 featured */}
+          <div
+            className="animate-on-scroll delay-2"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1.35fr",
+              gap: 20,
+            }}
+          >
+            {/* Left column: 2 stacked */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              {[
+                { key: "installations", icon: ServiceIcons.installations, num: "07", title: "Gestión de Instalaciones", desc: "Sistemas eléctricos, hidráulicos, climatización y domótica." },
+                { key: "cost", icon: ServiceIcons.cost, num: "08", title: "Control de Costes", desc: "Presupuestos detallados y seguimiento en tiempo real." },
+              ].map((svc) => (
+                <div
+                  key={svc.key}
+                  className="service-card"
+                  onMouseEnter={() => setHoveredService(svc.key)}
+                  onMouseLeave={() => setHoveredService(null)}
+                  style={{
+                    flex: 1,
+                    background: hoveredService === svc.key ? C.verde : C.blanco,
+                    border: `1px solid ${C.doradoArena}15`,
+                    padding: "clamp(24px, 3vw, 36px)",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
+                    <div style={{ width: 36, height: 36, color: hoveredService === svc.key ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
+                      {svc.icon}
+                    </div>
+                    <span style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 42,
+                      fontWeight: 300,
+                      color: hoveredService === svc.key ? `${C.doradoArena}20` : `${C.doradoArena}10`,
+                      lineHeight: 1,
+                      transition: "color 0.5s",
+                    }}>{svc.num}</span>
+                  </div>
+                  <div>
+                    <h3 style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 22,
+                      fontWeight: 600,
+                      color: hoveredService === svc.key ? C.arena : C.verde,
+                      marginBottom: 6,
+                      transition: "color 0.5s",
+                    }}>{svc.title}</h3>
+                    <p style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontSize: 12,
+                      lineHeight: 1.7,
+                      color: hoveredService === svc.key ? `${C.arena}aa` : C.gris,
+                      transition: "color 0.5s",
+                    }}>{svc.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Featured card — Asesoría Técnica */}
+            <div
+              className="service-card"
+              onMouseEnter={() => setHoveredService("advisory")}
+              onMouseLeave={() => setHoveredService(null)}
+              style={{
+                background: hoveredService === "advisory" ? C.verde : C.blanco,
+                border: `1px solid ${C.doradoArena}15`,
+                padding: "clamp(32px, 4vw, 56px)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <div style={{ width: 44, height: 44, color: hoveredService === "advisory" ? C.dorado : C.doradoArena, transition: "color 0.5s" }}>
+                  {ServiceIcons.advisory}
+                </div>
+                <span style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: 64,
+                  fontWeight: 300,
+                  color: hoveredService === "advisory" ? `${C.doradoArena}20` : `${C.doradoArena}12`,
+                  lineHeight: 1,
+                  transition: "color 0.5s",
+                }}>09</span>
+              </div>
+              <div>
+                <h3 style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: "clamp(26px, 3vw, 34px)",
+                  fontWeight: 600,
+                  color: hoveredService === "advisory" ? C.arena : C.verde,
+                  marginBottom: 12,
+                  transition: "color 0.5s",
+                }}>Asesoría Técnica</h3>
+                <p style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: 14,
+                  lineHeight: 1.8,
+                  color: hoveredService === "advisory" ? `${C.arena}bb` : C.gris,
+                  maxWidth: 400,
+                  transition: "color 0.5s",
+                }}>
+                  Consultoría experta en normativa urbanística, evaluación de terrenos, gestión de permisos y viabilidad integral para su inversión inmobiliaria.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1268,24 +1514,48 @@ export default function HomePage() {
                   style={{
                     width: "100%",
                     aspectRatio: "21/9",
-                    background: C.verde,
+                    background: `linear-gradient(${proj.gradient})`,
                     position: "relative",
                     overflow: "hidden",
                   }}
+                  className="grain"
                 >
-                  {/* Project photo */}
-                  <img
-                    src={proj.image}
-                    alt={proj.name}
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    loading={i === 0 ? "eager" : "lazy"}
-                  />
+                  {/* Architectural overlay grid */}
+                  <div style={{
+                    position: "absolute",
+                    inset: 0,
+                    backgroundImage: `
+                      linear-gradient(${C.arena}05 1px, transparent 1px),
+                      linear-gradient(90deg, ${C.arena}05 1px, transparent 1px)
+                    `,
+                    backgroundSize: "80px 80px",
+                  }} />
+
+                  {/* Centered placeholder text */}
+                  <div style={{
+                    position: "absolute",
+                    inset: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 12,
+                  }}>
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke={`${C.arena}25`} strokeWidth="1">
+                      <rect x="4" y="8" width="40" height="32" rx="2" />
+                      <circle cx="16" cy="20" r="4" />
+                      <path d="M4 36 L16 26 L24 32 L36 20 L44 28" />
+                    </svg>
+                    <span style={{
+                      fontFamily: "'Montserrat'",
+                      fontSize: 10,
+                      color: `${C.arena}25`,
+                      letterSpacing: "0.3em",
+                      textTransform: "uppercase",
+                    }}>
+                      Fotografía del proyecto
+                    </span>
+                  </div>
 
                   {/* Bottom gradient overlay for text legibility */}
                   <div style={{
@@ -1347,24 +1617,30 @@ export default function HomePage() {
 
                     {/* Right: specs */}
                     <div style={{ display: "flex", gap: 40, paddingBottom: 4 }}>
-                      <div style={{ textAlign: "right" }}>
-                        <span style={{
-                          fontFamily: "'Montserrat', sans-serif",
-                          fontSize: 9,
-                          fontWeight: 600,
-                          letterSpacing: "0.2em",
-                          textTransform: "uppercase",
-                          color: C.doradoArena,
-                          display: "block",
-                          marginBottom: 4,
-                        }}>Tipología</span>
-                        <span style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: 20,
-                          fontWeight: 500,
-                          color: C.arena,
-                        }}>{proj.type}</span>
-                      </div>
+                      {[
+                        { label: "Superficie", value: proj.size },
+                        { label: "Dormitorios", value: proj.beds },
+                        { label: "Tipología", value: proj.type },
+                      ].map((spec) => (
+                        <div key={spec.label} style={{ textAlign: "right" }}>
+                          <span style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontSize: 9,
+                            fontWeight: 600,
+                            letterSpacing: "0.2em",
+                            textTransform: "uppercase",
+                            color: C.doradoArena,
+                            display: "block",
+                            marginBottom: 4,
+                          }}>{spec.label}</span>
+                          <span style={{
+                            fontFamily: "'Cormorant Garamond', serif",
+                            fontSize: 20,
+                            fontWeight: 500,
+                            color: C.arena,
+                          }}>{spec.value}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
@@ -1478,7 +1754,6 @@ export default function HomePage() {
 
           <div className="animate-on-scroll delay-3" style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             <button
-              onClick={() => window.location.href = '/contacto'}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -1503,10 +1778,9 @@ export default function HomePage() {
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
-              Contáctanos
+              Solicitar Análisis Personalizado
             </button>
             <button
-              onClick={() => window.location.href = 'mailto:info@gruporoiba.com'}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -1529,7 +1803,7 @@ export default function HomePage() {
                 (e.currentTarget as HTMLElement).style.color = C.arena;
               }}
             >
-              Escribir Email
+              Agendar Llamada
             </button>
           </div>
         </div>
