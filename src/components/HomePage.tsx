@@ -189,6 +189,74 @@ const injectStyles = () => {
       cursor: pointer;
       transition: all 0.4s ease;
     }
+
+    /* ─── Mobile Responsive ─── */
+    @media (max-width: 768px) {
+      /* Services — horizontal snap carousel */
+      .roiba .services-grid {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 20px !important;
+        gap: 12px !important;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-right: 24px;
+      }
+      .roiba .services-grid::-webkit-scrollbar { display: none; }
+      .roiba .service-grid-item {
+        min-width: min(82vw, 300px) !important;
+        flex-shrink: 0 !important;
+        scroll-snap-align: start;
+      }
+      .roiba .services-header-row {
+        flex-direction: column !important;
+        gap: 20px !important;
+        align-items: flex-start !important;
+      }
+      .roiba .services-header-desc {
+        text-align: left !important;
+        max-width: 100% !important;
+      }
+      .roiba .services-scroll-hint {
+        display: flex !important;
+      }
+      /* About — single column */
+      .roiba .about-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+      }
+      .roiba .about-visual-col { display: none !important; }
+      /* Process — tabs become horizontal scroll */
+      .roiba .process-layout {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+      }
+      .roiba .process-tabs-col {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        border-left: none !important;
+        border-bottom: 1px solid rgba(201,169,110,0.15);
+        gap: 0 !important;
+        scrollbar-width: none;
+      }
+      .roiba .process-tabs-col::-webkit-scrollbar { display: none; }
+      .roiba .process-tab-btn {
+        min-width: 140px !important;
+        flex-shrink: 0;
+        border-left: none !important;
+        padding: 12px 16px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+      }
+      .roiba .process-detail-panel { padding: 24px 20px !important; }
+    }
+    @media (max-width: 480px) {
+      .roiba .service-grid-item { min-width: min(88vw, 280px) !important; }
+    }
   `;
   document.head.appendChild(style);
 };
@@ -675,7 +743,7 @@ export default function HomePage() {
 
       {/* ═══ ABOUT / TRUST ═══ */}
       <section style={{ padding: "clamp(80px, 10vw, 140px) clamp(24px, 8vw, 120px)", background: C.arenaLight }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div className="about-grid" style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
           <div>
             <span
               className="animate-on-scroll"
@@ -744,7 +812,7 @@ export default function HomePage() {
           </div>
 
           {/* Visual block */}
-          <div className="animate-on-scroll delay-2" style={{ position: "relative" }}>
+          <div className="animate-on-scroll delay-2 about-visual-col" style={{ position: "relative" }}>
             <div
               style={{
                 aspectRatio: "4/5",
@@ -800,7 +868,7 @@ export default function HomePage() {
 
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
           {/* Section header with decorative line */}
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 72, borderBottom: `1px solid ${C.doradoArena}20`, paddingBottom: 32 }}>
+          <div className="services-header-row" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 72, borderBottom: `1px solid ${C.doradoArena}20`, paddingBottom: 32 }}>
             <div>
               <span
                 className="animate-on-scroll"
@@ -832,7 +900,7 @@ export default function HomePage() {
               </h2>
             </div>
             <span
-              className="animate-on-scroll delay-2"
+              className="animate-on-scroll delay-2 services-header-desc"
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 12,
@@ -850,7 +918,7 @@ export default function HomePage() {
 
           {/* Services grid — icon left, text right, compact */}
           <div
-            className="animate-on-scroll"
+            className="animate-on-scroll services-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr 1fr",
@@ -860,7 +928,7 @@ export default function HomePage() {
             {SERVICES.map((svc, i) => (
               <div
                 key={svc.key}
-                className={`service-card animate-on-scroll delay-${Math.min(i % 3 + 1, 6)}`}
+                className={`service-card service-grid-item animate-on-scroll delay-${Math.min(i % 3 + 1, 6)}`}
                 onMouseEnter={() => setHoveredService(svc.key)}
                 onMouseLeave={() => setHoveredService(null)}
                 style={{
@@ -905,6 +973,28 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+          </div>
+          {/* Mobile scroll hint */}
+          <div
+            className="services-scroll-hint"
+            style={{
+              display: "none",
+              alignItems: "center",
+              gap: 8,
+              marginTop: 16,
+              justifyContent: "center",
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: 10,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: C.doradoArena,
+              opacity: 0.7,
+            }}
+          >
+            <span>Desliza para ver más</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M4 8h8M9 5l3 3-3 3"/>
+            </svg>
           </div>
         </div>
       </section>
@@ -965,13 +1055,14 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="animate-on-scroll delay-2" style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: 48 }}>
+          <div className="animate-on-scroll delay-2 process-layout" style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: 48 }}>
             {/* Tab buttons */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div className="process-tabs-col" style={{ display: "flex", flexDirection: "column", gap: 4 }}>
               {PROCESS.map((step, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveProcess(i)}
+                  className={`process-tab-btn${activeProcess === i ? ' active-tab' : ''}`}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -1036,6 +1127,7 @@ export default function HomePage() {
             {/* Active content panel */}
             <div
               key={activeProcess}
+              className="process-detail-panel"
               style={{
                 background: `${C.doradoArena}08`,
                 border: `1px solid ${C.doradoArena}15`,

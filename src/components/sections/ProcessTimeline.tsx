@@ -58,71 +58,73 @@ export const ProcessTimeline: FC = () => {
   const [activePhase, setActivePhase] = useState(0)
 
   return (
-    <section className="py-24 md:py-32 bg-roiba-arena relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-roiba-arena-light relative overflow-hidden">
       {/* Número decorativo de fondo */}
-      <div className="absolute top-20 right-0 text-[20rem] md:text-[30rem] font-serif text-roiba-verde/[0.02] leading-none select-none pointer-events-none">
+      <div className="absolute top-16 right-0 text-[18rem] md:text-[26rem] font-serif text-roiba-verde/[0.025] leading-none select-none pointer-events-none">
         {ROIBA_PHASES[activePhase].number}
       </div>
 
       <div className="container-editorial relative z-10">
         {/* Header */}
-        <div className="max-w-3xl mb-16 md:mb-24">
+        <div className="max-w-2xl mb-14 md:mb-20">
           <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mb-4 block">
             Nuestro Proceso
           </span>
-          <h2 className="text-display-md md:text-display-lg font-serif text-roiba-verde mb-6">
+          <h2 className="text-display-md md:text-display-lg font-serif text-roiba-verde mb-5">
             The Roiba Method
           </h2>
-          <p className="text-body-lg text-roiba-verde/70 font-light">
-            The Roiba Method estructura cada proyecto en seis fases definidas, diseñadas para eliminar la incertidumbre y garantizar control, transparencia y previsibilidad en todo el proceso constructivo.
+          <div className="w-12 h-px bg-roiba-dorado mb-6" />
+          <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed">
+            Seis fases definidas para eliminar la incertidumbre y garantizar control,
+            transparencia y previsibilidad en todo el proceso constructivo.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Timeline navegable */}
-          <div className="lg:col-span-5">
-            <div className="space-y-0 border-l border-roiba-verde/10">
+        <div className="grid lg:grid-cols-12 gap-0 lg:gap-14 items-start">
+
+          {/* ── Left: Phase list ── */}
+          <div className="lg:col-span-4">
+            {/* Mobile: horizontal scroll — Desktop: vertical list */}
+            <div
+              className="flex lg:flex-col overflow-x-auto lg:overflow-visible border-b-2 lg:border-b-0 lg:border-l-2 border-roiba-verde/10"
+              style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+            >
               {ROIBA_PHASES.map((phase, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActivePhase(idx)}
                   className={cn(
-                    'w-full text-left pl-6 py-5 relative transition-all duration-300',
-                    'hover:bg-roiba-verde/[0.02]',
-                    activePhase === idx && 'bg-roiba-verde/[0.03]'
+                    'flex-shrink-0 lg:flex-shrink text-left',
+                    'px-5 lg:pl-6 lg:pr-4 py-4 lg:py-5',
+                    'relative transition-all duration-300',
+                    'border-b-2 lg:border-b-0 lg:border-l-2 -mb-0.5 lg:-mb-0 lg:-ml-0.5',
+                    activePhase === idx
+                      ? 'border-roiba-dorado bg-roiba-verde/[0.03] lg:bg-roiba-verde/[0.03]'
+                      : 'border-transparent hover:bg-roiba-verde/[0.02]'
                   )}
                 >
-                  {/* Indicador activo */}
-                  <div 
-                    className={cn(
-                      'absolute left-0 top-0 bottom-0 w-px bg-roiba-dorado',
-                      'transform origin-top transition-transform duration-500',
-                      activePhase === idx ? 'scale-y-100' : 'scale-y-0'
-                    )}
-                  />
-                  
-                  <div className="flex items-baseline gap-4">
-                    <span 
+                  <div className="flex items-baseline gap-3 whitespace-nowrap lg:whitespace-normal">
+                    <span
                       className={cn(
-                        'text-caption font-sans font-medium transition-colors duration-300',
-                        activePhase === idx ? 'text-roiba-dorado' : 'text-roiba-verde/30'
+                        'font-sans text-caption font-semibold tracking-widest flex-shrink-0 transition-colors duration-300',
+                        activePhase === idx ? 'text-roiba-dorado' : 'text-roiba-verde/25'
                       )}
                     >
                       {phase.number}
                     </span>
                     <div>
-                      <h3 
+                      <p
                         className={cn(
-                          'text-subheading font-serif transition-colors duration-300',
-                          activePhase === idx ? 'text-roiba-verde' : 'text-roiba-verde/60'
+                          'font-serif text-body leading-snug transition-colors duration-300',
+                          activePhase === idx ? 'text-roiba-verde' : 'text-roiba-verde/50'
                         )}
                       >
                         {phase.title}
-                      </h3>
-                      <p 
+                      </p>
+                      <p
                         className={cn(
-                          'text-caption transition-colors duration-300',
-                          activePhase === idx ? 'text-roiba-verde/60' : 'text-roiba-verde/40'
+                          'text-caption hidden lg:block mt-0.5 transition-colors duration-300',
+                          activePhase === idx ? 'text-roiba-verde/55' : 'text-roiba-verde/30'
                         )}
                       >
                         {phase.subtitle}
@@ -134,44 +136,72 @@ export const ProcessTimeline: FC = () => {
             </div>
           </div>
 
-          {/* Detalle de fase activa */}
-          <div className="lg:col-span-7">
-            <div className="bg-white p-8 md:p-12 shadow-sm">
-              <div className="mb-8">
-                <span className="text-display-xl font-serif text-roiba-verde/10">
+          {/* ── Right: Active phase detail ── */}
+          <div className="lg:col-span-8 mt-6 lg:mt-0 lg:sticky lg:top-28">
+            <div
+              key={activePhase}
+              className="bg-white shadow-sm border border-roiba-verde/8 p-8 md:p-10 lg:p-12"
+              style={{ animation: 'fadeUp 0.4s ease both' }}
+            >
+              {/* Phase number + title row */}
+              <div className="flex items-start gap-5 mb-7">
+                <span className="font-serif leading-none font-light text-roiba-verde/[0.07] select-none flex-shrink-0"
+                  style={{ fontSize: 'clamp(4rem, 8vw, 6rem)' }}>
                   {ROIBA_PHASES[activePhase].number}
                 </span>
+                <div className="pt-1 flex-1 min-w-0">
+                  <h3 className="text-heading font-serif text-roiba-verde mb-1.5 leading-tight">
+                    {ROIBA_PHASES[activePhase].title}
+                  </h3>
+                  <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-dorado">
+                    {ROIBA_PHASES[activePhase].subtitle}
+                  </p>
+                </div>
               </div>
 
-              <h3 className="text-heading font-serif text-roiba-verde mb-2">
-                {ROIBA_PHASES[activePhase].title}
-              </h3>
-              
-              <p className="text-body text-roiba-dorado mb-6">
-                {ROIBA_PHASES[activePhase].subtitle}
-              </p>
+              {/* Gold divider */}
+              <div className="w-full h-px bg-roiba-dorado/20 mb-7" />
 
-              <p className="text-body-lg text-roiba-verde/70 font-light mb-8 leading-relaxed">
+              {/* Description */}
+              <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed mb-9">
                 {ROIBA_PHASES[activePhase].description}
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-6 pt-8 border-t border-roiba-verde/10">
+              {/* Meta grid */}
+              <div className="grid grid-cols-2 gap-6 pt-7 border-t border-roiba-verde/8">
                 <div>
-                  <p className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-verde/40 mb-2">
-                    Duración
+                  <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-verde/35 mb-2">
+                    Duración estimada
                   </p>
-                  <p className="text-subheading font-serif text-roiba-verde">
+                  <p className="text-subheading font-serif text-roiba-verde leading-tight">
                     {ROIBA_PHASES[activePhase].duration}
                   </p>
                 </div>
                 <div>
-                  <p className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-verde/40 mb-2">
+                  <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-verde/35 mb-2">
                     Entregable
                   </p>
-                  <p className="text-body text-roiba-verde">
+                  <p className="text-body text-roiba-verde/80 leading-snug">
                     {ROIBA_PHASES[activePhase].deliverable}
                   </p>
                 </div>
+              </div>
+
+              {/* Progress dots */}
+              <div className="flex items-center gap-2 mt-7 pt-6 border-t border-roiba-verde/8">
+                {ROIBA_PHASES.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActivePhase(idx)}
+                    aria-label={`Fase ${idx + 1}`}
+                    className={cn(
+                      'h-1.5 rounded-full transition-all duration-300',
+                      activePhase === idx
+                        ? 'w-8 bg-roiba-dorado'
+                        : 'w-3 bg-roiba-verde/15 hover:bg-roiba-verde/30'
+                    )}
+                  />
+                ))}
               </div>
             </div>
           </div>

@@ -154,6 +154,11 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  /* ===== EDITORIAL CONTAINER (usado en ProcessTimeline, Footer, WhyPuntaCana) ===== */
+  .container-editorial {
+    @apply max-w-7xl mx-auto px-6 md:px-10 lg:px-16;
+  }
+
   /* ===== DECORATIVOS ===== */
   .gold-line {
     @apply h-px bg-gradient-to-r from-transparent via-roiba-dorado to-transparent;

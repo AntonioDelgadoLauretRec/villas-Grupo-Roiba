@@ -11,16 +11,17 @@ export default function InversoresPage() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative bg-roiba-verde py-24 md:py-32 px-6 overflow-hidden">
+      <section className="relative bg-roiba-verde py-28 md:py-36 px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <p className="text-roiba-dorado uppercase tracking-[0.3em] text-xs font-medium mb-6">
+          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
             Inversores
           </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-6">
+          <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
             Centro de Inversores
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
-          <p className="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-body-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
             Información exclusiva para inversores cualificados
           </p>
         </div>
@@ -29,25 +30,25 @@ export default function InversoresPage() {
       <TrustSignals />
 
       {/* Beneficios Fiscales */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-24 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
-          <p className="text-roiba-dorado uppercase tracking-[0.2em] text-xs font-medium mb-4 text-center">
+          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-4 text-center">
             Ventajas
           </p>
-          <h2 className="text-3xl md:text-4xl font-serif text-roiba-verde mb-12 text-center">
+          <h2 className="text-display-md font-serif text-roiba-verde mb-12 text-center">
             Beneficios Fiscales
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-roiba-arena-light p-8 border border-roiba-verde/5">
-              <h3 className="text-xl font-serif text-roiba-verde mb-3">Ley Confotur</h3>
-              <p className="text-roiba-verde/70 leading-relaxed">
+              <h3 className="text-heading font-serif text-roiba-verde mb-3">Ley Confotur</h3>
+              <p className="text-roiba-verde/70 text-body leading-relaxed">
                 Exención de impuestos de transferencia y beneficios fiscales durante 15 años
                 para proyectos turísticos en República Dominicana.
               </p>
             </div>
             <div className="bg-roiba-arena-light p-8 border border-roiba-verde/5">
-              <h3 className="text-xl font-serif text-roiba-verde mb-3">Residencia por Inversión</h3>
-              <p className="text-roiba-verde/70 leading-relaxed">
+              <h3 className="text-heading font-serif text-roiba-verde mb-3">Residencia por Inversión</h3>
+              <p className="text-roiba-verde/70 text-body leading-relaxed">
                 Acceso a residencia dominicana con inversión inmobiliaria desde $200,000 USD.
                 Proceso simplificado y asesoría completa.
               </p>
@@ -59,10 +60,10 @@ export default function InversoresPage() {
       {/* Formulario */}
       <section className="py-20 px-6 bg-roiba-arena-light">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-serif text-roiba-verde mb-4 text-center">
+          <h2 className="text-display-md font-serif text-roiba-verde mb-4 text-center">
             Solicite información
           </h2>
-          <p className="text-roiba-verde/60 text-center mb-10">
+          <p className="text-roiba-verde/60 text-body text-center mb-10">
             Complete el formulario y nuestro equipo se pondrá en contacto en 24-48 horas.
           </p>
           <ContactForm />
