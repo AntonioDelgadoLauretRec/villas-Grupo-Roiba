@@ -425,16 +425,9 @@ const PROCESS = [
 ];
 
 const PROJECTS = [
-  { name: "Excellence Oyster Bay", location: "Jamaica", status: "Completada", type: "Resort premium", year: "2024", image: "/images/projects/excellence-oyster-bay.jpg" },
-  { name: "Iguanas 45", location: "Cap Cana, República Dominicana", status: "Completada", type: "Villa unifamiliar", year: "2024", image: "/images/projects/iguanas-45-cap-cana.png" },
-  { name: "14 Villas Banus Bay", location: "Puerto Banús, España", status: "Completada", type: "Villas premium", year: "2023", image: "/images/projects/villas-banus-bay.png" },
   { name: "Finest Punta Cana", location: "Punta Cana, República Dominicana", status: "Completada", type: "Resort & Residencias", year: "2024", image: "/images/projects/finest-punta-cana.jpg" },
+  { name: "Excellence Oyster Bay", location: "Jamaica", status: "Completada", type: "Resort premium", year: "2024", image: "/images/projects/excellence-oyster-bay.jpg" },
   { name: "Excellence El Carmen", location: "República Dominicana", status: "Completada", type: "Resort premium", year: "2023", image: "/images/projects/excellence-el-carmen.jpg" },
-  { name: "Terrazas de Cortessín", location: "Estepona, España", status: "Completada", type: "Residencial 64 apartamentos", year: "2024", image: "/images/projects/terrazas-cortessin.png" },
-  { name: "Mar de Pulpí Fase 7", location: "Almería, España", status: "Completada", type: "Residencial costero", year: "2024", image: "/images/projects/mar-de-pulpi.png" },
-  { name: "Cayuco 11", location: "Cap Cana, República Dominicana", status: "Completada", type: "Villa unifamiliar", year: "2024", image: "/images/projects/cayuco-11-cap-cana.png" },
-  { name: "Hotel Live Aqua", location: "Uvero Alto, República Dominicana", status: "Completada", type: "Hotel resort", year: "2024", image: "/images/projects/hotel-live-aqua.png" },
-  { name: "Atalaya Emotion", location: "Puerto Banús, España", status: "Completada", type: "64 apartamentos premium", year: "2024", image: "/images/projects/atalaya-emotion.png" },
 ];
 
 const STATS = [

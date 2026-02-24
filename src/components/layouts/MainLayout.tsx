@@ -14,13 +14,13 @@ export interface MainLayoutProps {
 const navigation = {
   es: [
     { href: '/proceso', label: 'Proceso' },
-    { href: '/coleccion', label: 'Colección' },
+    { href: '/villas', label: 'Colección' },
     { href: '/inversores', label: 'Inversores' },
     { href: '/por-que-punta-cana', label: 'Por qué Punta Cana' },
   ],
   en: [
     { href: '/proceso', label: 'Process' },
-    { href: '/coleccion', label: 'Collection' },
+    { href: '/villas', label: 'Collection' },
     { href: '/inversores', label: 'Investors' },
     { href: '/por-que-punta-cana', label: 'Why Punta Cana' },
   ],
