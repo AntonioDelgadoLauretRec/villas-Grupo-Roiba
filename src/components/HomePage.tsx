@@ -439,34 +439,34 @@ const STATS = [
 
 const TESTIMONIALS = [
   {
-    quote: "Grupo Roiba nos ofreció algo que no habíamos encontrado en ningún otro promotor en Punta Cana: transparencia real. Cada semana recibíamos informes detallados con fotos, costes actualizados y un cronograma que se cumplió al día. La villa superó nuestras expectativas.",
-    name: "Carlos M.",
-    role: "Inversor privado",
+    quote: "Grupo Roiba nos ofreció algo que no habíamos encontrado en ningún otro constructor en Punta Cana: transparencia real. Cada semana recibíamos informes detallados con fotos, costes actualizados y un cronograma que se cumplió al día. La villa superó todas nuestras expectativas.",
+    name: "Carlos & Lucía M.",
+    role: "Propietarios de villa",
     location: "Madrid, España",
   },
   {
-    quote: "Lo que más valoramos fue la dirección técnica. Iván y Ramón tienen un conocimiento profundo de la construcción en el Caribe y eso se nota en cada decisión. No hubo improvisación, todo estaba planificado. Nuestro proyecto se entregó en plazo y sin sobrecostes.",
-    name: "Alejandra & Thomas R.",
+    quote: "Construir nuestra villa desde Miami con un equipo en el Caribe parecía un reto enorme. Iván y Ramón lo hicieron simple. Su dominio técnico, la comunicación constante y el respeto escrupuloso al presupuesto nos dieron una confianza total desde el primer día.",
+    name: "James & Patricia W.",
     role: "Propietarios de villa en Cap Cana",
-    location: "Zúrich, Suiza",
+    location: "Miami, Florida, EE.UU.",
   },
   {
-    quote: "Invertir en República Dominicana desde el extranjero parecía complejo, pero Grupo Roiba simplificó todo el proceso: la due diligence legal, la gestión de permisos, la coordinación con arquitectos locales. Fue como tener un socio de confianza en destino.",
-    name: "Jean-Pierre L.",
-    role: "Inversor inmobiliario",
-    location: "París, Francia",
-  },
-  {
-    quote: "Buscábamos un equipo que entendiera nuestras expectativas europeas de calidad y las aplicara en el Caribe. Roiba lo consiguió. La atención al detalle en los acabados, la selección de materiales y el control de calidad fueron impecables.",
-    name: "Elena V.",
-    role: "Propietaria de villa",
+    quote: "Buscábamos un equipo que entendiera nuestras expectativas de calidad y las trasladara al Caribe. Roiba lo consiguió. La atención al detalle en los acabados, la selección de materiales y el control de calidad fueron impecables. Recomendamos Grupo Roiba sin reservas.",
+    name: "Elena & Roberto V.",
+    role: "Propietarios de villa",
     location: "Marbella, España",
   },
   {
-    quote: "El servicio Roiba Care fue decisivo en nuestra decisión. Saber que nuestra propiedad estará supervisada y mantenida profesionalmente cuando no estamos en Punta Cana nos da una tranquilidad absoluta. Es un servicio post-venta que realmente marca la diferencia.",
-    name: "Michael & Sarah K.",
-    role: "Propietarios e inversores",
-    location: "Miami, EE.UU.",
+    quote: "Construir en el Caribe desde Colombia parecía un proceso incierto, pero Grupo Roiba nos guió en cada etapa con profesionalismo y honestidad. La gestión de permisos, los arquitectos locales, la calidad de los materiales... todo fue exactamente como nos prometieron.",
+    name: "Andrés & Camila R.",
+    role: "Propietarios de villa en Punta Cana",
+    location: "Bogotá, Colombia",
+  },
+  {
+    quote: "El servicio Roiba Care fue decisivo en nuestra decisión. Saber que nuestra propiedad estará supervisada y mantenida profesionalmente cuando estamos en Nueva York nos da una tranquilidad absoluta. Es un servicio post-entrega que realmente marca la diferencia.",
+    name: "David & Lauren Chen",
+    role: "Propietarios de villa",
+    location: "New York, EE.UU.",
   },
 ];
 
@@ -520,6 +520,32 @@ export default function HomePage() {
         }}
         className="grain"
       >
+        {/* Background Video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            zIndex: 0,
+          }}
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay to maintain text readability */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(170deg, ${C.verde}CC 0%, ${C.verdeMid}BB 40%, ${C.verde}AA 100%)`,
+            zIndex: 1,
+          }}
+        />
         {/* Geometric accents */}
         <div
           style={{
@@ -531,6 +557,7 @@ export default function HomePage() {
             border: `1px solid ${C.doradoArena}15`,
             borderRadius: "50%",
             animation: "float 8s ease-in-out infinite",
+            zIndex: 1,
           }}
         />
         <div
@@ -543,6 +570,7 @@ export default function HomePage() {
             border: `1px solid ${C.doradoArena}10`,
             transform: "rotate(45deg)",
             animation: "float 10s ease-in-out infinite 2s",
+            zIndex: 1,
           }}
         />
         <div
@@ -553,6 +581,7 @@ export default function HomePage() {
             width: 1,
             height: 120,
             background: `linear-gradient(to bottom, transparent, ${C.doradoArena}30, transparent)`,
+            zIndex: 1,
           }}
         />
 
@@ -561,6 +590,7 @@ export default function HomePage() {
           style={{
             textAlign: "center",
             zIndex: 2,
+            position: "relative",
             padding: "0 24px",
             animation: "fadeUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards",
           }}
@@ -703,6 +733,7 @@ export default function HomePage() {
             alignItems: "center",
             gap: 8,
             animation: "pulse 2.5s ease infinite",
+            zIndex: 2,
           }}
         >
           <span

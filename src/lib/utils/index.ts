@@ -97,7 +97,7 @@ export const COMPANY = {
   name: 'Grupo Roiba',
   tagline: 'Arquitectura, control y confianza en cada proyecto',
   taglineEN: 'Architecture, control and confidence in every project',
-  email: 'inversiones@gruporoiba.com',
+  email: 'info@gruporoiba.com',
   phone: '+1 809 000 0000',
   whatsapp: '+18090000000',
   website: 'www.gruporoiba.com',

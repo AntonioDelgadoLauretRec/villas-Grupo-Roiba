@@ -3,244 +3,116 @@
 import { FC } from 'react'
 import Image from 'next/image'
 
-const PRIVILEGES = [
+const ATTRACTIONS = [
+  {
+    id: 'playas',
+    subtitle: 'Costa Caribeña',
+    title: 'Playas de Arena Blanca',
+    description:
+      'Las playas de Punta Cana y Cap Cana figuran de forma recurrente entre las mejores del mundo según Condé Nast Traveler, Travel + Leisure y TripAdvisor. Arena blanca de coral, aguas turquesa cristalinas y palmeras de cocotero componen un paisaje costero de belleza excepcional. Los residentes de comunidades como Cap Cana y Puntacana Resort disfrutan de acceso a tramos de playa privados con servicios de concierge, restauración gourmet y deportes acuáticos de primer nivel. Playa Juanillo, Playa Blanca y Cabeza de Toro son algunas de las joyas que adornan esta costa única de 48 kilómetros.',
+    image: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1920&q=85&fit=crop',
+  },
   {
     id: 'golf',
-    title: 'Sede del PGA Tour',
     subtitle: 'Golf de Clase Mundial',
+    title: 'Sede del PGA Tour',
     description:
-      'Punta Cana alberga el Corales Puntacana Championship, parada oficial del PGA Tour, consolidando la región como uno de los destinos de golf más prestigiosos del mundo. Los campos, diseñados por leyendas como Jack Nicklaus, Tom Fazio y P.B. Dye, se integran en paisajes naturales espectaculares entre acantilados, manglares y la línea costera del Caribe. Para el propietario de una villa premium, esto significa acceso exclusivo a instalaciones de competición internacional, membresías de club con servicios de primer nivel y un entorno que combina deporte, networking y estilo de vida al más alto estándar.',
+      'Punta Cana alberga el Corales Puntacana Championship, parada oficial del PGA Tour, consolidando la región como uno de los destinos de golf más prestigiosos del mundo. Los campos, diseñados por leyendas como Jack Nicklaus, Tom Fazio y P.B. Dye, se integran en paisajes naturales espectaculares entre acantilados, manglares y la línea costera del Caribe. Corales Golf Club, Punta Espada y La Cana Golf Course ofrecen entre todos más de 54 hoyos de nivel de campeonato. Acceso exclusivo a instalaciones de competición internacional, membresías de club con servicios de primer nivel y un entorno que combina deporte de élite y estilo de vida al más alto estándar.',
     image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1920&q=85&fit=crop',
-    size: 'large' as const,
+  },
+  {
+    id: 'gastronomia',
+    subtitle: 'Alta Cocina',
+    title: 'Gastronomía de Autor',
+    description:
+      'Punta Cana y Cap Cana albergan una escena gastronómica de nivel internacional que rivaliza con las grandes capitales culinarias. El Restaurante SBG, firmado por el chef con 3 estrellas Michelin Nandu Jubany, eleva la cocina mediterránea a una experiencia sensorial única en el Caribe. La Palapa by Eden Roc, con su privilegiada ubicación frente al Atlántico, fusiona técnica europea con ingredientes del trópico. El concepto Platea transforma la cena en un espectáculo de alta cultura gastronómica. Junto a estos referentes de alta cocina, el destino cuenta con una vibrante oferta de restaurantes de playa, ceviicherías de pescadores locales y steakhouses de primer nivel.',
+    image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=85&fit=crop',
   },
   {
     id: 'marina',
-    title: 'Capital del Marlin Azul',
     subtitle: 'Náutica Premium',
+    title: 'Capital del Marlin Azul',
     description:
-      'Marina Cap Cana es la marina de mayor capacidad de todo el Caribe, con certificación Blue Flag y más de 150 amarres para embarcaciones de hasta 150 pies. Reconocida internacionalmente como uno de los mejores destinos de pesca de altura del mundo — especialmente para el marlin azul —, la marina ofrece torneos de categoría internacional, servicios de charter privado, restaurantes frente al agua y acceso directo a las rutas náuticas del Caribe. Vivir en Cap Cana significa tener el mar como extensión natural de su propiedad.',
+      'Marina Cap Cana es la marina de mayor capacidad de todo el Caribe, con certificación Blue Flag y más de 150 amarres para embarcaciones de hasta 150 pies. Reconocida internacionalmente como uno de los mejores destinos de pesca de altura del mundo —especialmente para el marlin azul—, la marina organiza torneos de categoría internacional que atraen a los mejores pescadores deportivos del planeta. Los restaurantes frente al agua, boutiques náuticas y acceso directo a las rutas del Caribe completan una experiencia donde el mar se convierte en extensión natural de su estilo de vida.',
     image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1920&q=85&fit=crop',
-    size: 'medium' as const,
+  },
+  {
+    id: 'clubes',
+    subtitle: 'Vida Social Exclusiva',
+    title: 'Clubes Sociales de Primer Nivel',
+    description:
+      'Cap Cana y Punta Cana cuentan con una red de clubes sociales y beach clubs que definen un estilo de vida diferente al de cualquier otro destino caribeño. El Eden Roc Cap Cana, con su icónica arquitectura sobre los acantilados del Atlántico, combina piscina de borde infinito, restaurante de autor y acceso exclusivo a Playa Juanillo. El Blue Marlin Cap Cana, en plena marina, es el epicentro del social life náutico. Puntacana Resort & Club ofrece a sus residentes acceso a uno de los country clubs más completos del Caribe, con canchas de tenis, piscinas, spa de lujo y programación social de alto nivel durante todo el año.',
+    image: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'naturaleza',
+    subtitle: 'Patrimonio Natural',
+    title: 'Parques Naturales y Ecología',
+    description:
+      'A escasos kilómetros de Cap Cana, la República Dominicana custodia algunos de los ecosistemas más privilegiados del Caribe. El Parque Nacional del Este protege 420 km² de bosques tropicales, manglares y arrecifes de coral, con la mítica Isla Saona como joya de su interior. El Indigenous Eyes Ecological Park, dentro de Puntacana Resort & Club, alberga 12 lagunas de agua dulce y jardines botánicos de flora nativa. El Hoyo Azul, un cenote de aguas turquesas de impactante belleza, se ha convertido en uno de los rincones naturales más fotografiados del Caribe. Esta riqueza natural equilibra la sofisticación del lujo con la pureza del trópico.',
+    image: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'buceo',
+    subtitle: 'Mundo Submarino',
+    title: 'Buceo y Vida Marina',
+    description:
+      'Las aguas del Caribe dominicano albergan un ecosistema submarino de extraordinaria riqueza: arrecifes de coral vivos repletos de vida tropical, naufragios convertidos en arrecifes artificiales y cuevas submarinas únicas. Los centros de buceo de Cap Cana y Bávaro ofrecen inmersiones para todos los niveles, desde snorkel en aguas someras hasta dives técnicos a más de 30 metros de profundidad. Entre diciembre y marzo, la Bahía de Samaná ofrece el espectáculo único de las ballenas jorobadas migrando para reproducirse en las cálidas aguas dominicanas. Uno de los mejores destinos de buceo de todo el hemisferio occidental.',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'clima',
+    subtitle: 'Perfección Climática',
+    title: 'El Clima Ideal Todo el Año',
+    description:
+      'Con 340 días de sol al año y una temperatura media de 27°C, Punta Cana goza de uno de los climas más estables y benignos del mundo. La región se beneficia de la brisa constante del Caribe, que suaviza el calor tropical y crea unas condiciones de confort excepcionales tanto en exteriores como en interiores. La temporada seca, de noviembre a abril, coincide con el invierno del hemisferio norte, convirtiendo a Punta Cana en el refugio perfecto para residentes que escapan del frío europeo o norteamericano. Un clima que invita a vivir en exteriores y que convierte cada día en una oportunidad para disfrutar del jardín, la piscina, el golf o la playa.',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'nocturna',
+    subtitle: 'Entretenimiento',
+    title: 'Vida Nocturna y Ocio',
+    description:
+      'Cuando cae el sol en Punta Cana, la vida nocturna despliega una oferta de ocio que sorprende por su variedad y nivel. Imagine Punta Cana es uno de los clubes más singulares del mundo: una discoteca construida en el interior de una cueva natural de estalactitas y estalagmitas con capacidad para 2.000 personas. Coco Bongo lleva décadas siendo referencia de entretenimiento en vivo con espectáculos de acróbatas y efectos especiales. Para quienes prefieren un ambiente más íntimo, los beach clubs de Cap Cana ofrecen noches con DJ residente, cócteles de autor y puesta de sol sobre el Atlántico.',
+    image: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1920&q=85&fit=crop',
   },
   {
     id: 'ecuestre',
-    title: 'Los Establos & Polo',
     subtitle: 'Cultura Ecuestre',
+    title: 'Los Establos & Polo',
     description:
-      'Cap Cana cuenta con instalaciones ecuestres de primer nivel que incluyen un club de polo con canchas reglamentarias, escuelas de equitación para salto y doma, y establos gestionados con estándares internacionales. Este entorno ecuestre, poco habitual en el Caribe, permite disfrutar de una tradición que combina deporte, exclusividad y contacto con la naturaleza tropical. Un privilegio que diferencia a Punta Cana de cualquier otro destino de inversión en la región.',
+      'Cap Cana cuenta con instalaciones ecuestres de primer nivel que incluyen un club de polo con canchas reglamentarias, escuelas de equitación para salto y doma clásica, y establos gestionados con estándares internacionales. Los torneos de polo que se celebran en la temporada alta congregan a jugadores de Argentina, México, España y Estados Unidos, convirtiendo el campo en escenario de un deporte que combina velocidad, elegancia y tradición social. Para las familias residentes, las escuelas de hípica ofrecen programas para niños y adultos durante todo el año.',
     image: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1920&q=85&fit=crop',
-    size: 'medium' as const,
-  },
-  {
-    id: 'fbo',
-    title: 'Llegada sin Esperas',
-    subtitle: 'FBO Privado',
-    description:
-      'El aeropuerto internacional de Punta Cana (PUJ) dispone de una terminal FBO (Fixed Base Operations) de aviación privada que permite una llegada directa, discreta y sin colas. Desde su jet privado hasta la puerta de su villa en menos de 15 minutos. El aeropuerto opera vuelos directos desde las principales ciudades de Estados Unidos, Europa y Latinoamérica, convirtiendo a Punta Cana en uno de los destinos mejor conectados del Caribe.',
-    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1920&q=85&fit=crop',
-    size: 'small' as const,
-  },
-  {
-    id: 'beach',
-    title: 'Playas Privadas',
-    subtitle: 'Exclusividad Total',
-    description:
-      'Las playas de Punta Cana y Cap Cana figuran de forma recurrente entre las mejores del mundo según Condé Nast Traveler, Travel + Leisure y TripAdvisor. Arena blanca, aguas turquesa cristalinas y un clima con más de 340 días de sol al año definen un entorno costero de belleza excepcional. Los residentes de comunidades como Cap Cana, Puntacana Resort y Bávaro disfrutan de acceso a tramos de playa privados con servicios de concierge, restauración y deportes acuáticos de primer nivel.',
-    image: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1920&q=85&fit=crop',
-    size: 'small' as const,
   },
 ]
 
 export const WhyPuntaCana: FC = () => {
   return (
     <>
-      {/* ── PRIVILEGES SECTION ── */}
-      <section className="py-24 md:py-32 bg-white">
+      {/* ── ATTRACTIONS SECTION ── */}
+      <section className="py-24 md:py-32 bg-roiba-arena-light">
         <div className="container-editorial">
           {/* Header */}
-          <div className="max-w-3xl mb-16 md:mb-20">
+          <div className="max-w-3xl mb-20 md:mb-24">
             <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mb-4 block">
               El Destino
             </span>
             <h2 className="text-display-md md:text-display-lg font-serif text-roiba-verde mb-6">
-              The Punta Cana Privileges
+              Punta Cana —{' '}
+              <span className="italic">Un estilo de vida excepcional</span>
             </h2>
             <div className="w-12 h-px bg-roiba-dorado mb-6" />
             <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed">
-              No solo una inversión inmobiliaria. Un estilo de vida diseñado para quienes
-              exigen lo extraordinario. Punta Cana y Cap Cana ofrecen un ecosistema de
-              privilegios que trasciende lo residencial.
+              Más allá de la construcción de una villa, vivir en Punta Cana significa acceder a
+              un ecosistema de privilegios únicos en el Caribe: playas de categoría mundial,
+              gastronomía de autor, golf del PGA Tour, naturaleza virgen y un clima perfecto
+              los 365 días del año.
             </p>
           </div>
 
-          {/* Bento Grid */}
-          <div className="grid grid-cols-12 gap-4 md:gap-6">
-            {/* Large card - Golf */}
-            <div className="col-span-12 lg:col-span-7 group">
-              <div className="relative h-[400px] md:h-[520px] overflow-hidden bg-roiba-verde/5">
-                <Image
-                  src={PRIVILEGES[0].image}
-                  alt={PRIVILEGES[0].title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 58vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/90 via-roiba-verde/40 to-transparent" />
-
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
-                  <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado-light mb-2 block">
-                    {PRIVILEGES[0].subtitle}
-                  </span>
-                  <h3 className="text-heading md:text-display-md font-serif text-white mb-3">
-                    {PRIVILEGES[0].title}
-                  </h3>
-                  <p className="text-body text-white/80 max-w-lg leading-relaxed">
-                    {PRIVILEGES[0].description.slice(0, 200)}...
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Medium cards column */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col gap-4 md:gap-6">
-              {/* Marina */}
-              <div className="group flex-1">
-                <div className="relative h-[240px] md:h-[248px] overflow-hidden bg-roiba-verde/5">
-                  <Image
-                    src={PRIVILEGES[1].image}
-                    alt={PRIVILEGES[1].title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 42vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/80 to-transparent" />
-
-                  <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                    <span className="text-micro font-sans tracking-widest uppercase text-roiba-dorado-light/80 block mb-1">
-                      {PRIVILEGES[1].subtitle}
-                    </span>
-                    <h3 className="text-subheading font-serif text-white">
-                      {PRIVILEGES[1].title}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-
-              {/* Ecuestre */}
-              <div className="group flex-1">
-                <div className="relative h-[240px] md:h-[248px] overflow-hidden bg-roiba-verde/5">
-                  <Image
-                    src={PRIVILEGES[2].image}
-                    alt={PRIVILEGES[2].title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 42vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/80 to-transparent" />
-
-                  <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                    <span className="text-micro font-sans tracking-widest uppercase text-roiba-dorado-light/80 block mb-1">
-                      {PRIVILEGES[2].subtitle}
-                    </span>
-                    <h3 className="text-subheading font-serif text-white">
-                      {PRIVILEGES[2].title}
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Small cards row */}
-            <div className="col-span-12 sm:col-span-6 group">
-              <div className="relative h-[220px] overflow-hidden bg-roiba-verde/5">
-                <Image
-                  src={PRIVILEGES[3].image}
-                  alt={PRIVILEGES[3].title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/80 to-transparent" />
-
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                  <span className="text-micro font-sans tracking-widest uppercase text-roiba-dorado-light/80 block mb-1">
-                    {PRIVILEGES[3].subtitle}
-                  </span>
-                  <h3 className="text-subheading font-serif text-white">
-                    {PRIVILEGES[3].title}
-                  </h3>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-span-12 sm:col-span-6 group">
-              <div className="relative h-[220px] overflow-hidden bg-roiba-verde/5">
-                <Image
-                  src={PRIVILEGES[4].image}
-                  alt={PRIVILEGES[4].title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/80 to-transparent" />
-
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                  <span className="text-micro font-sans tracking-widest uppercase text-roiba-dorado-light/80 block mb-1">
-                    {PRIVILEGES[4].subtitle}
-                  </span>
-                  <h3 className="text-subheading font-serif text-white">
-                    {PRIVILEGES[4].title}
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Stats row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 md:mt-20 pt-16 border-t border-roiba-verde/10">
-            {[
-              { value: '340', label: 'Días de sol al año' },
-              { value: '15', label: 'Min. al aeropuerto' },
-              { value: '8-12%', label: 'ROI proyectado' },
-              { value: '0%', label: 'Impuesto transferencia*' },
-            ].map((stat, idx) => (
-              <div key={idx} className="text-center md:text-left">
-                <p className="text-display-md font-serif text-roiba-verde mb-2">
-                  {stat.value}
-                </p>
-                <p className="text-caption text-roiba-verde/60">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-micro text-roiba-verde/40 mt-4">
-            *Bajo régimen Confotur. Consulte condiciones.
-          </p>
-        </div>
-      </section>
-
-      {/* ── DETAILED PRIVILEGES ── */}
-      <section className="py-24 md:py-32 bg-roiba-arena-light">
-        <div className="container-editorial">
-          <div className="max-w-3xl mx-auto text-center mb-16 md:mb-20">
-            <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mb-4 block">
-              Privilegios exclusivos
-            </span>
-            <h2 className="text-display-md font-serif text-roiba-verde mb-6">
-              Un estilo de vida sin parangón
-            </h2>
-            <div className="w-12 h-px bg-roiba-dorado mx-auto mb-6" />
-            <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed">
-              Cada privilegio de Punta Cana ha sido desarrollado para ofrecer experiencias
-              que trascienden lo convencional. Conozca en detalle lo que hace de este destino
-              una oportunidad única.
-            </p>
-          </div>
-
-          <div className="space-y-16 md:space-y-24">
-            {PRIVILEGES.map((item, index) => {
+          {/* Alternating attraction cards */}
+          <div className="space-y-20 md:space-y-28">
+            {ATTRACTIONS.map((item, index) => {
               const isEven = index % 2 === 0
               return (
                 <div
@@ -249,7 +121,7 @@ export const WhyPuntaCana: FC = () => {
                     !isEven ? 'lg:flex-row-reverse' : ''
                   }`}
                 >
-                  {/* Image */}
+                  {/* Image with zoom on hover */}
                   <div className="flex-1 w-full">
                     <div className="relative aspect-[16/10] overflow-hidden group">
                       <Image
@@ -295,16 +167,17 @@ export const WhyPuntaCana: FC = () => {
             <div className="w-12 h-px bg-roiba-dorado mb-6" />
             <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed">
               Situado en el extremo oriental de República Dominicana, Punta Cana es el
-              principal polo turístico y de inversión del Caribe. Cap Cana, su comunidad
-              cerrada más exclusiva, ofrece 30.000 acres de desarrollo planificado con
-              marina, campos de golf, playas privadas y servicios de primer nivel.
+              principal polo turístico del Caribe. Cap Cana, su comunidad cerrada más
+              exclusiva, ofrece 30.000 acres de desarrollo planificado con marina, campos
+              de golf, playas privadas y servicios de primer nivel. A 15 minutos del
+              aeropuerto internacional con vuelos directos desde 85 ciudades.
             </p>
           </div>
 
           {/* Map */}
           <div className="relative w-full aspect-[16/7] md:aspect-[21/9] overflow-hidden border border-roiba-verde/10">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121285.01234567890!2d-68.45!3d18.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea85e5f6c5b5f45%3A0x4e7f8c3d5f4a2b1c!2sCap%20Cana%2C%20Punta%20Cana!5e0!3m2!1ses!2sdo!4v1700000000000!5m2!1ses!2sdo"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241406.19339!2d-68.72!3d18.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea85e5f6c5b5f45%3A0x4e7f8c3d5f4a2b1c!2sCap%20Cana%2C%20Punta%20Cana%2C%20La%20Altagracia!5e0!3m2!1ses!2sdo!4v1700000000000!5m2!1ses!2sdo"
               width="100%"
               height="100%"
               style={{ border: 0, position: 'absolute', inset: 0 }}
@@ -315,18 +188,21 @@ export const WhyPuntaCana: FC = () => {
             />
           </div>
 
-          {/* Location highlights */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+          {/* Location stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 pt-12 border-t border-roiba-verde/10">
             {[
-              { icon: '✈️', label: 'Aeropuerto PUJ', detail: 'Vuelos directos desde 85+ ciudades' },
-              { icon: '🏖️', label: 'Costa este', detail: '48 km de playas de arena blanca' },
-              { icon: '🏘️', label: 'Cap Cana', detail: 'Comunidad cerrada más exclusiva del Caribe' },
-              { icon: '🌡️', label: 'Clima tropical', detail: 'Temperatura media 27°C todo el año' },
-            ].map((loc, idx) => (
-              <div key={idx} className="p-5 bg-roiba-arena-light border border-roiba-verde/5">
-                <span className="text-2xl block mb-3">{loc.icon}</span>
-                <p className="text-body font-serif font-medium text-roiba-verde mb-1">{loc.label}</p>
-                <p className="text-caption text-roiba-verde/55 leading-relaxed">{loc.detail}</p>
+              { value: '340', label: 'Días de sol al año' },
+              { value: '15 min', label: 'Al aeropuerto PUJ' },
+              { value: '85+', label: 'Ciudades con vuelo directo' },
+              { value: '27°C', label: 'Temperatura media anual' },
+            ].map((stat, idx) => (
+              <div key={idx} className="text-center md:text-left">
+                <p className="text-display-md font-serif text-roiba-verde mb-2">
+                  {stat.value}
+                </p>
+                <p className="text-caption text-roiba-verde/60">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>

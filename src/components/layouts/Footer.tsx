@@ -13,7 +13,7 @@ const FOOTER_LINKS = {
   servicios: [
     { href: '/villas', label: 'Colección de Villas' },
     { href: '/por-que-punta-cana', label: 'Por qué Punta Cana' },
-    { href: '/inversores', label: 'Centro de Inversores' },
+    { href: '/servicios', label: 'Servicios' },
   ],
   legal: [
     { href: '/privacidad', label: 'Política de Privacidad' },
@@ -43,18 +43,18 @@ export const Footer: FC = () => {
             </div>
             
             <p className="text-body text-white/60 font-light mb-6 max-w-sm">
-              Construcción boutique de villas en el Caribe. 
-              Inversión patrimonial con control total y seguridad jurídica garantizada.
+              Construcción boutique de villas premium en Punta Cana.
+              Dirección técnica, control total y transparencia garantizada.
             </p>
 
             <div className="space-y-2 text-caption text-white/50">
               <p>Punta Cana, República Dominicana</p>
               <p>
                 <a 
-                  href="mailto:inversiones@gruporoiba.com" 
+                  href="mailto:info@gruporoiba.com"
                   className="hover:text-roiba-dorado-light transition-colors"
                 >
-                  inversiones@gruporoiba.com
+                  info@gruporoiba.com
                 </a>
               </p>
             </div>
@@ -133,7 +133,7 @@ export const Footer: FC = () => {
                 </svg>
               </a>
               <a 
-                href="https://instagram.com/gruporoiba" 
+                href="https://www.instagram.com/grupo_roiba/"
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center border border-white/20 text-white/60 hover:border-roiba-dorado-light hover:text-roiba-dorado-light transition-colors"

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: 'Sobre Nosotros',
@@ -202,7 +203,19 @@ export default function NosotrosPage() {
           {/* profiles grid */}
           <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
             {/* Profile 1 */}
-            <div className="bg-white rounded-sm p-8 md:p-10 shadow-sm border border-roiba-arena-dark/40">
+            <div className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
+              {/* Photo */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=85&fit=crop&crop=face,top"
+                  alt="Iván Barrios Martín"
+                  fill
+                  className="object-cover object-top grayscale"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/30 to-transparent" />
+              </div>
+              <div className="p-8 md:p-10">
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
                 Dirección Técnica
               </span>
@@ -251,10 +264,23 @@ export default function NosotrosPage() {
                   coordinación de equipos multidisciplinares en grandes proyectos.
                 </p>
               </div>
+              </div>
             </div>
 
             {/* Profile 2 */}
-            <div className="bg-white rounded-sm p-8 md:p-10 shadow-sm border border-roiba-arena-dark/40">
+            <div className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
+              {/* Photo */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <Image
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=85&fit=crop&crop=face,top"
+                  alt="Ramón Ojeda González"
+                  fill
+                  className="object-cover object-top grayscale"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/30 to-transparent" />
+              </div>
+              <div className="p-8 md:p-10">
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
                 Gerencia de Obras
               </span>
@@ -297,6 +323,7 @@ export default function NosotrosPage() {
                   gestión de subcontratas y planificación, garantizando el correcto desarrollo de
                   cada proyecto.
                 </p>
+              </div>
               </div>
             </div>
           </div>

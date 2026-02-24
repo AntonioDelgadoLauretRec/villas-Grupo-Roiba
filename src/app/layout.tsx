@@ -5,18 +5,18 @@ import { Footer } from '@/components/layouts/Footer'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Grupo Roiba | Inversión Patrimonial en el Caribe',
+    default: 'Grupo Roiba | Construcción Premium en Punta Cana',
     template: '%s | Grupo Roiba',
   },
-  description: 'Construcción boutique de villas de lujo en Punta Cana. Inversión inmobiliaria con control total, transparencia y seguridad jurídica garantizada. Tickets desde $500,000 USD.',
+  description: 'Construcción boutique de villas premium en Punta Cana. Dirección técnica, control total y transparencia garantizada en cada proyecto.',
   keywords: [
     'villas Punta Cana',
-    'inversión inmobiliaria Caribe',
+    'construcción premium Caribe',
     'construcción villas lujo',
     'real estate Dominican Republic',
-    'Cap Cana investment',
+    'Cap Cana villas',
     'luxury villa construction',
-    'Confotur benefits',
+    'dirección técnica obra',
   ],
   authors: [{ name: 'Grupo Roiba' }],
   creator: 'Grupo Roiba',
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
     alternateLocale: 'en_US',
     url: 'https://gruporoiba.com',
     siteName: 'Grupo Roiba',
-    title: 'Grupo Roiba | Inversión Patrimonial en el Caribe',
-    description: 'Construcción boutique de villas de lujo en Punta Cana. Sin intermediarios. Control total. Seguridad jurídica.',
+    title: 'Grupo Roiba | Construcción Premium en Punta Cana',
+    description: 'Construcción boutique de villas premium en Punta Cana. Dirección técnica, control total y transparencia.',
     images: [
       {
         url: '/images/og-image.jpg',
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Grupo Roiba | Inversión Patrimonial en el Caribe',
-    description: 'Construcción boutique de villas de lujo en Punta Cana.',
+    title: 'Grupo Roiba | Construcción Premium en Punta Cana',
+    description: 'Construcción boutique de villas premium en Punta Cana.',
     images: ['/images/og-image.jpg'],
   },
   robots: {

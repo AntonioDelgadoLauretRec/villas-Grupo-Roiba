@@ -15,14 +15,14 @@ const navigation = {
   es: [
     { href: '/proceso', label: 'Proceso' },
     { href: '/villas', label: 'Colección' },
-    { href: '/inversores', label: 'Inversores' },
     { href: '/por-que-punta-cana', label: 'Por qué Punta Cana' },
+    { href: '/nosotros', label: 'Nosotros' },
   ],
   en: [
     { href: '/proceso', label: 'Process' },
     { href: '/villas', label: 'Collection' },
-    { href: '/inversores', label: 'Investors' },
     { href: '/por-que-punta-cana', label: 'Why Punta Cana' },
+    { href: '/nosotros', label: 'About Us' },
   ],
 }
 
@@ -161,8 +161,8 @@ const Footer: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
       company: 'Empresa',
       links: [
         { href: '/proceso', label: 'Nuestro Proceso' },
-        { href: '/inversores', label: 'Para Inversores' },
         { href: '/por-que-punta-cana', label: 'Por qué Punta Cana' },
+        { href: '/nosotros', label: 'Nosotros' },
         { href: '/contacto', label: 'Contacto' },
       ],
       legal: 'Legal',
@@ -178,8 +178,8 @@ const Footer: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
       company: 'Company',
       links: [
         { href: '/proceso', label: 'Our Process' },
-        { href: '/inversores', label: 'For Investors' },
         { href: '/por-que-punta-cana', label: 'Why Punta Cana' },
+        { href: '/nosotros', label: 'About Us' },
         { href: '/contacto', label: 'Contact' },
       ],
       legal: 'Legal',
@@ -276,7 +276,9 @@ const Footer: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
             {/* Social Links Placeholder */}
             <div className="flex items-center gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/grupo_roiba/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white/50 hover:text-roiba-dorado transition-colors"
                 aria-label="Instagram"
               >
