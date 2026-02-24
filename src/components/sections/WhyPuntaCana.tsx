@@ -1,7 +1,19 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
+
+// ─── POINTS OF INTEREST on the map ───
+const POINTS_OF_INTEREST = [
+  { name: 'Cap Cana', type: 'Comunidad Exclusiva' },
+  { name: 'Playa Juanillo', type: 'Playa Premium' },
+  { name: 'Marina Cap Cana', type: 'Marina / Náutica' },
+  { name: 'Punta Espada Golf', type: 'Golf PGA' },
+  { name: 'Aeropuerto PUJ', type: 'Aeropuerto Internacional' },
+  { name: 'Puntacana Resort', type: 'Resort & Residencias' },
+  { name: 'Playa Bávaro', type: 'Playa' },
+  { name: 'Downtown Punta Cana', type: 'Centro Urbano' },
+]
 
 const ATTRACTIONS = [
   {
@@ -86,10 +98,236 @@ const ATTRACTIONS = [
   },
 ]
 
+// ─── WEATHER ICON SVGs ───
+function SunIcon() {
+  return (
+    <svg className="w-10 h-10 text-roiba-dorado" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+  )
+}
+
+function CloudSunIcon() {
+  return (
+    <svg className="w-10 h-10 text-roiba-dorado" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 18a5 5 0 0 0-5-5h-1a4 4 0 0 0-4 4H6a3 3 0 1 0 0 6h11a4 4 0 0 0 0-8z" />
+      <path d="M10 9V3" />
+      <path d="M15.5 5.5L13 8" />
+      <path d="M4.5 5.5L7 8" />
+    </svg>
+  )
+}
+
+function RainIcon() {
+  return (
+    <svg className="w-10 h-10 text-roiba-dorado" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 16.2A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25" />
+      <line x1="8" y1="19" x2="8" y2="21" />
+      <line x1="12" y1="17" x2="12" y2="19" />
+      <line x1="16" y1="19" x2="16" y2="21" />
+    </svg>
+  )
+}
+
+function getWeatherIcon(code: number) {
+  if (code <= 1) return <SunIcon />
+  if (code <= 3) return <CloudSunIcon />
+  return <RainIcon />
+}
+
+function getWeatherLabel(code: number): string {
+  if (code === 0) return 'Despejado'
+  if (code === 1) return 'Mayormente despejado'
+  if (code === 2) return 'Parcialmente nublado'
+  if (code === 3) return 'Nublado'
+  if (code <= 49) return 'Niebla'
+  if (code <= 59) return 'Llovizna'
+  if (code <= 69) return 'Lluvia'
+  if (code <= 79) return 'Nieve'
+  if (code <= 99) return 'Tormenta'
+  return 'Variable'
+}
+
+// ─── LIVE TEMPERATURE HOOK (Open-Meteo API — free, no key) ───
+function usePuntaCanaWeather() {
+  const [weather, setWeather] = useState<{
+    temp: number
+    feelsLike: number
+    humidity: number
+    windSpeed: number
+    weatherCode: number
+  } | null>(null)
+
+  useEffect(() => {
+    const url =
+      'https://api.open-meteo.com/v1/forecast?latitude=18.58&longitude=-68.37&current=temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code&timezone=America%2FSanto_Domingo'
+
+    fetch(url)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.current) {
+          setWeather({
+            temp: Math.round(data.current.temperature_2m),
+            feelsLike: Math.round(data.current.apparent_temperature),
+            humidity: data.current.relative_humidity_2m,
+            windSpeed: Math.round(data.current.wind_speed_10m),
+            weatherCode: data.current.weather_code,
+          })
+        }
+      })
+      .catch(() => {
+        // Fallback to typical Punta Cana weather
+        setWeather({ temp: 28, feelsLike: 30, humidity: 75, windSpeed: 18, weatherCode: 1 })
+      })
+  }, [])
+
+  return weather
+}
+
 export const WhyPuntaCana: FC = () => {
+  const weather = usePuntaCanaWeather()
+
   return (
     <>
-      {/* ── ATTRACTIONS SECTION ── */}
+      {/* ══════════════════════════════════════════════════
+          SECTION 1 — LOCATION: TEMPERATURE + MAP + STATS
+          ══════════════════════════════════════════════════ */}
+      <section className="py-24 md:py-32 bg-white">
+        <div className="container-editorial">
+          {/* Header */}
+          <div className="max-w-3xl mb-14 md:mb-16">
+            <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mb-4 block">
+              Ubicación
+            </span>
+            <h2 className="text-display-md font-serif text-roiba-verde mb-5">
+              Punta Cana & Cap Cana
+            </h2>
+            <div className="w-12 h-px bg-roiba-dorado mb-6" />
+            <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed">
+              Situado en el extremo oriental de República Dominicana, Punta Cana es el
+              principal polo turístico del Caribe. Cap Cana, su comunidad cerrada más
+              exclusiva, ofrece 30.000 acres de desarrollo planificado con marina, campos
+              de golf, playas privadas y servicios de primer nivel. A 15 minutos del
+              aeropuerto internacional con vuelos directos desde 85 ciudades.
+            </p>
+          </div>
+
+          {/* ── Live Temperature Widget ── */}
+          <div className="mb-12">
+            <div className="border border-roiba-verde/10 bg-roiba-arena-light p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+              {/* Temperature & Icon */}
+              <div className="flex items-center gap-5">
+                {weather ? getWeatherIcon(weather.weatherCode) : <SunIcon />}
+                <div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-display-lg font-serif text-roiba-verde leading-none">
+                      {weather?.temp ?? '—'}
+                    </span>
+                    <span className="text-heading font-serif text-roiba-verde/40">°C</span>
+                  </div>
+                  <p className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mt-1">
+                    Punta Cana — Ahora
+                  </p>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block w-px h-16 bg-roiba-verde/10" />
+
+              {/* Weather details */}
+              <div className="flex gap-8 md:gap-12 text-center md:text-left">
+                <div>
+                  <p className="text-caption text-roiba-verde/50 mb-1">Sensación</p>
+                  <p className="text-subheading font-serif text-roiba-verde">
+                    {weather?.feelsLike ?? '—'}°C
+                  </p>
+                </div>
+                <div>
+                  <p className="text-caption text-roiba-verde/50 mb-1">Humedad</p>
+                  <p className="text-subheading font-serif text-roiba-verde">
+                    {weather?.humidity ?? '—'}%
+                  </p>
+                </div>
+                <div>
+                  <p className="text-caption text-roiba-verde/50 mb-1">Viento</p>
+                  <p className="text-subheading font-serif text-roiba-verde">
+                    {weather?.windSpeed ?? '—'} km/h
+                  </p>
+                </div>
+                <div>
+                  <p className="text-caption text-roiba-verde/50 mb-1">Estado</p>
+                  <p className="text-subheading font-serif text-roiba-verde">
+                    {weather ? getWeatherLabel(weather.weatherCode) : '—'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Google Earth / Satellite Map with POIs ── */}
+          <div className="mb-8">
+            <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden border border-roiba-verde/10">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120703.0967!2d-68.5!3d18.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea8316e23e5c1b5%3A0x28ef7e8e79e70e5f!2sPunta%20Cana%2C%20Dominican%20Republic!5e1!3m2!1ses!2sdo!4v1700000000000!5m2!1ses!2sdo"
+                width="100%"
+                height="100%"
+                style={{ border: 0, position: 'absolute', inset: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Vista satélite de Punta Cana y Cap Cana"
+              />
+            </div>
+          </div>
+
+          {/* ── Points of Interest Grid ── */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            {POINTS_OF_INTEREST.map((poi, idx) => (
+              <div
+                key={idx}
+                className="flex items-start gap-3 p-4 border border-roiba-verde/8 bg-roiba-arena-light hover:border-roiba-dorado/30 transition-colors duration-300"
+              >
+                <div className="w-2 h-2 mt-1.5 rounded-full bg-roiba-dorado flex-shrink-0" />
+                <div>
+                  <p className="text-caption font-semibold text-roiba-verde leading-tight">
+                    {poi.name}
+                  </p>
+                  <p className="text-micro text-roiba-verde/50 mt-0.5">{poi.type}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* ── Location Stats ── */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-roiba-verde/10">
+            {[
+              { value: '340', label: 'Días de sol al año' },
+              { value: '15 min', label: 'Al aeropuerto PUJ' },
+              { value: '85+', label: 'Ciudades con vuelo directo' },
+              { value: '27°C', label: 'Temperatura media anual' },
+            ].map((stat, idx) => (
+              <div key={idx} className="text-center md:text-left">
+                <p className="text-display-md font-serif text-roiba-verde mb-2">
+                  {stat.value}
+                </p>
+                <p className="text-caption text-roiba-verde/60">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          SECTION 2 — ATTRACTIONS
+          ══════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-roiba-arena-light">
         <div className="container-editorial">
           {/* Header */}
@@ -150,61 +388,6 @@ export const WhyPuntaCana: FC = () => {
                 </div>
               )
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── MAP SECTION ── */}
-      <section className="py-24 md:py-32 bg-white">
-        <div className="container-editorial">
-          <div className="max-w-3xl mb-14 md:mb-16">
-            <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mb-4 block">
-              Ubicación
-            </span>
-            <h2 className="text-display-md font-serif text-roiba-verde mb-5">
-              Punta Cana & Cap Cana
-            </h2>
-            <div className="w-12 h-px bg-roiba-dorado mb-6" />
-            <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed">
-              Situado en el extremo oriental de República Dominicana, Punta Cana es el
-              principal polo turístico del Caribe. Cap Cana, su comunidad cerrada más
-              exclusiva, ofrece 30.000 acres de desarrollo planificado con marina, campos
-              de golf, playas privadas y servicios de primer nivel. A 15 minutos del
-              aeropuerto internacional con vuelos directos desde 85 ciudades.
-            </p>
-          </div>
-
-          {/* Map */}
-          <div className="relative w-full aspect-[16/7] md:aspect-[21/9] overflow-hidden border border-roiba-verde/10">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241406.19339!2d-68.72!3d18.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ea85e5f6c5b5f45%3A0x4e7f8c3d5f4a2b1c!2sCap%20Cana%2C%20Punta%20Cana%2C%20La%20Altagracia!5e0!3m2!1ses!2sdo!4v1700000000000!5m2!1ses!2sdo"
-              width="100%"
-              height="100%"
-              style={{ border: 0, position: 'absolute', inset: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Ubicación de Cap Cana, Punta Cana"
-            />
-          </div>
-
-          {/* Location stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 pt-12 border-t border-roiba-verde/10">
-            {[
-              { value: '340', label: 'Días de sol al año' },
-              { value: '15 min', label: 'Al aeropuerto PUJ' },
-              { value: '85+', label: 'Ciudades con vuelo directo' },
-              { value: '27°C', label: 'Temperatura media anual' },
-            ].map((stat, idx) => (
-              <div key={idx} className="text-center md:text-left">
-                <p className="text-display-md font-serif text-roiba-verde mb-2">
-                  {stat.value}
-                </p>
-                <p className="text-caption text-roiba-verde/60">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

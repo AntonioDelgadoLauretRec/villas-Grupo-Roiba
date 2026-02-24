@@ -72,6 +72,10 @@ const injectStyles = () => {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
+    @keyframes kenBurns {
+      0% { transform: scale(1) translate(0, 0); }
+      100% { transform: scale(1.15) translate(-2%, -1%); }
+    }
 
     .roiba * { box-sizing: border-box; margin: 0; padding: 0; }
     .roiba { font-family: 'Montserrat', sans-serif; color: ${C.verde}; overflow-x: hidden; }
@@ -470,6 +474,14 @@ const TESTIMONIALS = [
   },
 ];
 
+// ─── HERO BACKGROUND IMAGES (Punta Cana aerials — Unsplash 4K) ───
+const HERO_IMAGES = [
+  'https://images.unsplash.com/photo-1580237072617-771c3ecc4a24?w=1920&q=90&fit=crop',  // Punta Cana aerial beach
+  'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1920&q=90&fit=crop',  // Caribbean turquoise water
+  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=90&fit=crop',  // Tropical beach palms
+  'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=90&fit=crop',     // Luxury Caribbean resort
+]
+
 export default function HomePage() {
   const [activeProcess, setActiveProcess] = useState(0)
   const [hoveredService, setHoveredService] = useState<string | null>(null)
@@ -477,13 +489,29 @@ export default function HomePage() {
   const [carouselIdx, setCarouselIdx] = useState(0)
   const [carouselPaused, setCarouselPaused] = useState(false)
   const [testimonialIdx, setTestimonialIdx] = useState(0)
+  const [heroImgIdx, setHeroImgIdx] = useState(0)
+  const [hasVideo, setHasVideo] = useState(false)
 
   useEffect(() => {
     injectStyles()
     const handleScroll = () => setScrollY(window.scrollY || 0)
     window.addEventListener('scroll', handleScroll, { passive: true })
+    // Check if local video exists
+    const vid = document.createElement('video')
+    vid.src = '/videos/hero-bg.mp4'
+    vid.onloadeddata = () => setHasVideo(true)
+    vid.onerror = () => setHasVideo(false)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Hero image slideshow
+  useEffect(() => {
+    if (hasVideo) return
+    const timer = setInterval(() => {
+      setHeroImgIdx((prev) => (prev + 1) % HERO_IMAGES.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [hasVideo])
 
   useEffect(() => {
     if (carouselPaused) return
@@ -515,34 +543,62 @@ export default function HomePage() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          background: `linear-gradient(170deg, ${C.verde} 0%, ${C.verdeMid} 40%, ${C.verdeLight} 100%)`,
+          background: C.verde,
           overflow: "hidden",
         }}
         className="grain"
       >
-        {/* Background Video */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: 0,
-          }}
-        >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
-        </video>
+        {/* Background: Video (if available) or Image Slideshow with Ken Burns */}
+        {hasVideo ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              zIndex: 0,
+            }}
+          >
+            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <>
+            {HERO_IMAGES.map((src, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  opacity: heroImgIdx === i ? 1 : 0,
+                  transition: "opacity 1.5s ease-in-out",
+                  zIndex: 0,
+                }}
+              >
+                <img
+                  src={src}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    animation: heroImgIdx === i ? "kenBurns 7s ease-in-out forwards" : "none",
+                  }}
+                />
+              </div>
+            ))}
+          </>
+        )}
         {/* Dark overlay to maintain text readability */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: `linear-gradient(170deg, ${C.verde}CC 0%, ${C.verdeMid}BB 40%, ${C.verde}AA 100%)`,
+            background: `${C.verde}CC`,
             zIndex: 1,
           }}
         />
@@ -882,7 +938,7 @@ export default function HomePage() {
             <div
               style={{
                 aspectRatio: "4/5",
-                background: `linear-gradient(135deg, ${C.verde}, ${C.verdeMid})`,
+                background: C.verde,
                 position: "relative",
                 overflow: "hidden",
               }}
