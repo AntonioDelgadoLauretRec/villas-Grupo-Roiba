@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Servicios | Grupo Roiba',
   description:
     'Servicios integrales de diseño, construcción y gestión de proyectos residenciales de alta gama. Control integral del proceso constructivo con más de 20 años de experiencia.',
+  alternates: { canonical: 'https://gruporoiba.com/servicios' },
 }
 
 const serviciosGrid = [

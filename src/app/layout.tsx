@@ -54,8 +54,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
+  metadataBase: new URL('https://gruporoiba.com'),
+  alternates: {
+    canonical: '/',
   },
 }
 
@@ -73,6 +74,86 @@ export default function RootLayout({
         <meta name="theme-color" content="#0C2340" />
       </head>
       <body className="min-h-screen flex flex-col">
+        {/* JSON-LD Structured Data — Organization + LocalBusiness */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  '@id': 'https://gruporoiba.com/#organization',
+                  name: 'Grupo Roiba',
+                  url: 'https://gruporoiba.com',
+                  logo: {
+                    '@type': 'ImageObject',
+                    url: 'https://gruporoiba.com/images/og-image.jpg',
+                    width: 1200,
+                    height: 630,
+                  },
+                  description: 'Construcción boutique de villas premium en Punta Cana y Cap Cana, República Dominicana.',
+                  foundingDate: '2003',
+                  contactPoint: {
+                    '@type': 'ContactPoint',
+                    email: 'info@gruporoiba.com',
+                    contactType: 'customer service',
+                    availableLanguage: ['Spanish', 'English'],
+                  },
+                  sameAs: [],
+                },
+                {
+                  '@type': ['LocalBusiness', 'RealEstateAgent'],
+                  '@id': 'https://gruporoiba.com/#localbusiness',
+                  name: 'Grupo Roiba',
+                  url: 'https://gruporoiba.com',
+                  image: 'https://gruporoiba.com/images/og-image.jpg',
+                  description: 'Construcción de villas de lujo llave en mano en Punta Cana y Cap Cana. Dirección técnica, diseño arquitectónico y gestión integral con más de 20 años de experiencia.',
+                  address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Punta Cana',
+                    addressRegion: 'La Altagracia',
+                    addressCountry: 'DO',
+                  },
+                  geo: {
+                    '@type': 'GeoCoordinates',
+                    latitude: 18.58,
+                    longitude: -68.37,
+                  },
+                  email: 'info@gruporoiba.com',
+                  priceRange: '$$$',
+                  openingHoursSpecification: {
+                    '@type': 'OpeningHoursSpecification',
+                    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                    opens: '09:00',
+                    closes: '18:00',
+                  },
+                  areaServed: [
+                    { '@type': 'Place', name: 'Punta Cana' },
+                    { '@type': 'Place', name: 'Cap Cana' },
+                    { '@type': 'Place', name: 'Bávaro' },
+                    { '@type': 'Place', name: 'República Dominicana' },
+                  ],
+                  knowsAbout: [
+                    'Construcción de villas de lujo',
+                    'Dirección técnica de obra',
+                    'Diseño arquitectónico premium',
+                    'Inversión inmobiliaria en el Caribe',
+                    'Gestión de proyectos llave en mano',
+                  ],
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://gruporoiba.com/#website',
+                  url: 'https://gruporoiba.com',
+                  name: 'Grupo Roiba',
+                  publisher: { '@id': 'https://gruporoiba.com/#organization' },
+                  inLanguage: 'es',
+                },
+              ],
+            }),
+          }}
+        />
         {/* Grain overlay for texture */}
         <div className="grain-overlay" aria-hidden="true" />
         

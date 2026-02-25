@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'The Roiba Method | Grupo Roiba',
   description: 'Seis fases que transforman su inversión en un proceso controlado. Control, transparencia y previsibilidad en cada etapa del proyecto.',
+  alternates: { canonical: 'https://gruporoiba.com/proceso' },
 }
 
 export default function ProcesoPage() {

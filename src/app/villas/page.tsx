@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Colección de Villas | Grupo Roiba',
   description: 'Proyectos exclusivos de villas premium en Punta Cana. Diseño contemporáneo, ejecución precisa y gestión integral.',
+  alternates: { canonical: 'https://gruporoiba.com/villas' },
 }
 
 export default function VillasPage() {

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Sobre Nosotros',
   description:
     'Conozca Grupo Roiba: experiencia consolidada, visión contemporánea. Profesionales con más de 20 años en construcción residencial y hotelera en España y el Caribe.',
+  alternates: { canonical: 'https://gruporoiba.com/nosotros' },
 }
 
 /* ─────────────────────── icon helpers ─────────────────────── */

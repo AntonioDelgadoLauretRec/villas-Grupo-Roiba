@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Centro de Inversores | Grupo Roiba',
   description: 'Información exclusiva para inversores cualificados. Beneficios fiscales, seguridad jurídica y retorno de inversión en Punta Cana.',
+  alternates: { canonical: 'https://gruporoiba.com/inversores' },
 }
 
 export default function InversoresPage() {

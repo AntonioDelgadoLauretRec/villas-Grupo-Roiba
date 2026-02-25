@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: '¿Por qué Punta Cana? | Grupo Roiba',
   description: 'El destino de inversión más atractivo del Caribe. Descubra por qué Punta Cana es el lugar ideal para su villa premium.',
+  alternates: { canonical: 'https://gruporoiba.com/por-que-punta-cana' },
 }
 
 export default function PuntaCanaPage() {

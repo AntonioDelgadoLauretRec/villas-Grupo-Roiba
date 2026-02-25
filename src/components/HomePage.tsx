@@ -474,12 +474,12 @@ const TESTIMONIALS = [
   },
 ];
 
-// ─── HERO BACKGROUND IMAGES (Punta Cana aerials — Unsplash 4K) ───
+// ─── HERO BACKGROUND IMAGES — Arquitectura de lujo, villas, dron ───
 const HERO_IMAGES = [
-  'https://images.unsplash.com/photo-1580237072617-771c3ecc4a24?w=1920&q=90&fit=crop',  // Punta Cana aerial beach
-  'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1920&q=90&fit=crop',  // Caribbean turquoise water
-  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=90&fit=crop',  // Tropical beach palms
-  'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=90&fit=crop',     // Luxury Caribbean resort
+  'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&q=90&fit=crop',  // Villa de lujo moderna con piscina infinita
+  'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=90&fit=crop',  // Mansión contemporánea vista aérea
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=90&fit=crop',  // Interior villa lujo salón diseño
+  'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=90&fit=crop',  // Villa tropical con palmeras vista dron
 ]
 
 export default function HomePage() {

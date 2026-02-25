@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Contacto | Grupo Roiba',
   description: 'Solicite su análisis personalizado. Contacte con nuestro equipo para inversión en villas premium o solicitud de servicios.',
+  alternates: { canonical: 'https://gruporoiba.com/contacto' },
 }
 
 export default function ContactoPage() {
