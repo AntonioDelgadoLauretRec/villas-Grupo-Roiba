@@ -150,7 +150,7 @@ export default function ServiciosPage() {
       {/* ============================================ */}
       {/* 1. HERO — Dark navy background               */}
       {/* ============================================ */}
-      <section className="relative pt-36 pb-24 md:pt-44 md:pb-32 bg-roiba-verde overflow-hidden">
+      <section className="relative pt-28 pb-14 md:pt-32 md:pb-20 bg-roiba-verde overflow-hidden">
         {/* Subtle grain overlay */}
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-6 text-center">
@@ -174,7 +174,7 @@ export default function ServiciosPage() {
       {/* ============================================ */}
       {/* 2. SERVICES GRID — 8 services, light bg       */}
       {/* ============================================ */}
-      <section className="py-24 md:py-32 bg-roiba-arena-light">
+      <section className="py-14 md:py-20 bg-roiba-arena-light">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {serviciosGrid.map((servicio) => (
@@ -200,7 +200,7 @@ export default function ServiciosPage() {
       {/* ============================================ */}
       {/* 3. INTRO SECTION — "Todo lo que necesita"     */}
       {/* ============================================ */}
-      <section className="py-24 md:py-32 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
             Nuestras Líneas de Servicio
@@ -231,7 +231,7 @@ export default function ServiciosPage() {
           <section
             key={service.id}
             id={service.id}
-            className={`py-24 md:py-32 ${bgColor}`}
+            className={`py-14 md:py-20 ${bgColor}`}
           >
             <div className="max-w-7xl mx-auto px-6">
               {/* Service Label */}
@@ -296,7 +296,7 @@ export default function ServiciosPage() {
       {/* ============================================ */}
       {/* 5. CTA SECTION — Dark navy                    */}
       {/* ============================================ */}
-      <section className="relative py-24 md:py-32 bg-roiba-verde overflow-hidden">
+      <section className="relative py-14 md:py-20 bg-roiba-verde overflow-hidden">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-serif text-display-md text-white mb-6">

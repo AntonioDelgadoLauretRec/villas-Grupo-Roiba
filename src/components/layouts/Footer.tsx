@@ -28,7 +28,7 @@ export const Footer: FC = () => {
   return (
     <footer className="bg-roiba-verde text-white">
       {/* Main footer */}
-      <div className="container-editorial py-16 md:py-24">
+      <div className="container-editorial py-10 md:py-14">
         <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           {/* Brand column */}
           <div className="lg:col-span-4">

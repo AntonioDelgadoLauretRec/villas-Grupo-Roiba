@@ -116,7 +116,7 @@ export default function NosotrosPage() {
   return (
     <>
       {/* ── 1. HERO ─────────────────────────────────────── */}
-      <section className="relative bg-roiba-verde pt-32 pb-24 md:pt-40 md:pb-32 px-6">
+      <section className="relative bg-roiba-verde pt-24 pb-14 md:pt-28 md:pb-20 px-6">
         {/* subtle grain overlay */}
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto text-center">
@@ -135,7 +135,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* ── 2. NUESTRA HISTORIA ─────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 bg-white">
+      <section className="py-12 md:py-16 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl mx-auto">
             <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
@@ -180,7 +180,7 @@ export default function NosotrosPage() {
       </div>
 
       {/* ── 3. EL EQUIPO ────────────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 bg-roiba-arena-light">
+      <section className="py-12 md:py-16 px-6 bg-roiba-arena-light">
         <div className="max-w-7xl mx-auto">
           {/* section header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
@@ -336,7 +336,7 @@ export default function NosotrosPage() {
       </div>
 
       {/* ── 4. VISIÓN COMPLETA ──────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 bg-white">
+      <section className="py-12 md:py-16 px-6 bg-white">
         <div className="max-w-3xl mx-auto">
           <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
             Sinergia
@@ -369,7 +369,7 @@ export default function NosotrosPage() {
       </div>
 
       {/* ── 5. NUESTRO ENFOQUE ──────────────────────────── */}
-      <section className="py-20 md:py-28 px-6 bg-roiba-arena-light">
+      <section className="py-12 md:py-16 px-6 bg-roiba-arena-light">
         <div className="max-w-3xl mx-auto">
           <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
             Metodología
@@ -399,7 +399,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* ── 6. NUESTROS VALORES ─────────────────────────── */}
-      <section className="relative py-20 md:py-28 px-6 bg-roiba-verde">
+      <section className="relative py-12 md:py-16 px-6 bg-roiba-verde">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto">
           {/* section header */}
@@ -440,7 +440,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* ── 7. CTA ──────────────────────────────────────── */}
-      <section className="relative py-20 md:py-28 px-6 bg-roiba-verde-dark">
+      <section className="relative py-12 md:py-16 px-6 bg-roiba-verde-dark">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-3xl mx-auto text-center">
           <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em] mb-6 block">

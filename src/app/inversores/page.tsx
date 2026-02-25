@@ -11,7 +11,7 @@ export default function InversoresPage() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative bg-roiba-verde py-28 md:py-36 px-6 overflow-hidden">
+      <section className="relative bg-roiba-verde py-20 md:py-24 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
@@ -30,7 +30,7 @@ export default function InversoresPage() {
       <TrustSignals />
 
       {/* Beneficios Fiscales */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-14 px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-4 text-center">
             Ventajas
@@ -58,7 +58,7 @@ export default function InversoresPage() {
       </section>
 
       {/* Formulario */}
-      <section className="py-20 px-6 bg-roiba-arena-light">
+      <section className="py-12 px-6 bg-roiba-arena-light">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-display-md font-serif text-roiba-verde mb-4 text-center">
             Solicite información

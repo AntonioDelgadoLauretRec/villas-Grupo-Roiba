@@ -57,7 +57,7 @@ const LEGAL_BADGES = [
 
 export const TrustCenter: FC = () => {
   return (
-    <section className="py-24 md:py-32 bg-roiba-verde text-white relative overflow-hidden">
+    <section className="py-14 md:py-20 bg-roiba-verde text-white relative overflow-hidden">
       {/* Patrón decorativo */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div 
