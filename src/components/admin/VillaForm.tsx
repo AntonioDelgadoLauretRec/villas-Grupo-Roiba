@@ -8,7 +8,9 @@ import {
   FormSelect,
   FormCheckbox,
   FormError,
+  FormSection,
   SubmitButton,
+  SlugInput,
 } from './FormFields'
 import ImageUploader from './ImageUploader'
 import type { ActionResult } from '@/lib/admin/actions'
@@ -38,82 +40,150 @@ export default function VillaForm({ action, villa }: VillaFormProps) {
     }
     if (result.error) {
       setError(result.error)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
     setPending(false)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
       {villa && <input type="hidden" name="id" value={villa.id} />}
 
       <FormError message={error} />
 
       {/* Basic info */}
-      <fieldset className="bg-white border border-slate-200 rounded-sm p-6">
-        <legend className="text-sm font-medium text-slate-900 px-2">Información básica</legend>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <FormInput name="title" label="Título" defaultValue={villa?.title} required placeholder="Villa Excellence" />
-          <FormInput name="slug" label="Slug (URL)" defaultValue={villa?.slug} required placeholder="villa-excellence" />
-          <FormInput name="location" label="Ubicación" defaultValue={villa?.location || 'Punta Cana'} placeholder="Punta Cana" />
-          <FormInput name="year" label="Año" defaultValue={villa?.year} placeholder="2024" />
-          <FormInput name="sort_order" label="Orden de aparición" type="number" defaultValue={String(villa?.sort_order ?? 0)} />
+      <FormSection title="Información básica" description="Datos principales que identifican la villa">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <FormInput
+            name="title"
+            label="Nombre de la villa"
+            defaultValue={villa?.title}
+            required
+            placeholder="Ej: Villa Excellence Oyster Bay"
+            helpText="El nombre tal y como aparecerá en la web"
+          />
+          <SlugInput
+            defaultValue={villa?.slug}
+          />
+          <FormInput
+            name="location"
+            label="Ubicación"
+            defaultValue={villa?.location || 'Punta Cana'}
+            placeholder="Punta Cana"
+            helpText="Ciudad o zona donde se ubica la villa"
+          />
+          <FormInput
+            name="year"
+            label="Año de finalización"
+            defaultValue={villa?.year}
+            placeholder="2024"
+            helpText="Año en que se completó o se completará el proyecto"
+          />
+          <FormInput
+            name="sort_order"
+            label="Posición en el listado"
+            type="number"
+            defaultValue={String(villa?.sort_order ?? 0)}
+            helpText="Número menor = aparece primero. Usa 0, 1, 2..."
+          />
           <FormSelect
             name="status"
-            label="Estado"
+            label="Estado de publicación"
             defaultValue={villa?.status || 'draft'}
             options={[
-              { value: 'draft', label: 'Borrador' },
-              { value: 'published', label: 'Publicada' },
-              { value: 'hidden', label: 'Oculta' },
+              { value: 'draft', label: 'Borrador — no visible en la web' },
+              { value: 'published', label: 'Publicada — visible para todos' },
+              { value: 'hidden', label: 'Oculta — guardada pero no visible' },
             ]}
+            helpText="Solo las villas &laquo;Publicadas&raquo; aparecen en la web"
           />
         </div>
-        <div className="mt-4">
-          <FormCheckbox name="featured" label="Villa destacada" defaultChecked={villa?.featured} />
+        <div className="mt-5 pt-4 border-t border-slate-100">
+          <FormCheckbox
+            name="featured"
+            label="Marcar como villa destacada"
+            defaultChecked={villa?.featured}
+            helpText="Las villas destacadas aparecen de forma prominente en la página principal"
+          />
         </div>
-      </fieldset>
+      </FormSection>
 
       {/* Specs */}
-      <fieldset className="bg-white border border-slate-200 rounded-sm p-6">
-        <legend className="text-sm font-medium text-slate-900 px-2">Características</legend>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+      <FormSection title="Características" description="Datos técnicos de la villa (déjalos a 0 si no aplican)">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
           <FormInput name="bedrooms" label="Habitaciones" type="number" defaultValue={String(villa?.bedrooms ?? 0)} />
           <FormInput name="bathrooms" label="Baños" type="number" defaultValue={String(villa?.bathrooms ?? 0)} />
           <FormInput name="area_sqm" label="Superficie (m²)" type="number" defaultValue={String(villa?.area_sqm ?? 0)} />
-          <FormInput name="price_usd" label="Precio (USD)" type="number" defaultValue={String(villa?.price_usd ?? 0)} />
+          <FormInput name="price_usd" label="Precio (USD)" type="number" defaultValue={String(villa?.price_usd ?? 0)} helpText="Sin puntos ni comas" />
         </div>
-      </fieldset>
+      </FormSection>
 
       {/* Description */}
-      <fieldset className="bg-white border border-slate-200 rounded-sm p-6">
-        <legend className="text-sm font-medium text-slate-900 px-2">Descripción</legend>
-        <div className="space-y-4 mt-4">
-          <FormTextarea name="short_description" label="Descripción corta" defaultValue={villa?.short_description} rows={2} placeholder="Breve resumen de la villa..." />
-          <FormTextarea name="long_description" label="Descripción completa" defaultValue={villa?.long_description} rows={6} placeholder="Descripción detallada..." />
+      <FormSection title="Textos descriptivos" description="Los textos que aparecerán en la ficha de la villa">
+        <div className="space-y-5">
+          <FormTextarea
+            name="short_description"
+            label="Descripción breve"
+            defaultValue={villa?.short_description}
+            rows={2}
+            placeholder="Un resumen de 1-2 frases que capture la esencia de la villa..."
+            helpText="Aparece en las tarjetas del listado de villas. Máx. 200 caracteres recomendados."
+            maxLength={300}
+          />
+          <FormTextarea
+            name="long_description"
+            label="Descripción completa"
+            defaultValue={villa?.long_description}
+            rows={8}
+            placeholder="Descripción detallada de la villa: materiales, acabados, distribución, entorno..."
+            helpText="Aparece en la página individual de la villa. Puedes escribir todo lo necesario."
+          />
         </div>
-      </fieldset>
+      </FormSection>
 
       {/* Main image */}
-      <fieldset className="bg-white border border-slate-200 rounded-sm p-6">
-        <legend className="text-sm font-medium text-slate-900 px-2">Imagen principal</legend>
-        <div className="mt-4">
-          <ImageUploader name="main_image" label="Imagen principal" defaultValue={villa?.main_image} folder="villas" />
-        </div>
-      </fieldset>
+      <FormSection title="Imagen principal" description="La imagen destacada que representa esta villa">
+        <ImageUploader
+          name="main_image"
+          label="Selecciona o sube la imagen principal"
+          defaultValue={villa?.main_image}
+          folder="villas"
+        />
+      </FormSection>
 
       {/* SEO */}
-      <fieldset className="bg-white border border-slate-200 rounded-sm p-6">
-        <legend className="text-sm font-medium text-slate-900 px-2">SEO (opcional)</legend>
-        <div className="space-y-4 mt-4">
-          <FormInput name="seo_title" label="Título SEO" defaultValue={villa?.seo_title} placeholder="Título para buscadores" />
-          <FormTextarea name="seo_description" label="Meta descripción" defaultValue={villa?.seo_description} rows={2} placeholder="Descripción para buscadores (max 160 caracteres)" />
+      <FormSection title="SEO — Posicionamiento en buscadores" description="Opcional. Si lo dejas vacío, se usará el título y descripción de la villa">
+        <div className="space-y-5">
+          <FormInput
+            name="seo_title"
+            label="Título SEO"
+            defaultValue={villa?.seo_title}
+            placeholder="Título que aparecerá en Google"
+            helpText="Máx. 60 caracteres recomendados"
+          />
+          <FormTextarea
+            name="seo_description"
+            label="Meta descripción"
+            defaultValue={villa?.seo_description}
+            rows={2}
+            placeholder="Texto que aparece debajo del título en los resultados de Google"
+            helpText="Máx. 160 caracteres recomendados"
+            maxLength={200}
+          />
         </div>
-      </fieldset>
+      </FormSection>
 
       {/* Submit */}
-      <div className="flex items-center gap-4">
-        <SubmitButton label={villa ? 'Actualizar villa' : 'Crear villa'} pending={pending} />
-        <a href="/admin/villas" className="text-sm text-slate-500 hover:text-slate-700">
+      <div className="flex items-center gap-4 pt-4 border-t border-slate-200">
+        <SubmitButton
+          label={villa ? 'Guardar cambios' : 'Crear villa'}
+          pendingLabel={villa ? 'Guardando...' : 'Creando...'}
+          pending={pending}
+        />
+        <a
+          href="/admin/villas"
+          className="px-5 py-2.5 text-sm text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-sm transition-colors"
+        >
           Cancelar
         </a>
       </div>
