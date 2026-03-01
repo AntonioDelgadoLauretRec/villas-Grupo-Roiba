@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import ValuesCard from '@/components/ui/ValuesCard'
 
 export const metadata: Metadata = {
   title: 'Sobre Nosotros',
@@ -425,16 +426,12 @@ export default function NosotrosPage() {
           {/* values grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {values.map(({ title, description, Icon }) => (
-              <div
+              <ValuesCard
                 key={title}
-                className="bg-white/[0.04] border border-white/10 rounded-sm p-8 hover:bg-white/[0.07] transition-colors duration-300"
-              >
-                <div className="text-roiba-dorado mb-5">
-                  <Icon />
-                </div>
-                <h3 className="text-heading font-serif text-white mb-3">{title}</h3>
-                <p className="text-body text-white/60 leading-relaxed">{description}</p>
-              </div>
+                title={title}
+                description={description}
+                icon={<Icon />}
+              />
             ))}
           </div>
         </div>
