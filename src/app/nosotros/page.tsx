@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ValuesCard from '@/components/ui/ValuesCard'
+import ProjectCarousel from '@/components/ui/ProjectCarousel'
 
 export const metadata: Metadata = {
   title: 'Sobre Nosotros',
@@ -399,6 +400,16 @@ export default function NosotrosPage() {
           </p>
         </div>
       </section>
+
+      {/* ── 5.5 PORTFOLIO / PROYECTOS REALIZADOS ────────── */}
+      <section className="py-12 md:py-16 bg-roiba-arena-light overflow-hidden">
+        <ProjectCarousel />
+      </section>
+
+      {/* gold divider */}
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="h-px bg-roiba-dorado/30" />
+      </div>
 
       {/* ── 6. NUESTROS VALORES ─────────────────────────── */}
       <section className="relative py-12 md:py-16 px-6 bg-roiba-verde">

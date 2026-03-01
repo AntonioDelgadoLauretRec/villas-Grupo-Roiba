@@ -143,55 +143,53 @@ const injectStyles = () => {
     .roiba .service-card {
       position: relative;
       overflow: hidden;
-      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
     }
     .roiba .service-card::before {
       content: '';
       position: absolute;
       bottom: 0;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 0;
       height: 2px;
       background: ${C.doradoArena};
-      transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .roiba .service-card:hover::before {
-      width: 100%;
+    .roiba .service-card:hover::before,
+    .roiba .service-card.card-open::before {
+      width: 75%;
     }
     .roiba .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 64px rgba(18,38,32,0.14);
+      transform: scale(1.05);
+      box-shadow: 0 20px 60px rgba(12,35,64,0.2), 0 0 30px rgba(201,169,110,0.1);
+      border-color: ${C.doradoArena}40 !important;
+      z-index: 10;
     }
-
-    .roiba .carousel-slide {
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    .roiba .service-card.card-open {
+      transform: scale(1.03);
+      box-shadow: 0 16px 50px rgba(12,35,64,0.18);
+      border-color: ${C.doradoArena}30 !important;
+      z-index: 10;
     }
-
-    .roiba .carousel-nav-btn {
-      width: 56px;
-      height: 56px;
-      border: 1px solid ${C.arena}40;
-      background: ${C.verde}cc;
-      backdrop-filter: blur(12px);
-      color: ${C.arena};
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.4s ease;
+    .roiba .service-card .svc-desc {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .roiba .carousel-nav-btn:hover {
-      background: ${C.doradoArena};
-      color: ${C.verde};
-      border-color: ${C.doradoArena};
+    .roiba .service-card:hover .svc-desc,
+    .roiba .service-card.card-open .svc-desc {
+      max-height: 120px;
+      opacity: 1;
+      margin-top: 8px;
     }
-
-    .roiba .carousel-dot {
-      width: 32px;
-      height: 2px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.4s ease;
+    .roiba .service-card .svc-icon {
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .roiba .service-card:hover .svc-icon {
+      transform: scale(1.15);
     }
 
     /* ─── Mobile Responsive ─── */
@@ -428,12 +426,6 @@ const PROCESS = [
   },
 ];
 
-const PROJECTS = [
-  { name: "Finest Punta Cana", location: "Punta Cana, República Dominicana", status: "Completada", type: "Resort & Residencias", year: "2024", image: "/images/projects/finest-punta-cana.jpg" },
-  { name: "Excellence Oyster Bay", location: "Jamaica", status: "Completada", type: "Resort premium", year: "2024", image: "/images/projects/excellence-oyster-bay.jpg" },
-  { name: "Excellence El Carmen", location: "República Dominicana", status: "Completada", type: "Resort premium", year: "2023", image: "/images/projects/excellence-el-carmen.jpg" },
-];
-
 const STATS = [
   { value: "15+", label: "Proyectos entregados" },
   { value: "98%", label: "Satisfacción cliente" },
@@ -485,9 +477,8 @@ const HERO_IMAGES = [
 export default function HomePage() {
   const [activeProcess, setActiveProcess] = useState(0)
   const [hoveredService, setHoveredService] = useState<string | null>(null)
+  const [openService, setOpenService] = useState<string | null>(null)
   const [scrollY, setScrollY] = useState(0)
-  const [carouselIdx, setCarouselIdx] = useState(0)
-  const [carouselPaused, setCarouselPaused] = useState(false)
   const [testimonialIdx, setTestimonialIdx] = useState(0)
   const [heroImgIdx, setHeroImgIdx] = useState(0)
   const [hasVideo, setHasVideo] = useState(false)
@@ -512,14 +503,6 @@ export default function HomePage() {
     }, 6000)
     return () => clearInterval(timer)
   }, [hasVideo])
-
-  useEffect(() => {
-    if (carouselPaused) return
-    const timer = setInterval(() => {
-      setCarouselIdx((prev) => (prev + 1) % PROJECTS.length)
-    }, 5000)
-    return () => clearInterval(timer)
-  }, [carouselPaused])
 
   // Testimonial auto-advance
   useEffect(() => {
@@ -749,7 +732,7 @@ export default function HomePage() {
               Contáctanos
             </button>
             <button
-              onClick={() => document.getElementById('proyectos')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 11,
@@ -772,7 +755,7 @@ export default function HomePage() {
                 (e.currentTarget as HTMLElement).style.color = C.arena;
               }}
             >
-              Ver Proyectos
+              Ver Servicios
             </button>
           </div>
         </div>
@@ -1047,54 +1030,61 @@ export default function HomePage() {
               gap: 16,
             }}
           >
-            {SERVICES.map((svc, i) => (
-              <div
-                key={svc.key}
-                className={`service-card service-grid-item animate-on-scroll delay-${Math.min(i % 3 + 1, 6)}`}
-                onMouseEnter={() => setHoveredService(svc.key)}
-                onMouseLeave={() => setHoveredService(null)}
-                style={{
-                  background: hoveredService === svc.key ? C.verde : C.blanco,
-                  border: `1px solid ${C.doradoArena}15`,
-                  padding: "24px 28px",
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 20,
-                  transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
-                }}
-              >
-                {/* Icon */}
-                <div style={{
-                  width: 36,
-                  height: 36,
-                  minWidth: 36,
-                  color: hoveredService === svc.key ? C.dorado : C.doradoArena,
-                  transition: "color 0.5s",
-                  marginTop: 2,
-                }}>
-                  {svc.icon}
-                </div>
-                {/* Text */}
-                <div>
+            {SERVICES.map((svc, i) => {
+              const isOpen = openService === svc.key
+              const isHovered = hoveredService === svc.key
+              const isActive = isOpen || isHovered
+              return (
+                <div
+                  key={svc.key}
+                  className={`service-card service-grid-item animate-on-scroll delay-${Math.min(i % 3 + 1, 6)} ${isOpen ? 'card-open' : ''}`}
+                  onMouseEnter={() => setHoveredService(svc.key)}
+                  onMouseLeave={() => setHoveredService(null)}
+                  onClick={() => setOpenService(isOpen ? null : svc.key)}
+                  style={{
+                    background: isActive ? C.verde : C.blanco,
+                    border: `1px solid ${C.doradoArena}15`,
+                    padding: "28px 28px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    gap: 0,
+                    transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+                  }}
+                >
+                  {/* Icon */}
+                  <div className="svc-icon" style={{
+                    width: 40,
+                    height: 40,
+                    minWidth: 40,
+                    color: isActive ? C.dorado : C.doradoArena,
+                    transition: "color 0.5s",
+                    marginBottom: 16,
+                  }}>
+                    {svc.icon}
+                  </div>
+                  {/* Title */}
                   <h3 style={{
                     fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: 20,
+                    fontSize: 22,
                     fontWeight: 600,
-                    color: hoveredService === svc.key ? C.arena : C.verde,
-                    marginBottom: 6,
+                    color: isActive ? C.arena : C.verde,
                     lineHeight: 1.2,
                     transition: "color 0.5s",
                   }}>{svc.title}</h3>
-                  <p style={{
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontSize: 12,
-                    lineHeight: 1.65,
-                    color: hoveredService === svc.key ? `${C.arena}aa` : C.gris,
-                    transition: "color 0.5s",
-                  }}>{svc.desc}</p>
+                  {/* Description — hidden by default, revealed on hover/tap */}
+                  <div className="svc-desc">
+                    <p style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontSize: 12,
+                      lineHeight: 1.65,
+                      color: isActive ? `${C.arena}aa` : C.gris,
+                      transition: "color 0.5s",
+                    }}>{svc.desc}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
           {/* Mobile scroll hint */}
           <div
@@ -1394,228 +1384,6 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ═══ PORTFOLIO CAROUSEL ═══ */}
-      <section id="proyectos" style={{ padding: "clamp(60px, 8vw, 100px) 0", background: C.arenaLight }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(24px, 8vw, 120px)" }}>
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 56 }}>
-            <div>
-              <span
-                className="animate-on-scroll"
-                style={{
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontSize: 10,
-                  fontWeight: 600,
-                  letterSpacing: "0.3em",
-                  textTransform: "uppercase",
-                  color: C.doradoArena,
-                  display: "block",
-                  marginBottom: 16,
-                }}
-              >
-                Portfolio
-              </span>
-              <h2
-                className="animate-on-scroll delay-1"
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "clamp(32px, 4vw, 52px)",
-                  fontWeight: 400,
-                  color: C.verde,
-                  lineHeight: 1.15,
-                }}
-              >
-                Proyectos que{" "}
-                <span style={{ fontStyle: "italic", color: C.doradoArena }}>trascienden</span>
-              </h2>
-            </div>
-
-            {/* Carousel nav buttons */}
-            <div className="animate-on-scroll delay-2" style={{ display: "flex", gap: 8 }}>
-              <button
-                className="carousel-nav-btn"
-                onClick={() => setCarouselIdx((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length)}
-                aria-label="Proyecto anterior"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 19l-7-7 7-7"/></svg>
-              </button>
-              <button
-                className="carousel-nav-btn"
-                onClick={() => setCarouselIdx((prev) => (prev + 1) % PROJECTS.length)}
-                aria-label="Proyecto siguiente"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Carousel container — full width */}
-        <div
-          className="animate-on-scroll"
-          onMouseEnter={() => setCarouselPaused(true)}
-          onMouseLeave={() => setCarouselPaused(false)}
-          style={{
-            position: "relative",
-            width: "100%",
-            overflow: "hidden",
-          }}
-        >
-          {/* Slides wrapper */}
-          <div style={{
-            display: "flex",
-            transition: "transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
-            transform: `translateX(-${carouselIdx * 100}%)`,
-          }}>
-            {PROJECTS.map((proj, i) => (
-              <div
-                key={i}
-                style={{
-                  minWidth: "100%",
-                  position: "relative",
-                }}
-              >
-                {/* Image area */}
-                <div
-                  style={{
-                    width: "100%",
-                    aspectRatio: "21/9",
-                    background: C.verde,
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  {/* Project photo */}
-                  <img
-                    src={proj.image}
-                    alt={proj.name}
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    loading={i === 0 ? "eager" : "lazy"}
-                  />
-
-                  {/* Bottom gradient overlay for text legibility */}
-                  <div style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: "60%",
-                    background: `linear-gradient(to top, ${C.verde}ee 0%, ${C.verde}80 40%, transparent 100%)`,
-                  }} />
-
-                  {/* Project info overlay */}
-                  <div style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: "0 clamp(32px, 8vw, 120px) clamp(32px, 5vw, 56px)",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "flex-end",
-                  }}>
-                    {/* Left: project details */}
-                    <div>
-                      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-                        <span style={{
-                          display: "inline-block",
-                          padding: "5px 16px",
-                          background: proj.status === "Completada" ? C.doradoArena : `${C.arena}15`,
-                          fontFamily: "'Montserrat', sans-serif",
-                          fontSize: 9,
-                          fontWeight: 600,
-                          letterSpacing: "0.15em",
-                          textTransform: "uppercase",
-                          color: proj.status === "Completada" ? C.verde : C.arena,
-                        }}>{proj.status}</span>
-                        <span style={{
-                          fontFamily: "'Montserrat', sans-serif",
-                          fontSize: 11,
-                          color: `${C.arena}60`,
-                          letterSpacing: "0.1em",
-                        }}>{proj.year}</span>
-                      </div>
-                      <h3 style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: "clamp(28px, 4vw, 48px)",
-                        fontWeight: 500,
-                        color: C.arena,
-                        marginBottom: 6,
-                        lineHeight: 1.15,
-                      }}>{proj.name}</h3>
-                      <p style={{
-                        fontFamily: "'Montserrat', sans-serif",
-                        fontSize: 13,
-                        color: `${C.arena}80`,
-                        letterSpacing: "0.05em",
-                      }}>{proj.location}</p>
-                    </div>
-
-                    {/* Right: specs */}
-                    <div style={{ display: "flex", gap: 40, paddingBottom: 4 }}>
-                      <div style={{ textAlign: "right" }}>
-                        <span style={{
-                          fontFamily: "'Montserrat', sans-serif",
-                          fontSize: 9,
-                          fontWeight: 600,
-                          letterSpacing: "0.2em",
-                          textTransform: "uppercase",
-                          color: C.doradoArena,
-                          display: "block",
-                          marginBottom: 4,
-                        }}>Tipología</span>
-                        <span style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: 20,
-                          fontWeight: 500,
-                          color: C.arena,
-                        }}>{proj.type}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Slide counter */}
-                  <div style={{
-                    position: "absolute",
-                    top: "clamp(24px, 4vw, 48px)",
-                    right: "clamp(32px, 8vw, 120px)",
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: 14,
-                    color: `${C.arena}50`,
-                    letterSpacing: "0.15em",
-                  }}>
-                    <span style={{ color: C.doradoArena, fontSize: 22, fontWeight: 500 }}>{String(i + 1).padStart(2, "0")}</span>
-                    <span style={{ margin: "0 6px" }}>/</span>
-                    <span>{String(PROJECTS.length).padStart(2, "0")}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Carousel dots */}
-        <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 32, padding: "0 24px" }}>
-          {PROJECTS.map((_, i) => (
-            <button
-              key={i}
-              className="carousel-dot"
-              onClick={() => setCarouselIdx(i)}
-              aria-label={`Proyecto ${i + 1}`}
-              style={{
-                background: carouselIdx === i ? C.doradoArena : `${C.doradoArena}30`,
-                width: carouselIdx === i ? 48 : 32,
-              }}
-            />
-          ))}
         </div>
       </section>
 
