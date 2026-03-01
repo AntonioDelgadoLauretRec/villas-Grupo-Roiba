@@ -1,6 +1,9 @@
-import { VillaGrid } from '@/components/sections/VillaGrid'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
+import { getPublishedVillas } from '@/lib/data'
+
+export const revalidate = 3600 // ISR: revalidate every hour
 
 export const metadata: Metadata = {
   title: 'Colección de Villas | Grupo Roiba',
@@ -8,7 +11,9 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gruporoiba.com/villas' },
 }
 
-export default function VillasPage() {
+export default async function VillasPage() {
+  const villas = await getPublishedVillas()
+
   return (
     <main className="pt-20">
       {/* Hero */}
@@ -29,8 +34,74 @@ export default function VillasPage() {
         </div>
       </section>
 
-      {/* Villa Grid */}
-      <VillaGrid />
+      {/* Villa Grid — Server-rendered from Supabase */}
+      <section className="py-16 md:py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          {villas.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-roiba-verde/60 text-body-lg">
+                Próximamente publicaremos nuestros proyectos.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {villas.map((villa) => (
+                <Link
+                  key={villa.id}
+                  href={`/villas/${villa.slug}`}
+                  className="group block"
+                >
+                  {/* Image */}
+                  <div className="relative aspect-[4/5] overflow-hidden bg-roiba-arena-light mb-4">
+                    {villa.main_image ? (
+                      <Image
+                        src={villa.main_image}
+                        alt={villa.title}
+                        fill
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center text-roiba-verde/20">
+                        <svg className="w-16 h-16" fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24">
+                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                          <circle cx="8.5" cy="8.5" r="1.5" />
+                          <path d="M21 15l-5-5L5 21" />
+                        </svg>
+                      </div>
+                    )}
+                    {villa.featured && (
+                      <span className="absolute top-3 left-3 px-2.5 py-1 bg-roiba-dorado text-roiba-verde text-micro uppercase tracking-wider font-medium">
+                        Destacada
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Info */}
+                  <div>
+                    <h3 className="text-heading font-serif text-roiba-verde group-hover:text-roiba-verde-light transition-colors">
+                      {villa.title}
+                    </h3>
+                    <p className="text-caption text-roiba-dorado mt-1">{villa.location}</p>
+                    {villa.short_description && (
+                      <p className="text-body text-roiba-verde/60 mt-2 line-clamp-2">
+                        {villa.short_description}
+                      </p>
+                    )}
+                    {(villa.bedrooms > 0 || villa.area_sqm > 0) && (
+                      <div className="flex items-center gap-4 mt-3 text-caption text-roiba-verde/50">
+                        {villa.bedrooms > 0 && <span>{villa.bedrooms} hab.</span>}
+                        {villa.bathrooms > 0 && <span>{villa.bathrooms} baños</span>}
+                        {villa.area_sqm > 0 && <span>{villa.area_sqm} m²</span>}
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="relative py-14 md:py-20 bg-roiba-verde overflow-hidden">

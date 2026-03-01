@@ -1,0 +1,19 @@
+-- ============================================================
+-- HOW TO ADD AN ADMIN USER
+-- ============================================================
+-- 1. Go to Supabase Dashboard > Authentication > Users
+-- 2. Click "Add User" > "Create New User"
+-- 3. Enter email and password
+-- 4. Copy the user's UUID from the users table
+-- 5. Run the INSERT below replacing the UUID and email:
+--
+-- INSERT INTO admin_profiles (id, email, display_name, role)
+-- VALUES (
+--   'PASTE-USER-UUID-HERE',
+--   'admin@gruporoiba.com',
+--   'Admin Name',
+--   'superadmin'
+-- );
+--
+-- That's it! The user can now log in at /admin/login
+-- ============================================================
