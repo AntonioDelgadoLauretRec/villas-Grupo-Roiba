@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -13,49 +14,57 @@ const serviciosGrid = [
     num: '01',
     title: 'Diseño Arquitectónico',
     description:
-      'Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva. Cada diseño nace de su terreno, su visión y nuestro rigor técnico.',
+      'Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva.',
+    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80&fit=crop',
   },
   {
     num: '02',
     title: 'Construcción',
     description:
       'Ejecución integral con materiales premium y control en cada fase.',
+    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80&fit=crop',
   },
   {
     num: '03',
     title: 'Dirección Técnica',
     description:
       'Supervisión que garantiza plazos, calidad y normativa.',
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&fit=crop',
   },
   {
     num: '04',
     title: 'Gestión Llave en Mano',
     description:
       'Un solo interlocutor. Desde el concepto hasta la entrega.',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fit=crop',
   },
   {
     num: '05',
     title: 'Desarrollo de Proyectos',
     description:
       'Viabilidad técnica y económica para su inversión.',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop',
   },
   {
     num: '06',
     title: 'Control de Calidad',
     description:
       'Protocolos de inspección. Estándares medibles.',
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80&fit=crop',
   },
   {
     num: '07',
     title: 'Gestión de Instalaciones',
     description:
       'Sistemas eléctricos, hidráulicos, climatización y domótica.',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80&fit=crop',
   },
   {
     num: '08',
     title: 'Control de Costes',
     description:
       'Presupuestos detallados y seguimiento en tiempo real.',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop',
   },
 ]
 
@@ -177,21 +186,36 @@ export default function ServiciosPage() {
       {/* ============================================ */}
       <section className="py-14 md:py-20 bg-roiba-arena-light">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {serviciosGrid.map((servicio) => (
               <div
                 key={servicio.num}
-                className="group bg-white rounded-xl p-8 border border-roiba-verde/10 hover:border-roiba-dorado/30 transition-colors duration-300"
+                className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
               >
-                <span className="block font-serif text-display-md text-roiba-dorado/30 mb-4 leading-none">
-                  {servicio.num}
-                </span>
-                <h3 className="font-serif text-heading text-roiba-verde mb-3">
-                  {servicio.title}
-                </h3>
-                <p className="text-roiba-verde/60 text-body leading-relaxed">
-                  {servicio.description}
-                </p>
+                {/* Background photo */}
+                <Image
+                  src={servicio.image}
+                  alt={servicio.title}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+                {/* Dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde via-roiba-verde/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                {/* Gold top accent line */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-roiba-dorado/0 group-hover:bg-roiba-dorado/60 transition-all duration-500" />
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-7">
+                  <span className="font-serif text-roiba-dorado/50 text-display-md leading-none mb-3 transition-colors duration-300 group-hover:text-roiba-dorado/80">
+                    {servicio.num}
+                  </span>
+                  <h3 className="font-serif text-subheading text-white mb-2 leading-tight">
+                    {servicio.title}
+                  </h3>
+                  <p className="text-white/0 text-caption leading-relaxed max-h-0 overflow-hidden transition-all duration-500 group-hover:text-white/70 group-hover:max-h-24 group-hover:mt-1">
+                    {servicio.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -255,7 +279,7 @@ export default function ServiciosPage() {
                   </p>
                   <Link
                     href="/contacto"
-                    className="inline-block px-8 py-4 bg-roiba-verde text-white font-medium rounded-lg hover:bg-roiba-verde-light transition-colors duration-300"
+                    className="inline-block px-8 py-4 bg-roiba-verde text-white font-medium rounded-sm hover:bg-roiba-verde-light transition-colors duration-300"
                   >
                     Solicitar información
                   </Link>
@@ -309,7 +333,7 @@ export default function ServiciosPage() {
           </p>
           <Link
             href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado-light text-roiba-verde font-semibold rounded-lg hover:bg-roiba-dorado transition-colors duration-300 text-lg"
+            className="inline-block px-10 py-4 bg-roiba-dorado-light text-roiba-verde font-semibold rounded-sm hover:bg-roiba-dorado transition-colors duration-300 text-lg"
           >
             Solicitar consulta gratuita
           </Link>

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useEffect, useState, useCallback } from 'react'
+import { FC, useEffect, useState, useCallback, useRef } from 'react'
 import Image from 'next/image'
 
 // ─── POI CATEGORIES ───
@@ -65,13 +65,17 @@ const POIS: POI[] = [
   { name: 'Aeropuerto Int. PUJ', desc: 'Vuelos desde 85+ ciudades', cat: 'aeropuerto', lat: 18.5675, lng: -68.3636 },
 ]
 
-// ─── Build Google Maps embed URL from coordinates ───
-function buildMapUrl(lat: number, lng: number, zoom: number, satellite = true) {
-  const earthFlag = satellite ? '!5e1' : '!5e0'
-  return `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d${zoom}!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1${earthFlag}!3m2!1ses!2sdo!4v1700000000000!5m2!1ses!2sdo`
+// ─── Build Google Maps embed URL with marker for exact location ───
+function buildMapUrl(lat: number, lng: number, zoom: number, marker = false) {
+  if (marker) {
+    // Use q= parameter to show a marker pin at exact location
+    return `https://maps.google.com/maps?q=${lat},${lng}&t=k&z=${zoom}&output=embed`
+  }
+  // Overview: center without marker
+  return `https://maps.google.com/maps?ll=${lat},${lng}&t=k&z=${zoom}&output=embed`
 }
 
-const DEFAULT_MAP_URL = buildMapUrl(18.54, -68.39, 80000)
+const DEFAULT_MAP_URL = buildMapUrl(18.54, -68.39, 11)
 
 const ATTRACTIONS = [
   {
@@ -199,6 +203,19 @@ export const WhyPuntaCana: FC = () => {
   const [activePoi, setActivePoi] = useState<number | null>(null)
   const [mapUrl, setMapUrl] = useState(DEFAULT_MAP_URL)
   const [activeFilter, setActiveFilter] = useState<PoiCategory | null>(null)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   const handlePoiClick = useCallback((idx: number) => {
     if (activePoi === idx) {
@@ -207,13 +224,21 @@ export const WhyPuntaCana: FC = () => {
     } else {
       const poi = POIS[idx]
       setActivePoi(idx)
-      setMapUrl(buildMapUrl(poi.lat, poi.lng, 4000))
+      // Use zoom 16 with marker for exact POI location
+      setMapUrl(buildMapUrl(poi.lat, poi.lng, 16, true))
     }
   }, [activePoi])
 
   const filteredPois = activeFilter ? POIS.filter((p) => p.cat === activeFilter) : POIS
   // Sort POIs by category order
   const sortedPois = [...filteredPois].sort((a, b) => CAT_ORDER.indexOf(a.cat) - CAT_ORDER.indexOf(b.cat))
+
+  const handleFilterSelect = useCallback((cat: PoiCategory | null) => {
+    setActiveFilter(cat)
+    setActivePoi(null)
+    setMapUrl(DEFAULT_MAP_URL)
+    setDropdownOpen(false)
+  }, [])
 
   return (
     <>
@@ -306,32 +331,79 @@ export const WhyPuntaCana: FC = () => {
             </div>
           </div>
 
-          {/* LEGEND — category filter buttons, sorted */}
-          <div className="flex flex-wrap gap-2 mb-5">
-            <button
-              onClick={() => { setActiveFilter(null); setActivePoi(null); setMapUrl(DEFAULT_MAP_URL) }}
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-sans font-medium uppercase tracking-wider border transition-all duration-200 ${
-                activeFilter === null
-                  ? 'bg-roiba-verde text-white border-roiba-verde'
-                  : 'bg-white text-roiba-verde/60 border-roiba-verde/15 hover:border-roiba-verde/30'
-              }`}
-            >
-              Todos
-            </button>
-            {CAT_ORDER.map((cat) => (
+          {/* CATEGORY FILTER — Premium dropdown */}
+          <div className="mb-5 flex items-center gap-3">
+            <div ref={dropdownRef} className="relative">
               <button
-                key={cat}
-                onClick={() => { setActiveFilter(activeFilter === cat ? null : cat); setActivePoi(null); setMapUrl(DEFAULT_MAP_URL) }}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-sans font-medium uppercase tracking-wider border transition-all duration-200 ${
-                  activeFilter === cat
-                    ? 'bg-roiba-verde text-white border-roiba-verde'
-                    : 'bg-white text-roiba-verde/60 border-roiba-verde/15 hover:border-roiba-verde/30'
-                }`}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-white border border-roiba-verde/15 hover:border-roiba-dorado/40 transition-all duration-200 text-[12px] font-sans font-medium tracking-wider uppercase text-roiba-verde"
               >
-                <CatDot cat={cat} size={8} />
-                {CATEGORY_META[cat].label}
+                {activeFilter ? (
+                  <>
+                    <CatDot cat={activeFilter} size={8} />
+                    {CATEGORY_META[activeFilter].label}
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4 text-roiba-dorado" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M2 4h12M4 8h8M6 12h4" strokeLinecap="round" />
+                    </svg>
+                    Filtrar por categoría
+                  </>
+                )}
+                <svg className={`w-3 h-3 ml-1 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 4.5l3 3 3-3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </button>
-            ))}
+
+              {/* Dropdown panel */}
+              {dropdownOpen && (
+                <div className="absolute top-full left-0 mt-1 z-20 bg-white border border-roiba-verde/10 shadow-lg min-w-[240px]">
+                  <button
+                    onClick={() => handleFilterSelect(null)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-left text-[12px] font-sans tracking-wider uppercase transition-colors duration-150 ${
+                      activeFilter === null
+                        ? 'bg-roiba-verde text-white'
+                        : 'text-roiba-verde/70 hover:bg-roiba-arena-light'
+                    }`}
+                  >
+                    <span className="w-2 h-2 rounded-full bg-roiba-verde/40 flex-shrink-0" />
+                    Todos los puntos
+                  </button>
+                  <div className="h-px bg-roiba-verde/8" />
+                  {CAT_ORDER.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => handleFilterSelect(cat)}
+                      className={`w-full flex items-center gap-3 px-4 py-2.5 text-left text-[12px] font-sans tracking-wider uppercase transition-colors duration-150 ${
+                        activeFilter === cat
+                          ? 'bg-roiba-verde text-white'
+                          : 'text-roiba-verde/70 hover:bg-roiba-arena-light'
+                      }`}
+                    >
+                      <CatDot cat={cat} size={8} />
+                      <span className="flex-1">{CATEGORY_META[cat].label}</span>
+                      <span className={`text-[10px] tabular-nums ${activeFilter === cat ? 'text-white/50' : 'text-roiba-verde/30'}`}>
+                        {POIS.filter(p => p.cat === cat).length}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Active filter chip (quick clear) */}
+            {activeFilter && (
+              <button
+                onClick={() => handleFilterSelect(null)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-roiba-verde/5 text-roiba-verde/60 text-[11px] font-sans tracking-wider uppercase border border-roiba-verde/10 hover:bg-roiba-verde/10 transition-colors"
+              >
+                Limpiar filtro
+                <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 3l6 6M9 3l-6 6" strokeLinecap="round" />
+                </svg>
+              </button>
+            )}
           </div>
 
           {/* POI GRID — premium cards */}

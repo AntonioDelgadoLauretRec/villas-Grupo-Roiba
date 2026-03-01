@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 
 // ─── BRAND PALETTE — Azul + Blanco + Dorado ───
 const C = {
@@ -146,32 +146,23 @@ const injectStyles = () => {
       transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
       cursor: pointer;
     }
-    .roiba .service-card::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background: ${C.doradoArena};
-      transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .roiba .service-card:hover::before,
-    .roiba .service-card.card-open::before {
-      width: 75%;
-    }
     .roiba .service-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 20px 60px rgba(12,35,64,0.2), 0 0 30px rgba(201,169,110,0.1);
-      border-color: ${C.doradoArena}40 !important;
+      transform: scale(1.03);
+      box-shadow: 0 20px 60px rgba(12,35,64,0.3);
       z-index: 10;
     }
     .roiba .service-card.card-open {
-      transform: scale(1.03);
-      box-shadow: 0 16px 50px rgba(12,35,64,0.18);
-      border-color: ${C.doradoArena}30 !important;
+      transform: scale(1.02);
+      box-shadow: 0 16px 50px rgba(12,35,64,0.25);
       z-index: 10;
+    }
+    .roiba .service-card:hover .svc-img,
+    .roiba .service-card.card-open .svc-img {
+      transform: scale(1.1);
+    }
+    .roiba .service-card:hover .svc-accent,
+    .roiba .service-card.card-open .svc-accent {
+      opacity: 1 !important;
     }
     .roiba .service-card .svc-desc {
       max-height: 0;
@@ -184,12 +175,6 @@ const injectStyles = () => {
       max-height: 120px;
       opacity: 1;
       margin-top: 8px;
-    }
-    .roiba .service-card .svc-icon {
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .roiba .service-card:hover .svc-icon {
-      transform: scale(1.15);
     }
 
     /* ─── Mobile Responsive ─── */
@@ -239,8 +224,10 @@ const injectStyles = () => {
         display: flex !important;
         flex-direction: row !important;
         overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
         border-left: none !important;
-        border-bottom: 1px solid rgba(201,169,110,0.15);
+        border-bottom: 1px solid rgba(12,35,64,0.1);
         gap: 0 !important;
         scrollbar-width: none;
       }
@@ -248,16 +235,25 @@ const injectStyles = () => {
       .roiba .process-tab-btn {
         min-width: 140px !important;
         flex-shrink: 0;
+        scroll-snap-align: start;
         border-left: none !important;
+        border-bottom: 2px solid transparent;
         padding: 12px 16px !important;
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: 4px !important;
+        min-height: 44px;
       }
-      .roiba .process-detail-panel { padding: 24px 20px !important; }
+      .roiba .process-tab-btn.active-tab {
+        border-bottom-color: #C9A96E;
+      }
+      .roiba .process-detail-panel { padding: 24px 16px !important; }
+      /* Testimonials — smaller text on mobile */
+      .roiba .testimonial-quote { font-size: clamp(18px, 5vw, 22px) !important; }
     }
     @media (max-width: 480px) {
       .roiba .service-grid-item { min-width: min(88vw, 280px) !important; }
+      .roiba .process-tab-btn { min-width: 120px !important; padding: 10px 12px !important; }
     }
   `;
   document.head.appendChild(style);
@@ -364,15 +360,15 @@ const ServiceIcons = {
 
 // ─── CONTENT DATA ───
 const SERVICES = [
-  { key: "design", icon: ServiceIcons.design, title: "Diseño Arquitectónico", desc: "Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva. Cada diseño nace de su terreno, su visión y nuestro rigor técnico." },
-  { key: "build", icon: ServiceIcons.build, title: "Construcción", desc: "Ejecución integral con materiales premium y control en cada fase." },
-  { key: "direction", icon: ServiceIcons.direction, title: "Dirección Técnica", desc: "Supervisión que garantiza plazos, calidad y normativa." },
-  { key: "turnkey", icon: ServiceIcons.turnkey, title: "Gestión Llave en Mano", desc: "Un solo interlocutor. Desde el concepto hasta la entrega." },
-  { key: "develop", icon: ServiceIcons.develop, title: "Desarrollo de Proyectos", desc: "Viabilidad técnica y económica para su inversión." },
-  { key: "quality", icon: ServiceIcons.quality, title: "Control de Calidad", desc: "Protocolos de inspección. Estándares medibles." },
-  { key: "installations", icon: ServiceIcons.installations, title: "Gestión de Instalaciones", desc: "Sistemas eléctricos, hidráulicos, climatización y domótica." },
-  { key: "cost", icon: ServiceIcons.cost, title: "Control de Costes", desc: "Presupuestos detallados y seguimiento en tiempo real." },
-  { key: "advisory", icon: ServiceIcons.advisory, title: "Asesoría Técnica", desc: "Consultoría experta en normativa, terrenos, permisos y viabilidad para su inversión." },
+  { key: "design", title: "Diseño Arquitectónico", desc: "Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva.", image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80&fit=crop" },
+  { key: "build", title: "Construcción", desc: "Ejecución integral con materiales premium y control en cada fase.", image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80&fit=crop" },
+  { key: "direction", title: "Dirección Técnica", desc: "Supervisión que garantiza plazos, calidad y normativa.", image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&fit=crop" },
+  { key: "turnkey", title: "Gestión Llave en Mano", desc: "Un solo interlocutor. Desde el concepto hasta la entrega.", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80&fit=crop" },
+  { key: "develop", title: "Desarrollo de Proyectos", desc: "Viabilidad técnica y económica para su inversión.", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80&fit=crop" },
+  { key: "quality", title: "Control de Calidad", desc: "Protocolos de inspección. Estándares medibles.", image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&q=80&fit=crop" },
+  { key: "installations", title: "Gestión de Instalaciones", desc: "Sistemas eléctricos, hidráulicos, climatización y domótica.", image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80&fit=crop" },
+  { key: "cost", title: "Control de Costes", desc: "Presupuestos detallados y seguimiento en tiempo real.", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&fit=crop" },
+  { key: "advisory", title: "Asesoría Técnica", desc: "Consultoría experta en normativa, terrenos, permisos y viabilidad.", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&fit=crop" },
 ];
 
 const PROCESS = [
@@ -482,6 +478,22 @@ export default function HomePage() {
   const [testimonialIdx, setTestimonialIdx] = useState(0)
   const [heroImgIdx, setHeroImgIdx] = useState(0)
   const [hasVideo, setHasVideo] = useState(false)
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
+
+  const handleTestimonialTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }, [])
+
+  const handleTestimonialTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (!touchStartRef.current) return
+    const dx = e.changedTouches[0].clientX - touchStartRef.current.x
+    const dy = e.changedTouches[0].clientY - touchStartRef.current.y
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0) setTestimonialIdx((prev) => (prev + 1) % TESTIMONIALS.length)
+      else setTestimonialIdx((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)
+    }
+    touchStartRef.current = null
+  }, [])
 
   useEffect(() => {
     injectStyles()
@@ -1032,55 +1044,77 @@ export default function HomePage() {
           >
             {SERVICES.map((svc, i) => {
               const isOpen = openService === svc.key
-              const isHovered = hoveredService === svc.key
-              const isActive = isOpen || isHovered
               return (
                 <div
                   key={svc.key}
                   className={`service-card service-grid-item animate-on-scroll delay-${Math.min(i % 3 + 1, 6)} ${isOpen ? 'card-open' : ''}`}
-                  onMouseEnter={() => setHoveredService(svc.key)}
-                  onMouseLeave={() => setHoveredService(null)}
                   onClick={() => setOpenService(isOpen ? null : svc.key)}
                   style={{
-                    background: isActive ? C.verde : C.blanco,
-                    border: `1px solid ${C.doradoArena}15`,
-                    padding: "28px 28px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-start",
-                    gap: 0,
-                    transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+                    position: "relative",
+                    aspectRatio: "3/4",
+                    overflow: "hidden",
+                    cursor: "pointer",
+                    border: "none",
+                    padding: 0,
                   }}
                 >
-                  {/* Icon */}
-                  <div className="svc-icon" style={{
-                    width: 40,
-                    height: 40,
-                    minWidth: 40,
-                    color: isActive ? C.dorado : C.doradoArena,
-                    transition: "color 0.5s",
-                    marginBottom: 16,
+                  {/* Background photo */}
+                  <img
+                    src={svc.image}
+                    alt={svc.title}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      transition: "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
+                    }}
+                    className="svc-img"
+                    loading="lazy"
+                  />
+                  {/* Gradient overlay */}
+                  <div style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: `linear-gradient(to top, ${C.verde} 0%, ${C.verde}99 35%, transparent 100%)`,
+                    transition: "opacity 0.5s",
+                  }} />
+                  {/* Gold top accent */}
+                  <div style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 2,
+                    background: C.doradoArena,
+                    opacity: 0,
+                    transition: "opacity 0.5s",
+                  }} className="svc-accent" />
+                  {/* Content at bottom */}
+                  <div style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    padding: "24px",
                   }}>
-                    {svc.icon}
-                  </div>
-                  {/* Title */}
-                  <h3 style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: 22,
-                    fontWeight: 600,
-                    color: isActive ? C.arena : C.verde,
-                    lineHeight: 1.2,
-                    transition: "color 0.5s",
-                  }}>{svc.title}</h3>
-                  {/* Description — hidden by default, revealed on hover/tap */}
-                  <div className="svc-desc">
-                    <p style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontSize: 12,
-                      lineHeight: 1.65,
-                      color: isActive ? `${C.arena}aa` : C.gris,
-                      transition: "color 0.5s",
-                    }}>{svc.desc}</p>
+                    <h3 style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 20,
+                      fontWeight: 600,
+                      color: C.arena,
+                      lineHeight: 1.2,
+                    }}>{svc.title}</h3>
+                    {/* Description — revealed on hover/tap */}
+                    <div className="svc-desc">
+                      <p style={{
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontSize: 11,
+                        lineHeight: 1.65,
+                        color: `${C.arena}aa`,
+                      }}>{svc.desc}</p>
+                    </div>
                   </div>
                 </div>
               )
@@ -1116,11 +1150,10 @@ export default function HomePage() {
         id="proceso"
         style={{
           padding: "clamp(80px, 10vw, 140px) clamp(24px, 8vw, 120px)",
-          background: C.verde,
+          background: C.arenaLight,
           position: "relative",
           overflow: "hidden",
         }}
-        className="grain"
       >
         {/* Background geometric */}
         <div
@@ -1130,7 +1163,7 @@ export default function HomePage() {
             right: "-5%",
             width: 400,
             height: 400,
-            border: `1px solid ${C.doradoArena}08`,
+            border: `1px solid ${C.verde}08`,
             borderRadius: "50%",
             transform: "translateY(-50%)",
           }}
@@ -1159,7 +1192,7 @@ export default function HomePage() {
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "clamp(32px, 4vw, 48px)",
                 fontWeight: 400,
-                color: C.arena,
+                color: C.verde,
               }}
             >
               Del concepto a la{" "}
@@ -1180,7 +1213,7 @@ export default function HomePage() {
                     alignItems: "center",
                     gap: 16,
                     padding: "18px 24px",
-                    background: activeProcess === i ? `${C.doradoArena}15` : "transparent",
+                    background: activeProcess === i ? `${C.verde}0a` : "transparent",
                     border: "none",
                     borderLeft: activeProcess === i ? `3px solid ${C.doradoArena}` : `3px solid transparent`,
                     cursor: "pointer",
@@ -1189,7 +1222,7 @@ export default function HomePage() {
                     width: "100%",
                   }}
                   onMouseEnter={(e) => {
-                    if (activeProcess !== i) e.currentTarget.style.background = `${C.doradoArena}08`;
+                    if (activeProcess !== i) e.currentTarget.style.background = `${C.verde}05`;
                   }}
                   onMouseLeave={(e) => {
                     if (activeProcess !== i) e.currentTarget.style.background = "transparent";
@@ -1200,7 +1233,7 @@ export default function HomePage() {
                       fontFamily: "'Cormorant Garamond', serif",
                       fontSize: 28,
                       fontWeight: 300,
-                      color: activeProcess === i ? C.dorado : `${C.arena}40`,
+                      color: activeProcess === i ? C.dorado : `${C.verde}30`,
                       transition: "color 0.4s",
                       minWidth: 40,
                     }}
@@ -1213,7 +1246,7 @@ export default function HomePage() {
                         fontFamily: "'Montserrat', sans-serif",
                         fontSize: 13,
                         fontWeight: 600,
-                        color: activeProcess === i ? C.arena : `${C.arena}70`,
+                        color: activeProcess === i ? C.verde : `${C.verde}70`,
                         transition: "color 0.4s",
                         letterSpacing: "0.02em",
                       }}
@@ -1225,7 +1258,7 @@ export default function HomePage() {
                         fontFamily: "'Montserrat', sans-serif",
                         fontSize: 11,
                         fontWeight: 400,
-                        color: `${C.arena}50`,
+                        color: `${C.verde}50`,
                         marginTop: 2,
                       }}
                     >
@@ -1241,8 +1274,8 @@ export default function HomePage() {
               key={activeProcess}
               className="process-detail-panel"
               style={{
-                background: `${C.doradoArena}08`,
-                border: `1px solid ${C.doradoArena}15`,
+                background: "#FFFFFF",
+                border: `1px solid ${C.verde}10`,
                 padding: 48,
                 animation: "fadeIn 0.5s ease",
                 display: "flex",
@@ -1276,7 +1309,7 @@ export default function HomePage() {
                       fontFamily: "'Cormorant Garamond', serif",
                       fontSize: 32,
                       fontWeight: 500,
-                      color: C.arena,
+                      color: C.verde,
                     }}
                   >
                     {PROCESS[activeProcess].title}
@@ -1301,7 +1334,7 @@ export default function HomePage() {
                   fontFamily: "'Montserrat', sans-serif",
                   fontSize: 14,
                   lineHeight: 1.85,
-                  color: `${C.arena}cc`,
+                  color: `${C.verde}b0`,
                   fontWeight: 400,
                   marginBottom: 32,
                 }}
@@ -1312,7 +1345,7 @@ export default function HomePage() {
               <div
                 style={{
                   padding: "16px 20px",
-                  background: `${C.doradoArena}08`,
+                  background: `${C.doradoArena}0a`,
                   borderLeft: `2px solid ${C.doradoArena}40`,
                   marginBottom: 24,
                 }}
@@ -1335,7 +1368,7 @@ export default function HomePage() {
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
                     fontSize: 13,
-                    color: `${C.arena}aa`,
+                    color: `${C.verde}80`,
                   }}
                 >
                   {PROCESS[activeProcess].detail}
@@ -1357,7 +1390,7 @@ export default function HomePage() {
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
                     fontSize: 12,
-                    color: `${C.arena}80`,
+                    color: `${C.verde}70`,
                     fontWeight: 500,
                   }}
                 >
@@ -1375,7 +1408,7 @@ export default function HomePage() {
                       width: activeProcess === i ? 32 : 8,
                       height: 8,
                       borderRadius: 4,
-                      background: activeProcess === i ? C.doradoArena : `${C.arena}20`,
+                      background: activeProcess === i ? C.doradoArena : `${C.verde}15`,
                       transition: "all 0.4s ease",
                       cursor: "pointer",
                     }}
@@ -1446,7 +1479,12 @@ export default function HomePage() {
           </div>
 
           {/* Testimonial card */}
-          <div className="animate-on-scroll delay-1" style={{ position: "relative", minHeight: 280 }}>
+          <div
+            className="animate-on-scroll delay-1 touch-pan-y"
+            style={{ position: "relative", minHeight: 280 }}
+            onTouchStart={handleTestimonialTouchStart}
+            onTouchEnd={handleTestimonialTouchEnd}
+          >
             {TESTIMONIALS.map((t, i) => (
               <div
                 key={i}

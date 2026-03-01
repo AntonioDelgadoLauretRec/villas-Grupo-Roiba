@@ -221,6 +221,35 @@
     background: var(--color-dorado);
     border-radius: 4px;
   }
+
+  /* Touch-friendly utilities */
+  .touch-pan-y {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .touch-pan-x {
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ===== MOBILE OPTIMIZATIONS ===== */
+@media (max-width: 768px) {
+  /* Prevent iOS Safari auto-zoom on focus */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Safe area insets for notch devices */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
 }
 
 /* ===== FUENTES GOOGLE ===== */

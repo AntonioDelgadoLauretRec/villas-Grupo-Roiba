@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 
 const PROJECTS = [
@@ -30,9 +30,12 @@ const PROJECTS = [
   },
 ]
 
+const SWIPE_THRESHOLD = 50
+
 export default function ProjectCarousel() {
   const [idx, setIdx] = useState(0)
   const [paused, setPaused] = useState(false)
+  const touchRef = useRef<{ startX: number; startY: number } | null>(null)
 
   useEffect(() => {
     if (paused) return
@@ -41,6 +44,35 @@ export default function ProjectCarousel() {
     }, 5000)
     return () => clearInterval(timer)
   }, [paused])
+
+  const goNext = useCallback(() => {
+    setIdx((prev) => (prev + 1) % PROJECTS.length)
+  }, [])
+
+  const goPrev = useCallback(() => {
+    setIdx((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length)
+  }, [])
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchRef.current = {
+      startX: e.touches[0].clientX,
+      startY: e.touches[0].clientY,
+    }
+    setPaused(true)
+  }, [])
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (!touchRef.current) return
+    const deltaX = e.changedTouches[0].clientX - touchRef.current.startX
+    const deltaY = e.changedTouches[0].clientY - touchRef.current.startY
+    // Only swipe if horizontal movement is dominant
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > SWIPE_THRESHOLD) {
+      if (deltaX < 0) goNext()
+      else goPrev()
+    }
+    touchRef.current = null
+    setPaused(false)
+  }, [goNext, goPrev])
 
   return (
     <div>
@@ -57,14 +89,14 @@ export default function ProjectCarousel() {
         </div>
         <div className="flex gap-2">
           <button
-            onClick={() => setIdx((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length)}
+            onClick={goPrev}
             aria-label="Proyecto anterior"
             className="w-12 h-12 border border-roiba-verde/20 bg-roiba-verde/80 backdrop-blur-sm text-white flex items-center justify-center hover:bg-roiba-dorado hover:text-roiba-verde hover:border-roiba-dorado transition-all duration-300"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 19l-7-7 7-7" /></svg>
           </button>
           <button
-            onClick={() => setIdx((prev) => (prev + 1) % PROJECTS.length)}
+            onClick={goNext}
             aria-label="Proyecto siguiente"
             className="w-12 h-12 border border-roiba-verde/20 bg-roiba-verde/80 backdrop-blur-sm text-white flex items-center justify-center hover:bg-roiba-dorado hover:text-roiba-verde hover:border-roiba-dorado transition-all duration-300"
           >
@@ -77,7 +109,9 @@ export default function ProjectCarousel() {
       <div
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        className="relative w-full overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="relative w-full overflow-hidden touch-pan-y"
       >
         <div
           className="flex transition-transform duration-700 ease-out-expo"
