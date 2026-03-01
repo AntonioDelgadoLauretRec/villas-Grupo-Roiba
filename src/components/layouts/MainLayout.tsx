@@ -1,6 +1,6 @@
 'use client'
 
-import { type FC, type ReactNode, useState } from 'react'
+import { type FC, type ReactNode, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui'
@@ -42,12 +42,12 @@ const Header: FC<{ locale: 'es' | 'en' }> = ({ locale }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const nav = navigation[locale]
 
-  // Handle scroll effect
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', () => {
-      setIsScrolled(window.scrollY > 50)
-    })
-  }
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <header

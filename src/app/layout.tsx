@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import '@/styles/globals.css'
 import { Navbar } from '@/components/layouts/Navbar'
 import { Footer } from '@/components/layouts/Footer'
+import FloatingWhatsApp from '@/components/ui/FloatingWhatsApp'
+import CookieConsent from '@/components/ui/CookieConsent'
 
 export const metadata: Metadata = {
   title: {
@@ -169,6 +171,8 @@ export default function RootLayout({
         </main>
         
         <Footer />
+        <FloatingWhatsApp />
+        <CookieConsent />
       </body>
     </html>
   )
