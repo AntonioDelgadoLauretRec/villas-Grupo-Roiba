@@ -3,14 +3,15 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
-const HERO_IMAGES = [
+const DEFAULT_HERO_IMAGES = [
   'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&q=90&fit=crop',
   'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=90&fit=crop',
   'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=90&fit=crop',
   'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=90&fit=crop',
 ]
 
-export default function HeroSection() {
+export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
+  const HERO_IMAGES = dbImages && dbImages.length > 0 ? dbImages : DEFAULT_HERO_IMAGES
   const [imgIdx, setImgIdx] = useState(0)
   const [hasVideo, setHasVideo] = useState(false)
 

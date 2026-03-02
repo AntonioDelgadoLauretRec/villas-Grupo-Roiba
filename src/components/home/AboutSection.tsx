@@ -1,6 +1,12 @@
 import Image from 'next/image'
 
-export default function AboutSection() {
+interface AboutData {
+  title?: string
+  paragraph1?: string
+  paragraph2?: string
+}
+
+export default function AboutSection({ dbAbout }: { dbAbout?: AboutData }) {
   return (
     <section className="py-[clamp(80px,10vw,140px)] px-[clamp(24px,8vw,120px)] bg-roiba-arena-light">
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
@@ -16,10 +22,10 @@ export default function AboutSection() {
           </h2>
           <div className="scroll-reveal delay-2 w-12 h-0.5 bg-roiba-dorado mb-8" />
           <p className="scroll-reveal delay-3 font-sans text-sm leading-[1.85] text-slate-500 mb-5">
-            Grupo Roiba es una firma especializada en dirección técnica y supervisión de obra, así como en la construcción de villas premium en la zona este de República Dominicana, con especial enfoque en Punta Cana.
+            {dbAbout?.paragraph1 || 'Grupo Roiba es una firma especializada en dirección técnica y supervisión de obra, así como en la construcción de villas premium en la zona este de República Dominicana, con especial enfoque en Punta Cana.'}
           </p>
           <p className="scroll-reveal delay-4 font-sans text-sm leading-[1.85] text-slate-500">
-            Paralelamente, desarrollamos y construimos villas premium totalmente personalizadas, definiendo cada proyecto en función de los requerimientos técnicos, funcionales y estéticos del cliente, bajo un modelo de ejecución basado en precisión constructiva, planificación rigurosa y altos estándares de acabado.
+            {dbAbout?.paragraph2 || 'Paralelamente, desarrollamos y construimos villas premium totalmente personalizadas, definiendo cada proyecto en función de los requerimientos técnicos, funcionales y estéticos del cliente, bajo un modelo de ejecución basado en precisión constructiva, planificación rigurosa y altos estándares de acabado.'}
           </p>
         </div>
 

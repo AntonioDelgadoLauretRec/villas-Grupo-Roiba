@@ -70,13 +70,84 @@ function IconExternal({ className = 'w-4 h-4' }: { className?: string }) {
   )
 }
 
+function IconList({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" />
+      <line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />
+    </svg>
+  )
+}
+
+function IconUsers({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
+    </svg>
+  )
+}
+
+function IconStar({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  )
+}
+
+function IconMap({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" /><line x1="8" y1="2" x2="8" y2="18" /><line x1="16" y1="6" x2="16" y2="22" />
+    </svg>
+  )
+}
+
+function IconFile({ className = 'w-5 h-5' }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
+    </svg>
+  )
+}
+
 /* ─── Navigation items ────────────────────────────────── */
 
-const navItems = [
-  { href: '/admin', label: 'Inicio', icon: IconDashboard, description: 'Vista general' },
-  { href: '/admin/villas', label: 'Villas', icon: IconVilla, description: 'Gestionar villas' },
-  { href: '/admin/projects', label: 'Proyectos', icon: IconProject, description: 'Gestionar proyectos' },
-  { href: '/admin/settings', label: 'Ajustes', icon: IconSettings, description: 'Configuración del sitio' },
+interface NavSection {
+  title: string
+  items: { href: string; label: string; icon: React.ComponentType<{ className?: string }>; description: string }[]
+}
+
+const navSections: NavSection[] = [
+  {
+    title: 'Principal',
+    items: [
+      { href: '/admin', label: 'Inicio', icon: IconDashboard, description: 'Vista general' },
+      { href: '/admin/villas', label: 'Villas', icon: IconVilla, description: 'Gestionar villas' },
+      { href: '/admin/projects', label: 'Proyectos', icon: IconProject, description: 'Gestionar proyectos' },
+    ],
+  },
+  {
+    title: 'Contenido web',
+    items: [
+      { href: '/admin/servicios', label: 'Servicios', icon: IconList, description: 'Servicios homepage y servicios' },
+      { href: '/admin/sub-servicios', label: 'Sub-servicios', icon: IconList, description: 'Servicios detallados' },
+      { href: '/admin/proceso', label: 'Proceso', icon: IconList, description: 'Pasos del proceso' },
+      { href: '/admin/testimonios', label: 'Testimonios', icon: IconStar, description: 'Testimonios de clientes' },
+      { href: '/admin/equipo', label: 'Equipo', icon: IconUsers, description: 'Miembros del equipo' },
+      { href: '/admin/valores', label: 'Valores', icon: IconStar, description: 'Valores de la empresa' },
+      { href: '/admin/blog', label: 'Blog', icon: IconFile, description: 'Artículos del blog' },
+      { href: '/admin/pois', label: 'POIs', icon: IconMap, description: 'Puntos de interés en el mapa' },
+      { href: '/admin/atracciones', label: 'Atracciones', icon: IconMap, description: 'Atracciones de Punta Cana' },
+    ],
+  },
+  {
+    title: 'Configuración',
+    items: [
+      { href: '/admin/contenido', label: 'Contenido global', icon: IconSettings, description: 'Hero, stats, about, footer...' },
+      { href: '/admin/settings', label: 'Ajustes', icon: IconSettings, description: 'SEO y contacto' },
+    ],
+  },
 ]
 
 /* ─── Breadcrumb helper ───────────────────────────────── */
@@ -89,6 +160,16 @@ function getBreadcrumbs(pathname: string) {
     villas: 'Villas',
     projects: 'Proyectos',
     settings: 'Ajustes',
+    servicios: 'Servicios',
+    'sub-servicios': 'Sub-servicios',
+    proceso: 'Proceso',
+    testimonios: 'Testimonios',
+    equipo: 'Equipo',
+    valores: 'Valores',
+    blog: 'Blog',
+    pois: 'POIs',
+    atracciones: 'Atracciones',
+    contenido: 'Contenido global',
     new: 'Crear nuevo',
   }
 
@@ -165,42 +246,48 @@ export default function AdminShell({ children, adminName, adminRole }: AdminShel
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-            <p className="px-3 pb-2 text-[10px] text-white/30 uppercase tracking-[0.15em] font-medium">
-              Contenido
-            </p>
-            {navItems.map((item) => {
-              const Icon = item.icon
-              const isActive =
-                item.href === '/admin'
-                  ? pathname === '/admin'
-                  : pathname.startsWith(item.href)
+          <nav className="flex-1 px-3 py-4 space-y-4 overflow-y-auto">
+            {navSections.map((section) => (
+              <div key={section.title}>
+                <p className="px-3 pb-2 text-[10px] text-white/30 uppercase tracking-[0.15em] font-medium">
+                  {section.title}
+                </p>
+                <div className="space-y-0.5">
+                  {section.items.map((item) => {
+                    const Icon = item.icon
+                    const isActive =
+                      item.href === '/admin'
+                        ? pathname === '/admin'
+                        : pathname.startsWith(item.href)
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setSidebarOpen(false)}
-                  title={item.description}
-                  className={`
-                    flex items-center gap-3 px-3 py-2.5 rounded-sm text-sm transition-all duration-200
-                    ${
-                      isActive
-                        ? 'bg-white/10 text-white font-medium shadow-sm'
-                        : 'text-white/50 hover:text-white hover:bg-white/5'
-                    }
-                  `}
-                >
-                  <span className={`flex-shrink-0 ${isActive ? 'text-roiba-dorado' : ''}`}>
-                    <Icon />
-                  </span>
-                  <span>{item.label}</span>
-                  {isActive && (
-                    <span className="ml-auto w-1.5 h-1.5 rounded-full bg-roiba-dorado" />
-                  )}
-                </Link>
-              )
-            })}
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setSidebarOpen(false)}
+                        title={item.description}
+                        className={`
+                          flex items-center gap-3 px-3 py-2 rounded-sm text-sm transition-all duration-200
+                          ${
+                            isActive
+                              ? 'bg-white/10 text-white font-medium shadow-sm'
+                              : 'text-white/50 hover:text-white hover:bg-white/5'
+                          }
+                        `}
+                      >
+                        <span className={`flex-shrink-0 ${isActive ? 'text-roiba-dorado' : ''}`}>
+                          <Icon className="w-4 h-4" />
+                        </span>
+                        <span>{item.label}</span>
+                        {isActive && (
+                          <span className="ml-auto w-1.5 h-1.5 rounded-full bg-roiba-dorado" />
+                        )}
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
           </nav>
 
           {/* User section */}

@@ -1,5 +1,9 @@
 import { createClient } from '@/lib/supabase/server'
-import type { Villa, Project, SiteSetting } from '@/types/admin'
+import type {
+  Villa, Project, SiteSetting,
+  Service, SubService, ProcessStep, Testimonial,
+  TeamMember, CompanyValue, BlogPost, Poi, Attraction,
+} from '@/types/admin'
 
 /**
  * Fetch published villas, ordered by sort_order.
@@ -122,4 +126,225 @@ export async function getAllSiteSettings(): Promise<Record<string, Record<string
     }
   }
   return result
+}
+
+// ─── Services ───────────────────────────────────────────
+
+export async function getServices(page: 'homepage' | 'servicios'): Promise<Service[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('services')
+    .select('*')
+    .eq('page', page)
+    .eq('visible', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as Service[]) || []
+}
+
+export async function getAllServices(): Promise<Service[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('services')
+    .select('*')
+    .order('page', { ascending: true })
+    .order('sort_order', { ascending: true })
+
+  return (data as Service[]) || []
+}
+
+// ─── Sub-services ───────────────────────────────────────
+
+export async function getSubServices(): Promise<SubService[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('sub_services')
+    .select('*')
+    .eq('visible', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as SubService[]) || []
+}
+
+export async function getAllSubServices(): Promise<SubService[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('sub_services')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
+  return (data as SubService[]) || []
+}
+
+// ─── Process steps ──────────────────────────────────────
+
+export async function getProcessSteps(): Promise<ProcessStep[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('process_steps')
+    .select('*')
+    .eq('visible', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as ProcessStep[]) || []
+}
+
+export async function getAllProcessSteps(): Promise<ProcessStep[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('process_steps')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
+  return (data as ProcessStep[]) || []
+}
+
+// ─── Testimonials ───────────────────────────────────────
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('testimonials')
+    .select('*')
+    .eq('visible', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as Testimonial[]) || []
+}
+
+export async function getAllTestimonials(): Promise<Testimonial[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('testimonials')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
+  return (data as Testimonial[]) || []
+}
+
+// ─── Team members ───────────────────────────────────────
+
+export async function getTeamMembers(): Promise<TeamMember[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('team_members')
+    .select('*')
+    .eq('visible', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as TeamMember[]) || []
+}
+
+export async function getAllTeamMembers(): Promise<TeamMember[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('team_members')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
+  return (data as TeamMember[]) || []
+}
+
+// ─── Company values ─────────────────────────────────────
+
+export async function getCompanyValues(): Promise<CompanyValue[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('company_values')
+    .select('*')
+    .eq('visible', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as CompanyValue[]) || []
+}
+
+export async function getAllCompanyValues(): Promise<CompanyValue[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('company_values')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
+  return (data as CompanyValue[]) || []
+}
+
+// ─── Blog posts ─────────────────────────────────────────
+
+export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .eq('published', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as BlogPost[]) || []
+}
+
+export async function getAllBlogPosts(): Promise<BlogPost[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
+  return (data as BlogPost[]) || []
+}
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .eq('slug', slug)
+    .eq('published', true)
+    .single()
+
+  return (data as BlogPost) || null
+}
+
+// ─── POIs ───────────────────────────────────────────────
+
+export async function getPois(): Promise<Poi[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('pois')
+    .select('*')
+    .eq('visible', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as Poi[]) || []
+}
+
+export async function getAllPois(): Promise<Poi[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('pois')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
+  return (data as Poi[]) || []
+}
+
+// ─── Attractions ────────────────────────────────────────
+
+export async function getAttractions(): Promise<Attraction[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('attractions')
+    .select('*')
+    .eq('visible', true)
+    .order('sort_order', { ascending: true })
+
+  return (data as Attraction[]) || []
+}
+
+export async function getAllAttractions(): Promise<Attraction[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('attractions')
+    .select('*')
+    .order('sort_order', { ascending: true })
+
+  return (data as Attraction[]) || []
 }

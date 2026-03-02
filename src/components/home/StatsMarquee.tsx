@@ -1,11 +1,12 @@
-const STATS = [
+const DEFAULT_STATS = [
   { value: '15+', label: 'Proyectos entregados' },
   { value: '98%', label: 'Satisfacción cliente' },
   { value: '2', label: 'Países operativos' },
   { value: '0', label: 'Retrasos en entrega' },
 ]
 
-export default function StatsMarquee() {
+export default function StatsMarquee({ dbStats }: { dbStats?: { value: string; label: string }[] }) {
+  const STATS = dbStats && dbStats.length > 0 ? dbStats : DEFAULT_STATS
   return (
     <section className="bg-roiba-verde py-5 overflow-hidden border-y border-roiba-dorado/[0.12]">
       <div className="animate-marquee flex w-fit">

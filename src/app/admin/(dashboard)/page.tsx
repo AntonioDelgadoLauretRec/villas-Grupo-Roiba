@@ -67,42 +67,33 @@ export default async function AdminDashboardPage() {
         />
       </div>
 
-      {/* Quick actions */}
+      {/* Content management grid */}
       <div className="bg-white rounded-sm border border-slate-200 p-6 mb-8">
-        <h2 className="text-base font-semibold text-slate-800 mb-4">Acciones rápidas</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <Link
-            href="/admin/villas/new"
-            className="flex items-center gap-3 px-5 py-4 bg-roiba-verde/5 border border-roiba-verde/10 rounded-sm hover:bg-roiba-verde/10 transition-colors group"
-          >
-            <span className="w-10 h-10 rounded-full bg-roiba-verde/10 flex items-center justify-center text-roiba-verde text-lg group-hover:bg-roiba-verde group-hover:text-white transition-colors">+</span>
-            <div>
-              <p className="text-sm font-medium text-roiba-verde">Nueva villa</p>
-              <p className="text-xs text-slate-400">Añadir al portfolio</p>
-            </div>
-          </Link>
-          <Link
-            href="/admin/projects/new"
-            className="flex items-center gap-3 px-5 py-4 bg-blue-50/50 border border-blue-100 rounded-sm hover:bg-blue-50 transition-colors group"
-          >
-            <span className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">+</span>
-            <div>
-              <p className="text-sm font-medium text-blue-700">Nuevo proyecto</p>
-              <p className="text-xs text-slate-400">Añadir proyecto futuro</p>
-            </div>
-          </Link>
-          <Link
-            href="/admin/settings"
-            className="flex items-center gap-3 px-5 py-4 bg-slate-50 border border-slate-200 rounded-sm hover:bg-slate-100 transition-colors group"
-          >
-            <span className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 group-hover:bg-slate-600 group-hover:text-white transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>
-            </span>
-            <div>
-              <p className="text-sm font-medium text-slate-700">Ajustes del sitio</p>
-              <p className="text-xs text-slate-400">Hero, contacto, SEO</p>
-            </div>
-          </Link>
+        <h2 className="text-base font-semibold text-slate-800 mb-4">Gestionar contenido</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {[
+            { href: '/admin/villas/new', label: 'Nueva villa', sub: 'Portfolio' },
+            { href: '/admin/projects/new', label: 'Nuevo proyecto', sub: 'Proyectos' },
+            { href: '/admin/servicios', label: 'Servicios', sub: 'Homepage y servicios' },
+            { href: '/admin/sub-servicios', label: 'Sub-servicios', sub: 'Página de servicios' },
+            { href: '/admin/proceso', label: 'Proceso', sub: 'Pasos de trabajo' },
+            { href: '/admin/testimonios', label: 'Testimonios', sub: 'Opiniones de clientes' },
+            { href: '/admin/equipo', label: 'Equipo', sub: 'Miembros del equipo' },
+            { href: '/admin/valores', label: 'Valores', sub: 'Valores corporativos' },
+            { href: '/admin/blog', label: 'Blog', sub: 'Artículos' },
+            { href: '/admin/pois', label: 'POIs', sub: 'Mapa de Punta Cana' },
+            { href: '/admin/atracciones', label: 'Atracciones', sub: 'Destinos de interés' },
+            { href: '/admin/contenido', label: 'Contenido global', sub: 'Hero, stats, footer...' },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="flex flex-col px-4 py-3 bg-slate-50 border border-slate-200 rounded-sm hover:bg-slate-100 hover:border-slate-300 transition-colors"
+            >
+              <p className="text-sm font-medium text-slate-700">{item.label}</p>
+              <p className="text-xs text-slate-400 mt-0.5">{item.sub}</p>
+            </Link>
+          ))}
         </div>
       </div>
 

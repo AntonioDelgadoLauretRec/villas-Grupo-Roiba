@@ -9,18 +9,35 @@ import ProcessTabs from './home/ProcessTabs'
 import TestimonialsSection from './home/TestimonialsSection'
 import CTASection from './home/CTASection'
 import BrochureSection from './home/BrochureSection'
+import type { Service, ProcessStep, Testimonial } from '@/types/admin'
 
-export default function HomePage() {
+interface HomePageProps {
+  dbServices?: Service[]
+  dbProcessSteps?: ProcessStep[]
+  dbTestimonials?: Testimonial[]
+  dbHeroImages?: string[]
+  dbStats?: { value: string; label: string }[]
+  dbAbout?: { title?: string; paragraph1?: string; paragraph2?: string }
+}
+
+export default function HomePage({
+  dbServices,
+  dbProcessSteps,
+  dbTestimonials,
+  dbHeroImages,
+  dbStats,
+  dbAbout,
+}: HomePageProps) {
   useScrollReveal()
 
   return (
     <div className="bg-roiba-arena-light min-h-screen overflow-x-hidden">
-      <HeroSection />
-      <StatsMarquee />
-      <AboutSection />
-      <ServicesGrid />
-      <ProcessTabs />
-      <TestimonialsSection />
+      <HeroSection dbImages={dbHeroImages} />
+      <StatsMarquee dbStats={dbStats} />
+      <AboutSection dbAbout={dbAbout} />
+      <ServicesGrid dbServices={dbServices} />
+      <ProcessTabs dbSteps={dbProcessSteps} />
+      <TestimonialsSection dbTestimonials={dbTestimonials} />
       <BrochureSection />
       <CTASection />
     </div>

@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import ImageSkeleton from '@/components/ui/ImageSkeleton'
+import type { Service } from '@/types/admin'
 
-const SERVICES = [
+const DEFAULT_SERVICES = [
   { key: 'design', title: 'Diseño Arquitectónico', desc: 'Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva.', image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80&fit=crop' },
   { key: 'build', title: 'Construcción', desc: 'Ejecución integral con materiales premium y control en cada fase.', image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80&fit=crop' },
   { key: 'direction', title: 'Dirección Técnica', desc: 'Supervisión que garantiza plazos, calidad y normativa.', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&fit=crop' },
@@ -15,7 +16,10 @@ const SERVICES = [
   { key: 'advisory', title: 'Asesoría Técnica', desc: 'Consultoría experta en normativa, terrenos, permisos y viabilidad.', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&fit=crop' },
 ]
 
-export default function ServicesGrid() {
+export default function ServicesGrid({ dbServices }: { dbServices?: Service[] }) {
+  const SERVICES = dbServices
+    ? dbServices.map(s => ({ key: s.slug, title: s.title, desc: s.description, image: s.image }))
+    : DEFAULT_SERVICES
   const [openCard, setOpenCard] = useState<string | null>(null)
 
   return (

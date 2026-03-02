@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import type { Testimonial } from '@/types/admin'
 
-const TESTIMONIALS = [
+const DEFAULT_TESTIMONIALS = [
   { quote: 'Grupo Roiba nos ofreció algo que no habíamos encontrado en ningún otro constructor en Punta Cana: transparencia real. Cada semana recibíamos informes detallados con fotos, costes actualizados y un cronograma que se cumplió al día. La villa superó todas nuestras expectativas.', name: 'Carlos & Lucía M.', role: 'Propietarios de villa', location: 'Madrid, España' },
   { quote: 'Construir nuestra villa desde Miami con un equipo en el Caribe parecía un reto enorme. Iván y Ramón lo hicieron simple. Su dominio técnico, la comunicación constante y el respeto escrupuloso al presupuesto nos dieron una confianza total desde el primer día.', name: 'James & Patricia W.', role: 'Propietarios de villa en Cap Cana', location: 'Miami, Florida, EE.UU.' },
   { quote: 'Buscábamos un equipo que entendiera nuestras expectativas de calidad y las trasladara al Caribe. Roiba lo consiguió. La atención al detalle en los acabados, la selección de materiales y el control de calidad fueron impecables. Recomendamos Grupo Roiba sin reservas.', name: 'Elena & Roberto V.', role: 'Propietarios de villa', location: 'Marbella, España' },
@@ -10,7 +11,10 @@ const TESTIMONIALS = [
   { quote: 'El servicio Roiba Care fue decisivo en nuestra decisión. Saber que nuestra propiedad estará supervisada y mantenida profesionalmente cuando estamos en Nueva York nos da una tranquilidad absoluta. Es un servicio post-entrega que realmente marca la diferencia.', name: 'David & Lauren Chen', role: 'Propietarios de villa', location: 'New York, EE.UU.' },
 ]
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials?: Testimonial[] }) {
+  const TESTIMONIALS = dbTestimonials
+    ? dbTestimonials.map(t => ({ quote: t.quote, name: t.name, role: t.role, location: t.location }))
+    : DEFAULT_TESTIMONIALS
   const [idx, setIdx] = useState(0)
   const touchRef = useRef<{ x: number; y: number } | null>(null)
 

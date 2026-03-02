@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
+import { getPublishedBlogPosts } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Blog | Grupo Roiba',
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gruporoiba.com/blog' },
 }
 
-const articles = [
+const defaultArticles = [
   {
     slug: 'por-que-invertir-punta-cana-2025',
     title: 'Por qué invertir en Punta Cana en 2025',
@@ -65,7 +66,11 @@ const articles = [
   },
 ]
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const dbPosts = await getPublishedBlogPosts().catch(() => [])
+  const articles = dbPosts.length > 0
+    ? dbPosts.map(p => ({ slug: p.slug, title: p.title, excerpt: p.excerpt, image: p.image, category: p.category, date: p.date, readTime: p.read_time }))
+    : defaultArticles
   return (
     <main>
       {/* Hero */}

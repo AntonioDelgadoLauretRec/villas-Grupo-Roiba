@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import type { ProcessStep } from '@/types/admin'
 
-const PROCESS = [
+const DEFAULT_PROCESS = [
   { num: '01', title: 'Análisis de Terreno', subtitle: 'Seguridad jurídica en la adquisición', desc: 'La adquisición del terreno es el primer paso y uno de los más críticos del proyecto. Verificamos la situación legal de la propiedad antes de su adquisición, confirmando titularidad y detectando posibles cargas.', detail: 'Due diligence legal · Verificación de titularidad · Análisis de viabilidad', duration: '2-4 semanas' },
   { num: '02', title: 'Validación del Proyecto', subtitle: 'Viabilidad técnica y normativa', desc: 'Analizamos el proyecto desde un punto de vista técnico y urbanístico para asegurar su viabilidad antes de avanzar en el desarrollo. Evaluamos condicionantes del terreno y normativa aplicable.', detail: 'Estudio técnico · Normativa urbanística · Criterios constructivos', duration: '1-2 semanas' },
   { num: '03', title: 'Co-Diseño', subtitle: 'Arquitectura e interiorismo a medida', desc: 'Definimos el proyecto junto al cliente, adaptando la vivienda a sus necesidades, estilo de vida y objetivos de inversión. Cada proyecto es único y se desarrolla con un enfoque totalmente personalizado.', detail: 'Arquitectura · Interiorismo · Funcionalidad · Diseño personalizado', duration: '4-6 semanas' },
@@ -11,7 +12,10 @@ const PROCESS = [
   { num: '06', title: 'Roiba Care', subtitle: 'Gestión y mantenimiento post-entrega', desc: 'El proyecto no finaliza con la entrega. Ofrecemos un servicio de gestión y mantenimiento orientado a preservar el valor de la propiedad y garantizar su correcto funcionamiento a lo largo del tiempo.', detail: 'Mantenimiento · Supervisión · Gestión operativa · Informes periódicos', duration: 'Permanente' },
 ]
 
-export default function ProcessTabs() {
+export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
+  const PROCESS = dbSteps
+    ? dbSteps.map(s => ({ num: s.num, title: s.title, subtitle: s.subtitle, desc: s.description, detail: s.detail, duration: s.duration }))
+    : DEFAULT_PROCESS
   const [active, setActive] = useState(0)
   const step = PROCESS[active]
 
