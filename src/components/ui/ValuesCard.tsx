@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
+import ImageSkeleton from '@/components/ui/ImageSkeleton'
 
 interface ValuesCardProps {
   title: string
@@ -16,41 +16,38 @@ export default function ValuesCard({ title, description, image }: ValuesCardProp
     <div
       onClick={() => setOpen((o) => !o)}
       className={`
-        group relative aspect-[4/5] overflow-hidden cursor-pointer select-none
+        group relative aspect-[3/2] overflow-hidden cursor-pointer select-none rounded-sm
         transition-all duration-500 ease-out
-        hover:scale-[1.03]
-        hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]
-        hover:z-10
-        ${open ? 'scale-[1.02] shadow-[0_16px_50px_rgba(0,0,0,0.4)] z-10' : ''}
+        hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(0,0,0,0.25)] hover:z-10
+        ${open ? '-translate-y-1 shadow-[0_12px_36px_rgba(0,0,0,0.25)] z-10' : ''}
       `}
     >
       {/* Background photo */}
-      <Image
+      <ImageSkeleton
         src={image}
         alt={title}
         fill
         className={`
           object-cover transition-transform duration-700 ease-out
-          group-hover:scale-110
-          ${open ? 'scale-110' : ''}
+          group-hover:scale-105
+          ${open ? 'scale-105' : ''}
         `}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
       />
 
-      {/* Dark gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde via-roiba-verde/70 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+      {/* Dark gradient — lighter for compact card */}
+      <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/90 via-roiba-verde/40 to-transparent" />
 
       {/* Gold top accent */}
       <div className={`
         absolute top-0 left-0 right-0 h-[2px] bg-roiba-dorado transition-opacity duration-500
-        opacity-0 group-hover:opacity-70
-        ${open ? 'opacity-70' : ''}
+        opacity-0 group-hover:opacity-60
+        ${open ? 'opacity-60' : ''}
       `} />
 
       {/* Content at bottom */}
-      <div className="absolute inset-x-0 bottom-0 p-6 md:p-7">
-        {/* Title */}
-        <h3 className="text-subheading font-serif text-white leading-tight">
+      <div className="absolute inset-x-0 bottom-0 p-5">
+        <h3 className="font-serif text-lg text-white leading-tight font-medium">
           {title}
         </h3>
 
@@ -59,26 +56,15 @@ export default function ValuesCard({ title, description, image }: ValuesCardProp
           className={`
             overflow-hidden transition-all duration-500 ease-out
             max-h-0 opacity-0
-            group-hover:max-h-48 group-hover:opacity-100
-            group-hover:mt-3
-            ${open ? 'max-h-48 !opacity-100 mt-3' : ''}
+            group-hover:max-h-24 group-hover:opacity-100 group-hover:mt-2
+            ${open ? 'max-h-24 !opacity-100 mt-2' : ''}
           `}
         >
-          <p className="text-caption text-white/70 leading-relaxed">
+          <p className="text-[13px] text-white/70 leading-relaxed">
             {description}
           </p>
         </div>
       </div>
-
-      {/* Gold bottom accent */}
-      <div
-        className={`
-          absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-roiba-dorado/60
-          transition-all duration-500 ease-out
-          w-0 group-hover:w-3/4
-          ${open ? 'w-3/4' : ''}
-        `}
-      />
     </div>
   )
 }

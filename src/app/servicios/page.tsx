@@ -190,29 +190,22 @@ export default function ServiciosPage() {
             {serviciosGrid.map((servicio) => (
               <div
                 key={servicio.num}
-                className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
+                className="group relative aspect-[5/3] overflow-hidden cursor-pointer rounded-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]"
               >
-                {/* Background photo */}
                 <Image
                   src={servicio.image}
                   alt={servicio.title}
                   fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
-                {/* Dark gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde via-roiba-verde/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
-                {/* Gold top accent line */}
+                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/90 via-roiba-verde/40 to-transparent" />
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-roiba-dorado/0 group-hover:bg-roiba-dorado/60 transition-all duration-500" />
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-7">
-                  <span className="font-serif text-roiba-dorado/50 text-display-md leading-none mb-3 transition-colors duration-300 group-hover:text-roiba-dorado/80">
-                    {servicio.num}
-                  </span>
-                  <h3 className="font-serif text-subheading text-white mb-2 leading-tight">
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <h3 className="font-serif text-lg text-white font-medium leading-tight">
                     {servicio.title}
                   </h3>
-                  <p className="text-white/0 text-caption leading-relaxed max-h-0 overflow-hidden transition-all duration-500 group-hover:text-white/70 group-hover:max-h-24 group-hover:mt-1">
+                  <p className="text-white/0 text-[13px] leading-relaxed max-h-0 overflow-hidden transition-all duration-500 group-hover:text-white/70 group-hover:max-h-20 group-hover:mt-2">
                     {servicio.description}
                   </p>
                 </div>

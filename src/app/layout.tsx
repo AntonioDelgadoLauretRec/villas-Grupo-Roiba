@@ -4,6 +4,8 @@ import { Navbar } from '@/components/layouts/Navbar'
 import { Footer } from '@/components/layouts/Footer'
 import FloatingWhatsApp from '@/components/ui/FloatingWhatsApp'
 import CookieConsent from '@/components/ui/CookieConsent'
+import { LanguageProvider } from '@/lib/i18n/LanguageContext'
+import GoogleAnalytics from '@/components/ui/GoogleAnalytics'
 
 export const metadata: Metadata = {
   title: {
@@ -79,6 +81,8 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
       <body className="min-h-screen flex flex-col">
+        <GoogleAnalytics />
+        <LanguageProvider>
         {/* JSON-LD Structured Data — Organization + LocalBusiness */}
         <script
           type="application/ld+json"
@@ -173,6 +177,7 @@ export default function RootLayout({
         <Footer />
         <FloatingWhatsApp />
         <CookieConsent />
+        </LanguageProvider>
       </body>
     </html>
   )

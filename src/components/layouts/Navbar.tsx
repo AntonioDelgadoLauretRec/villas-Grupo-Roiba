@@ -4,23 +4,26 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-
-const navigation = [
-  { name: 'Servicios', href: '/servicios' },
-  { name: 'Proceso', href: '/proceso' },
-  { name: 'Villas', href: '/villas' },
-  { name: 'Destino', href: '/por-que-punta-cana' },
-  { name: 'Nosotros', href: '/nosotros' },
-]
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
+  const { locale, setLocale, t } = useLanguage()
+
+  const navigation = [
+    { name: t.nav.servicios, href: '/servicios' },
+    { name: t.nav.proceso, href: '/proceso' },
+    { name: t.nav.villas, href: '/villas' },
+    { name: t.nav.destino, href: '/por-que-punta-cana' },
+    { name: t.nav.nosotros, href: '/nosotros' },
+    { name: t.nav.blog, href: '/blog' },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -32,6 +35,8 @@ export function Navbar() {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
+
+  const toggleLang = () => setLocale(locale === 'es' ? 'en' : 'es')
 
   return (
     <header
@@ -55,10 +60,10 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {navigation.map((item) => (
             <Link
-              key={item.name}
+              key={item.href}
               href={item.href}
               className={`text-sm font-medium tracking-wide transition-colors ${
                 pathname === item.href
@@ -71,13 +76,22 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* CTA Desktop */}
-        <Link
-          href="/contacto"
-          className="hidden md:inline-block px-6 py-2.5 bg-[#E8C877] text-[#0C2340] text-sm font-semibold rounded-lg hover:bg-[#C9A96E] transition-all duration-300"
-        >
-          Contactar
-        </Link>
+        {/* CTA + Lang Switcher Desktop */}
+        <div className="hidden md:flex items-center gap-4">
+          <button
+            onClick={toggleLang}
+            className="text-xs font-semibold tracking-wider uppercase text-white/60 hover:text-[#E8C877] transition-colors px-2 py-1 border border-white/15 rounded"
+            aria-label={locale === 'es' ? 'Switch to English' : 'Cambiar a español'}
+          >
+            {locale === 'es' ? 'EN' : 'ES'}
+          </button>
+          <Link
+            href="/contacto"
+            className="px-6 py-2.5 bg-[#E8C877] text-[#0C2340] text-sm font-semibold rounded-lg hover:bg-[#C9A96E] transition-all duration-300"
+          >
+            {t.nav.contactar}
+          </Link>
+        </div>
 
         {/* Mobile Toggle */}
         <button
@@ -85,14 +99,7 @@ export function Navbar() {
           className="md:hidden text-white p-2"
           aria-label="Menú"
         >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             {mobileOpen ? (
               <path d="M18 6L6 18M6 6l12 12" />
             ) : (
@@ -111,7 +118,7 @@ export function Navbar() {
         <div className="flex flex-col items-center justify-center h-full gap-8">
           {navigation.map((item) => (
             <Link
-              key={item.name}
+              key={item.href}
               href={item.href}
               onClick={() => setMobileOpen(false)}
               className={`text-2xl font-medium transition-colors ${
@@ -123,12 +130,18 @@ export function Navbar() {
               {item.name}
             </Link>
           ))}
+          <button
+            onClick={toggleLang}
+            className="text-sm font-semibold tracking-wider uppercase text-white/60 hover:text-[#E8C877] transition-colors px-4 py-2 border border-white/20 rounded"
+          >
+            {locale === 'es' ? 'English' : 'Español'}
+          </button>
           <Link
             href="/contacto"
             onClick={() => setMobileOpen(false)}
             className="mt-4 px-8 py-3 bg-[#E8C877] text-[#0C2340] font-semibold rounded-lg"
           >
-            Contactar
+            {t.nav.contactar}
           </Link>
         </div>
       </div>
