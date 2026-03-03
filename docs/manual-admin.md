@@ -56,6 +56,30 @@
 
 Al entrar al panel, llegarás a la **pantalla de inicio**. Aquí verás:
 
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                     PANTALLA DE INICIO                           │
+│                                                                  │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌────────┐ │
+│  │  5 Villas    │ │  2 Borrador- │ │  3 Proyectos │ │ Ajustes│ │
+│  │  publicadas  │ │  es          │ │  visibles    │ │   ⚙️    │ │
+│  └──────────────┘ └──────────────┘ └──────────────┘ └────────┘ │
+│         ↑ Tarjetas de resumen (parte superior)                   │
+│                                                                  │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐            │
+│  │  Servicios   │ │  Proceso     │ │  Testimonios │            │
+│  │     →        │ │     →        │ │     →        │   ...      │
+│  ├──────────────┤ ├──────────────┤ ├──────────────┤            │
+│  │  Equipo      │ │  Valores     │ │  Blog        │            │
+│  │     →        │ │     →        │ │     →        │   ...      │
+│  ├──────────────┤ ├──────────────┤ ├──────────────┤            │
+│  │  POIs        │ │  Atracciones │ │  Contenido   │            │
+│  │     →        │ │     →        │ │  global →    │   ...      │
+│  └──────────────┘ └──────────────┘ └──────────────┘            │
+│         ↑ Cuadrícula de accesos directos (parte inferior)        │
+└──────────────────────────────────────────────────────────────────┘
+```
+
 ### Resumen en números
 
 Cuatro tarjetas en la parte superior muestran un resumen rápido:
@@ -78,6 +102,36 @@ Debajo del resumen verás una cuadrícula de accesos directos a **todas las secc
 ### Menú lateral
 
 El panel tiene un menú en el lado izquierdo de la pantalla, organizado en tres bloques:
+
+```
+┌─────────────────────────────────┐
+│  GRUPO ROIBA — Admin           │
+│                                 │
+│  ── PRINCIPAL ──────────────── │
+│  🏠  Inicio                    │
+│  🏡  Villas                    │
+│  📋  Proyectos                 │
+│                                 │
+│  ── CONTENIDO WEB ──────────── │
+│  ⚙️  Servicios                  │
+│  📎  Sub-servicios             │
+│  📊  Proceso                   │
+│  ⭐  Testimonios               │
+│  👥  Equipo                    │
+│  📄  Valores                   │
+│  📝  Blog                     │
+│  📍  POIs                     │
+│  🏖️  Atracciones               │
+│                                 │
+│  ── CONFIGURACIÓN ──────────── │
+│  📄  Contenido global          │
+│  ⚙️  Ajustes                    │
+│                                 │
+│  ─────────────────────────────  │
+│  🔗 Ver web pública            │
+│  🚪 Cerrar sesión              │
+└─────────────────────────────────┘
+```
 
 **Principal** — Los contenidos más importantes:
 - **Inicio**: Volver a la pantalla de resumen
@@ -103,9 +157,27 @@ El panel tiene un menú en el lado izquierdo de la pantalla, organizado en tres 
 
 En pantallas pequeñas, el menú está oculto. Para abrirlo, pulsa el icono de **tres líneas horizontales** (☰) en la esquina superior izquierda. Para cerrarlo, pulsa fuera del menú.
 
+```
+┌──────────────────────────────────────────┐
+│  ☰   Panel de Administración             │  ← Pulsa ☰ para abrir
+│──────────────────────────────────────────│     el menú en móvil
+│                                          │
+│        (contenido de la página)          │
+│                                          │
+└──────────────────────────────────────────┘
+```
+
 ### Barra de navegación superior
 
 En la parte superior de cada página verás una "ruta" que indica dónde estás. Por ejemplo: **Inicio / Servicios / Crear nuevo**. Puedes pulsar sobre cualquier parte de esta ruta para volver a esa sección.
+
+```
+  Inicio  ›  Servicios  ›  Crear nuevo
+  ↑            ↑              ↑
+  Pulsa aquí   Pulsa aquí     Estás aquí
+  para ir      para ver la    (no es un
+  al inicio    lista          enlace)
+```
 
 ### Ver la web pública
 
@@ -121,6 +193,24 @@ Las villas son las propiedades que forman el portfolio de la empresa.
 
 1. Pulsa **"Villas"** en el menú lateral
 2. Verás una lista con todas las villas, mostrando su nombre, ubicación y estado
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│  Villas                                        [ + Nueva villa ] │
+│──────────────────────────────────────────────────────────────────│
+│                                                                  │
+│  Nombre              Ubicación       Estado       Acciones       │
+│  ─────────────────────────────────────────────────────────────── │
+│  Villa Aurora        Cap Cana        Publicada    👁  ✏️  🗑     │
+│  Villa Excellence    Bávaro          Publicada    👁  ✏️  🗑     │
+│  Villa Oceano        Cap Cana        Borrador     👁  ✏️  🗑     │
+│                                                   │   │   │      │
+│                                                   │   │   └─ Eliminar
+│                                                   │   └─ Editar  │
+│                                                   └─ Mostrar/    │
+│                                                      Ocultar     │
+└──────────────────────────────────────────────────────────────────┘
+```
 
 ### Crear una nueva villa
 
@@ -158,11 +248,33 @@ Las villas son las propiedades que forman el portfolio de la empresa.
   - Si la villa está visible, pasará a estar oculta
   - Si está oculta, pasará a estar visible
 
+```
+  Estado actual          Pulsas 👁          Nuevo estado
+  ─────────────          ──────────          ────────────
+  ✅ Publicada    ──→    se oculta    ──→   ❌ Borrador
+  ❌ Borrador     ──→    se publica   ──→   ✅ Publicada
+```
+
 ### Eliminar una villa
 
 1. Pulsa el icono de la **papelera** (🗑) junto a la villa
 2. Aparecerá un mensaje pidiendo confirmación
 3. Pulsa **"Eliminar"** para borrarla definitivamente o **"Cancelar"** para mantenerla
+
+```
+ ┌────────────────────────────────────────┐
+ │                                        │
+ │   ⚠️  ¿Eliminar esta villa?            │
+ │                                        │
+ │   Esta acción no se puede deshacer.    │
+ │                                        │
+ │        [ Cancelar ]  [ Eliminar ]      │
+ │            ↑              ↑            │
+ │        Mantener la     Borrarla        │
+ │        villa           para siempre    │
+ │                                        │
+ └────────────────────────────────────────┘
+```
 
 > **Importante**: Eliminar una villa es irreversible. Se borrarán también todas sus fotografías asociadas.
 
@@ -262,6 +374,20 @@ Gestión de permisos
 ```
 
 Cada línea se convertirá en un punto de la lista visible en la web.
+
+```
+  Lo que escribes en el campo "Incluye":       Cómo se ve en la web:
+
+  ┌────────────────────────────────────┐       ┌──────────────────────────┐
+  │ Diseño arquitectónico personalizado│       │                          │
+  │ Interiorismo integral              │  ──→  │  • Diseño arquitectónico │
+  │ Selección de materiales premium    │       │    personalizado         │
+  │ Gestión de permisos                │       │  • Interiorismo integral │
+  └────────────────────────────────────┘       │  • Selección de          │
+    ↑ Una línea = un elemento                  │    materiales premium    │
+    ↑ NO uses guiones ni puntos                │  • Gestión de permisos   │
+    ↑ Pulsa "Enter" para nueva línea           └──────────────────────────┘
+```
 
 ---
 
@@ -385,10 +511,48 @@ Los POIs (Puntos de Interés) son las ubicaciones que aparecen en el mapa intera
 
 ### Cómo obtener las coordenadas de un lugar
 
-1. Abre **Google Maps** en tu navegador
-2. Busca el lugar o haz clic derecho en el punto exacto
+1. Abre **Google Maps** en tu navegador (maps.google.com)
+2. Busca el lugar o haz clic derecho en el punto exacto del mapa
 3. Se mostrarán dos números: el primero es la **latitud** y el segundo la **longitud**
-4. Copia esos números en los campos correspondientes
+4. Copia esos números en los campos correspondientes del formulario
+
+```
+  Google Maps: Clic derecho en el mapa
+  ─────────────────────────────────────
+
+  ┌─────────────────────────────────────────────┐
+  │                                             │
+  │        🗺️  (mapa de Punta Cana)             │
+  │                                             │
+  │                   📍 ← Clic derecho aquí    │
+  │               ┌────────────────┐            │
+  │               │ 18.5134, -68.3695│ ← Estos  │
+  │               │ ──────────────── │   son los │
+  │               │ Indicaciones...  │   números │
+  │               │ ¿Qué hay aquí?  │   que     │
+  │               └────────────────┘   necesitas │
+  │                                             │
+  └─────────────────────────────────────────────┘
+
+  El PRIMER número (18.5134)  → Campo "Latitud"
+  El SEGUNDO número (-68.3695) → Campo "Longitud"
+
+  ⚠️  Importante: el número de longitud en Punta Cana
+     siempre empieza con signo negativo (-)
+```
+
+### Ejemplo práctico
+
+Para añadir la Marina de Cap Cana como punto de interés:
+
+```
+  Nombre:      Cap Cana Marina
+  Categoría:   Marina
+  Latitud:     18.5134
+  Longitud:    -68.3695
+                 ↑
+                 No olvides el signo negativo
+```
 
 ---
 
@@ -420,6 +584,33 @@ Esta sección permite editar los textos generales de la web que no pertenecen a 
 2. En el lado izquierdo verás una lista de bloques de contenido
 3. Pulsa sobre el que quieras editar
 
+```
+┌──────────────────────────────────────────────────────────────────┐
+│  Contenido Global                                                │
+│──────────────────────────────────────────────────────────────────│
+│                                                                  │
+│  ┌──────────────┐  ┌──────────────────────────────────────────┐ │
+│  │              │  │                                          │ │
+│  │  Hero        │  │  Editor de contenido                     │ │
+│  │  Imágenes ◄──┼──┼─ Al pulsar un bloque                    │ │
+│  │  Estadísticas│  │   aquí se muestra su contenido           │ │
+│  │  Nosotros    │  │                                          │ │
+│  │  Contacto    │  │  ┌──────────────────────────────────┐   │ │
+│  │  SEO         │  │  │ [                                │   │ │
+│  │  Enfoque     │  │  │   {"value": "15+",               │   │ │
+│  │  Footer      │  │  │    "label": "Proyectos"},        │   │ │
+│  │              │  │  │   {"value": "98%",               │   │ │
+│  │              │  │  │    "label": "Clientes"}          │   │ │
+│  │              │  │  │ ]                                │   │ │
+│  │              │  │  └──────────────────────────────────┘   │ │
+│  │              │  │                                          │ │
+│  │              │  │                           [ Guardar ]    │ │
+│  └──────────────┘  └──────────────────────────────────────────┘ │
+│   Lista de            Editor (zona de edición de texto)          │
+│   bloques                                                        │
+└──────────────────────────────────────────────────────────────────┘
+```
+
 ### Bloques disponibles
 
 | Bloque | Qué controla |
@@ -439,6 +630,26 @@ Esta sección permite editar los textos generales de la web que no pertenecen a 
 2. Verás el contenido actual en un cuadro de texto en formato técnico (JSON)
 3. Modifica **solo los textos entre comillas** (`"texto"`). No borres las llaves `{}`, corchetes `[]`, ni las comas
 4. Pulsa **"Guardar"**
+
+```
+  Anatomía del formato JSON — Qué puedes cambiar y qué no:
+
+  {                          ← NO TOCAR (llave de apertura)
+    "value": "15+",          ← ✅ Puedes cambiar "15+" por otro texto
+    "label": "Proyectos"     ← ✅ Puedes cambiar "Proyectos"
+  }                          ← NO TOCAR (llave de cierre)
+   ↑        ↑        ↑
+   │        │        └── Las comillas "" son obligatorias
+   │        └── Los dos puntos : son obligatorios
+   └── El nombre del campo NO se cambia
+
+  Resumen:
+  ┌──────────────────────────────────────────────┐
+  │  ✅ PUEDES cambiar:  Los textos entre ""     │
+  │  ❌ NO toques:       {} [] , : ni los        │
+  │                      nombres de los campos   │
+  └──────────────────────────────────────────────┘
+```
 
 ### Ejemplo: cambiar una estadística
 
@@ -529,13 +740,67 @@ Para las secciones que piden una **"URL de imagen"** (servicios, equipo, valores
 
 | Término | Qué significa |
 |---------|---------------|
-| **Slug** | Un identificador corto y legible que forma parte de la dirección web. Por ejemplo, si el slug es `villa-aurora`, la dirección será `tudominio.com/villas/villa-aurora`. Solo puede contener letras minúsculas, números y guiones (-) |
-| **Orden** | Un número que determina la posición de un elemento en la lista. Los números más bajos aparecen primero. Consejo: usa múltiplos de 10 (10, 20, 30...) para poder insertar nuevos elementos entre los existentes sin tener que renumerar todo |
+| **Slug** | Un identificador corto y legible que forma parte de la dirección web (ver diagrama abajo) |
+| **Orden** | Un número que determina la posición de un elemento en la lista (ver diagrama abajo) |
 | **Visible / Publicado** | Una casilla que controla si el contenido aparece en la web pública. Si la casilla está desmarcada, el contenido solo es visible para los administradores |
 | **URL** | La dirección de internet de una página o imagen (ejemplo: `https://ejemplo.com/foto.jpg`) |
 | **SEO** | "Search Engine Optimization" (Optimización para Buscadores). Son los textos que controlan cómo aparece la web en los resultados de Google |
 | **JSON** | Un formato técnico para almacenar datos estructurados. Se usa en la sección de "Contenido global". Se reconoce por el uso de llaves `{}`, corchetes `[]` y comillas `""` |
 | **Caché** | Un sistema que guarda una copia temporal de la web para que cargue más rápido. Por eso los cambios pueden tardar un tiempo en reflejarse (hasta 1 hora) |
+
+### Cómo funciona el Slug (ejemplo visual)
+
+```
+  Título de la villa:  "Villa Aurora en Cap Cana"
+                                │
+                                ▼
+  Slug que escribes:   villa-aurora-cap-cana
+                                │
+                                ▼
+  Dirección web resultante:
+
+  https://gruporoiba.com / villas / villa-aurora-cap-cana
+  ├───────────────────┤   ├─────┤   ├────────────────────┤
+     Dominio del         Sección      Tu slug aparece
+     sitio web                         aquí
+
+  Reglas del slug:
+  ┌─────────────────────────────────────────────────┐
+  │  ✅  villa-aurora          (minúsculas + guiones)│
+  │  ✅  villa-2025            (números permitidos)  │
+  │  ❌  Villa Aurora          (sin mayúsculas)      │
+  │  ❌  villa aurora          (sin espacios)        │
+  │  ❌  villa_aurora          (sin guiones bajos)   │
+  │  ❌  villa/aurora          (sin barras)          │
+  └─────────────────────────────────────────────────┘
+```
+
+### Cómo funciona el Orden (ejemplo visual)
+
+```
+  Si asignas estos números de orden...
+
+  Servicio A  →  orden: 10
+  Servicio B  →  orden: 20
+  Servicio C  →  orden: 30
+
+  ...se mostrarán así en la web:
+
+  1. Servicio A
+  2. Servicio B
+  3. Servicio C
+
+  ¿Necesitas añadir uno nuevo entre A y B?
+  Simplemente dale orden 15:
+
+  Servicio A      →  orden: 10    →  1. Servicio A
+  Servicio NUEVO  →  orden: 15    →  2. Servicio NUEVO
+  Servicio B      →  orden: 20    →  3. Servicio B
+  Servicio C      →  orden: 30    →  4. Servicio C
+
+  💡 Consejo: Usa siempre múltiplos de 10 (10, 20, 30...)
+     para dejar espacio entre elementos.
+```
 
 ---
 
@@ -582,6 +847,44 @@ A continuación se muestra qué parte de la web controla cada sección del panel
 | **Villas** | Villas |
 | **Pie de página** | Contenido global (Footer) → Ajustes (Contacto) |
 | **Resultados en Google** | Ajustes (SEO) |
+
+```
+  PÁGINA DE INICIO (homepage) — Qué controla cada sección del admin:
+
+  ┌──────────────────────────────────────────────────────┐
+  │  ┌────────────────────────────────────────────────┐  │
+  │  │         HERO (encabezado con foto)             │  │ ← Contenido global:
+  │  │  "Arquitectura, control y confianza"           │  │   Hero + Imágenes Hero
+  │  └────────────────────────────────────────────────┘  │
+  │  ┌────────────────────────────────────────────────┐  │
+  │  │  15+ Proyectos  │  98% Clientes  │  10+ Años  │  │ ← Contenido global:
+  │  │     Barra de estadísticas                      │  │   Estadísticas
+  │  └────────────────────────────────────────────────┘  │
+  │  ┌────────────────────────────────────────────────┐  │
+  │  │         QUIÉNES SOMOS (texto + foto)           │  │ ← Contenido global:
+  │  │  "Precisión constructiva, visión integral..."  │  │   Sección Nosotros
+  │  └────────────────────────────────────────────────┘  │
+  │  ┌────────────────────────────────────────────────┐  │
+  │  │   ┌──────┐  ┌──────┐  ┌──────┐               │  │
+  │  │   │Diseño│  │Constr│  │Direcc│  ...           │  │ ← Admin: Servicios
+  │  │   └──────┘  └──────┘  └──────┘               │  │   (página: homepage)
+  │  │         NUESTROS SERVICIOS                     │  │
+  │  └────────────────────────────────────────────────┘  │
+  │  ┌────────────────────────────────────────────────┐  │
+  │  │  01  02  03  04  05  06                        │  │
+  │  │         NUESTRO PROCESO                        │  │ ← Admin: Proceso
+  │  └────────────────────────────────────────────────┘  │
+  │  ┌────────────────────────────────────────────────┐  │
+  │  │  ⭐⭐⭐⭐⭐                                     │  │
+  │  │  "Grupo Roiba nos ofreció..."                  │  │ ← Admin: Testimonios
+  │  │         TESTIMONIOS                            │  │
+  │  └────────────────────────────────────────────────┘  │
+  │  ┌────────────────────────────────────────────────┐  │
+  │  │         PIE DE PÁGINA                          │  │ ← Contenido global:
+  │  │  Contacto · Redes · Links                      │  │   Footer + Ajustes
+  │  └────────────────────────────────────────────────┘  │
+  └──────────────────────────────────────────────────────┘
+```
 
 ---
 
