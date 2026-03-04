@@ -28,13 +28,13 @@ const INVESTMENT_OPTIONS = [
 ]
 
 const SERVICE_OPTIONS = [
-  { value: 'direccion-tecnica', label: 'Dirección Técnica' },
-  { value: 'construccion-villa', label: 'Construcción de Villa' },
+  { value: 'direccion-tecnica', label: 'Dirección Técnica / Supervisión Independiente' },
+  { value: 'construccion-villa', label: 'Construcción Llave en Mano Completa' },
+  { value: 'project-management', label: 'Gestión de Proyecto de Mi Obra' },
+  { value: 'due-diligence', label: 'Due Diligence / Asesoramiento Técnico' },
   { value: 'interiorismo', label: 'Interiorismo y Equipamiento' },
-  { value: 'project-management', label: 'Project Management' },
-  { value: 'seguridad-juridica', label: 'Seguridad Jurídica' },
-  { value: 'roiba-care', label: 'Roiba Care' },
-  { value: 'otro', label: 'Otro' },
+  { value: 'roiba-care', label: 'Mantenimiento de Villa Existente (Roiba Care)' },
+  { value: 'orientacion', label: 'Aún no lo sé, necesito orientación' },
 ]
 
 const COUNTRIES = [

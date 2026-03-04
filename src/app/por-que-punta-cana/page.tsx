@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: '¿Por qué Punta Cana? | Grupo Roiba',
-  description: 'El destino de inversión más atractivo del Caribe. Descubra por qué Punta Cana es el lugar ideal para su villa premium.',
+  description: 'Infraestructura de primer nivel, marco legal estable y potencial de revalorización sostenido. Descubra por qué Punta Cana es el destino ideal para su inversión.',
   alternates: { canonical: 'https://gruporoiba.com/por-que-punta-cana' },
 }
 
@@ -16,14 +16,14 @@ export default function PuntaCanaPage() {
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            Destino
+            El Destino
           </p>
           <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
             ¿Por qué Punta Cana?
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
           <p className="text-body-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-            El destino de inversión más atractivo del Caribe
+            Infraestructura de primer nivel, marco legal estable y potencial de revalorización sostenido
           </p>
         </div>
       </section>
@@ -35,19 +35,19 @@ export default function PuntaCanaPage() {
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            Siguiente paso
+            Siguiente Paso
           </p>
           <h2 className="text-display-md font-serif text-white mb-6">
-            Invierta en el Caribe
+            Dé el primer paso
           </h2>
           <p className="text-white/60 text-body-lg mb-12 leading-relaxed">
-            Descubra las oportunidades de inversión en Punta Cana con la seguridad de un equipo experto.
+            Solicite información sobre zonas, tipologías de proyecto y análisis de viabilidad técnica antes de comprometerse.
           </p>
           <Link
             href="/contacto"
             className="inline-block px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold hover:bg-roiba-dorado-light transition-all duration-300 text-micro uppercase tracking-widest"
           >
-            Solicitar información
+            Solicitar análisis de mercado
           </Link>
         </div>
       </section>

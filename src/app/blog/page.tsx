@@ -5,7 +5,7 @@ import { getPublishedBlogPosts } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Blog | Grupo Roiba',
-  description: 'Artículos sobre inversión inmobiliaria en el Caribe, construcción de villas de lujo, mercado de Punta Cana y guías legales para inversores.',
+  description: 'Análisis de mercado, marco legal, proceso constructivo y vida en Punta Cana desde la perspectiva de quien ejecuta proyectos aquí.',
   alternates: { canonical: 'https://gruporoiba.com/blog' },
 }
 
@@ -77,12 +77,12 @@ export default async function BlogPage() {
       <section className="relative pt-28 pb-14 md:pt-32 md:pb-20 bg-roiba-verde overflow-hidden">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-6 text-center">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">Blog</p>
+          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">Publicaciones</p>
           <h1 className="font-serif text-display-lg md:text-display-xl text-white mb-8">
             Ideas, análisis y<br />guías de inversión
           </h1>
           <p className="text-white/60 text-body-lg max-w-2xl mx-auto leading-relaxed">
-            Artículos sobre mercado inmobiliario caribeño, construcción premium y oportunidades de inversión en Punta Cana.
+            Análisis de mercado, marco legal, proceso constructivo y vida en Punta Cana desde la perspectiva de quien ejecuta proyectos aquí.
           </p>
           <div className="mt-12 mx-auto w-16 h-px bg-roiba-dorado/40" />
         </div>
@@ -136,17 +136,20 @@ export default async function BlogPage() {
       <section className="relative py-14 md:py-20 bg-roiba-verde overflow-hidden">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-3xl mx-auto px-6 text-center">
+          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
+            ¿Le resulta útil este contenido?
+          </p>
           <h2 className="font-serif text-display-md text-white mb-6">
-            ¿Tiene un proyecto en mente?
+            Reciba análisis y guías técnicas por email
           </h2>
           <p className="text-white/60 text-body-lg mb-12 leading-relaxed">
-            Cuéntenos su idea. Nuestro equipo técnico le asesorará sin compromiso.
+            Suscríbase al boletín y reciba análisis, guías técnicas y actualizaciones de mercado antes de su publicación.
           </p>
           <Link
             href="/contacto"
             className="inline-block px-10 py-4 bg-roiba-dorado-light text-roiba-verde font-semibold rounded-sm hover:bg-roiba-dorado transition-colors duration-300 text-lg"
           >
-            Solicitar consulta gratuita
+            Suscribirse al boletín
           </Link>
         </div>
       </section>

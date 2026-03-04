@@ -14,16 +14,16 @@ const signals: TrustSignal[] = [
   {
     icon: 'experience',
     title: {
-      es: '38 Años de Experiencia',
-      en: '38 Years of Experience',
+      es: 'Experiencia Acumulada',
+      en: 'Accumulated Experience',
     },
     description: {
-      es: 'Trayectoria consolidada en construcción de alta calidad con proyectos en España y el Caribe.',
-      en: 'Consolidated track record in high-quality construction with projects in Spain and the Caribbean.',
+      es: 'Más de cuatro décadas ejecutando y supervisando proyectos residenciales y hoteleros en España y República Dominicana.',
+      en: 'Over four decades executing and supervising residential and hotel projects in Spain and the Dominican Republic.',
     },
     stat: {
-      value: '38+',
-      label: { es: 'Años', en: 'Years' },
+      value: '40+',
+      label: { es: 'Años combinados', en: 'Combined years' },
     },
   },
   {

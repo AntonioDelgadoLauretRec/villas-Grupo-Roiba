@@ -11,8 +11,8 @@ const FOOTER_LINKS = {
     { href: '/contacto', label: 'Contacto' },
   ],
   servicios: [
-    { href: '/villas', label: 'Colección de Villas' },
-    { href: '/por-que-punta-cana', label: 'Por qué Punta Cana' },
+    { href: '/villas', label: 'Proyectos' },
+    { href: '/inversores', label: 'Inversores' },
     { href: '/servicios', label: 'Servicios' },
   ],
   legal: [
@@ -43,8 +43,8 @@ export const Footer: FC = () => {
             </div>
             
             <p className="text-body text-white/60 font-light mb-6 max-w-sm">
-              Construcción boutique de villas premium en Punta Cana.
-              Dirección técnica, control total y transparencia garantizada.
+              Servicios técnicos especializados para proyectos residenciales de alta gama en Punta Cana:
+              dirección técnica, supervisión de obra, construcción llave en mano y gestión integral.
             </p>
 
             <div className="space-y-2 text-caption text-white/50">
@@ -156,7 +156,7 @@ export const Footer: FC = () => {
               © {currentYear} Grupo Roiba. Todos los derechos reservados.
             </p>
             <p className="text-caption text-white/40">
-              Las visualizaciones mostradas pueden ser conceptualizaciones arquitectónicas.
+              Las imágenes de proyectos pueden corresponder a visualizaciones, obras en proceso o proyectos completados según se indica en cada caso.
             </p>
           </div>
         </div>
