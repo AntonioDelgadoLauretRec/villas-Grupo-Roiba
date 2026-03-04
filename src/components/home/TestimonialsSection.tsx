@@ -41,7 +41,7 @@ export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials
   const t = TESTIMONIALS[idx]
 
   return (
-    <section className="py-[clamp(80px,10vw,120px)] px-[clamp(24px,8vw,120px)] bg-roiba-verde relative overflow-hidden">
+    <section className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-roiba-verde relative overflow-hidden">
       {/* Decorative quote */}
       <div className="absolute top-[10%] left-[8%] font-serif text-[clamp(200px,25vw,400px)] font-light text-roiba-dorado/[0.03] leading-none select-none pointer-events-none">
         &ldquo;

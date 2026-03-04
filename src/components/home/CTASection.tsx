@@ -1,6 +1,6 @@
 export default function CTASection() {
   return (
-    <section id="contacto" className="py-[clamp(80px,10vw,120px)] px-[clamp(24px,8vw,120px)] bg-roiba-verde relative overflow-hidden text-center">
+    <section id="contacto" className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-roiba-verde relative overflow-hidden text-center">
       {/* Vertical accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-roiba-dorado/[0.08] to-transparent" />
 

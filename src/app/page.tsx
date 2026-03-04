@@ -1,6 +1,6 @@
 import HomePage from '@/components/HomePage'
 import type { Metadata } from 'next'
-import { getServices, getProcessSteps, getTestimonials } from '@/lib/data'
+import { getServices, getProcessSteps, getTestimonials, getPublishedBlogPosts } from '@/lib/data'
 import { getSiteSetting } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -13,13 +13,14 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const [services, processSteps, testimonials, heroImages, stats, about] = await Promise.all([
+  const [services, processSteps, testimonials, heroImages, stats, about, blogPosts] = await Promise.all([
     getServices('homepage').catch(() => []),
     getProcessSteps().catch(() => []),
     getTestimonials().catch(() => []),
     getSiteSetting('hero_images').catch(() => null),
     getSiteSetting('stats').catch(() => null),
     getSiteSetting('about').catch(() => null),
+    getPublishedBlogPosts().catch(() => []),
   ])
 
   return (
@@ -30,6 +31,7 @@ export default async function Page() {
       dbHeroImages={Array.isArray(heroImages) ? heroImages as string[] : undefined}
       dbStats={Array.isArray(stats) ? stats as { value: string; label: string }[] : undefined}
       dbAbout={about as { title?: string; paragraph1?: string; paragraph2?: string } | undefined}
+      dbBlogPosts={blogPosts.length > 0 ? blogPosts : undefined}
     />
   )
 }

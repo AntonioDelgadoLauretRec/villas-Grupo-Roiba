@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import ValuesCard from '@/components/ui/ValuesCard'
+import ValueFlipCard from '@/components/ui/ValueFlipCard'
 import ProjectCarousel from '@/components/ui/ProjectCarousel'
 import CompanyTimeline from '@/components/sections/CompanyTimeline'
 
@@ -301,22 +302,10 @@ export default function NosotrosPage() {
             </p>
           </div>
 
-          {/* values grid — icon-based modern cards instead of reused images */}
+          {/* values grid — hover flip cards (no icons) */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {values.map(({ title, description, icon }) => (
-              <div
-                key={title}
-                className="group relative bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] p-7 rounded-sm transition-all duration-500 hover:-translate-y-1 hover:bg-white/[0.1] hover:shadow-[0_16px_48px_rgba(0,0,0,0.2)]"
-              >
-                {/* Gold top accent on hover */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-roiba-dorado opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-sm" />
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-full bg-roiba-dorado/10 flex items-center justify-center text-roiba-dorado mb-5 group-hover:bg-roiba-dorado/20 transition-colors duration-500">
-                  {icon}
-                </div>
-                <h3 className="font-serif text-lg text-white font-medium mb-3">{title}</h3>
-                <p className="text-[13px] text-white/60 leading-relaxed">{description}</p>
-              </div>
+            {values.map(({ title, description }) => (
+              <ValueFlipCard key={title} title={title} description={description} />
             ))}
           </div>
         </div>

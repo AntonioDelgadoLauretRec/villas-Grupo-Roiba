@@ -20,7 +20,7 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
   const step = PROCESS[active]
 
   return (
-    <section id="proceso" className="py-[clamp(80px,10vw,140px)] px-[clamp(24px,8vw,120px)] bg-roiba-verde relative overflow-hidden">
+    <section id="proceso" className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-roiba-verde relative overflow-hidden">
       {/* Grain texture */}
       <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
       {/* Geometric accent */}

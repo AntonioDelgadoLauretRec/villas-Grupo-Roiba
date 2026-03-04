@@ -1,5 +1,6 @@
 import { TrustSignals } from '@/components/sections/TrustSignals'
 import { ContactForm } from '@/components/sections/ContactForm'
+import InvestorsCarousel from '@/components/sections/InvestorsCarousel'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -29,6 +30,9 @@ export default function InversoresPage() {
       </section>
 
       <TrustSignals />
+
+      {/* Por qué Punta Cana — Carousel */}
+      <InvestorsCarousel />
 
       {/* Beneficios Fiscales */}
       <section className="py-14 px-6 bg-white">
