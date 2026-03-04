@@ -18,10 +18,24 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    const vid = document.createElement('video')
-    vid.src = '/videos/hero-bg.mp4'
-    vid.onloadeddata = () => setHasVideo(true)
-    vid.onerror = () => setHasVideo(false)
+    // Check for hero-drone.mp4 first, then hero-bg.mp4 as fallback
+    const checkVideo = (src: string) =>
+      new Promise<boolean>((resolve) => {
+        const vid = document.createElement('video')
+        vid.src = src
+        vid.onloadeddata = () => resolve(true)
+        vid.onerror = () => resolve(false)
+      })
+
+    checkVideo('/videos/hero-drone.mp4').then((found) => {
+      if (found) {
+        setHasVideo(true)
+      } else {
+        checkVideo('/videos/hero-bg.mp4').then((found2) => {
+          if (found2) setHasVideo(true)
+        })
+      }
+    })
   }, [])
 
   useEffect(() => {
@@ -29,6 +43,8 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
     const timer = setInterval(() => setImgIdx((p) => (p + 1) % HERO_IMAGES.length), 6000)
     return () => clearInterval(timer)
   }, [hasVideo, HERO_IMAGES.length])
+
+  const videoSrc = '/videos/hero-drone.mp4'
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center bg-roiba-verde overflow-hidden">
@@ -43,6 +59,7 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
           onLoadedData={() => setVideoLoaded(true)}
           className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
         >
+          <source src={videoSrc} type="video/mp4" />
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
       ) : (
@@ -63,46 +80,24 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
         ))
       )}
 
-      {/* Overlay — reduced to 40% for video, 70% for images */}
-      <div className={`absolute inset-0 z-[1] transition-opacity duration-1000 ${hasVideo ? 'bg-roiba-verde/40' : 'bg-roiba-verde/70'}`} />
+      {/* Overlay — 40% for video, darker for images */}
+      <div className={`absolute inset-0 z-[1] ${hasVideo ? 'bg-roiba-verde/40' : 'bg-roiba-verde/60'}`} />
 
-      {/* Vignette gradient edges */}
-      <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(12,35,64,0.4)_100%)]" />
-
-      {/* Geometric accents */}
-      <div className="absolute top-[10%] right-[8%] w-[300px] h-[300px] border border-roiba-dorado/[0.08] rounded-full animate-float z-[1]" />
-      <div className="absolute bottom-[15%] left-[5%] w-[200px] h-[200px] border border-roiba-dorado/[0.06] rotate-45 animate-float-slow z-[1]" />
-      <div className="absolute top-[30%] left-[15%] w-px h-[120px] bg-gradient-to-b from-transparent via-roiba-dorado/20 to-transparent z-[1]" />
-
-      {/* Logo on white card */}
-      <div className="z-[2] relative mb-10 animate-fade-in [animation-delay:0.1s] flex justify-center">
-        <div className="bg-white/95 backdrop-blur-sm px-8 py-5 rounded-sm shadow-[0_8px_32px_rgba(0,0,0,0.15)]">
-          <Image
-            src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
-            alt="Grupo Roiba"
-            width={180}
-            height={98}
-            className="h-12 md:h-14 w-auto"
-            priority
-          />
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="text-center z-[2] relative px-6 animate-fade-up">
+      {/* Content — NO logo superpuesto */}
+      <div className="text-center z-[2] relative px-6 max-w-[900px] mx-auto">
         <p className="font-sans text-[11px] font-medium tracking-[0.4em] uppercase text-roiba-dorado mb-8 animate-fade-in [animation-delay:0.3s]">
           Ingeniería y Construcción en el Caribe
         </p>
 
-        <h1 className="font-serif text-[clamp(36px,5.5vw,72px)] font-light text-white leading-[1.1] tracking-tight max-w-[900px] mx-auto">
+        <h1 className="font-serif text-[clamp(32px,5.5vw,68px)] font-light text-white leading-[1.1] tracking-tight animate-fade-up [animation-delay:0.5s]">
           Servicios técnicos integrales{' '}
           <span className="italic text-roiba-dorado-light">para proyectos</span>
           <br />residenciales de alta gama
         </h1>
 
-        <div className="w-[60px] h-px bg-roiba-dorado mx-auto my-9 animate-reveal-line" />
+        <div className="w-[60px] h-px bg-roiba-dorado mx-auto my-8 animate-line-grow [animation-delay:0.8s]" />
 
-        <p className="font-sans text-[15px] font-light text-white/80 max-w-[580px] mx-auto mb-12 leading-[1.7] tracking-wide animate-fade-in [animation-delay:1s]">
+        <p className="font-sans text-[15px] font-light text-white/80 max-w-[580px] mx-auto mb-10 leading-[1.7] tracking-wide animate-fade-in [animation-delay:1s]">
           Dirección técnica, supervisión de obra y construcción llave en mano.
           <br />
           Del concepto al mantenimiento, con un equipo que responde directamente ante usted.
@@ -111,13 +106,13 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center animate-fade-up [animation-delay:1.2s]">
           <a
             href="/servicios"
-            className="font-sans text-[11px] font-semibold tracking-[0.15em] uppercase px-10 py-4 bg-roiba-dorado text-roiba-verde hover:bg-roiba-dorado-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.25)] transition-all duration-400"
+            className="font-sans text-[11px] font-semibold tracking-[0.15em] uppercase px-10 py-4 bg-roiba-dorado text-roiba-verde hover:bg-roiba-dorado-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.25)] transition-all duration-300"
           >
             Explorar servicios
           </a>
           <a
             href="/contacto"
-            className="font-sans text-[11px] font-medium tracking-[0.15em] uppercase px-10 py-4 bg-transparent text-white border border-white/25 hover:border-roiba-dorado hover:text-roiba-dorado-light transition-all duration-400"
+            className="font-sans text-[11px] font-medium tracking-[0.15em] uppercase px-10 py-4 bg-transparent text-white border border-white/25 hover:border-roiba-dorado hover:text-roiba-dorado-light transition-all duration-300"
           >
             Hablar con el equipo
           </a>

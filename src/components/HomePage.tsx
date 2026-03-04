@@ -9,9 +9,8 @@ import ProcessTabs from './home/ProcessTabs'
 import TestimonialsSection from './home/TestimonialsSection'
 import CTASection from './home/CTASection'
 import BrochureSection from './home/BrochureSection'
-import Certifications from './sections/Certifications'
-import PressLogos from './sections/PressLogos'
-import type { Service, ProcessStep, Testimonial } from '@/types/admin'
+import BlogPreviewSection from './home/BlogPreviewSection'
+import type { Service, ProcessStep, Testimonial, BlogPost } from '@/types/admin'
 
 interface HomePageProps {
   dbServices?: Service[]
@@ -20,6 +19,7 @@ interface HomePageProps {
   dbHeroImages?: string[]
   dbStats?: { value: string; label: string }[]
   dbAbout?: { title?: string; paragraph1?: string; paragraph2?: string }
+  dbBlogPosts?: BlogPost[]
 }
 
 export default function HomePage({
@@ -29,6 +29,7 @@ export default function HomePage({
   dbHeroImages,
   dbStats,
   dbAbout,
+  dbBlogPosts,
 }: HomePageProps) {
   useScrollReveal()
 
@@ -39,10 +40,9 @@ export default function HomePage({
       <AboutSection dbAbout={dbAbout} />
       <ServicesGrid dbServices={dbServices} />
       <ProcessTabs dbSteps={dbProcessSteps} />
-      <Certifications />
       <TestimonialsSection dbTestimonials={dbTestimonials} />
-      <PressLogos />
       <BrochureSection />
+      <BlogPreviewSection dbPosts={dbBlogPosts} />
       <CTASection />
     </div>
   )

@@ -4,7 +4,7 @@ import { Navbar } from '@/components/layouts/Navbar'
 import { Footer } from '@/components/layouts/Footer'
 import FloatingWhatsApp from '@/components/ui/FloatingWhatsApp'
 import CookieConsent from '@/components/ui/CookieConsent'
-import CustomCursor from '@/components/ui/CustomCursor'
+
 import { LanguageProvider } from '@/lib/i18n/LanguageContext'
 import GoogleAnalytics from '@/components/ui/GoogleAnalytics'
 
@@ -177,7 +177,6 @@ export default function RootLayout({
         
         <Footer />
         <FloatingWhatsApp />
-        <CustomCursor />
         <CookieConsent />
         </LanguageProvider>
       </body>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -8,11 +8,9 @@ import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [visible, setVisible] = useState(true)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
   const { locale, setLocale, t } = useLanguage()
-  const lastScrollY = useRef(0)
 
   const navigation = [
     { name: t.nav.servicios, href: '/servicios' },
@@ -24,17 +22,7 @@ export function Navbar() {
   ]
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY
-      setScrolled(currentY > 50)
-      // Hide on scroll down, show on scroll up (only after 200px)
-      if (currentY > 200) {
-        setVisible(currentY < lastScrollY.current || currentY < 100)
-      } else {
-        setVisible(true)
-      }
-      lastScrollY.current = currentY
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -53,10 +41,8 @@ export function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        !visible && !mobileOpen ? '-translate-y-full' : 'translate-y-0'
-      } ${
         scrolled
-          ? 'bg-[#0C2340]/95 backdrop-blur-md shadow-xl py-3 border-b border-[#C9A96E]/20'
+          ? 'bg-[#0C2340] backdrop-blur-md shadow-xl py-3 border-b border-[#C9A96E]/20'
           : 'bg-gradient-to-b from-[#0C2340]/70 to-transparent py-5'
       }`}
     >
@@ -74,28 +60,24 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-7">
+        <nav className="hidden md:flex items-center gap-7">
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`relative text-sm font-medium tracking-wide transition-colors group/link ${
+              className={`text-sm font-medium tracking-wide transition-colors ${
                 pathname === item.href
                   ? 'text-[#E8C877]'
                   : 'text-white/80 hover:text-[#E8C877]'
               }`}
             >
               {item.name}
-              {/* Animated underline */}
-              <span className={`absolute -bottom-1 left-0 h-px bg-[#C9A96E] transition-all duration-300 ${
-                pathname === item.href ? 'w-full' : 'w-0 group-hover/link:w-full'
-              }`} />
             </Link>
           ))}
         </nav>
 
         {/* CTA + Lang Switcher Desktop */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-4">
           <button
             onClick={toggleLang}
             className="text-xs font-semibold tracking-wider uppercase text-white/60 hover:text-[#E8C877] transition-colors px-2 py-1 border border-white/15 rounded"
@@ -105,7 +87,7 @@ export function Navbar() {
           </button>
           <Link
             href="/contacto"
-            className="px-6 py-2.5 bg-[#E8C877] text-[#0C2340] text-sm font-semibold rounded-sm hover:bg-[#C9A96E] hover:shadow-[0_8px_24px_rgba(201,169,110,0.3)] transition-all duration-300"
+            className="px-6 py-2.5 bg-[#E8C877] text-[#0C2340] text-sm font-semibold rounded-lg hover:bg-[#C9A96E] transition-all duration-300"
           >
             {t.nav.contactar}
           </Link>
@@ -114,50 +96,40 @@ export function Navbar() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="lg:hidden text-white p-2 relative z-50"
+          className="md:hidden text-white p-2"
           aria-label="Menú"
         >
-          <div className="w-6 h-5 relative flex flex-col justify-between">
-            <span className={`block w-full h-0.5 bg-white transition-all duration-300 origin-center ${mobileOpen ? 'rotate-45 translate-y-[9px]' : ''}`} />
-            <span className={`block w-full h-0.5 bg-white transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-0' : ''}`} />
-            <span className={`block w-full h-0.5 bg-white transition-all duration-300 origin-center ${mobileOpen ? '-rotate-45 -translate-y-[9px]' : ''}`} />
-          </div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            {mobileOpen ? (
+              <path d="M18 6L6 18M6 6l12 12" />
+            ) : (
+              <path d="M3 12h18M3 6h18M3 18h18" />
+            )}
+          </svg>
         </button>
       </div>
 
-      {/* Mobile Menu — slide from right with staggered links */}
+      {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed inset-0 top-0 bg-[#0C2340] z-40 transition-all duration-500 ease-out-expo ${
-          mobileOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+        className={`md:hidden fixed inset-0 top-0 bg-[#0C2340] z-40 transition-transform duration-300 ${
+          mobileOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* Decorative elements */}
-        <div className="absolute top-[15%] right-[10%] w-[200px] h-[200px] border border-[#C9A96E]/[0.06] rounded-full" />
-        <div className="absolute bottom-[20%] left-[5%] w-[150px] h-[150px] border border-[#C9A96E]/[0.04] rotate-45" />
-
-        <div className="flex flex-col items-center justify-center h-full gap-6 px-8">
-          {navigation.map((item, idx) => (
+        <div className="flex flex-col items-center justify-center h-full gap-8">
+          {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setMobileOpen(false)}
-              className={`text-2xl font-serif font-medium transition-all duration-300 ${
+              className={`text-2xl font-medium transition-colors ${
                 pathname === item.href
                   ? 'text-[#E8C877]'
                   : 'text-white hover:text-[#E8C877]'
               }`}
-              style={{
-                transitionDelay: mobileOpen ? `${idx * 50 + 100}ms` : '0ms',
-                opacity: mobileOpen ? 1 : 0,
-                transform: mobileOpen ? 'translateY(0)' : 'translateY(20px)',
-              }}
             >
               {item.name}
             </Link>
           ))}
-
-          <div className="w-12 h-px bg-[#C9A96E]/30 my-2" />
-
           <button
             onClick={toggleLang}
             className="text-sm font-semibold tracking-wider uppercase text-white/60 hover:text-[#E8C877] transition-colors px-4 py-2 border border-white/20 rounded"
@@ -167,7 +139,7 @@ export function Navbar() {
           <Link
             href="/contacto"
             onClick={() => setMobileOpen(false)}
-            className="mt-4 px-8 py-3 bg-[#E8C877] text-[#0C2340] font-semibold rounded-sm hover:bg-[#C9A96E] transition-colors"
+            className="mt-4 px-8 py-3 bg-[#E8C877] text-[#0C2340] font-semibold rounded-lg"
           >
             {t.nav.contactar}
           </Link>
