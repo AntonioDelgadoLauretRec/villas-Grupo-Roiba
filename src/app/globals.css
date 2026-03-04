@@ -261,5 +261,87 @@
   animation: slide-up 0.4s ease-out;
 }
 
-/* ===== FUENTES GOOGLE ===== */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* ===== DUOTONE IMAGE FILTER ===== */
+.duotone-roiba {
+  position: relative;
+}
+.duotone-roiba::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(12,35,64,0.4), rgba(201,169,110,0.15));
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.duotone-roiba:hover::after {
+  opacity: 0.3;
+}
+
+/* ===== ANIMATED LINE DECORATIONS ===== */
+.line-reveal {
+  position: relative;
+  display: inline-block;
+}
+.line-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, #C9A96E, #E8C877);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.line-reveal.is-visible::after,
+.scroll-reveal.is-visible .line-reveal::after {
+  transform: scaleX(1);
+}
+
+/* ===== GLASSMORPHISM CARD ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-dark {
+  background: rgba(12, 35, 64, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 169, 110, 0.1);
+}
+
+/* ===== GRAIN OVERLAY ===== */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ===== CUSTOM CURSOR HIDE DEFAULT ===== */
+@media (pointer: fine) and (min-width: 1024px) {
+  html {
+    cursor: none !important;
+  }
+  a, button, [role="button"], input, textarea, select {
+    cursor: none !important;
+  }
+}
+
+/* ===== FUENTES GOOGLE — Variable weights ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* ===== LIGATURES ===== */
+body {
+  font-variant-ligatures: common-ligatures;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

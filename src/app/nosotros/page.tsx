@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import ValuesCard from '@/components/ui/ValuesCard'
 import ProjectCarousel from '@/components/ui/ProjectCarousel'
+import CompanyTimeline from '@/components/sections/CompanyTimeline'
 
 export const metadata: Metadata = {
   title: 'Sobre Nosotros | Grupo Roiba',
@@ -320,6 +321,9 @@ export default function NosotrosPage() {
           </div>
         </div>
       </section>
+
+      {/* ── 4.5 TIMELINE ──────────────────────────────── */}
+      <CompanyTimeline />
 
       {/* ── 5. PORTFOLIO / PROYECTOS QUE TRASCIENDEN ───── */}
       <section className="py-12 md:py-16 bg-roiba-arena-light overflow-hidden">

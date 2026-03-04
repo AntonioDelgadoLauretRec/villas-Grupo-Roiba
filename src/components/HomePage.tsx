@@ -9,6 +9,8 @@ import ProcessTabs from './home/ProcessTabs'
 import TestimonialsSection from './home/TestimonialsSection'
 import CTASection from './home/CTASection'
 import BrochureSection from './home/BrochureSection'
+import Certifications from './sections/Certifications'
+import PressLogos from './sections/PressLogos'
 import type { Service, ProcessStep, Testimonial } from '@/types/admin'
 
 interface HomePageProps {
@@ -37,7 +39,9 @@ export default function HomePage({
       <AboutSection dbAbout={dbAbout} />
       <ServicesGrid dbServices={dbServices} />
       <ProcessTabs dbSteps={dbProcessSteps} />
+      <Certifications />
       <TestimonialsSection dbTestimonials={dbTestimonials} />
+      <PressLogos />
       <BrochureSection />
       <CTASection />
     </div>

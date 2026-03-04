@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 
 const DEFAULT_HERO_IMAGES = [
@@ -14,6 +14,8 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
   const HERO_IMAGES = dbImages && dbImages.length > 0 ? dbImages : DEFAULT_HERO_IMAGES
   const [imgIdx, setImgIdx] = useState(0)
   const [hasVideo, setHasVideo] = useState(false)
+  const [videoLoaded, setVideoLoaded] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const vid = document.createElement('video')
@@ -26,13 +28,21 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
     if (hasVideo) return
     const timer = setInterval(() => setImgIdx((p) => (p + 1) % HERO_IMAGES.length), 6000)
     return () => clearInterval(timer)
-  }, [hasVideo])
+  }, [hasVideo, HERO_IMAGES.length])
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center bg-roiba-verde overflow-hidden">
-      {/* Background */}
+      {/* Background — Video or Image Slideshow */}
       {hasVideo ? (
-        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover z-0">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onLoadedData={() => setVideoLoaded(true)}
+          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+        >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
       ) : (
@@ -53,8 +63,11 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
         ))
       )}
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-roiba-verde/80 z-[1]" />
+      {/* Overlay — reduced to 40% for video, 70% for images */}
+      <div className={`absolute inset-0 z-[1] transition-opacity duration-1000 ${hasVideo ? 'bg-roiba-verde/40' : 'bg-roiba-verde/70'}`} />
+
+      {/* Vignette gradient edges */}
+      <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(12,35,64,0.4)_100%)]" />
 
       {/* Geometric accents */}
       <div className="absolute top-[10%] right-[8%] w-[300px] h-[300px] border border-roiba-dorado/[0.08] rounded-full animate-float z-[1]" />
@@ -95,7 +108,7 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
           Del concepto al mantenimiento, con un equipo que responde directamente ante usted.
         </p>
 
-        <div className="flex gap-5 justify-center animate-fade-up [animation-delay:1.2s]">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center animate-fade-up [animation-delay:1.2s]">
           <a
             href="/servicios"
             className="font-sans text-[11px] font-semibold tracking-[0.15em] uppercase px-10 py-4 bg-roiba-dorado text-roiba-verde hover:bg-roiba-dorado-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.25)] transition-all duration-400"

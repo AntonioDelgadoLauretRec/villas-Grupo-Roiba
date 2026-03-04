@@ -1,22 +1,85 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+
 const DEFAULT_STATS = [
-  { value: '20+', label: 'Años en proyectos residenciales y hoteleros' },
-  { value: '2M€–15M€', label: 'Dirección técnica en proyectos de este rango' },
-  { value: '2', label: 'España y República Dominicana' },
-  { value: '100%', label: 'Supervisión directa de ingenieros en cada proyecto' },
+  { value: 20, suffix: '+', label: 'Años en proyectos residenciales y hoteleros' },
+  { value: 15, prefix: '', suffix: 'M€', label: 'Dirección técnica en proyectos de este rango' },
+  { value: 2, suffix: '', label: 'España y República Dominicana' },
+  { value: 100, suffix: '%', label: 'Supervisión directa de ingenieros en cada proyecto' },
 ]
 
-export default function StatsMarquee({ dbStats }: { dbStats?: { value: string; label: string }[] }) {
-  const STATS = dbStats && dbStats.length > 0 ? dbStats : DEFAULT_STATS
+function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
+  const [count, setCount] = useState(0)
+  const [started, setStarted] = useState(false)
+  const ref = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          setStarted(true)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [started])
+
+  useEffect(() => {
+    if (!started) return
+    const startTime = performance.now()
+    const animate = (now: number) => {
+      const elapsed = now - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.round(eased * end))
+      if (progress < 1) requestAnimationFrame(animate)
+    }
+    requestAnimationFrame(animate)
+  }, [started, end, duration])
+
   return (
-    <section className="bg-roiba-verde py-5 overflow-hidden border-y border-roiba-dorado/[0.12]">
-      <div className="animate-marquee flex w-fit">
-        {[...STATS, ...STATS, ...STATS, ...STATS].map((s, i) => (
-          <div key={i} className="flex items-center gap-3 px-12 whitespace-nowrap">
-            <span className="font-serif text-[28px] font-semibold text-roiba-dorado-light">{s.value}</span>
-            <span className="font-sans text-[11px] font-normal tracking-wider text-white/60 uppercase">{s.label}</span>
-            <span className="text-roiba-dorado/20 mx-6">&#9670;</span>
-          </div>
-        ))}
+    <span ref={ref} className="font-serif text-[32px] md:text-[40px] font-semibold text-roiba-dorado-light tabular-nums">
+      {prefix}{count}{suffix}
+    </span>
+  )
+}
+
+export default function StatsMarquee({ dbStats }: { dbStats?: { value: string; label: string }[] }) {
+  const [mode, setMode] = useState<'counters' | 'marquee'>('counters')
+
+  // Parse dbStats into numeric format if provided
+  const parsedStats = dbStats
+    ? dbStats.map(s => {
+        const numMatch = s.value.match(/(\d+)/)
+        const num = numMatch ? parseInt(numMatch[1]) : 0
+        const suffix = s.value.replace(/\d+/g, '').trim()
+        return { value: num, suffix, prefix: '', label: s.label }
+      })
+    : DEFAULT_STATS
+
+  return (
+    <section className="bg-roiba-verde py-12 md:py-16 border-y border-roiba-dorado/[0.12] relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle, rgba(201,169,110,0.3) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+          {parsedStats.map((s, i) => (
+            <div key={i} className="text-center group">
+              <AnimatedCounter end={s.value} suffix={s.suffix} prefix={s.prefix} duration={2000 + i * 200} />
+              <div className="w-8 h-px bg-roiba-dorado/30 mx-auto my-3 group-hover:w-12 group-hover:bg-roiba-dorado transition-all duration-500" />
+              <span className="font-sans text-[11px] font-normal tracking-wider text-white/50 uppercase leading-relaxed block max-w-[200px] mx-auto">
+                {s.label}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
