@@ -4,34 +4,43 @@
 
 /* ══════════════════════════════════════════════════════════════
    GRUPO ROIBA - SISTEMA DE DISEÑO OFICIAL
-   Paleta: Azul Marino + Blanco + Dorado
+   Manual de Marca V3 + Arquitectura UX Gemini
+   Fecha: Enero 2026
    ══════════════════════════════════════════════════════════════ */
 
 @layer base {
   :root {
-    /* Azul Marino (Primario) — Autoridad, Solidez, Permanencia */
-    --color-verde: #0C2340;
-    --color-verde-light: #1B4B7A;
-    --color-verde-dark: #061525;
-
-    /* Blanco / Gris (Base) — Limpieza, Espacios, Calma */
-    --color-arena: #FFFFFF;
-    --color-arena-light: #F5F7FA;
-    --color-arena-dark: #E2E8F0;
-
-    /* Dorado (Acento Premium) — CTAs, Destacados, Lujo */
-    --color-dorado: #E8C877;
-    --color-dorado-arena: #C9A96E;
-    --color-dorado-mate: #C9A96E;
-
-    /* Tipografía */
+    /* ══════════════════════════════════════════════════════════
+       PALETA OFICIAL - MANUAL DE MARCA V3
+       Fuente: Manual_Maestro_Marca_Grupo_Roiba_V3_Logo_RI.pdf
+       ══════════════════════════════════════════════════════════ */
+    
+    /* Verde Profundo (Primario) - Autoridad, Solidez, Permanencia */
+    --color-verde: #122620;
+    --color-verde-light: #1A3830;
+    --color-verde-dark: #0A1613;
+    
+    /* Arena Claro (Base) - Fondos, Espacios, Calma */
+    --color-arena: #F4EBD0;
+    --color-arena-light: #FAF7EE;
+    --color-arena-dark: #E8DEC4;
+    
+    /* Dorado (Acento Premium) - CTAs, Destacados, Lujo */
+    --color-dorado: #FFCC53;
+    --color-dorado-arena: #B68D40;
+    --color-dorado-mate: #B68D40;
+    
+    /* ══════════════════════════════════════════════════════════
+       TIPOGRAFÍA - MANUAL DE MARCA V3
+       Primaria: Gotham → Fallback: Montserrat, Inter
+       ══════════════════════════════════════════════════════════ */
     --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
     --font-sans: 'Inter', 'Lato', system-ui, sans-serif;
     --font-display: 'Montserrat', 'Gotham', sans-serif;
-
-    /* Espaciado base (múltiplos de 8px) */
+    
+    /* Espaciado base (múltiplos de 8px - Manual V3) */
     --spacing-unit: 8px;
-
+    
     /* Transiciones suaves */
     --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -79,15 +88,15 @@
 @layer components {
   /* ===== BOTONES ===== */
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3
+    @apply inline-flex items-center justify-center px-6 py-3 
            font-sans font-semibold text-base tracking-wide
            rounded-sm transition-all duration-300 ease-out
            focus:outline-none focus-visible:ring-2 focus-visible:ring-roiba-dorado focus-visible:ring-offset-2;
   }
 
   .btn-primary {
-    @apply btn bg-roiba-dorado text-roiba-verde
-           hover:bg-roiba-dorado-light hover:shadow-lg
+    @apply btn bg-roiba-dorado text-roiba-verde 
+           hover:bg-roiba-dorado-claro hover:shadow-gold
            active:scale-[0.98];
   }
 
@@ -98,38 +107,38 @@
   }
 
   .btn-ghost {
-    @apply btn text-white border border-white/30 bg-transparent
-           hover:bg-white/10 hover:border-white/50;
+    @apply btn text-roiba-arena border border-roiba-arena/30 bg-transparent
+           hover:bg-roiba-arena/10 hover:border-roiba-arena/50;
   }
 
   /* ===== CARDS ===== */
   .card {
-    @apply bg-roiba-arena-light rounded-sm shadow-md
+    @apply bg-roiba-arena-light rounded-sm shadow-card 
            transition-all duration-300 ease-out
-           hover:shadow-xl hover:-translate-y-1;
+           hover:shadow-luxury hover:-translate-y-1;
   }
 
   .card-dark {
-    @apply bg-roiba-verde text-white rounded-sm shadow-xl;
+    @apply bg-roiba-verde text-roiba-arena rounded-sm shadow-luxury;
   }
 
   /* ===== INPUTS ===== */
   .input {
-    @apply w-full px-4 py-3 bg-white border border-roiba-verde/20
+    @apply w-full px-4 py-3 bg-white border border-roiba-verde/20 
            rounded-sm text-roiba-verde placeholder:text-roiba-verde/50
            transition-all duration-200
            focus:border-roiba-dorado focus:ring-1 focus:ring-roiba-dorado focus:outline-none;
   }
 
   .input-dark {
-    @apply input bg-roiba-verde-light border-white/20 text-white
-           placeholder:text-white/50
+    @apply input bg-roiba-verde-light border-roiba-arena/20 text-roiba-arena
+           placeholder:text-roiba-arena/50
            focus:border-roiba-dorado;
   }
 
   .select {
     @apply input appearance-none cursor-pointer
-           bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%230C2340%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
+           bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23122620%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
            bg-no-repeat bg-[right_1rem_center] bg-[length:1.25rem];
   }
 
@@ -143,7 +152,7 @@
   }
 
   .section-dark {
-    @apply section bg-roiba-verde text-white;
+    @apply section bg-roiba-verde text-roiba-arena;
   }
 
   .container-narrow {
@@ -179,10 +188,7 @@
 @layer utilities {
   /* Texto con gradiente dorado */
   .text-gradient-gold {
-    background: linear-gradient(135deg, #C9A96E, #E8C877);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    @apply bg-gradient-dorado bg-clip-text text-transparent;
   }
 
   /* Overlay para videos/imágenes */

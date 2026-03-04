@@ -14,7 +14,7 @@ export interface CardProps {
 const Card: FC<CardProps> = ({ children, variant = 'light', className, hover = true }) => {
   const variants = {
     light: 'bg-roiba-arena-light text-roiba-verde',
-    dark: 'bg-roiba-verde text-white',
+    dark: 'bg-roiba-verde text-roiba-arena',
   }
 
   return (
@@ -170,7 +170,7 @@ const FeatureCard: FC<FeatureCardProps> = ({ icon, title, description, variant =
       <p
         className={cn(
           'text-sm',
-          variant === 'dark' ? 'text-white/70' : 'text-roiba-verde/70'
+          variant === 'dark' ? 'text-roiba-arena/70' : 'text-roiba-verde/70'
         )}
       >
         {description}
