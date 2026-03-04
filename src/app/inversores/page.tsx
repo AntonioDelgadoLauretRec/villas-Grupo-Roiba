@@ -3,8 +3,8 @@ import { ContactForm } from '@/components/sections/ContactForm'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Centro de Inversores | Grupo Roiba',
-  description: 'Información exclusiva para inversores cualificados. Beneficios fiscales, seguridad jurídica y retorno de inversión en Punta Cana.',
+  title: 'Inversores | Grupo Roiba',
+  description: 'Datos de mercado, marco legal y garantías técnicas para invertir con criterio en Punta Cana. Beneficios fiscales, seguridad jurídica y asesoramiento técnico.',
   alternates: { canonical: 'https://gruporoiba.com/inversores' },
 }
 
@@ -16,14 +16,14 @@ export default function InversoresPage() {
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            Inversores
+            Para Inversores
           </p>
           <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
-            Centro de Inversores
+            Invertir con criterio técnico en Punta Cana
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
           <p className="text-body-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-            Información exclusiva para inversores cualificados
+            Datos de mercado, marco legal y garantías técnicas para tomar una decisión informada antes de comprometerse.
           </p>
         </div>
       </section>

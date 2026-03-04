@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'The Roiba Method | Grupo Roiba',
-  description: 'Seis fases que transforman su inversión en un proceso controlado. Control, transparencia y previsibilidad en cada etapa del proyecto.',
+  title: 'El Método Roiba | Grupo Roiba',
+  description: 'Seis fases definidas para avanzar sin incertidumbre. Entregables claros, supervisión técnica directa y puntos de decisión en cada etapa del proyecto.',
   alternates: { canonical: 'https://gruporoiba.com/proceso' },
 }
 
@@ -16,14 +16,14 @@ export default function ProcesoPage() {
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            Nuestro Proceso
+            Metodología Roiba
           </p>
           <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
-            The Roiba Method
+            El Método Roiba
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
           <p className="text-body-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-            Seis fases que transforman su inversión en un proceso controlado
+            Seis fases. Un objetivo: avanzar sin incertidumbre.
           </p>
         </div>
       </section>
@@ -32,11 +32,10 @@ export default function ProcesoPage() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-body-lg text-roiba-verde/70 leading-relaxed">
-            The Roiba Method estructura cada proyecto en seis fases definidas, diseñadas para
-            eliminar la incertidumbre y garantizar control, transparencia y previsibilidad en
-            todo el proceso constructivo. Cada etapa cuenta con entregables claros, supervisión
-            técnica y toma de decisiones fundamentadas, permitiendo al cliente mantener visibilidad
-            y control desde el inicio hasta la entrega y gestión de la propiedad.
+            Este proceso aplica cuando gestionamos un proyecto de principio a fin. Si interviene
+            en una fase intermedia (por ejemplo, solo supervisión de obra ya iniciada), adaptamos
+            las etapas relevantes. Cada fase tiene entregables definidos, puntos de decisión claros
+            y supervisión técnica directa.
           </p>
         </div>
       </section>
@@ -49,19 +48,19 @@ export default function ProcesoPage() {
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            Siguiente paso
+            ¿En qué fase está su proyecto?
           </p>
           <h2 className="text-display-md font-serif text-white mb-6">
-            ¿Listo para empezar?
+            Cuéntenos dónde está y le proponemos cómo intervenir
           </h2>
           <p className="text-white/60 text-body-lg mb-12 leading-relaxed">
-            Solicite una consulta inicial sin compromiso y descubra cómo podemos ayudarle.
+            Si tiene terreno, proyecto iniciado o solo necesita supervisión, explíquenos su situación.
           </p>
           <Link
             href="/contacto"
             className="inline-block px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold hover:bg-roiba-dorado-light transition-all duration-300 text-micro uppercase tracking-widest"
           >
-            Solicitar Análisis
+            Describir mi situación
           </Link>
         </div>
       </section>

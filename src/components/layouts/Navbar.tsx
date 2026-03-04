@@ -16,7 +16,7 @@ export function Navbar() {
     { name: t.nav.servicios, href: '/servicios' },
     { name: t.nav.proceso, href: '/proceso' },
     { name: t.nav.villas, href: '/villas' },
-    { name: t.nav.destino, href: '/por-que-punta-cana' },
+    { name: t.nav.destino, href: '/inversores' },
     { name: t.nav.nosotros, href: '/nosotros' },
     { name: t.nav.blog, href: '/blog' },
   ]

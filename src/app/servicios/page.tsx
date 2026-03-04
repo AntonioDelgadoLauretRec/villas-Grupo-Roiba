@@ -1,155 +1,199 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Servicios | Grupo Roiba',
   description:
-    'Servicios integrales de diseño, construcción y gestión de proyectos residenciales de alta gama. Control integral del proceso constructivo con más de 20 años de experiencia.',
+    'Dirección técnica, construcción llave en mano y gestión integral de proyectos residenciales de alta gama en Punta Cana. Servicios técnicos independientes, construcción y gestión post-entrega.',
   alternates: { canonical: 'https://gruporoiba.com/servicios' },
 }
 
-const serviciosGrid = [
+/* ─── Client Scenarios ─── */
+const scenarios = [
   {
-    num: '01',
-    title: 'Diseño Arquitectónico',
-    description:
-      'Proyectos exclusivos que integran estética contemporánea con funcionalidad y eficiencia constructiva.',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80&fit=crop',
+    id: 'construir-desde-cero',
+    situation: 'Tengo terreno, necesito construir desde cero',
+    services: [
+      'Construcción llave en mano',
+      'Dirección técnica integral',
+      'Interiorismo y equipamiento',
+      'Roiba Care (post-entrega)',
+    ],
+    result:
+      'Su villa lista para habitar, con supervisión directa de ingeniero.',
+    cta: 'Ver el proceso completo',
+    ctaHref: '/proceso',
   },
   {
-    num: '02',
-    title: 'Construcción',
-    description:
-      'Ejecución integral con materiales premium y control en cada fase.',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80&fit=crop',
+    id: 'supervision',
+    situation:
+      'Ya tengo arquitecto y constructor, necesito que alguien vigile que se haga bien',
+    services: [
+      'Dirección técnica independiente',
+      'Gestión de proyecto',
+      'Control de costes',
+    ],
+    result:
+      'Supervisión semanal in-situ con informes técnicos directos.',
+    cta: 'Ver cómo supervisamos',
+    ctaHref: '/contacto',
   },
   {
-    num: '03',
-    title: 'Dirección Técnica',
-    description:
-      'Supervisión que garantiza plazos, calidad y normativa.',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&fit=crop',
+    id: 'evaluando',
+    situation:
+      'Estoy evaluando invertir pero necesito asesoramiento técnico antes de decidir',
+    services: [
+      'Asesoramiento técnico',
+      'Due diligence de terrenos',
+      'Seguridad jurídica',
+      'Análisis de viabilidad',
+    ],
+    result:
+      'Informe técnico de viabilidad antes de comprometerse.',
+    cta: 'Solicitar análisis',
+    ctaHref: '/contacto',
   },
   {
-    num: '04',
-    title: 'Gestión Llave en Mano',
-    description:
-      'Un solo interlocutor. Desde el concepto hasta la entrega.',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fit=crop',
-  },
-  {
-    num: '05',
-    title: 'Desarrollo de Proyectos',
-    description:
-      'Viabilidad técnica y económica para su inversión.',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop',
-  },
-  {
-    num: '06',
-    title: 'Control de Calidad',
-    description:
-      'Protocolos de inspección. Estándares medibles.',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80&fit=crop',
-  },
-  {
-    num: '07',
-    title: 'Gestión de Instalaciones',
-    description:
-      'Sistemas eléctricos, hidráulicos, climatización y domótica.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80&fit=crop',
-  },
-  {
-    num: '08',
-    title: 'Control de Costes',
-    description:
-      'Presupuestos detallados y seguimiento en tiempo real.',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop',
+    id: 'gestion-post',
+    situation:
+      'Mi propiedad ya está construida, necesito gestión y mantenimiento profesional',
+    services: [
+      'Roiba Care',
+      'Mantenimiento preventivo',
+      'Gestión operativa de la propiedad',
+    ],
+    result:
+      'Su inversión protegida y operativa todo el año.',
+    cta: 'Ver planes de mantenimiento',
+    ctaHref: '/contacto',
   },
 ]
 
-interface SubService {
+/* ─── Business Lines ─── */
+interface ServiceLine {
   id: string
-  label: string
-  title: string
-  description: string
-  includes: string[]
-  note?: string
+  lineTag: string
+  lineTitle: string
+  lineIntro: string
+  services: {
+    title: string
+    includes: string[]
+    forWhom: string
+    duration: string
+    ctaLabel: string
+  }[]
 }
 
-const subServices: SubService[] = [
+const businessLines: ServiceLine[] = [
   {
-    id: 'villas-premium',
-    label: 'CONSTRUCCIÓN DE VILLAS PREMIUM',
-    title: 'Proyectos únicos, ejecución precisa',
-    description:
-      'Desarrollamos y construimos villas premium totalmente personalizadas, adaptando cada proyecto a los requerimientos técnicos, funcionales y estéticos del cliente. Cada obra se ejecuta bajo un modelo basado en planificación rigurosa, control técnico y altos estándares de acabado, garantizando calidad, control de costes y cumplimiento de plazos.',
-    includes: [
-      'Dirección de obra y jefatura de proyecto',
-      'Ejecución integral de la construcción',
-      'Control de calidad en cada fase',
-      'Selección y coordinación de subcontratistas premium',
-      'Seguimiento técnico y económico de la obra',
-      'Informes periódicos de avance',
+    id: 'servicios-tecnicos',
+    lineTag: 'Para clientes con equipo propio',
+    lineTitle: 'Servicios Técnicos Independientes',
+    lineIntro:
+      'Si ya tiene arquitecto, constructor o promotor, pero necesita supervisión técnica independiente para proteger su inversión.',
+    services: [
+      {
+        title: 'Dirección Técnica',
+        includes: [
+          'Supervisión semanal in-situ por ingeniero',
+          'Validación de calidad de materiales y ejecución',
+          'Informes técnicos fotográficos mensuales',
+          'Interlocución directa con constructor',
+        ],
+        forWhom: 'Inversores que construyen con equipo local',
+        duration: 'Desde fase de cimentación hasta entrega',
+        ctaLabel: 'Solicitar información',
+      },
+      {
+        title: 'Gestión de Proyecto',
+        includes: [
+          'Coordinación de todos los agentes (arquitecto, constructor, ingenierías)',
+          'Control de plazos y presupuesto',
+          'Gestión de cambios y extras',
+          'Reporting semanal al cliente',
+        ],
+        forWhom: 'Clientes que no pueden estar presencialmente',
+        duration: 'Desde diseño hasta recepción de llaves',
+        ctaLabel: 'Solicitar información',
+      },
+      {
+        title: 'Asesoramiento Técnico y Due Diligence',
+        includes: [
+          'Análisis de viabilidad técnica de terrenos',
+          'Revisión de proyectos existentes',
+          'Detección de riesgos constructivos',
+          'Estimación de costes realista',
+        ],
+        forWhom: 'Inversores en fase de evaluación',
+        duration: '1-2 semanas',
+        ctaLabel: 'Solicitar análisis de terreno',
+      },
     ],
   },
   {
-    id: 'interiorismo',
-    label: 'INTERIORISMO Y EQUIPAMIENTO',
-    title: 'Coherencia en diseño, precisión en la ejecución',
-    description:
-      'Como parte del desarrollo de nuestras villas premium, ofrecemos un servicio de interiorismo orientado a dar continuidad al concepto arquitectónico y constructivo del proyecto, garantizando coherencia en diseño, materiales y ejecución.',
-    includes: [
-      'Definición del concepto de diseño interior',
-      'Selección de materiales, acabados y equipamiento',
-      'Diseño de iluminación técnica y decorativa',
-      'Asesoramiento en mobiliario y elementos a medida',
-      'Integración de paisajismo y áreas exteriores',
-      'Coordinación con la ejecución de la obra',
+    id: 'construccion-llave-en-mano',
+    lineTag: 'Para clientes que delegan la ejecución completa',
+    lineTitle: 'Construcción Llave en Mano',
+    lineIntro:
+      'Asumimos la responsabilidad total del proyecto: desde el diseño arquitectónico hasta la entrega de llaves, con supervisión directa de los fundadores.',
+    services: [
+      {
+        title: 'Construcción de Villas a Medida',
+        includes: [
+          'Desarrollo del proyecto arquitectónico',
+          'Tramitación de permisos',
+          'Ejecución de obra con equipo propio y subcontratas supervisadas',
+          'Control de calidad en cada fase',
+          'Garantía estructural',
+        ],
+        forWhom: 'Rango de proyecto: 250 m² a 800 m²',
+        duration: '12-18 meses desde diseño',
+        ctaLabel: 'Ver proceso de construcción',
+      },
+      {
+        title: 'Interiorismo y Equipamiento',
+        includes: [
+          'Diseño de interiores coherente con arquitectura',
+          'Selección de acabados y materiales',
+          'Mobiliario fijo y equipamiento',
+          'Coordinación de instalaciones especiales (domótica, AV)',
+        ],
+        forWhom: 'Proyectos llave en mano o reformas integrales',
+        duration: 'Según alcance del proyecto',
+        ctaLabel: 'Solicitar información',
+      },
     ],
   },
   {
-    id: 'seguridad-juridica',
-    label: 'SEGURIDAD JURÍDICA EN LA INVERSIÓN',
-    title: 'Protección desde el origen del proyecto',
-    description:
-      'La adquisición del terreno es una de las fases más críticas de cualquier desarrollo. Por ello, Grupo Roiba trabaja con un equipo de profesionales especializados en seguridad jurídica inmobiliaria en República Dominicana, encargado de verificar la situación legal de cada propiedad antes de su adquisición.',
-    includes: [
-      'Due diligence legal del terreno',
-      'Verificación de titularidad y cargas',
-      'Revisión de documentación registral',
-      'Acompañamiento en la adquisición',
-      'Apoyo en la obtención de licencias y permisos',
-      'Coordinación de aspectos legales durante el desarrollo del proyecto',
-    ],
-  },
-  {
-    id: 'roiba-care',
-    label: 'ROIBA CARE',
-    title: 'Gestión y mantenimiento para proteger su inversión',
-    description:
-      'En Grupo Roiba, el proyecto no finaliza con la entrega de la vivienda. A través de Roiba Care, ofrecemos un servicio de gestión y mantenimiento orientado a preservar el valor de la propiedad y garantizar su correcto funcionamiento a lo largo del tiempo. Este servicio está especialmente diseñado para propietarios que no residen de forma permanente.',
-    includes: [
-      'Mantenimiento preventivo y correctivo de la propiedad',
-      'Supervisión periódica del estado de la vivienda',
-      'Coordinación de personal de servicio y proveedores',
-      'Gestión operativa de la propiedad',
-      'Informes periódicos de estado',
-    ],
-    note: 'Los servicios serán contratados directamente por el cliente con empresas externas especializadas. Grupo Roiba actúa únicamente como facilitador de contactos de confianza en la zona.',
-  },
-  {
-    id: 'project-management',
-    label: 'PROJECT MANAGEMENT',
-    title: 'Coordinación y control del proyecto',
-    description:
-      'Ofrecemos servicios de Project Management para clientes que requieren una gestión profesional e independiente de su proyecto de construcción. Coordinamos los diferentes agentes implicados, optimizando recursos y asegurando el cumplimiento de plazos, costes y objetivos definidos.',
-    includes: [
-      'Planificación y cronograma del proyecto',
-      'Control presupuestario y seguimiento de costes',
-      'Coordinación de contratistas y proveedores',
-      'Seguimiento del avance de obra',
-      'Identificación y gestión de riesgos',
+    id: 'gestion-post-entrega',
+    lineTag: 'Para propietarios que necesitan gestión continua',
+    lineTitle: 'Gestión Post-Entrega',
+    lineIntro:
+      'Su villa es una inversión que requiere mantenimiento profesional para preservar su valor y operatividad a lo largo del tiempo.',
+    services: [
+      {
+        title: 'Roiba Care (Mantenimiento Integral)',
+        includes: [
+          'Inspecciones técnicas trimestrales',
+          'Mantenimiento preventivo de instalaciones',
+          'Gestión de incidencias',
+          'Renovación de acabados según desgaste',
+        ],
+        forWhom: 'Propietarios no residentes',
+        duration: 'Servicio permanente',
+        ctaLabel: 'Ver planes de mantenimiento',
+      },
+      {
+        title: 'Seguridad Jurídica en la Inversión',
+        includes: [
+          'Verificación de títulos de propiedad',
+          'Due diligence legal previo a compra',
+          'Asesoramiento en estructura de tenencia',
+        ],
+        forWhom: 'Inversores extranjeros',
+        duration: '2-4 semanas',
+        ctaLabel: 'Hablar con el equipo legal',
+      },
     ],
   },
 ]
@@ -158,57 +202,84 @@ export default function ServiciosPage() {
   return (
     <main>
       {/* ============================================ */}
-      {/* 1. HERO — Dark navy background               */}
+      {/* 1. HERO                                       */}
       {/* ============================================ */}
       <section className="relative pt-28 pb-14 md:pt-32 md:pb-20 bg-roiba-verde overflow-hidden">
-        {/* Subtle grain overlay */}
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-6 text-center">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            Nuestros Servicios
+            Capacidades Técnicas
           </p>
           <h1 className="font-serif text-display-lg md:text-display-xl text-white mb-8">
-            Ingeniería aplicada.
+            Dirección técnica, construcción
             <br />
-            Proyectos bajo control
+            y gestión integral
           </h1>
           <p className="text-white/60 text-body-lg max-w-2xl mx-auto leading-relaxed">
-            Control integral del proceso constructivo. Cada servicio responde a
-            una necesidad real del proyecto.
+            Trabajamos en proyectos residenciales de alta gama desde tres líneas
+            principales: servicios técnicos independientes, construcción llave
+            en mano y gestión post-entrega.
           </p>
-          {/* Decorative line */}
           <div className="mt-12 mx-auto w-16 h-px bg-roiba-dorado/40" />
         </div>
       </section>
 
       {/* ============================================ */}
-      {/* 2. SERVICES GRID — 8 services, light bg       */}
+      {/* 2. CLIENT SCENARIOS                           */}
       {/* ============================================ */}
       <section className="py-14 md:py-20 bg-roiba-arena-light">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-            {serviciosGrid.map((servicio) => (
+          <div className="text-center mb-14">
+            <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
+              Su Punto de Partida
+            </p>
+            <h2 className="font-serif text-display-md text-roiba-verde mb-4">
+              Cómo podemos ayudarle
+            </h2>
+            <p className="text-roiba-verde/60 text-body-lg max-w-xl mx-auto">
+              Cada proyecto es distinto. Elija su situación:
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {scenarios.map((scenario) => (
               <div
-                key={servicio.num}
-                className="group relative aspect-[5/3] overflow-hidden cursor-pointer rounded-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_36px_rgba(0,0,0,0.2)]"
+                key={scenario.id}
+                className="bg-white p-8 md:p-10 border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
               >
-                <Image
-                  src={servicio.image}
-                  alt={servicio.title}
-                  fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/90 via-roiba-verde/40 to-transparent" />
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-roiba-dorado/0 group-hover:bg-roiba-dorado/60 transition-all duration-500" />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <h3 className="font-serif text-lg text-white font-medium leading-tight">
-                    {servicio.title}
-                  </h3>
-                  <p className="text-white/0 text-[13px] leading-relaxed max-h-0 overflow-hidden transition-all duration-500 group-hover:text-white/70 group-hover:max-h-20 group-hover:mt-2">
-                    {servicio.description}
-                  </p>
-                </div>
+                <h3 className="font-serif text-xl text-roiba-verde mb-5 leading-tight">
+                  &ldquo;{scenario.situation}&rdquo;
+                </h3>
+                <ul className="space-y-2 mb-6">
+                  {scenario.services.map((svc, i) => (
+                    <li key={i} className="flex items-start gap-2.5">
+                      <span className="text-roiba-dorado mt-0.5 flex-shrink-0">
+                        &#10003;
+                      </span>
+                      <span className="text-roiba-verde/70 text-body">
+                        {svc}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-body text-roiba-verde/50 italic mb-6">
+                  Resultado: {scenario.result}
+                </p>
+                <Link
+                  href={scenario.ctaHref}
+                  className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-verde transition-colors"
+                >
+                  {scenario.cta}
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
+                    <path d="M3 7h8M8 4l3 3-3 3" />
+                  </svg>
+                </Link>
               </div>
             ))}
           </div>
@@ -216,76 +287,44 @@ export default function ServiciosPage() {
       </section>
 
       {/* ============================================ */}
-      {/* 3. INTRO SECTION — "Todo lo que necesita"     */}
+      {/* 3. BUSINESS LINES — Detailed                  */}
       {/* ============================================ */}
-      <section className="py-14 md:py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            Nuestras Líneas de Servicio
-          </p>
-          <h2 className="font-serif text-display-md text-roiba-verde mb-8">
-            Todo lo que necesita su proyecto
-          </h2>
-          <p className="text-roiba-verde/60 text-body-lg leading-relaxed max-w-3xl mx-auto">
-            Estructuramos nuestra actividad en dos líneas principales: dirección
-            técnica y supervisión de obra, y construcción de villas premium. Cada
-            servicio responde a una necesidad concreta del cliente, con un
-            objetivo común: garantizar control, calidad y transparencia en todo
-            el proceso constructivo con un equipo con más de 20 años de
-            experiencia en el sector.
-          </p>
-          <div className="mt-10 mx-auto w-16 h-px bg-roiba-dorado/40" />
-        </div>
-      </section>
-
-      {/* ============================================ */}
-      {/* 4. SUB-SERVICES — Alternating layout          */}
-      {/* ============================================ */}
-      {subServices.map((service, index) => {
-        const isEven = index % 2 === 0
-        const bgColor = isEven ? 'bg-roiba-arena-light' : 'bg-white'
+      {businessLines.map((line, lineIdx) => {
+        const bgColor = lineIdx % 2 === 0 ? 'bg-white' : 'bg-roiba-arena-light'
 
         return (
           <section
-            key={service.id}
-            id={service.id}
+            key={line.id}
+            id={line.id}
             className={`py-14 md:py-20 ${bgColor}`}
           >
             <div className="max-w-7xl mx-auto px-6">
-              {/* Service Label */}
-              <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-4">
-                {service.label}
-              </p>
+              {/* Line Header */}
+              <div className="max-w-3xl mb-12">
+                <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-4">
+                  {line.lineTag}
+                </p>
+                <h2 className="font-serif text-display-md text-roiba-verde mb-4">
+                  {line.lineTitle}
+                </h2>
+                <div className="w-12 h-px bg-roiba-dorado mb-6" />
+                <p className="text-roiba-verde/60 text-body-lg leading-relaxed">
+                  {line.lineIntro}
+                </p>
+              </div>
 
-              <div
-                className={`flex flex-col lg:flex-row gap-12 lg:gap-20 items-start ${
-                  !isEven ? 'lg:flex-row-reverse' : ''
-                }`}
-              >
-                {/* Text Content */}
-                <div className="flex-1 lg:max-w-xl">
-                  <h2 className="font-serif text-display-md text-roiba-verde mb-6">
-                    {service.title}
-                  </h2>
-                  <p className="text-roiba-verde/60 text-body-lg leading-relaxed mb-8">
-                    {service.description}
-                  </p>
-                  <Link
-                    href="/contacto"
-                    className="inline-block px-8 py-4 bg-roiba-verde text-white font-medium rounded-sm hover:bg-roiba-verde-light transition-colors duration-300"
+              {/* Services within this line */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {line.services.map((svc, svcIdx) => (
+                  <div
+                    key={svcIdx}
+                    className="bg-white rounded-sm p-8 md:p-10 shadow-sm border border-roiba-verde/[0.06]"
                   >
-                    Solicitar información
-                  </Link>
-                </div>
-
-                {/* Features Card */}
-                <div className="flex-1 w-full">
-                  <div className="bg-white rounded-xl p-8 md:p-10 shadow-sm border border-roiba-verde/10">
-                    <h3 className="font-serif text-subheading text-roiba-verde mb-6 font-semibold">
-                      Incluye
+                    <h3 className="font-serif text-xl text-roiba-verde mb-5 font-medium">
+                      {svc.title}
                     </h3>
-                    <ul className="space-y-4">
-                      {service.includes.map((item, i) => (
+                    <ul className="space-y-3 mb-6">
+                      {svc.includes.map((item, i) => (
                         <li key={i} className="flex items-start gap-3">
                           <span className="text-roiba-dorado mt-0.5 text-lg font-bold flex-shrink-0">
                             &#10003;
@@ -296,15 +335,44 @@ export default function ServiciosPage() {
                         </li>
                       ))}
                     </ul>
-                    {service.note && (
-                      <div className="mt-8 pt-6 border-t border-roiba-verde/10">
-                        <p className="text-roiba-verde/50 text-caption italic leading-relaxed">
-                          {service.note}
+
+                    <div className="grid grid-cols-2 gap-4 pt-5 border-t border-roiba-verde/10 mb-6">
+                      <div>
+                        <p className="text-micro font-medium tracking-widest uppercase text-roiba-verde/35 mb-1">
+                          Para quién
+                        </p>
+                        <p className="text-caption text-roiba-verde/70">
+                          {svc.forWhom}
                         </p>
                       </div>
-                    )}
+                      <div>
+                        <p className="text-micro font-medium tracking-widest uppercase text-roiba-verde/35 mb-1">
+                          Duración
+                        </p>
+                        <p className="text-caption text-roiba-verde/70">
+                          {svc.duration}
+                        </p>
+                      </div>
+                    </div>
+
+                    <Link
+                      href="/contacto"
+                      className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-verde transition-colors"
+                    >
+                      {svc.ctaLabel}
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      >
+                        <path d="M3 7h8M8 4l3 3-3 3" />
+                      </svg>
+                    </Link>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </section>
@@ -312,23 +380,26 @@ export default function ServiciosPage() {
       })}
 
       {/* ============================================ */}
-      {/* 5. CTA SECTION — Dark navy                    */}
+      {/* 4. CTA SECTION                                */}
       {/* ============================================ */}
       <section className="relative py-14 md:py-20 bg-roiba-verde overflow-hidden">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-3xl mx-auto px-6 text-center">
+          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
+            ¿Qué necesita?
+          </p>
           <h2 className="font-serif text-display-md text-white mb-6">
-            ¿Tiene un proyecto en mente?
+            Explíquenos su proyecto y le proponemos un enfoque
           </h2>
           <p className="text-white/60 text-body-lg mb-12 leading-relaxed">
-            Cuéntenos su idea. Nuestro equipo técnico le asesorará sin
-            compromiso.
+            Podemos trabajar solo en la fase que necesite o asumir el proyecto
+            completo. Respuesta del equipo técnico en 48 horas.
           </p>
           <Link
             href="/contacto"
             className="inline-block px-10 py-4 bg-roiba-dorado-light text-roiba-verde font-semibold rounded-sm hover:bg-roiba-dorado transition-colors duration-300 text-lg"
           >
-            Solicitar consulta gratuita
+            Contactar al equipo
           </Link>
         </div>
       </section>

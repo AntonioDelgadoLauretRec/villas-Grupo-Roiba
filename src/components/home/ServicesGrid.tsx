@@ -32,15 +32,15 @@ export default function ServicesGrid({ dbServices }: { dbServices?: Service[] })
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 md:mb-[72px] border-b border-roiba-dorado/[0.12] pb-8">
           <div>
             <span className="scroll-reveal block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">
-              Nuestros Servicios
+              Nuestras Capacidades
             </span>
             <h2 className="scroll-reveal delay-1 font-serif text-[clamp(32px,4vw,52px)] font-normal text-roiba-verde leading-[1.15]">
-              Ingeniería aplicada{' '}
-              <span className="italic text-roiba-dorado">con precisión</span>
+              Cómo podemos{' '}
+              <span className="italic text-roiba-dorado">ayudarle</span>
             </h2>
           </div>
           <span className="scroll-reveal delay-2 font-sans text-xs text-slate-500 max-w-xs md:text-right leading-relaxed mt-5 md:mt-0">
-            Control integral del proceso constructivo. Cada servicio responde a una necesidad real del proyecto.
+            Cada proyecto es distinto. Elija su punto de partida.
           </span>
         </div>
 

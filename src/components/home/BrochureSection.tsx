@@ -40,14 +40,14 @@ export default function BrochureSection() {
 
       <div className="max-w-[900px] mx-auto relative z-[2] text-center">
         <span className="scroll-reveal block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">
-          Guía gratuita
+          Recurso gratuito
         </span>
         <h2 className="scroll-reveal delay-1 font-serif text-[clamp(28px,4vw,44px)] font-normal text-roiba-verde leading-tight mb-4">
-          Guía de inversión en{' '}
+          Guía del inversor en{' '}
           <span className="italic text-roiba-dorado">Punta Cana</span>
         </h2>
         <p className="scroll-reveal delay-2 font-sans text-sm text-slate-500 max-w-lg mx-auto leading-relaxed mb-8">
-          Descargue nuestra guía completa con análisis de mercado, marco legal, fiscalidad y oportunidades de inversión inmobiliaria en República Dominicana.
+          Análisis de mercado, marco legal, fiscalidad y oportunidades de inversión inmobiliaria en República Dominicana.
         </p>
 
         {status === 'success' ? (

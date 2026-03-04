@@ -28,11 +28,11 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
         {/* Header */}
         <div className="text-center mb-16 md:mb-[72px]">
           <span className="scroll-reveal block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">
-            Nuestro Proceso
+            Metodología
           </span>
           <h2 className="scroll-reveal delay-1 font-serif text-[clamp(32px,4vw,48px)] font-normal text-roiba-verde">
-            Del concepto a la{' '}
-            <span className="italic text-roiba-dorado-light">realidad</span>
+            Cómo trabajamos{' '}
+            <span className="italic text-roiba-dorado-light">(proyecto completo)</span>
           </h2>
         </div>
 

@@ -64,36 +64,36 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
       {/* Content */}
       <div className="text-center z-[2] relative px-6 animate-fade-up">
         <p className="font-sans text-[11px] font-medium tracking-[0.4em] uppercase text-roiba-dorado mb-8 animate-fade-in [animation-delay:0.3s]">
-          Construcción Premium en el Caribe
+          Ingeniería y Construcción en el Caribe
         </p>
 
-        <h1 className="font-serif text-[clamp(42px,7vw,88px)] font-light text-white leading-[1.05] tracking-tight max-w-[900px] mx-auto">
-          Arquitectura,{' '}
-          <span className="italic text-roiba-dorado-light">control</span>
-          <br />y confianza
+        <h1 className="font-serif text-[clamp(36px,5.5vw,72px)] font-light text-white leading-[1.1] tracking-tight max-w-[900px] mx-auto">
+          Servicios técnicos integrales{' '}
+          <span className="italic text-roiba-dorado-light">para proyectos</span>
+          <br />residenciales de alta gama
         </h1>
 
         <div className="w-[60px] h-px bg-roiba-dorado mx-auto my-9 animate-reveal-line" />
 
-        <p className="font-sans text-[15px] font-light text-white/80 max-w-[520px] mx-auto mb-12 leading-[1.7] tracking-wide animate-fade-in [animation-delay:1s]">
-          Villas premium llave en mano. Diseño contemporáneo,
+        <p className="font-sans text-[15px] font-light text-white/80 max-w-[580px] mx-auto mb-12 leading-[1.7] tracking-wide animate-fade-in [animation-delay:1s]">
+          Dirección técnica, supervisión de obra y construcción llave en mano.
           <br />
-          gestión integral y un proceso totalmente personalizado.
+          Del concepto al mantenimiento, con un equipo que responde directamente ante usted.
         </p>
 
         <div className="flex gap-5 justify-center animate-fade-up [animation-delay:1.2s]">
           <a
-            href="/contacto"
+            href="/servicios"
             className="font-sans text-[11px] font-semibold tracking-[0.15em] uppercase px-10 py-4 bg-roiba-dorado text-roiba-verde hover:bg-roiba-dorado-light hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.25)] transition-all duration-400"
           >
-            Contáctanos
+            Explorar servicios
           </a>
-          <button
-            onClick={() => document.getElementById('servicios')?.scrollIntoView({ behavior: 'smooth' })}
+          <a
+            href="/contacto"
             className="font-sans text-[11px] font-medium tracking-[0.15em] uppercase px-10 py-4 bg-transparent text-white border border-white/25 hover:border-roiba-dorado hover:text-roiba-dorado-light transition-all duration-400"
           >
-            Ver Servicios
-          </button>
+            Hablar con el equipo
+          </a>
         </div>
       </div>
 

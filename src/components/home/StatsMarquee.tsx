@@ -1,8 +1,8 @@
 const DEFAULT_STATS = [
-  { value: '15+', label: 'Proyectos entregados' },
-  { value: '98%', label: 'Satisfacción cliente' },
-  { value: '2', label: 'Países operativos' },
-  { value: '0', label: 'Retrasos en entrega' },
+  { value: '20+', label: 'Años en proyectos residenciales y hoteleros' },
+  { value: '2M€–15M€', label: 'Dirección técnica en proyectos de este rango' },
+  { value: '2', label: 'España y República Dominicana' },
+  { value: '100%', label: 'Supervisión directa de ingenieros en cada proyecto' },
 ]
 
 export default function StatsMarquee({ dbStats }: { dbStats?: { value: string; label: string }[] }) {
