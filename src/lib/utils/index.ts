@@ -47,15 +47,15 @@ export function slugify(text: string): string {
  * Constantes del proyecto
  */
 export const COLORS = {
-  verde: '#122620',
-  verdeLight: '#1A3830',
-  verdeDark: '#0A1A15',
-  arena: '#F4EBD0',
-  arenaLight: '#FAF7EE',
-  arenaDark: '#E5DCC0',
-  dorado: '#B68D40',
-  doradoClaro: '#FFCC53',
-  doradoOscuro: '#8B6914',
+  verde: '#0C2340',
+  verdeLight: '#1B4B7A',
+  verdeDark: '#061525',
+  arena: '#FFFFFF',
+  arenaLight: '#F5F7FA',
+  arenaDark: '#E2E8F0',
+  dorado: '#C9A96E',
+  doradoClaro: '#E8C877',
+  doradoOscuro: '#A8884F',
 } as const
 
 export const INVESTMENT_RANGES = [

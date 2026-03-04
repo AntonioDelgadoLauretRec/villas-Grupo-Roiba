@@ -5,15 +5,15 @@
 @tailwind utilities;
 
 :root {
-  /* Colores Grupo Roiba */
-  --color-verde: #122620;
-  --color-verde-light: #1A4D5C;
-  --color-arena: #F4EBD0;
-  --color-arena-dark: #E5DCC5;
-  --color-dorado: #B68D40;
-  --color-dorado-light: #FFCC53;
+  /* Colores Grupo Roiba - Azul Marino + Blanco + Dorado */
+  --color-verde: #0C2340;
+  --color-verde-light: #1B4B7A;
+  --color-arena: #FFFFFF;
+  --color-arena-dark: #E2E8F0;
+  --color-dorado: #C9A96E;
+  --color-dorado-light: #E8C877;
   --color-negro: #0A0A0A;
-  --color-blanco: #FEFEFE;
+  --color-blanco: #FFFFFF;
   
   /* Espaciado base */
   --spacing-unit: 8px;
@@ -320,7 +320,7 @@
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     border-left: none !important;
-    border-bottom: 1px solid rgba(12,35,64,0.1);
+    border-bottom: 1px solid rgba(12,35,64,0.08);
     gap: 0 !important;
     scrollbar-width: none;
   }
@@ -333,7 +333,7 @@
     border-bottom: 2px solid transparent;
   }
   .process-tabs-row > button.active-tab {
-    border-bottom-color: #C9A96E;
+    border-bottom-color: #C9A96E; /* dorado refinado mate */
   }
 }
 @media (max-width: 480px) {
