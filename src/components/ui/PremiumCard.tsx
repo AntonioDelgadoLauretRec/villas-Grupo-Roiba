@@ -30,7 +30,7 @@ export default function PremiumCard({ image, title, description, href, aspect = 
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative overflow-hidden cursor-pointer rounded-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(12,35,64,0.25)] hover:z-10 ${className}`}
+      className={`group relative overflow-hidden cursor-pointer rounded-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_60px_rgba(12,35,64,0.20)] hover:z-10 ${className}`}
     >
       {/* Image */}
       <div className={`relative ${aspect} overflow-hidden`}>

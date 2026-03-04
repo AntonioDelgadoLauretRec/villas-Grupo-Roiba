@@ -50,7 +50,7 @@ export default function ServicesGrid({ dbServices }: { dbServices?: Service[] })
                 <div
                   key={svc.key}
                   onClick={() => setOpenCard(isOpen ? null : svc.key)}
-                  className={`group relative snap-start flex-shrink-0 w-[85vw] sm:w-[45vw] lg:w-[calc(33.333vw-2rem)] aspect-[5/3] overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[0_16px_48px_rgba(12,35,64,0.2)] hover:z-10 ${isOpen ? 'scale-[1.02] shadow-[0_16px_48px_rgba(12,35,64,0.2)] z-10' : ''}`}
+                  className={`group relative snap-start flex-shrink-0 w-[85vw] sm:w-[45vw] lg:w-[calc(33.333vw-2rem)] aspect-[5/3] overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[0_16px_48px_rgba(12,35,64,0.15)] hover:z-10 ${isOpen ? 'scale-[1.02] shadow-[0_16px_48px_rgba(12,35,64,0.15)] z-10' : ''}`}
                 >
                   <ImageSkeleton
                     src={svc.image}

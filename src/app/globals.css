@@ -15,20 +15,20 @@
        Fuente: Manual_Maestro_Marca_Grupo_Roiba_V3_Logo_RI.pdf
        ══════════════════════════════════════════════════════════ */
     
-    /* Verde Profundo (Primario) - Autoridad, Solidez, Permanencia */
-    --color-verde: #122620;
-    --color-verde-light: #1A3830;
-    --color-verde-dark: #0A1613;
-    
-    /* Arena Claro (Base) - Fondos, Espacios, Calma */
-    --color-arena: #F4EBD0;
-    --color-arena-light: #FAF7EE;
-    --color-arena-dark: #E8DEC4;
-    
-    /* Dorado (Acento Premium) - CTAs, Destacados, Lujo */
-    --color-dorado: #FFCC53;
-    --color-dorado-arena: #B68D40;
-    --color-dorado-mate: #B68D40;
+    /* Azul Marino Profundo (Primario) - Autoridad, Solidez, Permanencia */
+    --color-verde: #0C2340;
+    --color-verde-light: #1B4B7A;
+    --color-verde-dark: #061525;
+
+    /* Blanco (Base) - Fondos, Espacios, Limpieza */
+    --color-arena: #FFFFFF;
+    --color-arena-light: #F5F7FA;
+    --color-arena-dark: #E2E8F0;
+
+    /* Dorado Refinado (Acento Premium) - CTAs, Destacados, Lujo */
+    --color-dorado: #C9A96E;
+    --color-dorado-arena: #C9A96E;
+    --color-dorado-mate: #C9A96E;
     
     /* ══════════════════════════════════════════════════════════
        TIPOGRAFÍA - MANUAL DE MARCA V3
@@ -138,7 +138,7 @@
 
   .select {
     @apply input appearance-none cursor-pointer
-           bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23122620%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
+           bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%230C2340%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%209l6%206%206-6%22%2F%3E%3C%2Fsvg%3E')]
            bg-no-repeat bg-[right_1rem_center] bg-[length:1.25rem];
   }
 
@@ -275,7 +275,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(12,35,64,0.4), rgba(201,169,110,0.15));
+  background: linear-gradient(135deg, rgba(12,35,64,0.35), rgba(201,169,110,0.12));
   mix-blend-mode: multiply;
   pointer-events: none;
   transition: opacity 0.5s ease;
@@ -297,6 +297,7 @@
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, #C9A96E, #E8C877);
+  /* Dorado refinado mate → Dorado claro */
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -315,7 +316,7 @@
 }
 
 .glass-dark {
-  background: rgba(12, 35, 64, 0.6);
+  background: rgba(12, 35, 64, 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(201, 169, 110, 0.1);
