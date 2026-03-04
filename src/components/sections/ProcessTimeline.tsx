@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC, useState, useRef, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 
 const ROIBA_PHASES = [
@@ -54,8 +54,37 @@ const ROIBA_PHASES = [
   },
 ]
 
+const SWIPE_THRESHOLD = 50
+
 export const ProcessTimeline: FC = () => {
   const [activePhase, setActivePhase] = useState(0)
+  const touchRef = useRef<{ startX: number; startY: number } | null>(null)
+
+  const goNext = useCallback(() => {
+    setActivePhase((prev) => Math.min(prev + 1, ROIBA_PHASES.length - 1))
+  }, [])
+
+  const goPrev = useCallback(() => {
+    setActivePhase((prev) => Math.max(prev - 1, 0))
+  }, [])
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchRef.current = {
+      startX: e.touches[0].clientX,
+      startY: e.touches[0].clientY,
+    }
+  }, [])
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (!touchRef.current) return
+    const deltaX = e.changedTouches[0].clientX - touchRef.current.startX
+    const deltaY = e.changedTouches[0].clientY - touchRef.current.startY
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > SWIPE_THRESHOLD) {
+      if (deltaX < 0) goNext()
+      else goPrev()
+    }
+    touchRef.current = null
+  }, [goNext, goPrev])
 
   return (
     <section className="py-14 md:py-20 bg-roiba-arena-light relative overflow-hidden">
@@ -84,17 +113,17 @@ export const ProcessTimeline: FC = () => {
 
           {/* ── Left: Phase list ── */}
           <div className="lg:col-span-4">
-            {/* Mobile: horizontal scroll — Desktop: vertical list */}
+            {/* Mobile: horizontal scrollable — Desktop: vertical list */}
             <div
-              className="flex lg:flex-col overflow-x-auto lg:overflow-visible border-b-2 lg:border-b-0 lg:border-l-2 border-roiba-verde/10"
-              style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+              className="flex lg:flex-col overflow-x-auto lg:overflow-visible border-b-2 lg:border-b-0 lg:border-l-2 border-roiba-verde/10 snap-x snap-mandatory scrollbar-luxury"
+              style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
             >
               {ROIBA_PHASES.map((phase, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActivePhase(idx)}
                   className={cn(
-                    'flex-shrink-0 lg:flex-shrink text-left',
+                    'flex-shrink-0 lg:flex-shrink text-left snap-center',
                     'px-5 lg:pl-6 lg:pr-4 py-4 lg:py-5',
                     'relative transition-all duration-300',
                     'border-b-2 lg:border-b-0 lg:border-l-2 -mb-0.5 lg:-mb-0 lg:-ml-0.5',
@@ -134,10 +163,21 @@ export const ProcessTimeline: FC = () => {
                 </button>
               ))}
             </div>
+
+            {/* Mobile swipe hint */}
+            <div className="flex lg:hidden items-center gap-2 mt-3 justify-center font-sans text-micro tracking-[0.12em] uppercase text-roiba-dorado/60">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 8H4M7 5L4 8l3 3"/></svg>
+              <span>Desliza para navegar</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 8h8M9 5l3 3-3 3"/></svg>
+            </div>
           </div>
 
-          {/* ── Right: Active phase detail ── */}
-          <div className="lg:col-span-8 mt-6 lg:mt-0 lg:sticky lg:top-28">
+          {/* ── Right: Active phase detail (swipeable on mobile) ── */}
+          <div
+            className="lg:col-span-8 mt-6 lg:mt-0 lg:sticky lg:top-28"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <div
               key={activePhase}
               className="bg-white shadow-sm border border-roiba-verde/8 p-8 md:p-10 lg:p-12"
@@ -187,21 +227,51 @@ export const ProcessTimeline: FC = () => {
                 </div>
               </div>
 
-              {/* Progress dots */}
-              <div className="flex items-center gap-2 mt-7 pt-6 border-t border-roiba-verde/8">
-                {ROIBA_PHASES.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActivePhase(idx)}
-                    aria-label={`Fase ${idx + 1}`}
-                    className={cn(
-                      'h-1.5 rounded-full transition-all duration-300',
-                      activePhase === idx
-                        ? 'w-8 bg-roiba-dorado'
-                        : 'w-3 bg-roiba-verde/15 hover:bg-roiba-verde/30'
-                    )}
-                  />
-                ))}
+              {/* Navigation arrows + progress */}
+              <div className="flex items-center justify-between mt-7 pt-6 border-t border-roiba-verde/8">
+                <button
+                  onClick={goPrev}
+                  disabled={activePhase === 0}
+                  aria-label="Fase anterior"
+                  className={cn(
+                    'w-10 h-10 flex items-center justify-center border transition-all duration-300',
+                    activePhase === 0
+                      ? 'border-roiba-verde/10 text-roiba-verde/20 cursor-not-allowed'
+                      : 'border-roiba-verde/20 text-roiba-verde/60 hover:border-roiba-dorado hover:text-roiba-dorado'
+                  )}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M15 19l-7-7 7-7" /></svg>
+                </button>
+
+                <div className="flex items-center gap-2">
+                  {ROIBA_PHASES.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActivePhase(idx)}
+                      aria-label={`Fase ${idx + 1}`}
+                      className={cn(
+                        'h-1.5 rounded-full transition-all duration-300',
+                        activePhase === idx
+                          ? 'w-8 bg-roiba-dorado'
+                          : 'w-3 bg-roiba-verde/15 hover:bg-roiba-verde/30'
+                      )}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={goNext}
+                  disabled={activePhase === ROIBA_PHASES.length - 1}
+                  aria-label="Fase siguiente"
+                  className={cn(
+                    'w-10 h-10 flex items-center justify-center border transition-all duration-300',
+                    activePhase === ROIBA_PHASES.length - 1
+                      ? 'border-roiba-verde/10 text-roiba-verde/20 cursor-not-allowed'
+                      : 'border-roiba-verde/20 text-roiba-verde/60 hover:border-roiba-dorado hover:text-roiba-dorado'
+                  )}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 5l7 7-7 7" /></svg>
+                </button>
               </div>
             </div>
           </div>

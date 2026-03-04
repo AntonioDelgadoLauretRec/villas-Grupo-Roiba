@@ -58,11 +58,6 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
-      {
-        source: '/inversores',
-        destination: '/villas',
-        permanent: true,
-      },
     ]
   },
 }

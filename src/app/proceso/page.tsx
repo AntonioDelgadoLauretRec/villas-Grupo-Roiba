@@ -1,5 +1,6 @@
 import { ProcessTimeline } from '@/components/sections/ProcessTimeline'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -11,8 +12,17 @@ export const metadata: Metadata = {
 export default function ProcesoPage() {
   return (
     <main className="pt-20">
-      {/* Hero */}
-      <section className="relative bg-roiba-verde py-20 md:py-24 px-6 overflow-hidden">
+      {/* Hero with background image */}
+      <section className="relative bg-roiba-verde py-24 md:py-32 px-6 overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=85&fit=crop"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-roiba-verde/80" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">

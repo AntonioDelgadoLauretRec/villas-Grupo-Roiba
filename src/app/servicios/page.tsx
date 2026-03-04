@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ const scenarios = [
       'Su villa lista para habitar, con supervisión directa de ingeniero.',
     cta: 'Ver el proceso completo',
     ctaHref: '/proceso',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop',
   },
   {
     id: 'supervision',
@@ -37,6 +39,7 @@ const scenarios = [
       'Supervisión semanal in-situ con informes técnicos directos.',
     cta: 'Ver cómo supervisamos',
     ctaHref: '/contacto',
+    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&fit=crop',
   },
   {
     id: 'evaluando',
@@ -52,6 +55,7 @@ const scenarios = [
       'Informe técnico de viabilidad antes de comprometerse.',
     cta: 'Solicitar análisis',
     ctaHref: '/contacto',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop',
   },
   {
     id: 'gestion-post',
@@ -66,6 +70,7 @@ const scenarios = [
       'Su inversión protegida y operativa todo el año.',
     cta: 'Ver planes de mantenimiento',
     ctaHref: '/contacto',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fit=crop',
   },
 ]
 
@@ -75,12 +80,14 @@ interface ServiceLine {
   lineTag: string
   lineTitle: string
   lineIntro: string
+  image: string
   services: {
     title: string
     includes: string[]
     forWhom: string
     duration: string
     ctaLabel: string
+    icon: string
   }[]
 }
 
@@ -91,9 +98,11 @@ const businessLines: ServiceLine[] = [
     lineTitle: 'Servicios Técnicos Independientes',
     lineIntro:
       'Si ya tiene arquitecto, constructor o promotor, pero necesita supervisión técnica independiente para proteger su inversión.',
+    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80&fit=crop',
     services: [
       {
         title: 'Dirección Técnica',
+        icon: '🔍',
         includes: [
           'Supervisión semanal in-situ por ingeniero',
           'Validación de calidad de materiales y ejecución',
@@ -106,6 +115,7 @@ const businessLines: ServiceLine[] = [
       },
       {
         title: 'Gestión de Proyecto',
+        icon: '📋',
         includes: [
           'Coordinación de todos los agentes (arquitecto, constructor, ingenierías)',
           'Control de plazos y presupuesto',
@@ -118,6 +128,7 @@ const businessLines: ServiceLine[] = [
       },
       {
         title: 'Asesoramiento Técnico y Due Diligence',
+        icon: '📊',
         includes: [
           'Análisis de viabilidad técnica de terrenos',
           'Revisión de proyectos existentes',
@@ -136,9 +147,11 @@ const businessLines: ServiceLine[] = [
     lineTitle: 'Construcción Llave en Mano',
     lineIntro:
       'Asumimos la responsabilidad total del proyecto: desde el diseño arquitectónico hasta la entrega de llaves, con supervisión directa de los fundadores.',
+    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80&fit=crop',
     services: [
       {
         title: 'Construcción de Villas a Medida',
+        icon: '🏗️',
         includes: [
           'Desarrollo del proyecto arquitectónico',
           'Tramitación de permisos',
@@ -152,6 +165,7 @@ const businessLines: ServiceLine[] = [
       },
       {
         title: 'Interiorismo y Equipamiento',
+        icon: '🎨',
         includes: [
           'Diseño de interiores coherente con arquitectura',
           'Selección de acabados y materiales',
@@ -170,9 +184,11 @@ const businessLines: ServiceLine[] = [
     lineTitle: 'Gestión Post-Entrega',
     lineIntro:
       'Su villa es una inversión que requiere mantenimiento profesional para preservar su valor y operatividad a lo largo del tiempo.',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop',
     services: [
       {
         title: 'Roiba Care (Mantenimiento Integral)',
+        icon: '🛡️',
         includes: [
           'Inspecciones técnicas trimestrales',
           'Mantenimiento preventivo de instalaciones',
@@ -185,6 +201,7 @@ const businessLines: ServiceLine[] = [
       },
       {
         title: 'Seguridad Jurídica en la Inversión',
+        icon: '⚖️',
         includes: [
           'Verificación de títulos de propiedad',
           'Due diligence legal previo a compra',
@@ -225,7 +242,7 @@ export default function ServiciosPage() {
       </section>
 
       {/* ============================================ */}
-      {/* 2. CLIENT SCENARIOS                           */}
+      {/* 2. CLIENT SCENARIOS — with images            */}
       {/* ============================================ */}
       <section className="py-14 md:py-20 bg-roiba-arena-light">
         <div className="max-w-7xl mx-auto px-6">
@@ -244,42 +261,55 @@ export default function ServiciosPage() {
             {scenarios.map((scenario) => (
               <div
                 key={scenario.id}
-                className="bg-white p-8 md:p-10 border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
+                className="group bg-white border border-roiba-verde/[0.06] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
               >
-                <h3 className="font-serif text-xl text-roiba-verde mb-5 leading-tight">
-                  &ldquo;{scenario.situation}&rdquo;
-                </h3>
-                <ul className="space-y-2 mb-6">
-                  {scenario.services.map((svc, i) => (
-                    <li key={i} className="flex items-start gap-2.5">
-                      <span className="text-roiba-dorado mt-0.5 flex-shrink-0">
-                        &#10003;
-                      </span>
-                      <span className="text-roiba-verde/70 text-body">
-                        {svc}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-body text-roiba-verde/50 italic mb-6">
-                  Resultado: {scenario.result}
-                </p>
-                <Link
-                  href={scenario.ctaHref}
-                  className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-verde transition-colors"
-                >
-                  {scenario.cta}
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
+                {/* Image header */}
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={scenario.image}
+                    alt={scenario.situation}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/60 to-transparent" />
+                </div>
+                <div className="p-8 md:p-10">
+                  <h3 className="font-serif text-xl text-roiba-verde mb-5 leading-tight">
+                    &ldquo;{scenario.situation}&rdquo;
+                  </h3>
+                  <ul className="space-y-2 mb-6">
+                    {scenario.services.map((svc, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <span className="text-roiba-dorado mt-0.5 flex-shrink-0">
+                          &#10003;
+                        </span>
+                        <span className="text-roiba-verde/70 text-body">
+                          {svc}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-body text-roiba-verde/50 italic mb-6">
+                    Resultado: {scenario.result}
+                  </p>
+                  <Link
+                    href={scenario.ctaHref}
+                    className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-verde transition-colors"
                   >
-                    <path d="M3 7h8M8 4l3 3-3 3" />
-                  </svg>
-                </Link>
+                    {scenario.cta}
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    >
+                      <path d="M3 7h8M8 4l3 3-3 3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
@@ -287,7 +317,7 @@ export default function ServiciosPage() {
       </section>
 
       {/* ============================================ */}
-      {/* 3. BUSINESS LINES — Detailed                  */}
+      {/* 3. BUSINESS LINES — with hero images + cards  */}
       {/* ============================================ */}
       {businessLines.map((line, lineIdx) => {
         const bgColor = lineIdx % 2 === 0 ? 'bg-white' : 'bg-roiba-arena-light'
@@ -299,18 +329,29 @@ export default function ServiciosPage() {
             className={`py-14 md:py-20 ${bgColor}`}
           >
             <div className="max-w-7xl mx-auto px-6">
-              {/* Line Header */}
-              <div className="max-w-3xl mb-12">
-                <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-4">
-                  {line.lineTag}
-                </p>
-                <h2 className="font-serif text-display-md text-roiba-verde mb-4">
-                  {line.lineTitle}
-                </h2>
-                <div className="w-12 h-px bg-roiba-dorado mb-6" />
-                <p className="text-roiba-verde/60 text-body-lg leading-relaxed">
-                  {line.lineIntro}
-                </p>
+              {/* Line Header with background image */}
+              <div className="relative rounded-sm overflow-hidden mb-12">
+                <div className="relative h-56 md:h-64">
+                  <Image
+                    src={line.image}
+                    alt={line.lineTitle}
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                  />
+                  <div className="absolute inset-0 bg-roiba-verde/75" />
+                  <div className="absolute inset-0 flex flex-col justify-center px-8 md:px-14">
+                    <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-3">
+                      {line.lineTag}
+                    </p>
+                    <h2 className="font-serif text-display-md text-white mb-4">
+                      {line.lineTitle}
+                    </h2>
+                    <p className="text-white/70 text-body-lg leading-relaxed max-w-2xl">
+                      {line.lineIntro}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* Services within this line */}
@@ -318,8 +359,10 @@ export default function ServiciosPage() {
                 {line.services.map((svc, svcIdx) => (
                   <div
                     key={svcIdx}
-                    className="bg-white rounded-sm p-8 md:p-10 shadow-sm border border-roiba-verde/[0.06]"
+                    className="group bg-white rounded-sm p-8 md:p-10 shadow-sm border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
                   >
+                    {/* Gold top accent on hover */}
+                    <div className="w-full h-[2px] bg-roiba-dorado/0 group-hover:bg-roiba-dorado transition-colors duration-500 -mt-8 md:-mt-10 mb-8 md:mb-10 -mx-8 md:-mx-10 px-0" style={{ width: 'calc(100% + 4rem)', marginLeft: '-2rem', marginRight: '-2rem' }} />
                     <h3 className="font-serif text-xl text-roiba-verde mb-5 font-medium">
                       {svc.title}
                     </h3>
@@ -357,7 +400,7 @@ export default function ServiciosPage() {
 
                     <Link
                       href="/contacto"
-                      className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-verde transition-colors"
+                      className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-verde transition-colors group-hover:translate-x-1 duration-300"
                     >
                       {svc.ctaLabel}
                       <svg

@@ -18,37 +18,61 @@ const values = [
     title: 'Transparencia',
     description:
       'Comunicación directa y continua. El cliente tiene acceso al estado del proyecto, costes actualizados y justificación de cada decisión técnica en cualquier momento.',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&fit=crop',
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
+      </svg>
+    ),
   },
   {
     title: 'Control',
     description:
       'Supervisión técnica en cada fase bajo una misma dirección. Integramos planificación, ejecución en campo y seguimiento económico para detectar desviaciones antes de que escalen.',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&fit=crop',
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 20V10M18 20V4M6 20v-4" />
+      </svg>
+    ),
   },
   {
     title: 'Rigor técnico',
     description:
       'Criterio profesional en cada decisión. Desde la selección de sistemas constructivos hasta los materiales de acabado, priorizamos durabilidad, eficiencia y adecuación al entorno.',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80&fit=crop',
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+      </svg>
+    ),
   },
   {
     title: 'Calidad',
     description:
       'Materiales y sistemas constructivos seleccionados conforme al estándar del proyecto. Supervisión de acabados en cada partida antes de dar la fase por cerrada.',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80&fit=crop',
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+      </svg>
+    ),
   },
   {
     title: 'Compromiso',
     description:
       'Los fundadores participan personalmente en la dirección o supervisión de cada obra, asumiendo responsabilidad directa sobre su correcta ejecución.',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80&fit=crop',
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+      </svg>
+    ),
   },
   {
     title: 'Confianza',
     description:
       'Cada proyecto es el inicio de una relación a largo plazo. La confianza se construye entregando lo acordado, en plazo, sin excepciones ni excusas.',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80&fit=crop',
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
   },
 ]
 
@@ -82,31 +106,56 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* ── 2. NUESTRA HISTORIA ─────────────────────────── */}
+      {/* ── 2. ORIGEN + ENFOQUE en dos columnas ────────── */}
       <section className="py-12 md:py-16 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl mx-auto">
-            <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
-              Origen
-            </span>
-            <h2 className="text-display-md font-serif text-roiba-verde mt-4 mb-3">
-              Cómo nace Grupo Roiba
-            </h2>
-            <div className="w-16 h-px bg-roiba-dorado mb-10" />
-            <div className="space-y-6 text-body-lg text-roiba-verde/80 leading-relaxed">
-              <p>
-                Grupo Roiba nace de la experiencia de dos ingenieros que, tras décadas
-                gestionando proyectos residenciales y hoteleros complejos, identificaron
-                una necesidad clara en el mercado de Punta Cana: servicios técnicos
-                profesionales con implicación directa.
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+            {/* Columna izquierda: Origen */}
+            <div>
+              <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
+                Origen
+              </span>
+              <h2 className="text-display-md font-serif text-roiba-verde mt-4 mb-3">
+                Cómo nace Grupo Roiba
+              </h2>
+              <div className="w-16 h-px bg-roiba-dorado mb-8" />
+              <div className="space-y-6 text-body-lg text-roiba-verde/80 leading-relaxed">
+                <p>
+                  Grupo Roiba nace de la experiencia de dos ingenieros que, tras décadas
+                  gestionando proyectos residenciales y hoteleros complejos, identificaron
+                  una necesidad clara en el mercado de Punta Cana: servicios técnicos
+                  profesionales con implicación directa.
+                </p>
+                <p>
+                  La firma reúne experiencia en dirección técnica, ejecución de obra y
+                  gestión de proyectos desde la fase de diseño hasta la operación. Esa base
+                  permite abordar cada proyecto —sea supervisión independiente o construcción
+                  completa— con criterio técnico contrastado y control de costes, calidad y
+                  plazos.
+                </p>
+              </div>
+            </div>
+
+            {/* Columna derecha: Enfoque de Trabajo */}
+            <div>
+              <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
+                Cómo Trabajamos
+              </span>
+              <h2 className="text-display-md font-serif text-roiba-verde mt-4 mb-3">
+                Enfoque de Trabajo
+              </h2>
+              <div className="w-16 h-px bg-roiba-dorado mb-8" />
+              <p className="text-body-lg text-roiba-verde/80 leading-relaxed mb-8">
+                Cada proyecto se aborda con un enfoque estructurado basado en:
               </p>
-              <p>
-                La firma reúne experiencia en dirección técnica, ejecución de obra y
-                gestión de proyectos desde la fase de diseño hasta la operación. Esa base
-                permite abordar cada proyecto —sea supervisión independiente o construcción
-                completa— con criterio técnico contrastado y control de costes, calidad y
-                plazos.
-              </p>
+              <ul className="space-y-4">
+                {enfoqueItems.map((item) => (
+                  <li key={item} className="flex items-start gap-4">
+                    <span className="mt-1.5 block w-2 h-2 rounded-full bg-roiba-dorado flex-shrink-0" />
+                    <span className="text-body-lg text-roiba-verde/80">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -152,12 +201,12 @@ export default function NosotrosPage() {
               </div>
               <div className="p-8 md:p-10">
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
-                Socio Fundador
+                Socio Director
               </span>
               <h3 className="text-heading font-serif text-roiba-verde mt-3 mb-1">
                 Iván Barrios Martín
               </h3>
-              <p className="text-caption text-roiba-dorado mb-6">Director Técnico · Ingeniero · 20+ años</p>
+              <p className="text-caption text-roiba-dorado mb-6">Socio Director · Ingeniero · 20+ años</p>
               <div className="w-10 h-px bg-roiba-dorado/50 mb-6" />
               <div className="space-y-4 text-body text-roiba-verde/75 leading-relaxed">
                 <p>
@@ -194,12 +243,12 @@ export default function NosotrosPage() {
               </div>
               <div className="p-8 md:p-10">
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
-                Socio Fundador
+                Socio Director
               </span>
               <h3 className="text-heading font-serif text-roiba-verde mt-3 mb-1">
                 Ramón Ojeda González
               </h3>
-              <p className="text-caption text-roiba-dorado mb-6">Gerente de Obras · 25+ años en ejecución</p>
+              <p className="text-caption text-roiba-dorado mb-6">Socio Director · 25+ años en ejecución</p>
               <div className="w-10 h-px bg-roiba-dorado/50 mb-6" />
               <div className="space-y-4 text-body text-roiba-verde/75 leading-relaxed">
                 <p>
@@ -229,41 +278,7 @@ export default function NosotrosPage() {
         <div className="h-px bg-roiba-dorado/30" />
       </div>
 
-      {/* ── 4. NUESTRO ENFOQUE ──────────────────────────── */}
-      <section className="py-12 md:py-16 px-6 bg-roiba-arena-light">
-        <div className="max-w-3xl mx-auto">
-          <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
-            Cómo Trabajamos
-          </span>
-          <h2 className="text-display-md font-serif text-roiba-verde mt-4 mb-6">
-            Enfoque de Trabajo
-          </h2>
-          <div className="w-16 h-px bg-roiba-dorado mb-10" />
-          <p className="text-body-lg text-roiba-verde/80 leading-relaxed mb-8">
-            Cada proyecto se aborda con un enfoque estructurado basado en:
-          </p>
-          <ul className="space-y-4 mb-10">
-            {enfoqueItems.map((item) => (
-              <li key={item} className="flex items-start gap-4">
-                <span className="mt-1.5 block w-2 h-2 rounded-full bg-roiba-dorado flex-shrink-0" />
-                <span className="text-body-lg text-roiba-verde/80">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ── 4.5 PORTFOLIO / PROYECTOS REALIZADOS ────────── */}
-      <section className="py-12 md:py-16 bg-roiba-arena-light overflow-hidden">
-        <ProjectCarousel />
-      </section>
-
-      {/* gold divider */}
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="h-px bg-roiba-dorado/30" />
-      </div>
-
-      {/* ── 5. NUESTROS VALORES ─────────────────────────── */}
+      {/* ── 4. NUESTROS VALORES (moved above carousel) ─── */}
       <section className="relative py-12 md:py-16 px-6 bg-roiba-verde">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto">
@@ -285,18 +300,38 @@ export default function NosotrosPage() {
             </p>
           </div>
 
-          {/* values grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-            {values.map(({ title, description, image }) => (
-              <ValuesCard
+          {/* values grid — icon-based modern cards instead of reused images */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {values.map(({ title, description, icon }) => (
+              <div
                 key={title}
-                title={title}
-                description={description}
-                image={image}
-              />
+                className="group relative bg-white/[0.06] backdrop-blur-sm border border-white/[0.08] p-7 rounded-sm transition-all duration-500 hover:-translate-y-1 hover:bg-white/[0.1] hover:shadow-[0_16px_48px_rgba(0,0,0,0.2)]"
+              >
+                {/* Gold top accent on hover */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-roiba-dorado opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-sm" />
+                {/* Icon */}
+                <div className="w-14 h-14 rounded-full bg-roiba-dorado/10 flex items-center justify-center text-roiba-dorado mb-5 group-hover:bg-roiba-dorado/20 transition-colors duration-500">
+                  {icon}
+                </div>
+                <h3 className="font-serif text-lg text-white font-medium mb-3">{title}</h3>
+                <p className="text-[13px] text-white/60 leading-relaxed">{description}</p>
+              </div>
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── 5. PORTFOLIO / PROYECTOS QUE TRASCIENDEN ───── */}
+      <section className="py-12 md:py-16 bg-roiba-arena-light overflow-hidden">
+        {/* Updated intro copy */}
+        <div className="max-w-7xl mx-auto px-6 mb-4">
+          <p className="text-body text-roiba-verde/60 max-w-2xl leading-relaxed">
+            Proyectos en los que los socios de Grupo Roiba han participado a lo largo de su trayectoria
+            profesional previa, en distintas empresas y roles. No son proyectos exclusivos de Grupo Roiba,
+            sino referencias de la experiencia acumulada por el equipo fundador.
+          </p>
+        </div>
+        <ProjectCarousel />
       </section>
 
       {/* ── 6. CTA ──────────────────────────────────────── */}

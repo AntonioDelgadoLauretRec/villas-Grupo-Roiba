@@ -61,6 +61,20 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
       <div className="absolute bottom-[15%] left-[5%] w-[200px] h-[200px] border border-roiba-dorado/[0.06] rotate-45 animate-float-slow z-[1]" />
       <div className="absolute top-[30%] left-[15%] w-px h-[120px] bg-gradient-to-b from-transparent via-roiba-dorado/20 to-transparent z-[1]" />
 
+      {/* Logo on white card */}
+      <div className="z-[2] relative mb-10 animate-fade-in [animation-delay:0.1s] flex justify-center">
+        <div className="bg-white/95 backdrop-blur-sm px-8 py-5 rounded-sm shadow-[0_8px_32px_rgba(0,0,0,0.15)]">
+          <Image
+            src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
+            alt="Grupo Roiba"
+            width={180}
+            height={98}
+            className="h-12 md:h-14 w-auto"
+            priority
+          />
+        </div>
+      </div>
+
       {/* Content */}
       <div className="text-center z-[2] relative px-6 animate-fade-up">
         <p className="font-sans text-[11px] font-medium tracking-[0.4em] uppercase text-roiba-dorado mb-8 animate-fade-in [animation-delay:0.3s]">

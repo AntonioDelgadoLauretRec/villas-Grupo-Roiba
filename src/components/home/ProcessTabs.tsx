@@ -20,9 +20,11 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
   const step = PROCESS[active]
 
   return (
-    <section id="proceso" className="py-[clamp(80px,10vw,140px)] px-[clamp(24px,8vw,120px)] bg-roiba-arena-light relative overflow-hidden">
+    <section id="proceso" className="py-[clamp(80px,10vw,140px)] px-[clamp(24px,8vw,120px)] bg-roiba-verde relative overflow-hidden">
+      {/* Grain texture */}
+      <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
       {/* Geometric accent */}
-      <div className="absolute top-1/2 -right-[5%] w-[400px] h-[400px] border border-roiba-verde/[0.03] rounded-full -translate-y-1/2" />
+      <div className="absolute top-1/2 -right-[5%] w-[400px] h-[400px] border border-white/[0.04] rounded-full -translate-y-1/2" />
 
       <div className="max-w-[1200px] mx-auto relative z-[2]">
         {/* Header */}
@@ -30,7 +32,7 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
           <span className="scroll-reveal block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">
             Metodología
           </span>
-          <h2 className="scroll-reveal delay-1 font-serif text-[clamp(32px,4vw,48px)] font-normal text-roiba-verde">
+          <h2 className="scroll-reveal delay-1 font-serif text-[clamp(32px,4vw,48px)] font-normal text-white">
             Cómo trabajamos{' '}
             <span className="italic text-roiba-dorado-light">(proyecto completo)</span>
           </h2>
@@ -45,45 +47,45 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
                 onClick={() => setActive(i)}
                 className={`flex items-center gap-4 px-6 py-4 text-left w-full transition-all duration-400 border-l-[3px] ${
                   active === i
-                    ? 'border-l-roiba-dorado bg-roiba-verde/[0.04] active-tab'
-                    : 'border-l-transparent hover:bg-roiba-verde/[0.02]'
+                    ? 'border-l-roiba-dorado bg-white/[0.06] active-tab'
+                    : 'border-l-transparent hover:bg-white/[0.03]'
                 }`}
               >
-                <span className={`font-serif text-[28px] font-light min-w-[40px] transition-colors duration-400 ${active === i ? 'text-roiba-dorado-light' : 'text-roiba-verde/20'}`}>
+                <span className={`font-serif text-[28px] font-light min-w-[40px] transition-colors duration-400 ${active === i ? 'text-roiba-dorado-light' : 'text-white/20'}`}>
                   {s.num}
                 </span>
                 <div>
-                  <div className={`font-sans text-[13px] font-semibold tracking-wide transition-colors duration-400 ${active === i ? 'text-roiba-verde' : 'text-roiba-verde/60'}`}>
+                  <div className={`font-sans text-[13px] font-semibold tracking-wide transition-colors duration-400 ${active === i ? 'text-white' : 'text-white/60'}`}>
                     {s.title}
                   </div>
-                  <div className="font-sans text-[11px] text-roiba-verde/40 mt-0.5">{s.subtitle}</div>
+                  <div className="font-sans text-[11px] text-white/40 mt-0.5">{s.subtitle}</div>
                 </div>
               </button>
             ))}
           </div>
 
           {/* Content panel */}
-          <div key={active} className="bg-white border border-roiba-verde/[0.06] p-8 md:p-12 flex flex-col justify-center animate-fade-in mt-6 lg:mt-0">
+          <div key={active} className="bg-white/[0.07] backdrop-blur-sm border border-white/[0.08] p-8 md:p-12 flex flex-col justify-center animate-fade-in mt-6 lg:mt-0">
             <div className="flex items-baseline gap-5 mb-6">
               <span className="font-serif text-[64px] font-light text-roiba-dorado/30 leading-none">{step.num}</span>
               <div>
-                <h3 className="font-serif text-[32px] font-medium text-roiba-verde">{step.title}</h3>
+                <h3 className="font-serif text-[32px] font-medium text-white">{step.title}</h3>
                 <span className="font-sans text-[11px] font-medium text-roiba-dorado tracking-wider uppercase">{step.subtitle}</span>
               </div>
             </div>
 
-            <p className="font-sans text-sm leading-[1.85] text-roiba-verde/70 mb-8">{step.desc}</p>
+            <p className="font-sans text-sm leading-[1.85] text-white/65 mb-8">{step.desc}</p>
 
-            <div className="py-4 px-5 bg-roiba-dorado/[0.04] border-l-2 border-roiba-dorado/30 mb-6">
+            <div className="py-4 px-5 bg-roiba-dorado/[0.08] border-l-2 border-roiba-dorado/40 mb-6">
               <span className="font-sans text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado block mb-1.5">Entregables</span>
-              <span className="font-sans text-[13px] text-roiba-verde/50">{step.detail}</span>
+              <span className="font-sans text-[13px] text-white/50">{step.detail}</span>
             </div>
 
             <div className="flex items-center gap-2">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#C9A96E" strokeWidth="1.5">
                 <circle cx="8" cy="8" r="6" /><path d="M8 4 L8 8 L11 10" />
               </svg>
-              <span className="font-sans text-xs text-roiba-verde/50 font-medium">Duración estimada: {step.duration}</span>
+              <span className="font-sans text-xs text-white/50 font-medium">Duración estimada: {step.duration}</span>
             </div>
 
             {/* Progress dots */}
@@ -93,7 +95,7 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
                   key={i}
                   onClick={() => setActive(i)}
                   aria-label={`Paso ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-400 ${active === i ? 'w-8 bg-roiba-dorado' : 'w-2 bg-roiba-verde/10 hover:bg-roiba-verde/20'}`}
+                  className={`h-2 rounded-full transition-all duration-400 ${active === i ? 'w-8 bg-roiba-dorado' : 'w-2 bg-white/15 hover:bg-white/25'}`}
                 />
               ))}
             </div>
