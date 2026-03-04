@@ -49,8 +49,16 @@ const config: Config = {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         'fade-up': 'fadeUp 0.8s ease-out forwards',
         'slide-in': 'slideIn 0.6s ease-out forwards',
+        'slide-in-right': 'slideInRight 0.6s ease-out forwards',
         'reveal': 'reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'line-grow': 'lineGrow 0.8s ease-out forwards',
+        'float': 'float 6s ease-in-out infinite',
+        'float-slow': 'float 8s ease-in-out infinite',
+        'ken-burns': 'kenBurns 20s ease-in-out infinite alternate',
+        'marquee': 'marquee 30s linear infinite',
+        'pulse-opacity': 'pulseOpacity 2s ease-in-out infinite',
+        'reveal-line': 'lineGrow 1s ease-out 0.5s forwards',
+        'shimmer': 'shimmer 2s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -65,6 +73,10 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateX(-20px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
+        slideInRight: {
+          '0%': { opacity: '0', transform: 'translateX(20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
         reveal: {
           '0%': { clipPath: 'inset(0 100% 0 0)' },
           '100%': { clipPath: 'inset(0 0% 0 0)' },
@@ -72,6 +84,26 @@ const config: Config = {
         lineGrow: {
           '0%': { transform: 'scaleX(0)' },
           '100%': { transform: 'scaleX(1)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' },
+        },
+        kenBurns: {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.08)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        pulseOpacity: {
+          '0%, 100%': { opacity: '0.4' },
+          '50%': { opacity: '1' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
         },
       },
       transitionTimingFunction: {

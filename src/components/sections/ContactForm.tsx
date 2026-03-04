@@ -4,12 +4,16 @@ import { FC, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
+type LeadType = 'inversion' | 'servicios'
+
 interface FormData {
+  lead_type: LeadType
   full_name: string
   email: string
   phone: string
   country: string
   investment_capacity: string
+  service_type: string
   message: string
   gdpr_consent: boolean
   marketing_consent: boolean
@@ -21,6 +25,16 @@ const INVESTMENT_OPTIONS = [
   { value: '1m-2m', label: '$1,000,000 - $2,000,000 USD' },
   { value: '2m-5m', label: '$2,000,000 - $5,000,000 USD' },
   { value: '5m+', label: 'Más de $5,000,000 USD' },
+]
+
+const SERVICE_OPTIONS = [
+  { value: 'direccion-tecnica', label: 'Dirección Técnica / Supervisión Independiente' },
+  { value: 'construccion-villa', label: 'Construcción Llave en Mano Completa' },
+  { value: 'project-management', label: 'Gestión de Proyecto de Mi Obra' },
+  { value: 'due-diligence', label: 'Due Diligence / Asesoramiento Técnico' },
+  { value: 'interiorismo', label: 'Interiorismo y Equipamiento' },
+  { value: 'roiba-care', label: 'Mantenimiento de Villa Existente (Roiba Care)' },
+  { value: 'orientacion', label: 'Aún no lo sé, necesito orientación' },
 ]
 
 const COUNTRIES = [
@@ -37,79 +51,104 @@ const COUNTRIES = [
 
 export const ContactForm: FC = () => {
   const [formData, setFormData] = useState<FormData>({
+    lead_type: 'inversion',
     full_name: '',
     email: '',
     phone: '',
     country: '',
     investment_capacity: '',
+    service_type: '',
     message: '',
     gdpr_consent: false,
     marketing_consent: false,
   })
-  
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
+
+  const [errors, setErrors] = useState<Partial<Record<string, string>>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<Record<keyof FormData, string>> = {}
-    
+    const newErrors: Partial<Record<string, string>> = {}
+
     if (!formData.full_name.trim() || formData.full_name.length < 2) {
       newErrors.full_name = 'Nombre completo requerido'
     }
-    
+
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       newErrors.email = 'Email inválido'
     }
-    
+
     if (!formData.phone.trim()) {
       newErrors.phone = 'Teléfono requerido'
     }
-    
+
     if (!formData.country) {
       newErrors.country = 'Seleccione un país'
     }
-    
-    if (!formData.investment_capacity) {
+
+    if (formData.lead_type === 'inversion' && !formData.investment_capacity) {
       newErrors.investment_capacity = 'Seleccione capacidad de inversión'
     }
-    
+
+    if (formData.lead_type === 'servicios' && !formData.service_type) {
+      newErrors.service_type = 'Seleccione el tipo de servicio'
+    }
+
     if (!formData.gdpr_consent) {
       newErrors.gdpr_consent = 'Debe aceptar la política de privacidad'
     }
-    
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) return
-    
+
     setIsSubmitting(true)
-    
+
     try {
+      const payload: Record<string, unknown> = {
+        lead_type: formData.lead_type,
+        full_name: formData.full_name,
+        email: formData.email,
+        phone: formData.phone,
+        country: formData.country,
+        message: formData.message,
+        gdpr_consent: formData.gdpr_consent,
+        marketing_consent: formData.marketing_consent,
+      }
+
+      if (formData.lead_type === 'inversion') {
+        payload.investment_capacity = formData.investment_capacity
+      } else {
+        payload.service_type = formData.service_type
+      }
+
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
-      
+
       if (!response.ok) throw new Error('Error al enviar')
-      
+
       setSubmitStatus('success')
       setFormData({
+        lead_type: 'inversion',
         full_name: '',
         email: '',
         phone: '',
         country: '',
         investment_capacity: '',
+        service_type: '',
         message: '',
         gdpr_consent: false,
         marketing_consent: false,
       })
-    } catch (error) {
+    } catch {
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -121,15 +160,25 @@ export const ContactForm: FC = () => {
   ) => {
     const { name, value, type } = e.target
     const checked = (e.target as HTMLInputElement).checked
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }))
-    
-    if (errors[name as keyof FormData]) {
+
+    if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: undefined }))
     }
+  }
+
+  const setLeadType = (type: LeadType) => {
+    setFormData(prev => ({
+      ...prev,
+      lead_type: type,
+      investment_capacity: '',
+      service_type: '',
+    }))
+    setErrors({})
   }
 
   if (submitStatus === 'success') {
@@ -144,7 +193,7 @@ export const ContactForm: FC = () => {
           Solicitud Recibida
         </h3>
         <p className="text-body text-roiba-verde/70 mb-6">
-          Nuestro equipo revisará su información y se pondrá en contacto 
+          Nuestro equipo revisará su información y se pondrá en contacto
           en las próximas 24-48 horas hábiles.
         </p>
         <button
@@ -159,6 +208,41 @@ export const ContactForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Tipo de solicitud */}
+      <div>
+        <label className="block text-caption font-medium text-roiba-verde mb-3">
+          Tipo de solicitud
+        </label>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => setLeadType('inversion')}
+            className={cn(
+              'px-4 py-4 border text-sm font-medium transition-all duration-300 text-center',
+              formData.lead_type === 'inversion'
+                ? 'bg-roiba-verde text-white border-roiba-verde'
+                : 'bg-white text-roiba-verde/70 border-roiba-verde/20 hover:border-roiba-dorado hover:text-roiba-verde'
+            )}
+          >
+            <span className="block font-semibold mb-1">Inversión en Villa</span>
+            <span className="block text-xs opacity-70">Construcción de villa premium</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setLeadType('servicios')}
+            className={cn(
+              'px-4 py-4 border text-sm font-medium transition-all duration-300 text-center',
+              formData.lead_type === 'servicios'
+                ? 'bg-roiba-verde text-white border-roiba-verde'
+                : 'bg-white text-roiba-verde/70 border-roiba-verde/20 hover:border-roiba-dorado hover:text-roiba-verde'
+            )}
+          >
+            <span className="block font-semibold mb-1">Solicitud de Servicios</span>
+            <span className="block text-xs opacity-70">Dirección técnica, interiorismo, etc.</span>
+          </button>
+        </div>
+      </div>
+
       {/* Nombre y Email */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
@@ -181,7 +265,7 @@ export const ContactForm: FC = () => {
             <p className="mt-1 text-micro text-red-500">{errors.full_name}</p>
           )}
         </div>
-        
+
         <div>
           <label className="block text-caption font-medium text-roiba-verde mb-2">
             Email *
@@ -226,7 +310,7 @@ export const ContactForm: FC = () => {
             <p className="mt-1 text-micro text-red-500">{errors.phone}</p>
           )}
         </div>
-        
+
         <div>
           <label className="block text-caption font-medium text-roiba-verde mb-2">
             País de residencia *
@@ -254,32 +338,60 @@ export const ContactForm: FC = () => {
         </div>
       </div>
 
-      {/* Capacidad de inversión */}
-      <div>
-        <label className="block text-caption font-medium text-roiba-verde mb-2">
-          Capacidad de inversión *
-        </label>
-        <select
-          name="investment_capacity"
-          value={formData.investment_capacity}
-          onChange={handleChange}
-          className={cn(
-            'w-full px-4 py-3 bg-white border text-roiba-verde appearance-none',
-            'focus:outline-none focus:border-roiba-dorado transition-colors',
-            errors.investment_capacity ? 'border-red-500' : 'border-roiba-verde/20'
+      {/* Campos condicionales */}
+      {formData.lead_type === 'inversion' ? (
+        <div>
+          <label className="block text-caption font-medium text-roiba-verde mb-2">
+            Capacidad de inversión *
+          </label>
+          <select
+            name="investment_capacity"
+            value={formData.investment_capacity}
+            onChange={handleChange}
+            className={cn(
+              'w-full px-4 py-3 bg-white border text-roiba-verde appearance-none',
+              'focus:outline-none focus:border-roiba-dorado transition-colors',
+              errors.investment_capacity ? 'border-red-500' : 'border-roiba-verde/20'
+            )}
+          >
+            <option value="">Seleccionar rango</option>
+            {INVESTMENT_OPTIONS.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          {errors.investment_capacity && (
+            <p className="mt-1 text-micro text-red-500">{errors.investment_capacity}</p>
           )}
-        >
-          <option value="">Seleccionar rango</option>
-          {INVESTMENT_OPTIONS.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        {errors.investment_capacity && (
-          <p className="mt-1 text-micro text-red-500">{errors.investment_capacity}</p>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div>
+          <label className="block text-caption font-medium text-roiba-verde mb-2">
+            Tipo de servicio *
+          </label>
+          <select
+            name="service_type"
+            value={formData.service_type}
+            onChange={handleChange}
+            className={cn(
+              'w-full px-4 py-3 bg-white border text-roiba-verde appearance-none',
+              'focus:outline-none focus:border-roiba-dorado transition-colors',
+              errors.service_type ? 'border-red-500' : 'border-roiba-verde/20'
+            )}
+          >
+            <option value="">Seleccionar servicio</option>
+            {SERVICE_OPTIONS.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          {errors.service_type && (
+            <p className="mt-1 text-micro text-red-500">{errors.service_type}</p>
+          )}
+        </div>
+      )}
 
       {/* Mensaje */}
       <div>
@@ -292,7 +404,9 @@ export const ContactForm: FC = () => {
           onChange={handleChange}
           rows={4}
           className="w-full px-4 py-3 bg-white border border-roiba-verde/20 text-roiba-verde focus:outline-none focus:border-roiba-dorado transition-colors resize-none"
-          placeholder="Cuéntenos sobre su proyecto o consulta..."
+          placeholder={formData.lead_type === 'inversion'
+            ? 'Cuéntenos sobre su proyecto de inversión...'
+            : 'Describa el servicio que necesita...'}
         />
       </div>
 
@@ -317,7 +431,7 @@ export const ContactForm: FC = () => {
         {errors.gdpr_consent && (
           <p className="text-micro text-red-500">{errors.gdpr_consent}</p>
         )}
-        
+
         <label className="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
@@ -327,7 +441,7 @@ export const ContactForm: FC = () => {
             className="mt-1 w-4 h-4 accent-roiba-dorado"
           />
           <span className="text-caption text-roiba-verde/70">
-            Deseo recibir información sobre nuevos proyectos y oportunidades de inversión.
+            Deseo recibir información sobre nuevos proyectos y oportunidades.
           </span>
         </label>
       </div>
@@ -338,11 +452,11 @@ export const ContactForm: FC = () => {
           Ha ocurrido un error. Por favor, inténtelo de nuevo o contacte directamente a inversiones@gruporoiba.com
         </div>
       )}
-      
+
       <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting} className="w-full">
-        <span>Solicitar Análisis Personalizado</span>
+        <span>{formData.lead_type === 'inversion' ? 'Solicitar Análisis Personalizado' : 'Solicitar Información'}</span>
       </Button>
-      
+
       <p className="text-micro text-roiba-verde/50 text-center">
         Su información es confidencial y está protegida bajo estándares GDPR.
       </p>

@@ -49,17 +49,17 @@ const services = [
 
 export function ServicesOverview() {
   return (
-    <section className="py-20 md:py-28 bg-[#F4EBD0]">
+    <section className="py-12 md:py-16 bg-[#FFFFFF]">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-[#B68D40] uppercase tracking-[0.2em] text-sm font-medium mb-4">
+          <p className="text-[#C9A96E] uppercase tracking-[0.2em] text-sm font-medium mb-4">
             Servicios
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#122620] mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0C2340] mb-6">
             Soluciones integrales de construcción
           </h2>
-          <p className="text-[#122620]/70 text-lg max-w-2xl mx-auto">
+          <p className="text-[#0C2340]/70 text-lg max-w-2xl mx-auto">
             Acompañamos cada proyecto desde la concepción hasta la entrega,
             con un equipo multidisciplinar y más de 38 años de experiencia.
           </p>
@@ -71,16 +71,16 @@ export function ServicesOverview() {
             <Link
               key={index}
               href={service.href}
-              className="group bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-[#122620]/5"
+              className="group bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-[#0C2340]/5"
             >
               <span className="text-4xl block mb-5">{service.icon}</span>
-              <h3 className="text-xl font-bold text-[#122620] mb-3 group-hover:text-[#B68D40] transition-colors">
+              <h3 className="text-xl font-bold text-[#0C2340] mb-3 group-hover:text-[#C9A96E] transition-colors">
                 {service.title}
               </h3>
-              <p className="text-[#122620]/60 leading-relaxed">
+              <p className="text-[#0C2340]/60 leading-relaxed">
                 {service.description}
               </p>
-              <span className="inline-block mt-4 text-[#B68D40] text-sm font-medium group-hover:translate-x-1 transition-transform">
+              <span className="inline-block mt-4 text-[#C9A96E] text-sm font-medium group-hover:translate-x-1 transition-transform">
                 Ver más →
               </span>
             </Link>
@@ -91,7 +91,7 @@ export function ServicesOverview() {
         <div className="text-center mt-14">
           <Link
             href="/servicios"
-            className="inline-block px-8 py-4 bg-[#122620] text-[#F4EBD0] font-semibold rounded-lg hover:bg-[#122620]/90 transition-all duration-300"
+            className="inline-block px-8 py-4 bg-[#0C2340] text-white font-semibold rounded-lg hover:bg-[#0C2340]/90 transition-all duration-300"
           >
             Ver todos los servicios
           </Link>
