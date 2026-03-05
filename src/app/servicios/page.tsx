@@ -9,5 +9,9 @@ export const metadata: Metadata = {
 }
 
 export default function ServiciosPage() {
-  return <ServiciosContent />
+  return (
+    <main>
+      <ServiciosContent />
+    </main>
+  )
 }
