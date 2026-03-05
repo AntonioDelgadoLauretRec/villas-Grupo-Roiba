@@ -75,7 +75,7 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
   }, [videoReady, HERO_IMAGES.length])
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center bg-roiba-verde overflow-hidden">
+    <section className="relative min-h-[100dvh] flex flex-col justify-center items-center bg-roiba-verde overflow-hidden">
       {/* Background — Video (always rendered, hidden until ready) */}
       {!videoFailed && (
         <video

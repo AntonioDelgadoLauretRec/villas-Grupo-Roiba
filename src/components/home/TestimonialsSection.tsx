@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
 import type { Testimonial } from '@/types/admin'
 
-const DEFAULT_TESTIMONIALS = [
+const TESTIMONIALS_ES = [
   { quote: 'Grupo Roiba nos ofreció algo que no habíamos encontrado en ningún otro constructor en Punta Cana: transparencia real. Cada semana recibíamos informes detallados con fotos, costes actualizados y un cronograma que se cumplió al día. La villa superó todas nuestras expectativas.', name: 'Carlos & Lucía M.', role: 'Propietarios de villa', location: 'Madrid, España' },
   { quote: 'Construir nuestra villa desde Miami con un equipo en el Caribe parecía un reto enorme. Iván y Ramón lo hicieron simple. Su dominio técnico, la comunicación constante y el respeto escrupuloso al presupuesto nos dieron una confianza total desde el primer día.', name: 'James & Patricia W.', role: 'Propietarios de villa en Cap Cana', location: 'Miami, Florida, EE.UU.' },
   { quote: 'Buscábamos un equipo que entendiera nuestras expectativas de calidad y las trasladara al Caribe. Roiba lo consiguió. La atención al detalle en los acabados, la selección de materiales y el control de calidad fueron impecables. Recomendamos Grupo Roiba sin reservas.', name: 'Elena & Roberto V.', role: 'Propietarios de villa', location: 'Marbella, España' },
@@ -12,7 +12,17 @@ const DEFAULT_TESTIMONIALS = [
   { quote: 'El servicio Roiba Care fue decisivo en nuestra decisión. Saber que nuestra propiedad estará supervisada y mantenida profesionalmente cuando estamos en Nueva York nos da una tranquilidad absoluta. Es un servicio post-entrega que realmente marca la diferencia.', name: 'David & Lauren Chen', role: 'Propietarios de villa', location: 'New York, EE.UU.' },
 ]
 
+const TESTIMONIALS_EN = [
+  { quote: 'Grupo Roiba offered us something we hadn\'t found with any other builder in Punta Cana: real transparency. Every week we received detailed reports with photos, updated costs and a schedule that was met to the day. The villa exceeded all our expectations.', name: 'Carlos & Lucía M.', role: 'Villa owners', location: 'Madrid, Spain' },
+  { quote: 'Building our villa from Miami with a team in the Caribbean seemed like a huge challenge. Iván and Ramón made it simple. Their technical expertise, constant communication and strict respect for the budget gave us total confidence from day one.', name: 'James & Patricia W.', role: 'Villa owners in Cap Cana', location: 'Miami, Florida, USA' },
+  { quote: 'We were looking for a team that understood our quality expectations and could deliver them in the Caribbean. Roiba did it. The attention to detail in the finishes, material selection and quality control were impeccable. We recommend Grupo Roiba without reservation.', name: 'Elena & Roberto V.', role: 'Villa owners', location: 'Marbella, Spain' },
+  { quote: 'Building in the Caribbean from Colombia seemed uncertain, but Grupo Roiba guided us at every stage with professionalism and honesty. Permits, local architects, material quality... everything was exactly as promised.', name: 'Andrés & Camila R.', role: 'Villa owners in Punta Cana', location: 'Bogotá, Colombia' },
+  { quote: 'The Roiba Care service was decisive in our decision. Knowing that our property will be supervised and professionally maintained when we\'re in New York gives us absolute peace of mind. It\'s a post-delivery service that truly makes a difference.', name: 'David & Lauren Chen', role: 'Villa owners', location: 'New York, USA' },
+]
+
 export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials?: Testimonial[] }) {
+  const { locale } = useLanguage()
+  const DEFAULT_TESTIMONIALS = locale === 'en' ? TESTIMONIALS_EN : TESTIMONIALS_ES
   const TESTIMONIALS = dbTestimonials
     ? dbTestimonials.map(t => ({ quote: t.quote, name: t.name, role: t.role, location: t.location }))
     : DEFAULT_TESTIMONIALS
