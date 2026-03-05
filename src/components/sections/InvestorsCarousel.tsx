@@ -10,6 +10,31 @@ const DEFAULT_SLIDES = [
     image: 'https://images.unsplash.com/photo-1580541631950-7282082b53ce?w=3840&q=90&fit=crop',
   },
   {
+    title: 'Golf de Clase Mundial',
+    description: 'Punta Cana alberga torneos del PGA Tour y campos diseñados por Jack Nicklaus, Tom Fazio y P.B. Dye. Punta Espada (Cap Cana), Corales y La Cana atraen a jugadores de élite de todo el mundo.',
+    image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=3840&q=90&fit=crop',
+  },
+  {
+    title: 'Pesca Deportiva Internacional',
+    description: 'Cap Cana es sede de torneos internacionales de pesca de altura como el White Marlin Open del Caribe. Aguas profundas con marlín azul, dorado y atún a minutos de la costa.',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=3840&q=90&fit=crop',
+  },
+  {
+    title: 'Polo y Estilo de Vida Ecuestre',
+    description: 'Cap Cana cuenta con el Polo Club más exclusivo del Caribe, con torneos internacionales y una comunidad ecuestre activa. Un estilo de vida reservado a destinos premium.',
+    image: 'https://images.unsplash.com/photo-1591228127791-8e2eaef098d3?w=3840&q=90&fit=crop',
+  },
+  {
+    title: 'Marina y Clubes Náuticos',
+    description: 'Cap Cana Marina, la marina más grande del Caribe, ofrece 122 atraques para embarcaciones de hasta 150 pies. Base ideal para explorar las islas del Caribe.',
+    image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=3840&q=90&fit=crop',
+  },
+  {
+    title: 'Gastronomía de Alto Standing',
+    description: 'Restaurantes con chefs internacionales y estrellas Michelin: SBG Cap Cana, La Palapa by Eden Roc, Playa Blanca. Una oferta gastronómica a la altura de las capitales europeas.',
+    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=3840&q=90&fit=crop',
+  },
+  {
     title: 'Seguridad Jurídica para el Inversor',
     description: 'República Dominicana cuenta con un marco legal sólido que protege la propiedad privada extranjera. Proceso de compra transparente con títulos de propiedad certificados y registro catastral fiable.',
     image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=3840&q=90&fit=crop',
