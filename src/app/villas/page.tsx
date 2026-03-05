@@ -15,9 +15,18 @@ export default async function VillasPage() {
   const villas = await getPublishedVillas()
 
   return (
-    <main className="pt-20">
+    <main>
       {/* Hero */}
-      <section className="relative bg-roiba-verde py-20 md:py-24 px-6 overflow-hidden">
+      <section className="relative bg-roiba-verde py-24 md:py-32 px-6 overflow-hidden">
+        <Image
+          src="/images/projects/cayuco-11-cap-cana.png"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">

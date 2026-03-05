@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import ValuesCard from '@/components/ui/ValuesCard'
 import ValueFlipCard from '@/components/ui/ValueFlipCard'
 import ProjectCarousel from '@/components/ui/ProjectCarousel'
 
@@ -91,19 +90,28 @@ export default function NosotrosPage() {
   return (
     <>
       {/* ── 1. HERO ─────────────────────────────────────── */}
-      <section className="relative bg-roiba-verde pt-24 pb-14 md:pt-28 md:pb-20 px-6">
+      <section className="relative bg-roiba-verde py-24 md:py-32 px-6 overflow-hidden">
+        <Image
+          src="/images/projects/excellence-oyster-bay.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto text-center">
+        <div className="relative max-w-7xl mx-auto text-center z-10">
           <span className="inline-block text-roiba-dorado text-micro uppercase tracking-[0.2em] mb-6">
             Quiénes Somos
           </span>
           <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
             El equipo detrás de cada proyecto
           </h1>
-          <p className="text-subheading text-white/70 max-w-2xl mx-auto font-light">
+          <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
+          <p className="text-body-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
             Más de 20 años ejecutando y supervisando proyectos residenciales y hoteleros en España y el Caribe
           </p>
-          <div className="mt-10 mx-auto w-20 h-px bg-roiba-dorado" />
         </div>
       </section>
 

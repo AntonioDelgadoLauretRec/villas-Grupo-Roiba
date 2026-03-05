@@ -74,17 +74,26 @@ export default async function BlogPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative pt-28 pb-14 md:pt-32 md:pb-20 bg-roiba-verde overflow-hidden">
+      <section className="relative py-24 md:py-32 bg-roiba-verde overflow-hidden">
+        <Image
+          src="/images/projects/finest-punta-cana.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
-        <div className="relative max-w-5xl mx-auto px-6 text-center">
+        <div className="relative max-w-5xl mx-auto px-6 text-center z-10">
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">Publicaciones</p>
           <h1 className="font-serif text-display-lg md:text-display-xl text-white mb-8">
             Ideas, análisis y<br />guías de inversión
           </h1>
-          <p className="text-white/60 text-body-lg max-w-2xl mx-auto leading-relaxed">
+          <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
+          <p className="text-white/70 text-body-lg max-w-2xl mx-auto leading-relaxed">
             Análisis de mercado, marco legal, proceso constructivo y vida en Punta Cana desde la perspectiva de quien ejecuta proyectos aquí.
           </p>
-          <div className="mt-12 mx-auto w-16 h-px bg-roiba-dorado/40" />
         </div>
       </section>
 

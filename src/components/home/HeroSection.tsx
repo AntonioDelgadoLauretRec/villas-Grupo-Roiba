@@ -12,9 +12,12 @@ const DEFAULT_HERO_IMAGES = [
 ]
 
 // Public domain / free-to-use video URLs from Pexels
+// Punta Cana beach resort drone, tropical beach DR, Caribbean beach, luxury pool villa
 const HERO_VIDEO_URLS = [
-  'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/1093662/1093662-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/3576316/3576316-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/3223480/3223480-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/12021278/12021278-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/2169880/2169880-uhd_2560_1440_30fps.mp4',
 ]
 
 export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
