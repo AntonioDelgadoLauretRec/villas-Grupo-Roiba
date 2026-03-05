@@ -92,7 +92,7 @@ export default function NosotrosPage() {
       {/* ── 1. HERO ─────────────────────────────────────── */}
       <section className="relative bg-roiba-verde py-24 md:py-32 px-6 overflow-hidden">
         <Image
-          src="/images/projects/excellence-oyster-bay.jpg"
+          src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=85&fit=crop"
           alt=""
           fill
           className="object-cover"

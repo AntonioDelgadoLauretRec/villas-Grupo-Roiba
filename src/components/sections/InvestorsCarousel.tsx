@@ -5,29 +5,29 @@ import Image from 'next/image'
 
 const DEFAULT_SLIDES = [
   {
-    title: 'Conectividad Internacional',
-    description: 'Aeropuerto Internacional de Punta Cana (PUJ) con vuelos directos desde las principales capitales de Europa y América. Más de 8 millones de pasajeros anuales.',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800&q=80&fit=crop',
+    title: 'Destino Turístico Líder',
+    description: 'Punta Cana recibe más de 8 millones de visitantes anuales, con vuelos directos desde las principales capitales de Europa y América. Es el destino más demandado del Caribe.',
+    image: 'https://images.unsplash.com/photo-1580541631950-7282082b53ce?w=3840&q=90&fit=crop',
   },
   {
-    title: 'Marco Legal Favorable',
-    description: 'Ley Confotur: exención de impuestos de transferencia y beneficios fiscales durante 15 años. Residencia por inversión desde $200,000 USD.',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&fit=crop',
+    title: 'Seguridad Jurídica para el Inversor',
+    description: 'República Dominicana cuenta con un marco legal sólido que protege la propiedad privada extranjera. Proceso de compra transparente con títulos de propiedad certificados y registro catastral fiable.',
+    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=3840&q=90&fit=crop',
   },
   {
     title: 'Rentabilidad Demostrada',
     description: 'Rentabilidades brutas del 6-10% anual en alquiler vacacional. Revalorización sostenida del 8-12% anual en las zonas premium.',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=3840&q=90&fit=crop',
   },
   {
     title: 'Infraestructura de Primer Nivel',
     description: 'Cap Cana, Bávaro, Cocotal: comunidades con seguridad 24h, marina, campos de golf y servicios de lujo integrados.',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fit=crop',
+    image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=3840&q=90&fit=crop',
   },
   {
     title: 'Clima y Estilo de Vida',
     description: '350 días de sol al año, playas de arena blanca y una comunidad internacional creciente. El Caribe más accesible para inversores europeos.',
-    image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80&fit=crop',
+    image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=3840&q=90&fit=crop',
   },
 ]
 

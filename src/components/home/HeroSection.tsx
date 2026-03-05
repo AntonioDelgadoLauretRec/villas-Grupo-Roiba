@@ -11,78 +11,87 @@ const DEFAULT_HERO_IMAGES = [
   'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=90&fit=crop',
 ]
 
-// Public domain / free-to-use video URLs from Pexels
-// Punta Cana beach resort drone, tropical beach DR, Caribbean beach, luxury pool villa
-const HERO_VIDEO_URLS = [
-  'https://videos.pexels.com/video-files/3576316/3576316-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/3223480/3223480-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/12021278/12021278-uhd_2560_1440_30fps.mp4',
+// Free-to-use video candidates – try local first, then remote CDNs.
+// Each remote entry lists several resolution variants since Pexels/Pixabay
+// file names are not 100% predictable.
+const LOCAL_VIDEOS = ['/videos/hero-drone.mp4', '/videos/hero-bg.mp4']
+
+const REMOTE_VIDEOS = [
+  // Pexels – aerial tropical beach / Caribbean
+  'https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4',
+  'https://videos.pexels.com/video-files/1093662/1093662-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/1093662/1093662-uhd_2560_1440_25fps.mp4',
+  // Pexels – luxury pool villa drone
+  'https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_30fps.mp4',
+  'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_25fps.mp4',
+  // Pexels – turquoise beach aerial
+  'https://videos.pexels.com/video-files/2169880/2169880-hd_1920_1080_30fps.mp4',
   'https://videos.pexels.com/video-files/2169880/2169880-uhd_2560_1440_30fps.mp4',
+  'https://videos.pexels.com/video-files/2169880/2169880-uhd_2560_1440_25fps.mp4',
+  // Pexels – Maldives island drone
+  'https://videos.pexels.com/video-files/4010941/4010941-hd_1920_1080_25fps.mp4',
+  'https://videos.pexels.com/video-files/4010941/4010941-uhd_2560_1440_25fps.mp4',
+  // Pexels – beach aerial drone
+  'https://videos.pexels.com/video-files/854218/854218-hd_1920_1080_30fps.mp4',
+  'https://videos.pexels.com/video-files/854218/854218-hd_1920_1080_25fps.mp4',
 ]
 
 export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
   const HERO_IMAGES = dbImages && dbImages.length > 0 ? dbImages : DEFAULT_HERO_IMAGES
   const [imgIdx, setImgIdx] = useState(0)
-  const [hasVideo, setHasVideo] = useState(false)
-  const [videoLoaded, setVideoLoaded] = useState(false)
-  const [videoSrc, setVideoSrc] = useState('')
+  const [videoReady, setVideoReady] = useState(false)
+  const [videoFailed, setVideoFailed] = useState(false)
+  const [currentVideoIdx, setCurrentVideoIdx] = useState(0)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const allVideos = [...LOCAL_VIDEOS, ...REMOTE_VIDEOS]
   const { t } = useLanguage()
 
-  useEffect(() => {
-    const checkVideo = (src: string) =>
-      new Promise<boolean>((resolve) => {
-        const vid = document.createElement('video')
-        vid.src = src
-        vid.onloadeddata = () => resolve(true)
-        vid.onerror = () => resolve(false)
-        setTimeout(() => resolve(false), 5000)
-      })
-
-    const tryVideos = async () => {
-      // Try local videos first
-      for (const src of ['/videos/hero-drone.mp4', '/videos/hero-bg.mp4']) {
-        if (await checkVideo(src)) {
-          setVideoSrc(src)
-          setHasVideo(true)
-          return
-        }
-      }
-      // Try remote Pexels videos
-      for (const src of HERO_VIDEO_URLS) {
-        if (await checkVideo(src)) {
-          setVideoSrc(src)
-          setHasVideo(true)
-          return
-        }
-      }
+  // Try loading the next video source when one fails
+  const tryNextVideo = () => {
+    const next = currentVideoIdx + 1
+    if (next < allVideos.length) {
+      setCurrentVideoIdx(next)
+    } else {
+      setVideoFailed(true)
     }
+  }
 
-    tryVideos()
-  }, [])
-
+  // When video source changes, update the video element
   useEffect(() => {
-    if (hasVideo) return
+    if (videoFailed || videoReady) return
+    const vid = videoRef.current
+    if (!vid) return
+
+    vid.src = allVideos[currentVideoIdx]
+    vid.load()
+  }, [currentVideoIdx, videoFailed, videoReady])
+
+  // Image carousel fallback
+  useEffect(() => {
+    if (videoReady) return
     const timer = setInterval(() => setImgIdx((p) => (p + 1) % HERO_IMAGES.length), 6000)
     return () => clearInterval(timer)
-  }, [hasVideo, HERO_IMAGES.length])
+  }, [videoReady, HERO_IMAGES.length])
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center bg-roiba-verde overflow-hidden">
-      {/* Background — Video or Image Slideshow */}
-      {hasVideo && videoSrc ? (
+      {/* Background — Video (always rendered, hidden until ready) */}
+      {!videoFailed && (
         <video
           ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
-          onLoadedData={() => setVideoLoaded(true)}
-          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
-        >
-          <source src={videoSrc} type="video/mp4" />
-        </video>
-      ) : (
+          onCanPlayThrough={() => setVideoReady(true)}
+          onError={tryNextVideo}
+          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+        />
+      )}
+
+      {/* Background — Image Slideshow (visible until video loads, or permanently if video fails) */}
+      {!videoReady &&
         HERO_IMAGES.map((src, i) => (
           <div
             key={i}
@@ -97,11 +106,10 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
               sizes="100vw"
             />
           </div>
-        ))
-      )}
+        ))}
 
       {/* Overlay */}
-      <div className={`absolute inset-0 z-[1] ${hasVideo ? 'bg-roiba-verde/40' : 'bg-roiba-verde/60'}`} />
+      <div className={`absolute inset-0 z-[1] ${videoReady ? 'bg-roiba-verde/40' : 'bg-roiba-verde/60'}`} />
 
       {/* Content */}
       <div className="text-center z-[2] relative px-6 max-w-[900px] mx-auto">

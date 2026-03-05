@@ -19,7 +19,7 @@ export default async function VillasPage() {
       {/* Hero */}
       <section className="relative bg-roiba-verde py-24 md:py-32 px-6 overflow-hidden">
         <Image
-          src="/images/projects/cayuco-11-cap-cana.png"
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85&fit=crop"
           alt=""
           fill
           className="object-cover"

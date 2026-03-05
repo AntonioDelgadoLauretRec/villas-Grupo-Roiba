@@ -223,7 +223,7 @@ export default function ServiciosPage() {
       {/* ============================================ */}
       <section className="relative py-24 md:py-32 bg-roiba-verde overflow-hidden">
         <Image
-          src="/images/projects/hotel-live-aqua.png"
+          src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=85&fit=crop"
           alt=""
           fill
           className="object-cover"

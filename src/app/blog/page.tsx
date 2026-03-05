@@ -76,7 +76,7 @@ export default async function BlogPage() {
       {/* Hero */}
       <section className="relative py-24 md:py-32 bg-roiba-verde overflow-hidden">
         <Image
-          src="/images/projects/finest-punta-cana.jpg"
+          src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=1920&q=85&fit=crop"
           alt=""
           fill
           className="object-cover"

@@ -252,7 +252,7 @@ export const dictionaries = {
       eyebrow: 'Engineering & Construction in the Caribbean',
       title1: 'Comprehensive technical services',
       titleAccent: 'for exclusive',
-      title2: 'exclusive residential projects',
+      title2: 'residential projects',
       subtitle: 'Technical management, construction supervision and turnkey delivery. From concept to maintenance, with a team that reports directly to you.',
       cta: 'Explore services',
       ctaSecondary: 'Talk to the team',
