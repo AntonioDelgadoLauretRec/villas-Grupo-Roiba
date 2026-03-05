@@ -7,6 +7,7 @@ import CookieConsent from '@/components/ui/CookieConsent'
 
 import { LanguageProvider } from '@/lib/i18n/LanguageContext'
 import GoogleAnalytics from '@/components/ui/GoogleAnalytics'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: {
@@ -179,6 +180,7 @@ export default function RootLayout({
         <FloatingWhatsApp />
         <CookieConsent />
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   )
