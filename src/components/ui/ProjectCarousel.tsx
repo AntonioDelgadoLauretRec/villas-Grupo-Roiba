@@ -28,6 +28,22 @@ const PROJECTS = [
     year: '2023',
     image: '/images/projects/excellence-el-carmen.jpg',
   },
+  {
+    name: 'Excellence Oyster Bay — Fase 2',
+    location: 'Jamaica',
+    status: 'Completada',
+    type: 'Resort premium',
+    year: '2024',
+    image: '/images/projects/excellence-oyster-bay-2.jpg',
+  },
+  {
+    name: 'Excellence Oyster Bay — Exteriores',
+    location: 'Jamaica',
+    status: 'Completada',
+    type: 'Resort premium',
+    year: '2024',
+    image: '/images/projects/excellence-oyster-bay-3.jpg',
+  },
 ]
 
 const SWIPE_THRESHOLD = 50

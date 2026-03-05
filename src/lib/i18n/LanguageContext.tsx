@@ -21,12 +21,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('es')
 
   useEffect(() => {
+    // Only restore saved preference; default is always Spanish
     const saved = localStorage.getItem(STORAGE_KEY) as Locale | null
     if (saved && (saved === 'es' || saved === 'en')) {
       setLocaleState(saved)
-    } else {
-      const browserLang = navigator.language.slice(0, 2)
-      if (browserLang === 'en') setLocaleState('en')
     }
   }, [])
 

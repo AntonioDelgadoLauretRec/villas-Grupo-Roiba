@@ -94,21 +94,6 @@ export const ProcessTimeline: FC = () => {
       </div>
 
       <div className="container-editorial relative z-10">
-        {/* Header */}
-        <div className="max-w-2xl mb-14 md:mb-20">
-          <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mb-4 block">
-            Metodología Roiba
-          </span>
-          <h2 className="text-display-md md:text-display-lg font-serif text-roiba-verde mb-5">
-            El Método Roiba
-          </h2>
-          <div className="w-12 h-px bg-roiba-dorado mb-6" />
-          <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed">
-            Seis fases con entregables definidos, puntos de decisión claros y supervisión
-            técnica directa en cada etapa.
-          </p>
-        </div>
-
         <div className="grid lg:grid-cols-12 gap-0 lg:gap-14 items-start">
 
           {/* ── Left: Phase list ── */}

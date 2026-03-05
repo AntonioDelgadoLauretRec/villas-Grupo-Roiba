@@ -3,6 +3,7 @@
 import { FC, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 type LeadType = 'inversion' | 'servicios'
 
@@ -24,32 +25,34 @@ const INVESTMENT_OPTIONS = [
   { value: '500k-1m', label: '$500,000 - $1,000,000 USD' },
   { value: '1m-2m', label: '$1,000,000 - $2,000,000 USD' },
   { value: '2m-5m', label: '$2,000,000 - $5,000,000 USD' },
-  { value: '5m+', label: 'Más de $5,000,000 USD' },
-]
-
-const SERVICE_OPTIONS = [
-  { value: 'direccion-tecnica', label: 'Dirección Técnica / Supervisión Independiente' },
-  { value: 'construccion-villa', label: 'Construcción Llave en Mano Completa' },
-  { value: 'project-management', label: 'Gestión de Proyecto de Mi Obra' },
-  { value: 'due-diligence', label: 'Due Diligence / Asesoramiento Técnico' },
-  { value: 'interiorismo', label: 'Interiorismo y Equipamiento' },
-  { value: 'roiba-care', label: 'Mantenimiento de Villa Existente (Roiba Care)' },
-  { value: 'orientacion', label: 'Aún no lo sé, necesito orientación' },
 ]
 
 const COUNTRIES = [
-  { value: 'ES', label: 'España' },
-  { value: 'US', label: 'Estados Unidos' },
-  { value: 'DE', label: 'Alemania' },
-  { value: 'FR', label: 'Francia' },
-  { value: 'UK', label: 'Reino Unido' },
-  { value: 'MX', label: 'México' },
-  { value: 'AR', label: 'Argentina' },
-  { value: 'CO', label: 'Colombia' },
-  { value: 'OTHER', label: 'Otro' },
+  { value: 'ES', label: { es: 'España', en: 'Spain' } },
+  { value: 'US', label: { es: 'Estados Unidos', en: 'United States' } },
+  { value: 'DE', label: { es: 'Alemania', en: 'Germany' } },
+  { value: 'FR', label: { es: 'Francia', en: 'France' } },
+  { value: 'UK', label: { es: 'Reino Unido', en: 'United Kingdom' } },
+  { value: 'MX', label: { es: 'México', en: 'Mexico' } },
+  { value: 'AR', label: { es: 'Argentina', en: 'Argentina' } },
+  { value: 'CO', label: { es: 'Colombia', en: 'Colombia' } },
+  { value: 'OTHER', label: { es: 'Otro', en: 'Other' } },
 ]
 
 export const ContactForm: FC = () => {
+  const { locale, t } = useLanguage()
+  const cf = t.contactForm
+
+  const SERVICE_OPTIONS = [
+    { value: 'direccion-tecnica', label: cf.direccionTecnica },
+    { value: 'construccion-villa', label: cf.construccionLlaveEnMano },
+    { value: 'project-management', label: cf.gestionProyecto },
+    { value: 'due-diligence', label: cf.dueDiligence },
+    { value: 'interiorismo', label: cf.interiorismo },
+    { value: 'roiba-care', label: cf.roibaCare },
+    { value: 'orientacion', label: cf.orientacion },
+  ]
+
   const [formData, setFormData] = useState<FormData>({
     lead_type: 'inversion',
     full_name: '',
@@ -71,31 +74,31 @@ export const ContactForm: FC = () => {
     const newErrors: Partial<Record<string, string>> = {}
 
     if (!formData.full_name.trim() || formData.full_name.length < 2) {
-      newErrors.full_name = 'Nombre completo requerido'
+      newErrors.full_name = cf.nombreRequerido
     }
 
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      newErrors.email = 'Email inválido'
+      newErrors.email = cf.emailInvalido
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Teléfono requerido'
+      newErrors.phone = cf.telefonoRequerido
     }
 
     if (!formData.country) {
-      newErrors.country = 'Seleccione un país'
+      newErrors.country = cf.paisRequerido
     }
 
     if (formData.lead_type === 'inversion' && !formData.investment_capacity) {
-      newErrors.investment_capacity = 'Seleccione capacidad de inversión'
+      newErrors.investment_capacity = cf.inversionRequerida
     }
 
     if (formData.lead_type === 'servicios' && !formData.service_type) {
-      newErrors.service_type = 'Seleccione el tipo de servicio'
+      newErrors.service_type = cf.servicioRequerido
     }
 
     if (!formData.gdpr_consent) {
-      newErrors.gdpr_consent = 'Debe aceptar la política de privacidad'
+      newErrors.gdpr_consent = cf.gdprRequerido
     }
 
     setErrors(newErrors)
@@ -133,7 +136,7 @@ export const ContactForm: FC = () => {
         body: JSON.stringify(payload),
       })
 
-      if (!response.ok) throw new Error('Error al enviar')
+      if (!response.ok) throw new Error('Error')
 
       setSubmitStatus('success')
       setFormData({
@@ -190,17 +193,16 @@ export const ContactForm: FC = () => {
           </svg>
         </div>
         <h3 className="text-heading font-serif text-roiba-verde mb-3">
-          Solicitud Recibida
+          {cf.solicitudRecibida}
         </h3>
         <p className="text-body text-roiba-verde/70 mb-6">
-          Nuestro equipo revisará su información y se pondrá en contacto
-          en las próximas 24-48 horas hábiles.
+          {cf.solicitudRecibidaDesc}
         </p>
         <button
           onClick={() => setSubmitStatus('idle')}
           className="text-caption font-medium text-roiba-dorado hover:text-roiba-verde transition-colors"
         >
-          Enviar otra solicitud
+          {cf.enviarOtra}
         </button>
       </div>
     )
@@ -208,10 +210,9 @@ export const ContactForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Tipo de solicitud */}
       <div>
         <label className="block text-caption font-medium text-roiba-verde mb-3">
-          Tipo de solicitud
+          {cf.tipoSolicitud}
         </label>
         <div className="grid grid-cols-2 gap-3">
           <button
@@ -224,8 +225,8 @@ export const ContactForm: FC = () => {
                 : 'bg-white text-roiba-verde/70 border-roiba-verde/20 hover:border-roiba-dorado hover:text-roiba-verde'
             )}
           >
-            <span className="block font-semibold mb-1">Inversión en Villa</span>
-            <span className="block text-xs opacity-70">Construcción de villa premium</span>
+            <span className="block font-semibold mb-1">{cf.inversionVilla}</span>
+            <span className="block text-xs opacity-70">{cf.inversionDesc}</span>
           </button>
           <button
             type="button"
@@ -237,17 +238,16 @@ export const ContactForm: FC = () => {
                 : 'bg-white text-roiba-verde/70 border-roiba-verde/20 hover:border-roiba-dorado hover:text-roiba-verde'
             )}
           >
-            <span className="block font-semibold mb-1">Solicitud de Servicios</span>
-            <span className="block text-xs opacity-70">Dirección técnica, interiorismo, etc.</span>
+            <span className="block font-semibold mb-1">{cf.solicitudServicios}</span>
+            <span className="block text-xs opacity-70">{cf.serviciosDesc}</span>
           </button>
         </div>
       </div>
 
-      {/* Nombre y Email */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label className="block text-caption font-medium text-roiba-verde mb-2">
-            Nombre completo *
+            {cf.nombreCompleto} *
           </label>
           <input
             type="text"
@@ -259,7 +259,7 @@ export const ContactForm: FC = () => {
               'focus:outline-none focus:border-roiba-dorado transition-colors',
               errors.full_name ? 'border-red-500' : 'border-roiba-verde/20'
             )}
-            placeholder="Su nombre"
+            placeholder={cf.suNombre}
           />
           {errors.full_name && (
             <p className="mt-1 text-micro text-red-500">{errors.full_name}</p>
@@ -268,7 +268,7 @@ export const ContactForm: FC = () => {
 
         <div>
           <label className="block text-caption font-medium text-roiba-verde mb-2">
-            Email *
+            {cf.emailLabel} *
           </label>
           <input
             type="email"
@@ -288,11 +288,10 @@ export const ContactForm: FC = () => {
         </div>
       </div>
 
-      {/* Teléfono y País */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label className="block text-caption font-medium text-roiba-verde mb-2">
-            Teléfono *
+            {cf.telefono} *
           </label>
           <input
             type="tel"
@@ -313,7 +312,7 @@ export const ContactForm: FC = () => {
 
         <div>
           <label className="block text-caption font-medium text-roiba-verde mb-2">
-            País de residencia *
+            {cf.paisResidencia} *
           </label>
           <select
             name="country"
@@ -325,10 +324,10 @@ export const ContactForm: FC = () => {
               errors.country ? 'border-red-500' : 'border-roiba-verde/20'
             )}
           >
-            <option value="">Seleccionar país</option>
+            <option value="">{cf.seleccionarPais}</option>
             {COUNTRIES.map(country => (
               <option key={country.value} value={country.value}>
-                {country.label}
+                {country.label[locale]}
               </option>
             ))}
           </select>
@@ -338,11 +337,10 @@ export const ContactForm: FC = () => {
         </div>
       </div>
 
-      {/* Campos condicionales */}
       {formData.lead_type === 'inversion' ? (
         <div>
           <label className="block text-caption font-medium text-roiba-verde mb-2">
-            Capacidad de inversión *
+            {cf.capacidadInversion} *
           </label>
           <select
             name="investment_capacity"
@@ -354,12 +352,13 @@ export const ContactForm: FC = () => {
               errors.investment_capacity ? 'border-red-500' : 'border-roiba-verde/20'
             )}
           >
-            <option value="">Seleccionar rango</option>
+            <option value="">{cf.seleccionarRango}</option>
             {INVESTMENT_OPTIONS.map(option => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
+            <option value="5m+">{cf.masDE5M}</option>
           </select>
           {errors.investment_capacity && (
             <p className="mt-1 text-micro text-red-500">{errors.investment_capacity}</p>
@@ -368,7 +367,7 @@ export const ContactForm: FC = () => {
       ) : (
         <div>
           <label className="block text-caption font-medium text-roiba-verde mb-2">
-            Tipo de servicio *
+            {cf.tipoServicio} *
           </label>
           <select
             name="service_type"
@@ -380,7 +379,7 @@ export const ContactForm: FC = () => {
               errors.service_type ? 'border-red-500' : 'border-roiba-verde/20'
             )}
           >
-            <option value="">Seleccionar servicio</option>
+            <option value="">{cf.seleccionarServicio}</option>
             {SERVICE_OPTIONS.map(option => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -393,10 +392,9 @@ export const ContactForm: FC = () => {
         </div>
       )}
 
-      {/* Mensaje */}
       <div>
         <label className="block text-caption font-medium text-roiba-verde mb-2">
-          Mensaje (opcional)
+          {cf.mensaje}
         </label>
         <textarea
           name="message"
@@ -404,26 +402,17 @@ export const ContactForm: FC = () => {
           onChange={handleChange}
           rows={4}
           className="w-full px-4 py-3 bg-white border border-roiba-verde/20 text-roiba-verde focus:outline-none focus:border-roiba-dorado transition-colors resize-none"
-          placeholder={formData.lead_type === 'inversion'
-            ? 'Cuéntenos sobre su proyecto de inversión...'
-            : 'Describa el servicio que necesita...'}
+          placeholder={formData.lead_type === 'inversion' ? cf.placeholderInversion : cf.placeholderServicios}
         />
       </div>
 
-      {/* Consentimientos */}
       <div className="space-y-4">
         <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            name="gdpr_consent"
-            checked={formData.gdpr_consent}
-            onChange={handleChange}
-            className="mt-1 w-4 h-4 accent-roiba-dorado"
-          />
+          <input type="checkbox" name="gdpr_consent" checked={formData.gdpr_consent} onChange={handleChange} className="mt-1 w-4 h-4 accent-roiba-dorado" />
           <span className="text-caption text-roiba-verde/70">
-            He leído y acepto la{' '}
+            {cf.gdprText}{' '}
             <a href="/privacidad" className="text-roiba-dorado hover:underline">
-              Política de Privacidad
+              {cf.politicaPrivacidad}
             </a>
             . *
           </span>
@@ -433,32 +422,25 @@ export const ContactForm: FC = () => {
         )}
 
         <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            name="marketing_consent"
-            checked={formData.marketing_consent}
-            onChange={handleChange}
-            className="mt-1 w-4 h-4 accent-roiba-dorado"
-          />
+          <input type="checkbox" name="marketing_consent" checked={formData.marketing_consent} onChange={handleChange} className="mt-1 w-4 h-4 accent-roiba-dorado" />
           <span className="text-caption text-roiba-verde/70">
-            Deseo recibir información sobre nuevos proyectos y oportunidades.
+            {cf.marketingText}
           </span>
         </label>
       </div>
 
-      {/* Submit */}
       {submitStatus === 'error' && (
         <div className="p-4 bg-red-50 border border-red-200 text-red-600 text-caption">
-          Ha ocurrido un error. Por favor, inténtelo de nuevo o contacte directamente a inversiones@gruporoiba.com
+          {cf.errorSubmit}
         </div>
       )}
 
       <Button type="submit" variant="primary" size="lg" isLoading={isSubmitting} className="w-full">
-        <span>{formData.lead_type === 'inversion' ? 'Solicitar Análisis Personalizado' : 'Solicitar Información'}</span>
+        <span>{formData.lead_type === 'inversion' ? cf.enviarInversion : cf.enviarServicios}</span>
       </Button>
 
       <p className="text-micro text-roiba-verde/50 text-center">
-        Su información es confidencial y está protegida bajo estándares GDPR.
+        {cf.gdprNote}
       </p>
     </form>
   )

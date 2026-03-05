@@ -1,7 +1,6 @@
-import Link from 'next/link'
-import Image from 'next/image'
 import type { Metadata } from 'next'
 import { getPublishedBlogPosts } from '@/lib/data'
+import BlogContent from './BlogContent'
 
 export const metadata: Metadata = {
   title: 'Blog | Grupo Roiba',
@@ -9,150 +8,11 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://gruporoiba.com/blog' },
 }
 
-const defaultArticles = [
-  {
-    slug: 'por-que-invertir-punta-cana-2025',
-    title: 'Por qué invertir en Punta Cana en 2025',
-    excerpt: 'Analizamos el mercado inmobiliario de Punta Cana: rentabilidad, demanda turística, marco fiscal favorable y las zonas con mayor proyección de crecimiento.',
-    image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80&fit=crop',
-    category: 'Inversión',
-    date: '15 Feb 2025',
-    readTime: '8 min',
-  },
-  {
-    slug: 'guia-legal-comprar-propiedad-republica-dominicana',
-    title: 'Guía legal: comprar propiedad en República Dominicana',
-    excerpt: 'Todo lo que necesita saber sobre el marco legal, permisos, titularidad y due diligence para adquirir terreno o propiedad en la República Dominicana como extranjero.',
-    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&fit=crop',
-    category: 'Legal',
-    date: '28 Ene 2025',
-    readTime: '12 min',
-  },
-  {
-    slug: 'proceso-construccion-villa-lujo-caribe',
-    title: 'El proceso de construir una villa de lujo en el Caribe',
-    excerpt: 'Desde la selección del terreno hasta la entrega llave en mano: las fases, plazos, presupuestos y decisiones clave que todo inversor debe conocer.',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fit=crop',
-    category: 'Construcción',
-    date: '10 Ene 2025',
-    readTime: '10 min',
-  },
-  {
-    slug: 'fiscalidad-inversores-extranjeros-rd',
-    title: 'Fiscalidad para inversores extranjeros en RD',
-    excerpt: 'Impuestos, exenciones, Ley Confotur y beneficios fiscales disponibles para inversores internacionales que construyen en zonas turísticas de República Dominicana.',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop',
-    category: 'Fiscal',
-    date: '5 Dic 2024',
-    readTime: '7 min',
-  },
-  {
-    slug: 'cap-cana-vs-bavaro-donde-construir',
-    title: 'Cap Cana vs Bávaro: ¿dónde construir su villa?',
-    excerpt: 'Comparativa detallada entre las dos zonas más demandadas de Punta Cana: accesibilidad, servicios, precios de terreno, plusvalía y estilo de vida.',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&fit=crop',
-    category: 'Destino',
-    date: '20 Nov 2024',
-    readTime: '9 min',
-  },
-  {
-    slug: 'materiales-construccion-tropical-caribe',
-    title: 'Materiales de construcción para clima tropical',
-    excerpt: 'Cómo seleccionar materiales que resistan la humedad, salinidad y condiciones climáticas del Caribe sin comprometer el diseño ni la durabilidad.',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80&fit=crop',
-    category: 'Construcción',
-    date: '8 Nov 2024',
-    readTime: '6 min',
-  },
-]
-
 export default async function BlogPage() {
   const dbPosts = await getPublishedBlogPosts().catch(() => [])
   const articles = dbPosts.length > 0
     ? dbPosts.map(p => ({ slug: p.slug, title: p.title, excerpt: p.excerpt, image: p.image, category: p.category, date: p.date, readTime: p.read_time }))
-    : defaultArticles
-  return (
-    <main>
-      {/* Hero */}
-      <section className="relative pt-28 pb-14 md:pt-32 md:pb-20 bg-roiba-verde overflow-hidden">
-        <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
-        <div className="relative max-w-5xl mx-auto px-6 text-center">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">Publicaciones</p>
-          <h1 className="font-serif text-display-lg md:text-display-xl text-white mb-8">
-            Ideas, análisis y<br />guías de inversión
-          </h1>
-          <p className="text-white/60 text-body-lg max-w-2xl mx-auto leading-relaxed">
-            Análisis de mercado, marco legal, proceso constructivo y vida en Punta Cana desde la perspectiva de quien ejecuta proyectos aquí.
-          </p>
-          <div className="mt-12 mx-auto w-16 h-px bg-roiba-dorado/40" />
-        </div>
-      </section>
+    : undefined
 
-      {/* Articles grid */}
-      <section className="py-14 md:py-20 bg-roiba-arena-light">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {articles.map((article) => (
-              <article
-                key={article.slug}
-                className="group bg-white rounded-sm overflow-hidden border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <span className="absolute top-4 left-4 px-3 py-1 bg-roiba-verde/80 text-white text-[10px] font-semibold tracking-wider uppercase rounded-sm">
-                    {article.category}
-                  </span>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center gap-3 mb-3 text-[11px] text-roiba-verde/40 font-sans">
-                    <span>{article.date}</span>
-                    <span>·</span>
-                    <span>{article.readTime}</span>
-                  </div>
-                  <h2 className="font-serif text-xl text-roiba-verde leading-tight mb-3 group-hover:text-roiba-dorado transition-colors">
-                    {article.title}
-                  </h2>
-                  <p className="text-sm text-roiba-verde/60 leading-relaxed mb-4">
-                    {article.excerpt}
-                  </p>
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado group-hover:gap-3 transition-all">
-                    Leer artículo
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
-                  </span>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative py-14 md:py-20 bg-roiba-verde overflow-hidden">
-        <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
-        <div className="relative max-w-3xl mx-auto px-6 text-center">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            ¿Le resulta útil este contenido?
-          </p>
-          <h2 className="font-serif text-display-md text-white mb-6">
-            Reciba análisis y guías técnicas por email
-          </h2>
-          <p className="text-white/60 text-body-lg mb-12 leading-relaxed">
-            Suscríbase al boletín y reciba análisis, guías técnicas y actualizaciones de mercado antes de su publicación.
-          </p>
-          <Link
-            href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado-light text-roiba-verde font-semibold rounded-sm hover:bg-roiba-dorado transition-colors duration-300 text-lg"
-          >
-            Suscribirse al boletín
-          </Link>
-        </div>
-      </section>
-    </main>
-  )
+  return <BlogContent dbArticles={articles} />
 }

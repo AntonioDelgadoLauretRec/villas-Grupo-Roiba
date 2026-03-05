@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 import type { Testimonial } from '@/types/admin'
 
-const DEFAULT_TESTIMONIALS = [
+const TESTIMONIALS_ES = [
   { quote: 'Grupo Roiba nos ofreció algo que no habíamos encontrado en ningún otro constructor en Punta Cana: transparencia real. Cada semana recibíamos informes detallados con fotos, costes actualizados y un cronograma que se cumplió al día. La villa superó todas nuestras expectativas.', name: 'Carlos & Lucía M.', role: 'Propietarios de villa', location: 'Madrid, España' },
   { quote: 'Construir nuestra villa desde Miami con un equipo en el Caribe parecía un reto enorme. Iván y Ramón lo hicieron simple. Su dominio técnico, la comunicación constante y el respeto escrupuloso al presupuesto nos dieron una confianza total desde el primer día.', name: 'James & Patricia W.', role: 'Propietarios de villa en Cap Cana', location: 'Miami, Florida, EE.UU.' },
   { quote: 'Buscábamos un equipo que entendiera nuestras expectativas de calidad y las trasladara al Caribe. Roiba lo consiguió. La atención al detalle en los acabados, la selección de materiales y el control de calidad fueron impecables. Recomendamos Grupo Roiba sin reservas.', name: 'Elena & Roberto V.', role: 'Propietarios de villa', location: 'Marbella, España' },
@@ -11,12 +12,23 @@ const DEFAULT_TESTIMONIALS = [
   { quote: 'El servicio Roiba Care fue decisivo en nuestra decisión. Saber que nuestra propiedad estará supervisada y mantenida profesionalmente cuando estamos en Nueva York nos da una tranquilidad absoluta. Es un servicio post-entrega que realmente marca la diferencia.', name: 'David & Lauren Chen', role: 'Propietarios de villa', location: 'New York, EE.UU.' },
 ]
 
+const TESTIMONIALS_EN = [
+  { quote: 'Grupo Roiba offered us something we hadn\'t found with any other builder in Punta Cana: real transparency. Every week we received detailed reports with photos, updated costs and a schedule that was met to the day. The villa exceeded all our expectations.', name: 'Carlos & Lucía M.', role: 'Villa owners', location: 'Madrid, Spain' },
+  { quote: 'Building our villa from Miami with a team in the Caribbean seemed like a huge challenge. Iván and Ramón made it simple. Their technical expertise, constant communication and strict respect for the budget gave us total confidence from day one.', name: 'James & Patricia W.', role: 'Villa owners in Cap Cana', location: 'Miami, Florida, USA' },
+  { quote: 'We were looking for a team that understood our quality expectations and could deliver them in the Caribbean. Roiba did it. The attention to detail in the finishes, material selection and quality control were impeccable. We recommend Grupo Roiba without reservation.', name: 'Elena & Roberto V.', role: 'Villa owners', location: 'Marbella, Spain' },
+  { quote: 'Building in the Caribbean from Colombia seemed uncertain, but Grupo Roiba guided us at every stage with professionalism and honesty. Permits, local architects, material quality... everything was exactly as promised.', name: 'Andrés & Camila R.', role: 'Villa owners in Punta Cana', location: 'Bogotá, Colombia' },
+  { quote: 'The Roiba Care service was decisive in our decision. Knowing that our property will be supervised and professionally maintained when we\'re in New York gives us absolute peace of mind. It\'s a post-delivery service that truly makes a difference.', name: 'David & Lauren Chen', role: 'Villa owners', location: 'New York, USA' },
+]
+
 export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials?: Testimonial[] }) {
+  const { locale } = useLanguage()
+  const DEFAULT_TESTIMONIALS = locale === 'en' ? TESTIMONIALS_EN : TESTIMONIALS_ES
   const TESTIMONIALS = dbTestimonials
     ? dbTestimonials.map(t => ({ quote: t.quote, name: t.name, role: t.role, location: t.location }))
     : DEFAULT_TESTIMONIALS
   const [idx, setIdx] = useState(0)
   const touchRef = useRef<{ x: number; y: number } | null>(null)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const timer = setInterval(() => setIdx((p) => (p + 1) % TESTIMONIALS.length), 6000)
@@ -38,28 +50,25 @@ export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials
     touchRef.current = null
   }, [])
 
-  const t = TESTIMONIALS[idx]
+  const item = TESTIMONIALS[idx]
 
   return (
     <section className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-roiba-verde relative overflow-hidden">
-      {/* Decorative quote */}
       <div className="absolute top-[10%] left-[8%] font-serif text-[clamp(200px,25vw,400px)] font-light text-roiba-dorado/[0.03] leading-none select-none pointer-events-none">
         &ldquo;
       </div>
 
       <div className="max-w-[900px] mx-auto relative z-[2]">
-        {/* Header */}
         <div className="scroll-reveal text-center mb-14">
-          <span className="block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">Testimonios</span>
+          <span className="block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">{t.testimonials.eyebrow}</span>
           <h2 className="font-serif text-[clamp(32px,4vw,48px)] font-normal text-white">
-            Lo que dicen{' '}
-            <span className="italic text-roiba-dorado-light">nuestros clientes</span>
+            {t.testimonials.title}{' '}
+            <span className="italic text-roiba-dorado-light">{t.testimonials.titleAccent}</span>
           </h2>
         </div>
 
-        {/* Testimonial */}
         <div className="scroll-reveal delay-1 touch-pan-y relative min-h-[280px]" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-          {TESTIMONIALS.map((item, i) => (
+          {TESTIMONIALS.map((testimonial, i) => (
             <div
               key={i}
               className={`text-center transition-all duration-800 ease-out ${
@@ -68,7 +77,6 @@ export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials
                   : 'absolute top-0 left-0 right-0 opacity-0 translate-y-5 pointer-events-none'
               }`}
             >
-              {/* Stars */}
               <div className="mb-6 flex justify-center gap-1">
                 {[...Array(5)].map((_, s) => (
                   <svg key={s} width="18" height="18" viewBox="0 0 24 24" fill="#C9A96E">
@@ -77,17 +85,16 @@ export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials
                 ))}
               </div>
               <p className="font-serif text-[clamp(18px,2.5vw,24px)] font-normal italic text-white/85 leading-[1.65] max-w-[720px] mx-auto mb-8">
-                &ldquo;{item.quote}&rdquo;
+                &ldquo;{testimonial.quote}&rdquo;
               </p>
               <div className="w-10 h-px bg-roiba-dorado/40 mx-auto mb-6" />
-              <p className="font-sans text-[13px] font-semibold text-white tracking-wide mb-1">{item.name}</p>
-              <p className="font-sans text-[11px] text-roiba-dorado mb-0.5">{item.role}</p>
-              <p className="font-sans text-[11px] text-white/30">{item.location}</p>
+              <p className="font-sans text-[13px] font-semibold text-white tracking-wide mb-1">{testimonial.name}</p>
+              <p className="font-sans text-[11px] text-roiba-dorado mb-0.5">{testimonial.role}</p>
+              <p className="font-sans text-[11px] text-white/30">{testimonial.location}</p>
             </div>
           ))}
         </div>
 
-        {/* Dots */}
         <div className="flex justify-center gap-2 mt-10">
           {TESTIMONIALS.map((_, i) => (
             <button
