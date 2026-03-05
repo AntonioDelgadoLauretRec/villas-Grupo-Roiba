@@ -6,7 +6,7 @@ import { getSiteSetting } from '@/lib/data'
 export const metadata: Metadata = {
   title: 'Grupo Roiba | Servicios Técnicos y Construcción en Punta Cana',
   description:
-    'Firma de servicios técnicos especializados en proyectos residenciales de alta gama en Punta Cana y Cap Cana. Dirección técnica, supervisión de obra, construcción llave en mano y gestión integral. Más de 20 años de experiencia.',
+    'Firma de servicios técnicos especializados en proyectos residenciales exclusivos en Punta Cana y Cap Cana. Dirección técnica, supervisión de obra, construcción llave en mano y gestión integral. Más de 20 años de experiencia.',
   alternates: {
     canonical: 'https://gruporoiba.com',
   },

@@ -1,13 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-
-const DEFAULT_STATS = [
-  { value: 20, suffix: '+', label: 'Años en proyectos residenciales y hoteleros' },
-  { value: 15, prefix: '', suffix: 'M€', label: 'Dirección técnica en proyectos de este rango' },
-  { value: 2, suffix: '', label: 'España y República Dominicana' },
-  { value: 100, suffix: '%', label: 'Supervisión directa de ingenieros en cada proyecto' },
-]
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000 }: { end: number; suffix?: string; prefix?: string; duration?: number }) {
   const [count, setCount] = useState(0)
@@ -35,7 +29,6 @@ function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000 }: { e
     const animate = (now: number) => {
       const elapsed = now - startTime
       const progress = Math.min(elapsed / duration, 1)
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3)
       setCount(Math.round(eased * end))
       if (progress < 1) requestAnimationFrame(animate)
@@ -51,9 +44,15 @@ function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000 }: { e
 }
 
 export default function StatsMarquee({ dbStats }: { dbStats?: { value: string; label: string }[] }) {
-  const [mode, setMode] = useState<'counters' | 'marquee'>('counters')
+  const { t } = useLanguage()
 
-  // Parse dbStats into numeric format if provided
+  const DEFAULT_STATS = [
+    { value: 20, suffix: '+', label: t.stats.proyectos },
+    { value: 15, prefix: '', suffix: 'M\u20AC', label: t.stats.satisfaccion },
+    { value: 2, suffix: '', label: t.stats.paises },
+    { value: 100, suffix: '%', label: t.stats.retrasos },
+  ]
+
   const parsedStats = dbStats
     ? dbStats.map(s => {
         const numMatch = s.value.match(/(\d+)/)
@@ -65,7 +64,6 @@ export default function StatsMarquee({ dbStats }: { dbStats?: { value: string; l
 
   return (
     <section className="bg-roiba-verde py-12 md:py-16 border-y border-roiba-dorado/[0.12] relative overflow-hidden">
-      {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle, rgba(201,169,110,0.3) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">

@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 import type { BlogPost } from '@/types/admin'
 
 const DEFAULT_POSTS = [
@@ -48,6 +49,8 @@ const DEFAULT_POSTS = [
 ]
 
 export default function BlogPreviewSection({ dbPosts }: { dbPosts?: BlogPost[] }) {
+  const { t } = useLanguage()
+
   const posts = dbPosts && dbPosts.length > 0
     ? dbPosts.slice(0, 5).map(p => ({
         slug: p.slug,
@@ -62,26 +65,24 @@ export default function BlogPreviewSection({ dbPosts }: { dbPosts?: BlogPost[] }
   return (
     <section className="py-12 md:py-16 bg-white relative overflow-hidden">
       <div className="px-4 md:px-8 lg:px-16">
-        {/* Header */}
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between mb-10 border-b border-roiba-dorado/[0.12] pb-6">
           <div>
             <span className="scroll-reveal block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-3">
-              Publicaciones
+              {t.blogPreview.eyebrow}
             </span>
             <h2 className="scroll-reveal delay-1 font-serif text-[clamp(28px,4vw,48px)] font-normal text-roiba-verde leading-[1.15]">
-              Últimas <span className="italic text-roiba-dorado">entradas</span>
+              {t.blogPreview.title} <span className="italic text-roiba-dorado">{t.blogPreview.titleAccent}</span>
             </h2>
           </div>
           <Link
             href="/blog"
             className="scroll-reveal delay-2 inline-flex items-center gap-2 font-sans text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-dorado-light transition-colors mt-4 md:mt-0"
           >
-            Ver todas las publicaciones
+            {t.blogPreview.viewAll}
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
           </Link>
         </div>
 
-        {/* Horizontal scroll carousel */}
         <div className="scroll-reveal overflow-x-auto hide-scrollbar snap-x snap-mandatory touch-pan-x -mx-4 md:-mx-8 lg:-mx-16 px-4 md:px-8 lg:px-16">
           <div className="flex gap-5 w-max">
             {posts.map((post, idx) => (
@@ -113,7 +114,7 @@ export default function BlogPreviewSection({ dbPosts }: { dbPosts?: BlogPost[] }
                     {post.excerpt}
                   </p>
                   <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado group-hover:gap-3 transition-all">
-                    Leer más
+                    {t.blogPreview.readMore}
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
                   </span>
                 </div>
