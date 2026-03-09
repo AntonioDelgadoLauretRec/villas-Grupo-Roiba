@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -244,6 +244,15 @@
     clip-path: inset(0 100% 0 0);
   }
   
+  /* Hide scrollbar */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Text gradient */
   .text-gradient {
     @apply bg-clip-text text-transparent;
@@ -339,6 +348,67 @@
 @media (max-width: 480px) {
   .services-scroll > * { min-width: min(88vw, 280px) !important; }
   .process-tabs-row > button { min-width: 120px !important; }
+}
+
+/* ===== GLOBAL BUTTON SYSTEM ===== */
+
+/* Botón primario con fill slide */
+.btn-roiba-primary {
+  @apply relative overflow-hidden
+         font-sans text-[10px] font-semibold tracking-[0.18em] uppercase
+         px-8 py-4 bg-roiba-dorado text-roiba-verde
+         hover:-translate-y-0.5
+         transition-all duration-300;
+  box-shadow: none;
+}
+.btn-roiba-primary:hover {
+  box-shadow: 0 12px 40px rgba(201,169,110,0.28);
+}
+.btn-roiba-primary::before {
+  content: '';
+  @apply absolute inset-0 bg-roiba-dorado-light
+         transition-transform duration-300 ease-out;
+  transform: translateX(-101%);
+}
+.btn-roiba-primary:hover::before {
+  transform: translateX(0);
+}
+.btn-roiba-primary span {
+  @apply relative z-10;
+}
+
+/* Botón ghost/outline */
+.btn-roiba-ghost {
+  @apply font-sans text-[10px] font-medium tracking-[0.18em] uppercase
+         px-8 py-4 bg-transparent
+         border border-roiba-verde/25 text-roiba-verde
+         hover:border-roiba-dorado hover:text-roiba-dorado
+         transition-all duration-300;
+}
+.btn-roiba-ghost:hover {
+  background-color: rgba(201,169,110,0.05);
+}
+
+/* Botón ghost sobre fondo oscuro */
+.btn-roiba-ghost-dark {
+  @apply font-sans text-[10px] font-medium tracking-[0.18em] uppercase
+         px-8 py-4 bg-transparent
+         border border-white/20 text-white/75
+         hover:border-roiba-dorado hover:text-roiba-dorado-light
+         transition-all duration-300;
+}
+.btn-roiba-ghost-dark:hover {
+  background-color: rgba(201,169,110,0.08);
+}
+
+/* ===== CLIP REVEAL ANIMATION ===== */
+@keyframes clipReveal {
+  0%   { clip-path: inset(0 100% 0 0); opacity: 1; }
+  100% { clip-path: inset(0 0% 0 0);   opacity: 1; }
+}
+
+.animate-clip-reveal {
+  animation: clipReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Focus states accesibles */

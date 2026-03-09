@@ -24,16 +24,10 @@ export default function CTASection() {
         </p>
 
         <div className="scroll-reveal delay-3 flex gap-4 justify-center flex-wrap">
-          <a
-            href="/contacto"
-            className="font-sans text-[11px] font-semibold tracking-[0.15em] uppercase px-12 py-[18px] bg-roiba-dorado text-roiba-verde hover:bg-roiba-dorado-light hover:-translate-y-0.5 hover:shadow-[0_16px_48px_rgba(201,169,110,0.2)] transition-all duration-400"
-          >
-            {t.cta.primary}
+          <a href="/contacto" className="btn-roiba-primary px-12">
+            <span>{t.cta.primary}</span>
           </a>
-          <a
-            href="mailto:info@gruporoiba.com"
-            className="font-sans text-[11px] font-medium tracking-[0.15em] uppercase px-12 py-[18px] bg-transparent text-white border border-white/20 hover:border-roiba-dorado hover:text-roiba-dorado-light transition-all duration-400"
-          >
+          <a href="mailto:info@gruporoiba.com" className="btn-roiba-ghost-dark px-12">
             {t.cta.secondary}
           </a>
         </div>

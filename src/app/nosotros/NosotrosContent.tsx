@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import ValueFlipCard from '@/components/ui/ValueFlipCard'
 import ProjectCarousel from '@/components/ui/ProjectCarousel'
+import { RevealWrapper } from '@/components/ui/RevealWrapper'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 /* ─────────────────────── i18n text ─────────────────────── */
@@ -269,41 +270,43 @@ export default function NosotrosContent() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
             {/* Columna izquierda: Origen */}
-            <div>
+            <RevealWrapper variant="fade-in">
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
                 {tx.origenTag}
               </span>
-              <h2 className="text-display-md font-serif text-roiba-verde mt-4 mb-3">
+              <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-3">
                 {tx.origenTitle}
               </h2>
-              <div className="w-16 h-px bg-roiba-dorado mb-8" />
-              <div className="space-y-6 text-body-lg text-roiba-verde/80 leading-relaxed">
+              <RevealWrapper variant="line-grow" delay={200} className="w-16 h-px bg-roiba-dorado mb-8">
+                <span className="sr-only">decorative line</span>
+              </RevealWrapper>
+              <div className="space-y-6 text-body-lg text-roiba-texto-suave leading-relaxed">
                 <p>{tx.origenP1}</p>
                 <p>{tx.origenP2}</p>
               </div>
-            </div>
+            </RevealWrapper>
 
             {/* Columna derecha: Enfoque de Trabajo */}
-            <div>
+            <RevealWrapper variant="slide-left" delay={150}>
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
                 {tx.enfoqueTag}
               </span>
-              <h2 className="text-display-md font-serif text-roiba-verde mt-4 mb-3">
+              <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-3">
                 {tx.enfoqueTitle}
               </h2>
               <div className="w-16 h-px bg-roiba-dorado mb-8" />
-              <p className="text-body-lg text-roiba-verde/80 leading-relaxed mb-8">
+              <p className="text-body-lg text-roiba-texto-suave leading-relaxed mb-8">
                 {tx.enfoqueIntro}
               </p>
               <ul className="space-y-4">
                 {tx.enfoqueItems.map((item) => (
                   <li key={item} className="flex items-start gap-4">
                     <span className="mt-1.5 block w-2 h-2 rounded-full bg-roiba-dorado flex-shrink-0" />
-                    <span className="text-body-lg text-roiba-verde/80">{item}</span>
+                    <span className="text-body-lg text-roiba-texto-suave">{item}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </RevealWrapper>
           </div>
         </div>
       </section>
@@ -314,26 +317,26 @@ export default function NosotrosContent() {
       </div>
 
       {/* -- 3. EL EQUIPO -- */}
-      <section className="py-12 md:py-16 px-6 bg-roiba-arena-light">
+      <section className="py-12 md:py-16 px-6 bg-roiba-fondo-alt">
         <div className="max-w-7xl mx-auto">
           {/* section header */}
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <RevealWrapper variant="fade-up" className="max-w-3xl mx-auto text-center mb-16">
             <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
               {tx.equipoTag}
             </span>
-            <h2 className="text-display-md font-serif text-roiba-verde mt-4 mb-6">
+            <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-6">
               {tx.equipoTitle}
             </h2>
             <div className="w-16 h-px bg-roiba-dorado mx-auto mb-8" />
-            <p className="text-body-lg text-roiba-verde/80 leading-relaxed">
+            <p className="text-body-lg text-roiba-texto-suave leading-relaxed">
               {tx.equipoDesc}
             </p>
-          </div>
+          </RevealWrapper>
 
           {/* profiles grid */}
           <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
             {/* Profile 1 — Iván */}
-            <div className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
+            <RevealWrapper variant="fade-up" delay={0} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=85&fit=crop&crop=face,top"
@@ -359,10 +362,10 @@ export default function NosotrosContent() {
                 <p>{tx.ivanP3}</p>
               </div>
               </div>
-            </div>
+            </RevealWrapper>
 
             {/* Profile 2 — Ramón */}
-            <div className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
+            <RevealWrapper variant="fade-up" delay={200} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=85&fit=crop&crop=face,top"
@@ -377,18 +380,18 @@ export default function NosotrosContent() {
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
                 {tx.ramonRole}
               </span>
-              <h3 className="text-heading font-serif text-roiba-verde mt-3 mb-1">
+              <h3 className="text-heading font-serif text-roiba-texto mt-3 mb-1">
                 Ramón Ojeda González
               </h3>
               <p className="text-caption text-roiba-dorado mb-6">{tx.ramonCaption}</p>
               <div className="w-10 h-px bg-roiba-dorado/50 mb-6" />
-              <div className="space-y-4 text-body text-roiba-verde/75 leading-relaxed">
+              <div className="space-y-4 text-body text-roiba-texto-suave leading-relaxed">
                 <p>{tx.ramonP1}</p>
                 <p>{tx.ramonP2}</p>
                 <p>{tx.ramonP3}</p>
               </div>
               </div>
-            </div>
+            </RevealWrapper>
           </div>
         </div>
       </section>
@@ -421,8 +424,10 @@ export default function NosotrosContent() {
 
           {/* values grid — hover flip cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {tx.values.map(({ title, description }) => (
-              <ValueFlipCard key={title} title={title} description={description} />
+            {tx.values.map(({ title, description }, i) => (
+              <RevealWrapper key={title} variant="slide-left" delay={i * 100}>
+                <ValueFlipCard title={title} description={description} />
+              </RevealWrapper>
             ))}
           </div>
         </div>
@@ -452,11 +457,8 @@ export default function NosotrosContent() {
           <p className="text-body-lg text-white/70 leading-relaxed mb-10">
             {tx.ctaDesc}
           </p>
-          <Link
-            href="/contacto"
-            className="inline-block bg-roiba-dorado hover:bg-roiba-dorado-light text-roiba-verde font-semibold px-10 py-4 rounded-sm text-body tracking-wide transition-colors duration-300"
-          >
-            {tx.ctaButton}
+          <Link href="/contacto" className="btn-roiba-primary px-10 inline-block">
+            <span>{tx.ctaButton}</span>
           </Link>
         </div>
       </section>

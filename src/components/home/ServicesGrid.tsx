@@ -39,7 +39,7 @@ export default function ServicesGrid({ dbServices }: { dbServices?: Service[] })
   const [openCard, setOpenCard] = useState<string | null>(null)
 
   return (
-    <section id="servicios" className="py-12 md:py-16 bg-roiba-arena-light relative overflow-hidden">
+    <section id="servicios" className="py-12 md:py-16 bg-roiba-fondo-alt relative overflow-hidden">
       <div className="px-4 md:px-8 lg:px-16 relative z-[2]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between mb-10 md:mb-14 border-b border-roiba-dorado/[0.12] pb-6">
           <div>
@@ -51,7 +51,7 @@ export default function ServicesGrid({ dbServices }: { dbServices?: Service[] })
               <span className="italic text-roiba-dorado">{t.services.titleAccent}</span>
             </h2>
           </div>
-          <span className="scroll-reveal delay-2 font-sans text-xs text-slate-500 max-w-xs md:text-right leading-relaxed mt-4 md:mt-0">
+          <span className="scroll-reveal delay-2 font-sans text-xs text-roiba-texto-suave max-w-xs md:text-right leading-relaxed mt-4 md:mt-0">
             {t.services.subtitle}
           </span>
         </div>

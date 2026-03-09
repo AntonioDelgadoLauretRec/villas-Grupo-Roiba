@@ -21,12 +21,15 @@ const config: Config = {
           'dorado-light': '#E8C877', // Dorado claro (acento, CTA)
           negro: '#0A0A0A',
           blanco: '#FFFFFF',
+          fondo: '#FFFFFF',          // fondo blanco puro para secciones light
+          'fondo-alt': '#F8FAFB',    // gris muy claro para secciones alternas
+          texto: '#0C2340',          // texto oscuro sobre fondo claro
+          'texto-suave': '#4A6580',  // texto secundario sobre blanco
         },
       },
       fontFamily: {
-        // Tipografía editorial - NO genérica
+        sans: ['DM Sans', 'system-ui', 'sans-serif'],
         serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Cormorant Garamond', 'Georgia', 'serif'],
       },
       fontSize: {
@@ -110,6 +113,12 @@ const config: Config = {
       },
       transitionTimingFunction: {
         'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'luxury': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
+      transitionDuration: {
+        '400': '400ms',
+        '600': '600ms',
+        '900': '900ms',
       },
       backgroundImage: {
         'grain': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
