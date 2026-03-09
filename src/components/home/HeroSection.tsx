@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
 
@@ -11,30 +11,23 @@ const DEFAULT_HERO_IMAGES = [
   'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=90&fit=crop',
 ]
 
-// Free-to-use video candidates – try local first, then remote CDNs.
-// Each remote entry lists several resolution variants since Pexels/Pixabay
-// file names are not 100% predictable.
-const LOCAL_VIDEOS = ['/videos/hero-drone.mp4', '/videos/hero-bg.mp4']
-
-const REMOTE_VIDEOS = [
+// Videos ordered by priority. The component will try them sequentially.
+// Mix of local files and free CDN sources (Pexels license / Mixkit / Coverr).
+// From the browser, these URLs load correctly — server-side curl may fail.
+const VIDEO_SOURCES = [
+  // Local videos (if uploaded by the user)
+  '/videos/hero-drone.mp4',
+  '/videos/hero-bg.mp4',
+  // Mixkit – free stock video, no CORS restrictions
+  'https://assets.mixkit.co/videos/4816/4816-720.mp4',
+  'https://assets.mixkit.co/videos/4883/4883-720.mp4',
+  'https://assets.mixkit.co/videos/1171/1171-720.mp4',
   // Pexels – aerial tropical beach / Caribbean
   'https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4',
-  'https://videos.pexels.com/video-files/1093662/1093662-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/1093662/1093662-uhd_2560_1440_25fps.mp4',
   // Pexels – luxury pool villa drone
   'https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_30fps.mp4',
-  'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_25fps.mp4',
   // Pexels – turquoise beach aerial
   'https://videos.pexels.com/video-files/2169880/2169880-hd_1920_1080_30fps.mp4',
-  'https://videos.pexels.com/video-files/2169880/2169880-uhd_2560_1440_30fps.mp4',
-  'https://videos.pexels.com/video-files/2169880/2169880-uhd_2560_1440_25fps.mp4',
-  // Pexels – Maldives island drone
-  'https://videos.pexels.com/video-files/4010941/4010941-hd_1920_1080_25fps.mp4',
-  'https://videos.pexels.com/video-files/4010941/4010941-uhd_2560_1440_25fps.mp4',
-  // Pexels – beach aerial drone
-  'https://videos.pexels.com/video-files/854218/854218-hd_1920_1080_30fps.mp4',
-  'https://videos.pexels.com/video-files/854218/854218-hd_1920_1080_25fps.mp4',
 ]
 
 export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
@@ -42,30 +35,75 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
   const [imgIdx, setImgIdx] = useState(0)
   const [videoReady, setVideoReady] = useState(false)
   const [videoFailed, setVideoFailed] = useState(false)
-  const [currentVideoIdx, setCurrentVideoIdx] = useState(0)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const allVideos = [...LOCAL_VIDEOS, ...REMOTE_VIDEOS]
+  const attemptRef = useRef(0)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const loadedRef = useRef(false)
   const { t } = useLanguage()
 
-  // Try loading the next video source when one fails
-  const tryNextVideo = () => {
-    const next = currentVideoIdx + 1
-    if (next < allVideos.length) {
-      setCurrentVideoIdx(next)
-    } else {
-      setVideoFailed(true)
-    }
-  }
+  // Try loading videos one at a time via JS — more reliable than <source> elements
+  // because we get per-source error feedback and can control the flow.
+  // Includes a timeout per attempt: HTTP 403 sometimes doesn't fire onError.
+  const tryNext = useCallback(() => {
+    if (loadedRef.current) return
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
 
-  // When video source changes, update the video element
-  useEffect(() => {
-    if (videoFailed || videoReady) return
     const vid = videoRef.current
     if (!vid) return
 
-    vid.src = allVideos[currentVideoIdx]
+    attemptRef.current += 1
+    const idx = attemptRef.current
+    if (idx >= VIDEO_SOURCES.length) {
+      setVideoFailed(true)
+      return
+    }
+
+    vid.src = VIDEO_SOURCES[idx]
     vid.load()
-  }, [currentVideoIdx, videoFailed, videoReady])
+
+    // Timeout: if this source doesn't fire canplaythrough in 6s, try next
+    timeoutRef.current = setTimeout(() => {
+      if (!loadedRef.current) tryNext()
+    }, 6000)
+  }, [])
+
+  // Handle video successfully loaded
+  const handleCanPlay = useCallback(() => {
+    if (loadedRef.current) return
+    loadedRef.current = true
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    setVideoReady(true)
+    const vid = videoRef.current
+    if (vid) {
+      vid.play().catch(() => { /* autoplay blocked */ })
+    }
+  }, [])
+
+  // Handle video error — try next source immediately
+  const handleError = useCallback(() => {
+    if (loadedRef.current) return
+    tryNext()
+  }, [tryNext])
+
+  // Start loading the first video on mount
+  useEffect(() => {
+    const vid = videoRef.current
+    if (!vid) return
+
+    const idx = 0
+    attemptRef.current = idx
+    vid.src = VIDEO_SOURCES[idx]
+    vid.load()
+
+    // Timeout for the first attempt
+    timeoutRef.current = setTimeout(() => {
+      if (!loadedRef.current) tryNext()
+    }, 6000)
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [tryNext])
 
   // Image carousel fallback
   useEffect(() => {
@@ -76,7 +114,7 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col bg-roiba-verde overflow-hidden">
-      {/* Background — Video (always rendered, hidden until ready) */}
+      {/* Background — Video */}
       {!videoFailed && (
         <video
           ref={videoRef}
@@ -84,8 +122,9 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
           muted
           loop
           playsInline
-          onCanPlayThrough={() => setVideoReady(true)}
-          onError={tryNextVideo}
+          preload="auto"
+          onCanPlayThrough={handleCanPlay}
+          onError={handleError}
           className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
         />
       )}
