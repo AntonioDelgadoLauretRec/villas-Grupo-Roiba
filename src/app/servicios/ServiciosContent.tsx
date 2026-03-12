@@ -558,8 +558,8 @@ export default function ServiciosContent() {
                 </div>
               </div>
 
-              {/* Services cards — responsive grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Services cards — responsive grid (3 cols for servicios-tecnicos, 2 cols when only 2 items) */}
+              <div className={`grid grid-cols-1 gap-6 ${line.id === 'servicios-tecnicos' ? 'md:grid-cols-2 lg:grid-cols-3' : line.services.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
                 {line.services.map((svc, svcIdx) => (
                   <div
                     key={svcIdx}

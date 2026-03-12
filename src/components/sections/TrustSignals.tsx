@@ -2,6 +2,7 @@
 
 import { type FC } from 'react'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 export interface TrustSignal {
   icon: 'experience' | 'legal' | 'direct'
@@ -58,43 +59,28 @@ const signals: TrustSignal[] = [
   },
 ]
 
-export interface TrustSignalsProps {
-  locale?: 'es' | 'en'
-  variant?: 'cards' | 'inline' | 'stats'
-}
-
-export const TrustSignals: FC<TrustSignalsProps> = ({ locale = 'es', variant = 'cards' }) => {
-  if (variant === 'inline') {
-    return <InlineTrust signals={signals} locale={locale} />
-  }
-
-  if (variant === 'stats') {
-    return <StatsTrust signals={signals} locale={locale} />
-  }
+export const TrustSignals: FC = () => {
+  const { locale } = useLanguage()
 
   return (
-    <section className="section bg-roiba-arena">
-      <div className="container-wide">
+    <section className="py-14 md:py-20 bg-roiba-fondo-alt">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-roiba-dorado text-sm font-semibold uppercase tracking-wider">
-            {locale === 'es' ? 'Nuestra Diferencia' : 'Our Difference'}
-          </span>
-          <h2 className="font-serif text-3xl md:text-4xl text-roiba-verde mt-3 mb-4">
+          <h2 className="text-display-md font-serif text-roiba-verde mb-4">
             {locale === 'es' ? 'Por qué Grupo Roiba' : 'Why Grupo Roiba'}
           </h2>
-          <div className="divider" />
+          <div className="w-16 h-px bg-roiba-dorado mx-auto" />
         </div>
 
-        {/* Cards Grid */}
+        {/* Cards Grid — animated on hover */}
         <div className="grid md:grid-cols-3 gap-8">
           {signals.map((signal, index) => (
             <div
               key={signal.icon}
               className={cn(
-                'group p-8 bg-white rounded-sm shadow-card',
-                'transition-all duration-300 hover:shadow-luxury hover:-translate-y-1',
-                'animate-fade-up',
+                'group p-8 bg-white rounded-sm shadow-sm border border-roiba-verde/[0.06]',
+                'transition-all duration-500 hover:shadow-xl hover:-translate-y-1',
                 index === 0 && 'animate-delay-100',
                 index === 1 && 'animate-delay-200',
                 index === 2 && 'animate-delay-300'
@@ -108,22 +94,22 @@ export const TrustSignals: FC<TrustSignalsProps> = ({ locale = 'es', variant = '
               {/* Stat Badge */}
               {signal.stat && (
                 <div className="inline-flex items-baseline gap-1 mb-4">
-                  <span className="text-3xl font-bold text-roiba-dorado">
+                  <span className="text-display-md font-serif font-semibold text-roiba-dorado">
                     {signal.stat.value}
                   </span>
-                  <span className="text-sm text-roiba-verde/60">
+                  <span className="text-caption text-roiba-verde/60">
                     {signal.stat.label[locale]}
                   </span>
                 </div>
               )}
 
               {/* Title */}
-              <h3 className="font-serif text-xl text-roiba-verde mb-3">
+              <h3 className="font-serif text-heading text-roiba-verde mb-3">
                 {signal.title[locale]}
               </h3>
 
               {/* Description */}
-              <p className="text-roiba-verde/70 leading-relaxed">
+              <p className="text-body text-roiba-verde/70 leading-relaxed">
                 {signal.description[locale]}
               </p>
             </div>
@@ -131,43 +117,6 @@ export const TrustSignals: FC<TrustSignalsProps> = ({ locale = 'es', variant = '
         </div>
       </div>
     </section>
-  )
-}
-
-/* ===== INLINE VARIANT ===== */
-const InlineTrust: FC<{ signals: TrustSignal[]; locale: 'es' | 'en' }> = ({ signals, locale }) => {
-  return (
-    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 py-8 border-y border-roiba-verde/10">
-      {signals.map((signal, index) => (
-        <div key={signal.icon} className="flex items-center gap-3">
-          <TrustIcon icon={signal.icon} className="w-6 h-6 text-roiba-dorado" />
-          <span className="text-roiba-verde font-medium">{signal.title[locale]}</span>
-          {index < signals.length - 1 && (
-            <span className="hidden md:block w-px h-6 bg-roiba-verde/20 ml-8" />
-          )}
-        </div>
-      ))}
-    </div>
-  )
-}
-
-/* ===== STATS VARIANT ===== */
-const StatsTrust: FC<{ signals: TrustSignal[]; locale: 'es' | 'en' }> = ({ signals, locale }) => {
-  return (
-    <div className="grid grid-cols-3 gap-4 md:gap-8">
-      {signals.map((signal) => (
-        <div key={signal.icon} className="text-center">
-          {signal.stat && (
-            <>
-              <p className="text-4xl md:text-5xl font-bold text-roiba-dorado mb-2">
-                {signal.stat.value}
-              </p>
-              <p className="text-sm text-roiba-verde/60">{signal.stat.label[locale]}</p>
-            </>
-          )}
-        </div>
-      ))}
-    </div>
   )
 }
 

@@ -24,32 +24,6 @@ export default function InversoresContent() {
       {/* Por qué Punta Cana — Carousel */}
       <InvestorsCarousel />
 
-      {/* Beneficios Fiscales */}
-      <section className="py-14 px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-4 text-center">
-            {t.inversoresPage.ventajas}
-          </p>
-          <h2 className="text-display-md font-serif text-roiba-verde mb-12 text-center">
-            {t.inversoresPage.beneficiosFiscales}
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-roiba-arena-light p-8 border border-roiba-verde/5">
-              <h3 className="text-heading font-serif text-roiba-verde mb-3">{t.inversoresPage.confoturTitle}</h3>
-              <p className="text-roiba-verde/70 text-body leading-relaxed">
-                {t.inversoresPage.confoturDesc}
-              </p>
-            </div>
-            <div className="bg-roiba-arena-light p-8 border border-roiba-verde/5">
-              <h3 className="text-heading font-serif text-roiba-verde mb-3">{t.inversoresPage.residenciaTitle}</h3>
-              <p className="text-roiba-verde/70 text-body leading-relaxed">
-                {t.inversoresPage.residenciaDesc}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Formulario */}
       <section className="py-12 px-6 bg-roiba-arena-light">
         <div className="max-w-3xl mx-auto">

@@ -22,7 +22,7 @@ const DEFAULT_SLIDES = [
   {
     title: 'Polo y Estilo de Vida Ecuestre',
     description: 'Cap Cana cuenta con el Polo Club más exclusivo del Caribe, con torneos internacionales y una comunidad ecuestre activa. Un estilo de vida reservado a destinos premium.',
-    image: 'https://images.unsplash.com/photo-1591228127791-8e2eaef098d3?w=3840&q=90&fit=crop',
+    image: 'https://images.unsplash.com/photo-1529158062015-cad636e205a0?w=3840&q=90&fit=crop',
   },
   {
     title: 'Marina y Clubes Náuticos',
@@ -53,6 +53,11 @@ const DEFAULT_SLIDES = [
     title: 'Clima y Estilo de Vida',
     description: '350 días de sol al año, playas de arena blanca y una comunidad internacional creciente. El Caribe más accesible para inversores europeos.',
     image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=3840&q=90&fit=crop',
+  },
+  {
+    title: 'Beneficios Fiscales',
+    description: 'Ley CONFOTUR: exención de impuestos sobre la propiedad y transferencias durante 15 años. Residencia fiscal con ventajas para inversores extranjeros y posibilidad de residencia permanente.',
+    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=3840&q=90&fit=crop',
   },
 ]
 

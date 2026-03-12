@@ -44,6 +44,30 @@ const PROJECTS = [
     year: '2024',
     image: '/images/projects/excellence-oyster-bay-3.jpg',
   },
+  {
+    name: 'Finest Punta Cana',
+    location: 'Punta Cana, República Dominicana',
+    status: 'Completada',
+    type: 'Resort & Residencias',
+    year: '2023',
+    image: '/images/projects/Finest Punta Cana.jpeg',
+  },
+  {
+    name: 'Excellence El Carmen',
+    location: 'República Dominicana',
+    status: 'Completada',
+    type: 'Resort premium',
+    year: '2022',
+    image: '/images/projects/Excellence El Carmen (República Dominicana).JPG',
+  },
+  {
+    name: 'Universe Punta Cana',
+    location: 'Punta Cana, República Dominicana',
+    status: 'En desarrollo',
+    type: 'Residencial',
+    year: '2025',
+    image: '/images/projects/Proyecro universe en Punta Cana.jpeg',
+  },
 ]
 
 const SWIPE_THRESHOLD = 50
@@ -92,17 +116,8 @@ export default function ProjectCarousel() {
 
   return (
     <div>
-      {/* Header */}
-      <div className="max-w-7xl mx-auto px-6 mb-10 flex items-end justify-between">
-        <div>
-          <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em] block mb-3">
-            Trayectoria
-          </span>
-          <h2 className="text-display-md font-serif text-roiba-verde">
-            Proyectos que{' '}
-            <span className="italic text-roiba-dorado">trascienden</span>
-          </h2>
-        </div>
+      {/* Navigation arrows */}
+      <div className="max-w-7xl mx-auto px-6 mb-6 flex justify-end">
         <div className="flex gap-2">
           <button
             onClick={goPrev}
