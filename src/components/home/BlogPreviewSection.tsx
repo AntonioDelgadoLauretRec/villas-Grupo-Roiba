@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
@@ -8,22 +9,24 @@ import type { BlogPost } from '@/types/admin'
 const POSTS_ES = [
   { slug: 'por-que-invertir-punta-cana-2025', title: 'Por qué invertir en Punta Cana en 2025', excerpt: 'Analizamos el mercado inmobiliario de Punta Cana: rentabilidad, demanda turística y marco fiscal favorable.', image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80&fit=crop', category: 'Inversión', date: '15 Feb 2025' },
   { slug: 'guia-legal-comprar-propiedad-republica-dominicana', title: 'Guía legal: comprar propiedad en República Dominicana', excerpt: 'Todo sobre el marco legal, permisos y due diligence para adquirir propiedad como extranjero.', image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&fit=crop', category: 'Legal', date: '28 Ene 2025' },
-  { slug: 'proceso-construccion-villa-lujo-caribe', title: 'El proceso de construir una villa de lujo en el Caribe', excerpt: 'Desde la selección del terreno hasta la entrega llave en mano: fases, plazos y decisiones clave.', image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fit=crop', category: 'Construcción', date: '10 Ene 2025' },
+  { slug: 'proceso-construccion-villa-lujo-caribe', title: 'El proceso de construir una villa de lujo en el Caribe', excerpt: 'Desde la selección del terreno hasta la entrega llave en mano: fases, plazos y decisiones clave.', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop', category: 'Construcción', date: '10 Ene 2025' },
   { slug: 'fiscalidad-inversores-extranjeros-rd', title: 'Fiscalidad para inversores extranjeros en RD', excerpt: 'Impuestos, exenciones, Ley Confotur y beneficios fiscales para inversores internacionales.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop', category: 'Fiscal', date: '5 Dic 2024' },
-  { slug: 'cap-cana-vs-bavaro-donde-construir', title: 'Cap Cana vs Bávaro: ¿dónde construir su villa?', excerpt: 'Comparativa entre las dos zonas más demandadas de Punta Cana.', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&fit=crop', category: 'Destino', date: '20 Nov 2024' },
+  { slug: 'cap-cana-vs-bavaro-donde-construir', title: 'Cap Cana vs Bávaro: ¿dónde construir su villa?', excerpt: 'Comparativa entre las dos zonas más demandadas de Punta Cana.', image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80&fit=crop', category: 'Destino', date: '20 Nov 2024' },
 ]
 
 const POSTS_EN = [
   { slug: 'por-que-invertir-punta-cana-2025', title: 'Why invest in Punta Cana in 2025', excerpt: 'We analyze the Punta Cana real estate market: profitability, tourism demand and favorable tax framework.', image: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=800&q=80&fit=crop', category: 'Investment', date: '15 Feb 2025' },
   { slug: 'guia-legal-comprar-propiedad-republica-dominicana', title: 'Legal guide: buying property in the Dominican Republic', excerpt: 'Everything about the legal framework, permits and due diligence for purchasing property as a foreigner.', image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80&fit=crop', category: 'Legal', date: '28 Jan 2025' },
-  { slug: 'proceso-construccion-villa-lujo-caribe', title: 'The process of building a luxury villa in the Caribbean', excerpt: 'From site selection to turnkey delivery: phases, timelines and key decisions.', image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fit=crop', category: 'Construction', date: '10 Jan 2025' },
+  { slug: 'proceso-construccion-villa-lujo-caribe', title: 'The process of building a luxury villa in the Caribbean', excerpt: 'From site selection to turnkey delivery: phases, timelines and key decisions.', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop', category: 'Construction', date: '10 Jan 2025' },
   { slug: 'fiscalidad-inversores-extranjeros-rd', title: 'Taxation for foreign investors in DR', excerpt: 'Taxes, exemptions, Confotur Law and tax benefits for international investors.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop', category: 'Tax', date: '5 Dec 2024' },
-  { slug: 'cap-cana-vs-bavaro-donde-construir', title: 'Cap Cana vs Bávaro: where to build your villa?', excerpt: 'Comparison between the two most sought-after areas in Punta Cana.', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80&fit=crop', category: 'Destination', date: '20 Nov 2024' },
+  { slug: 'cap-cana-vs-bavaro-donde-construir', title: 'Cap Cana vs Bávaro: where to build your villa?', excerpt: 'Comparison between the two most sought-after areas in Punta Cana.', image: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800&q=80&fit=crop', category: 'Destination', date: '20 Nov 2024' },
 ]
 
 export default function BlogPreviewSection({ dbPosts }: { dbPosts?: BlogPost[] }) {
   const { t, locale } = useLanguage()
   const DEFAULT_POSTS = locale === 'en' ? POSTS_EN : POSTS_ES
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const pausedRef = useRef(false)
 
   const posts = dbPosts && dbPosts.length > 0
     ? dbPosts.slice(0, 5).map(p => ({
@@ -35,6 +38,29 @@ export default function BlogPreviewSection({ dbPosts }: { dbPosts?: BlogPost[] }
         date: p.date,
       }))
     : DEFAULT_POSTS
+
+  // Auto-scroll: smooth right-to-left
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+
+    let raf: number
+    const speed = 0.5 // px per frame
+
+    const step = () => {
+      if (!pausedRef.current && el.scrollWidth > el.clientWidth) {
+        el.scrollLeft += speed
+        // Loop back when reaching the end
+        if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 1) {
+          el.scrollLeft = 0
+        }
+      }
+      raf = requestAnimationFrame(step)
+    }
+
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
+  }, [])
 
   return (
     <section className="py-12 md:py-16 bg-white relative overflow-hidden">
@@ -57,7 +83,14 @@ export default function BlogPreviewSection({ dbPosts }: { dbPosts?: BlogPost[] }
           </Link>
         </div>
 
-        <div className="scroll-reveal overflow-x-auto hide-scrollbar snap-x snap-mandatory touch-pan-x -mx-4 md:-mx-8 lg:-mx-16 px-4 md:px-8 lg:px-16">
+        <div
+          ref={scrollRef}
+          onMouseEnter={() => { pausedRef.current = true }}
+          onMouseLeave={() => { pausedRef.current = false }}
+          onTouchStart={() => { pausedRef.current = true }}
+          onTouchEnd={() => { setTimeout(() => { pausedRef.current = false }, 3000) }}
+          className="scroll-reveal overflow-x-auto hide-scrollbar snap-x snap-mandatory touch-pan-x -mx-4 md:-mx-8 lg:-mx-16 px-4 md:px-8 lg:px-16"
+        >
           <div className="flex gap-5 w-max">
             {posts.map((post, idx) => (
               <Link

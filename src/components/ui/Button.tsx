@@ -23,13 +23,14 @@ export const Button: FC<ButtonProps> = ({
     'font-sans font-medium tracking-wider uppercase',
     'transition-all duration-500 ease-out-expo',
     'disabled:opacity-50 disabled:cursor-not-allowed',
-    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roiba-dorado'
+    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roiba-dorado',
+    'active:scale-[0.98]'
   )
 
   const variants = {
     primary: cn(
-      'bg-roiba-verde text-roiba-arena overflow-hidden group',
-      'hover:text-roiba-verde'
+      'bg-roiba-dorado text-roiba-verde overflow-hidden group',
+      'hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.30)]'
     ),
     secondary: cn(
       'border border-roiba-verde text-roiba-verde bg-transparent',
@@ -54,8 +55,8 @@ export const Button: FC<ButtonProps> = ({
       {...props}
     >
       {variant === 'primary' && (
-        <span 
-          className="absolute inset-0 bg-roiba-dorado transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out-expo"
+        <span
+          className="absolute inset-0 bg-roiba-dorado-light transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"
           aria-hidden="true"
         />
       )}

@@ -352,7 +352,7 @@
 
 /* ===== GLOBAL BUTTON SYSTEM ===== */
 
-/* Botón primario con fill slide */
+/* Botón primario con fill slide — dorado → verde reveal */
 .btn-roiba-primary {
   @apply relative overflow-hidden
          font-sans text-[10px] font-semibold tracking-[0.18em] uppercase
@@ -362,12 +362,13 @@
   box-shadow: none;
 }
 .btn-roiba-primary:hover {
-  box-shadow: 0 12px 40px rgba(201,169,110,0.28);
+  box-shadow: 0 12px 40px rgba(201,169,110,0.30);
 }
 .btn-roiba-primary::before {
   content: '';
   @apply absolute inset-0 bg-roiba-dorado-light
-         transition-transform duration-300 ease-out;
+         transition-transform duration-300;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateX(-101%);
 }
 .btn-roiba-primary:hover::before {
@@ -375,6 +376,12 @@
 }
 .btn-roiba-primary span {
   @apply relative z-10;
+}
+.btn-roiba-primary:focus-visible {
+  @apply outline-2 outline-offset-2 outline-roiba-dorado;
+}
+.btn-roiba-primary:active {
+  @apply scale-[0.98];
 }
 
 /* Botón ghost/outline */

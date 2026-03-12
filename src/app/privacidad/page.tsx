@@ -25,7 +25,7 @@ export default function PrivacidadPage() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-3xl mx-auto">
           <p className="text-caption text-roiba-verde/50 mb-10 uppercase tracking-widest font-medium">
-            Última actualización: Febrero 2026
+            Última actualización: Marzo 2026
           </p>
 
           <div className="space-y-10">

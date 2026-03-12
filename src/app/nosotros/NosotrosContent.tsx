@@ -12,9 +12,9 @@ import { useLanguage } from '@/lib/i18n/LanguageContext'
 const TEXT = {
   es: {
     heroTag: 'Quiénes Somos',
-    heroTitle: 'El equipo detrás de cada proyecto',
+    heroTitle: 'El equipo de Grupo Roiba',
     heroDesc:
-      'Más de 20 años ejecutando y supervisando proyectos residenciales y hoteleros en España y el Caribe',
+      'Más de 20 años ejecutando y supervisando proyectos residenciales en España y el Caribe.',
 
     origenTag: 'Origen',
     origenTitle: 'Cómo nace Grupo Roiba',
@@ -31,7 +31,7 @@ const TEXT = {
       'La planificación técnica rigurosa, el control económico y de plazos, la supervisión continua de la ejecución y la coordinación eficiente de todos los agentes son los principios que guían nuestro trabajo diario. Los fundadores participan directamente en cada proyecto, asegurando que el nivel de exigencia se mantenga en todo momento.',
 
     equipoTag: 'Profesionales',
-    equipoTitle: 'Un equipo con años de experiencia',
+    equipoTitle: 'El equipo de Grupo Roiba',
     equipoDesc:
       'Grupo Roiba está dirigido por profesionales con una sólida experiencia en el desarrollo de proyectos de edificación en España y el Caribe, tanto en el ámbito residencial como hotelero.',
 
@@ -64,31 +64,37 @@ const TEXT = {
         title: 'Transparencia',
         description:
           'Comunicación directa y continua. El cliente tiene acceso al estado del proyecto, costes actualizados y justificación de cada decisión técnica en cualquier momento.',
+        image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=70&fit=crop',
       },
       {
         title: 'Control',
         description:
           'Supervisión técnica en cada fase bajo una misma dirección. Integramos planificación, ejecución en campo y seguimiento económico para detectar desviaciones antes de que escalen.',
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=70&fit=crop',
       },
       {
         title: 'Rigor técnico',
         description:
           'Criterio profesional en cada decisión. Desde la selección de sistemas constructivos hasta los materiales de acabado, priorizamos durabilidad, eficiencia y adecuación al entorno.',
+        image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=70&fit=crop',
       },
       {
         title: 'Calidad',
         description:
           'Materiales y sistemas constructivos seleccionados conforme al estándar del proyecto. Supervisión de acabados en cada partida antes de dar la fase por cerrada.',
+        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=70&fit=crop',
       },
       {
         title: 'Compromiso',
         description:
           'Los fundadores participan personalmente en la dirección o supervisión de cada obra, asumiendo responsabilidad directa sobre su correcta ejecución.',
+        image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=70&fit=crop',
       },
       {
         title: 'Confianza',
         description:
           'Cada proyecto es el inicio de una relación a largo plazo. La confianza se construye entregando lo acordado, en plazo, sin excepciones ni excusas.',
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=70&fit=crop',
       },
     ],
 
@@ -105,9 +111,9 @@ const TEXT = {
   },
   en: {
     heroTag: 'About Us',
-    heroTitle: 'The team behind every project',
+    heroTitle: 'The Grupo Roiba Team',
     heroDesc:
-      'Over 20 years executing and supervising residential and hospitality projects in Spain and the Caribbean',
+      'Over 20 years executing and supervising residential projects in Spain and the Caribbean.',
 
     origenTag: 'Origin',
     origenTitle: 'How Grupo Roiba was born',
@@ -124,7 +130,7 @@ const TEXT = {
       'Rigorous technical planning, budget and schedule control, continuous execution supervision, and efficient coordination of all stakeholders are the principles that guide our daily work. The founders participate directly in every project, ensuring that the level of demand is maintained at all times.',
 
     equipoTag: 'Professionals',
-    equipoTitle: 'A team with years of experience',
+    equipoTitle: 'The Grupo Roiba Team',
     equipoDesc:
       'Grupo Roiba is led by professionals with solid experience in building development projects in Spain and the Caribbean, in both the residential and hospitality sectors.',
 
@@ -157,31 +163,37 @@ const TEXT = {
         title: 'Transparency',
         description:
           'Direct and continuous communication. The client has access to the project status, updated costs, and the rationale behind every technical decision at any time.',
+        image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=70&fit=crop',
       },
       {
         title: 'Control',
         description:
           'Technical supervision at every phase under a single management structure. We integrate planning, field execution, and financial tracking to detect deviations before they escalate.',
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=70&fit=crop',
       },
       {
         title: 'Technical Rigour',
         description:
           'Professional judgement in every decision. From the selection of construction systems to finishing materials, we prioritise durability, efficiency, and suitability to the environment.',
+        image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=70&fit=crop',
       },
       {
         title: 'Quality',
         description:
           'Materials and construction systems selected according to the project standard. Finish inspection in every trade before closing the phase.',
+        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=70&fit=crop',
       },
       {
         title: 'Commitment',
         description:
           'The founders personally participate in the management or supervision of every project, assuming direct responsibility for its proper execution.',
+        image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=70&fit=crop',
       },
       {
         title: 'Trust',
         description:
           'Every project is the start of a long-term relationship. Trust is built by delivering what was agreed, on time, with no exceptions or excuses.',
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=70&fit=crop',
       },
     ],
 
@@ -219,87 +231,40 @@ export default function NosotrosContent() {
         <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto text-center z-10">
-          <span className="inline-block text-roiba-dorado text-micro uppercase tracking-[0.2em] mb-6">
-            {tx.heroTag}
-          </span>
           <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
             {tx.heroTitle}
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
-          <p className="text-body-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-body-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
             {tx.heroDesc}
           </p>
         </div>
       </section>
 
-      {/* -- 2. ORIGEN + ENFOQUE -- */}
-      <section className="py-12 md:py-16 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
-            {/* Columna izquierda: Origen */}
-            <RevealWrapper variant="fade-in">
-              <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
-                {tx.origenTag}
-              </span>
-              <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-3">
-                {tx.origenTitle}
-              </h2>
-              <RevealWrapper variant="line-grow" delay={200} className="w-16 h-px bg-roiba-dorado mb-8">
-                <span className="sr-only">decorative line</span>
-              </RevealWrapper>
-              <div className="space-y-6 text-body-lg text-roiba-texto-suave leading-relaxed">
-                <p>{tx.origenP1}</p>
-                <p>{tx.origenP2}</p>
-              </div>
-            </RevealWrapper>
-
-            {/* Columna derecha: Enfoque de Trabajo — prose format */}
-            <RevealWrapper variant="slide-left" delay={150}>
-              <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
-                {tx.enfoqueTag}
-              </span>
-              <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-3">
-                {tx.enfoqueTitle}
-              </h2>
-              <div className="w-16 h-px bg-roiba-dorado mb-8" />
-              <div className="max-w-[800px] space-y-6 font-sans text-[18px] text-roiba-negro leading-[1.8]">
-                <p>{tx.enfoqueContent}</p>
-                <p>{tx.enfoqueContent2}</p>
-              </div>
-            </RevealWrapper>
-          </div>
-        </div>
-      </section>
-
-      {/* gold divider */}
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="h-px bg-roiba-dorado/30" />
-      </div>
-
-      {/* -- 3. EL EQUIPO -- */}
+      {/* -- 2. EL EQUIPO -- */}
       <section className="py-12 md:py-16 px-6 bg-roiba-fondo-alt">
         <div className="max-w-7xl mx-auto">
           {/* section header */}
-          <RevealWrapper variant="fade-up" className="max-w-3xl mx-auto text-center mb-16">
+          <div className="max-w-3xl mx-auto text-center mb-14">
             <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
               {tx.equipoTag}
             </span>
-            <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-6">
+            <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-4">
               {tx.equipoTitle}
             </h2>
-            <div className="w-16 h-px bg-roiba-dorado mx-auto mb-8" />
+            <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
             <p className="text-body-lg text-roiba-texto-suave leading-relaxed">
               {tx.equipoDesc}
             </p>
-          </RevealWrapper>
+          </div>
 
           {/* profiles grid */}
           <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
             {/* Profile 1 — Iván */}
             <RevealWrapper variant="fade-up" delay={0} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
+              <div className="relative w-full aspect-square overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=85&fit=crop&crop=face,top"
+                  src="/images/Ivan.webp"
                   alt="Iván Barrios Martín"
                   fill
                   className="object-cover object-top grayscale"
@@ -326,9 +291,9 @@ export default function NosotrosContent() {
 
             {/* Profile 2 — Juan Ramón */}
             <RevealWrapper variant="fade-up" delay={200} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
+              <div className="relative w-full aspect-square overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=85&fit=crop&crop=face,top"
+                  src="/images/Juan Ramon.webp"
                   alt="Juan Ramón Ojeda González"
                   fill
                   className="object-cover object-top grayscale"
@@ -383,27 +348,30 @@ export default function NosotrosContent() {
 
           {/* values grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {tx.values.map(({ title, description }, i) => (
+            {tx.values.map(({ title, description, image }, i) => (
               <RevealWrapper key={title} variant="slide-left" delay={i * 100}>
-                <ValueFlipCard title={title} description={description} />
+                <ValueFlipCard title={title} description={description} image={image} />
               </RevealWrapper>
             ))}
           </div>
         </div>
       </section>
 
-      {/* -- 5. PORTFOLIO / EXPERIENCIAS QUE DEJAN HUELLA -- */}
+      {/* -- 5. PORTFOLIO -- */}
       <section className="py-12 md:py-16 bg-roiba-arena-light overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-8">
-          <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em] block mb-4">
-            {tx.portfolioTag}
-          </span>
-          <h2 className="text-display-md font-serif text-roiba-texto mb-4">
-            {tx.portfolioTitle}
-          </h2>
-          <p className="text-body text-roiba-verde/60 max-w-2xl leading-relaxed">
-            {tx.portfolioDesc}
-          </p>
+        <div className="max-w-7xl mx-auto px-6 mb-10">
+          <div className="text-center">
+            <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
+              {tx.portfolioTag}
+            </span>
+            <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-4">
+              {tx.portfolioTitle}
+            </h2>
+            <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
+            <p className="text-body-lg text-roiba-texto-suave leading-relaxed max-w-3xl mx-auto">
+              {tx.portfolioDesc}
+            </p>
+          </div>
         </div>
         <ProjectCarousel />
       </section>

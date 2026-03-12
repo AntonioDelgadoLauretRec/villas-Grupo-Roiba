@@ -38,13 +38,13 @@ export const Footer: FC = () => {
       <div className="container-editorial py-12 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Logo column */}
-          <div>
+          <div className="flex items-start">
             <Image
               src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
               alt="Grupo Roiba"
-              width={160}
-              height={88}
-              className="h-12 w-auto brightness-0 invert mb-6"
+              width={240}
+              height={132}
+              className="h-28 md:h-32 w-auto brightness-0 invert"
             />
           </div>
 
@@ -112,10 +112,6 @@ export const Footer: FC = () => {
               </a>
             </div>
 
-            <Link href="/contacto" className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-dorado-light transition-colors">
-              {t.footer.hablemos}
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7h8M8 4l3 3-3 3" /></svg>
-            </Link>
           </div>
         </div>
       </div>

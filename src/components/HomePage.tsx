@@ -7,7 +7,6 @@ import AboutSection from './home/AboutSection'
 import ServicesGrid from './home/ServicesGrid'
 import TestimonialsSection from './home/TestimonialsSection'
 import CTASection from './home/CTASection'
-import BrochureSection from './home/BrochureSection'
 import BlogPreviewSection from './home/BlogPreviewSection'
 import type { Service, Testimonial, BlogPost } from '@/types/admin'
 
@@ -37,7 +36,6 @@ export default function HomePage({
       <AboutSection dbAbout={dbAbout} />
       <ServicesGrid dbServices={dbServices} />
       <TestimonialsSection dbTestimonials={dbTestimonials} />
-      <BrochureSection />
       <BlogPreviewSection dbPosts={dbBlogPosts} />
       <CTASection />
     </div>

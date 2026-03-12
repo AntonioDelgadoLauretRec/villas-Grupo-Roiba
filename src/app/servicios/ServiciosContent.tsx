@@ -441,16 +441,11 @@ export default function ServiciosContent() {
         <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-6 text-center z-10">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            {tx.hero.tag}
-          </p>
           <h1 className="font-serif text-display-lg md:text-display-xl text-white mb-8">
-            {tx.hero.title}
-            <br />
-            {tx.hero.titleBreak}
+            {tx.hero.title} {tx.hero.titleBreak}
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
-          <p className="text-white/70 text-body-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/70 text-body-lg max-w-3xl mx-auto leading-relaxed">
             {tx.hero.description}
           </p>
         </div>
@@ -561,8 +556,8 @@ export default function ServiciosContent() {
                 </div>
               </div>
 
-              {/* Services cards — responsive grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Services cards — responsive grid (3 cols for servicios-tecnicos, 2 cols when only 2 items) */}
+              <div className={`grid grid-cols-1 gap-6 ${line.id === 'servicios-tecnicos' ? 'md:grid-cols-2 lg:grid-cols-3' : line.services.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
                 {line.services.map((svc, svcIdx) => (
                   <div
                     key={svcIdx}

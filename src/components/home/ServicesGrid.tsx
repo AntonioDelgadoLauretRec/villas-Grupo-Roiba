@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import ImageSkeleton from '@/components/ui/ImageSkeleton'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
 import type { Service } from '@/types/admin'
@@ -61,9 +62,15 @@ export default function ServicesGrid({ dbServices }: { dbServices?: Service[] })
             {SERVICES.map((svc) => {
               const isOpen = openCard === svc.key
               return (
-                <div
+                <Link
                   key={svc.key}
-                  onClick={() => setOpenCard(isOpen ? null : svc.key)}
+                  href="/servicios"
+                  onClick={(e) => {
+                    if (!isOpen) {
+                      e.preventDefault()
+                      setOpenCard(svc.key)
+                    }
+                  }}
                   className={`group relative snap-start flex-shrink-0 w-[85vw] sm:w-[45vw] lg:w-[calc(33.333vw-2rem)] aspect-[5/3] overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[0_16px_48px_rgba(12,35,64,0.15)] hover:z-10 ${isOpen ? 'scale-[1.02] shadow-[0_16px_48px_rgba(12,35,64,0.15)] z-10' : ''}`}
                 >
                   <ImageSkeleton
@@ -82,7 +89,7 @@ export default function ServicesGrid({ dbServices }: { dbServices?: Service[] })
                       <p className="font-sans text-[11px] leading-relaxed text-white/70">{svc.desc}</p>
                     </div>
                   </div>
-                </div>
+                </Link>
               )
             })}
           </div>

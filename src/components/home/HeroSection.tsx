@@ -22,59 +22,6 @@ const VIDEO_SOURCES = [
   'https://videos.pexels.com/video-files/2169880/2169880-hd_1920_1080_30fps.mp4',
 ]
 
-function HeroEmailCapture() {
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const { t } = useLanguage()
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return
-
-    setStatus('loading')
-    try {
-      // Mock function — Supabase integration TBD
-      await new Promise(resolve => setTimeout(resolve, 800))
-      setStatus('success')
-      setEmail('')
-    } catch {
-      setStatus('error')
-    }
-  }
-
-  if (status === 'success') {
-    return (
-      <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-sm font-sans text-sm font-medium
-                       animate-fade-in">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M6 10l3 3 5-6" /><circle cx="10" cy="10" r="8" />
-        </svg>
-        {t.hero.emailSuccess}
-      </div>
-    )
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto lg:mx-0">
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder={t.hero.emailPlaceholder}
-        className="flex-1 px-5 py-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-sm text-sm font-sans text-white placeholder:text-white/50 focus:border-roiba-dorado focus:ring-1 focus:ring-roiba-dorado outline-none transition-all"
-      />
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="px-8 py-3.5 bg-roiba-dorado-light text-roiba-verde text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-roiba-dorado transition-all duration-300 disabled:opacity-60 whitespace-nowrap rounded-sm"
-      >
-        {status === 'loading' ? '...' : t.hero.emailCta}
-      </button>
-    </form>
-  )
-}
-
 export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
   const HERO_IMAGES = dbImages && dbImages.length > 0 ? dbImages : DEFAULT_HERO_IMAGES
   const [imgIdx, setImgIdx] = useState(0)
@@ -207,9 +154,9 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
 
         {/* Left column — text */}
         <div className="lg:w-1/2 lg:pr-16 text-center lg:text-left">
-          {/* Main headline — slide from left */}
+          {/* Main headline — slide from left, single line */}
           <h1 className="font-display text-[clamp(32px,5.5vw,52px)] font-bold text-white
-                          leading-[1.1] tracking-tight mb-0
+                          leading-[1.1] tracking-tight mb-0 whitespace-nowrap
                           animate-slide-in-left [animation-delay:0.3s] opacity-0 [animation-fill-mode:forwards]">
             {t.hero.title}
           </h1>
@@ -224,11 +171,6 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
                            max-w-lg mb-10 leading-[1.7] tracking-wide mx-auto lg:mx-0">
               {t.hero.subtitle}
             </p>
-          </div>
-
-          {/* Email Lead Magnet */}
-          <div className="animate-fade-in [animation-delay:1.2s] opacity-0 [animation-fill-mode:forwards] mb-10">
-            <HeroEmailCapture />
           </div>
 
           {/* CTAs */}

@@ -166,11 +166,8 @@ export default async function VillaDetailPage({
           <p className="text-white/60 text-body-lg mb-10 leading-relaxed">
             Nuestro equipo le proporcionará toda la información que necesite.
           </p>
-          <Link
-            href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold hover:bg-roiba-dorado-light transition-all duration-300 text-micro uppercase tracking-widest"
-          >
-            Solicitar información
+          <Link href="/contacto" className="btn-roiba-primary px-10 inline-block">
+            <span>Solicitar información</span>
           </Link>
         </div>
       </section>

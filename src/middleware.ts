@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   // ── CSP headers ──
   response.headers.set(
     'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://*.supabase.co https://*.sanity.io https://*.apicdn.sanity.io https://www.google-analytics.com https://vercel.live https://fonts.googleapis.com https://api.open-meteo.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self' data: https: http:; frame-src 'self' https://www.google.com https://maps.google.com"
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src 'self' https://*.supabase.co https://*.sanity.io https://*.apicdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://analytics.google.com https://vercel.live https://fonts.googleapis.com https://api.open-meteo.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self' data: https: http:; frame-src 'self' https://www.google.com https://maps.google.com https://www.googletagmanager.com"
   )
 
   // ── Admin route protection ──

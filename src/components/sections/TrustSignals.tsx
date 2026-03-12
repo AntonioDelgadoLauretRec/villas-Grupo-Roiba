@@ -1,18 +1,18 @@
 'use client'
 
 import { type FC } from 'react'
-import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
+import ValueFlipCard from '@/components/ui/ValueFlipCard'
+import { RevealWrapper } from '@/components/ui/RevealWrapper'
 
 export interface TrustSignal {
-  icon: 'experience' | 'legal' | 'direct'
   title: { es: string; en: string }
   description: { es: string; en: string }
-  stat?: { value: string; label: { es: string; en: string } }
+  image: string
 }
 
 const signals: TrustSignal[] = [
   {
-    icon: 'experience',
     title: {
       es: 'Experiencia Acumulada',
       en: 'Accumulated Experience',
@@ -21,13 +21,9 @@ const signals: TrustSignal[] = [
       es: 'Más de cuatro décadas ejecutando y supervisando proyectos residenciales y hoteleros en España y República Dominicana.',
       en: 'Over four decades executing and supervising residential and hotel projects in Spain and the Dominican Republic.',
     },
-    stat: {
-      value: '40+',
-      label: { es: 'Años combinados', en: 'Combined years' },
-    },
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=70&fit=crop',
   },
   {
-    icon: 'legal',
     title: {
       es: 'Seguridad Jurídica',
       en: 'Legal Security',
@@ -36,13 +32,9 @@ const signals: TrustSignal[] = [
       es: 'Due diligence completa, títulos verificados y cumplimiento normativo antes de cualquier inversión.',
       en: 'Complete due diligence, verified titles, and regulatory compliance before any investment.',
     },
-    stat: {
-      value: '100%',
-      label: { es: 'Transparencia', en: 'Transparency' },
-    },
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=70&fit=crop',
   },
   {
-    icon: 'direct',
     title: {
       es: 'Trato Directo',
       en: 'Direct Contact',
@@ -51,151 +43,39 @@ const signals: TrustSignal[] = [
       es: 'Sin intermediarios ni comisiones ocultas. Comunicación directa con los fundadores y el equipo técnico.',
       en: 'No middlemen or hidden commissions. Direct communication with founders and technical team.',
     },
-    stat: {
-      value: '0%',
-      label: { es: 'Comisiones broker', en: 'Broker fees' },
-    },
+    image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=70&fit=crop',
   },
 ]
 
-export interface TrustSignalsProps {
-  locale?: 'es' | 'en'
-  variant?: 'cards' | 'inline' | 'stats'
-}
-
-export const TrustSignals: FC<TrustSignalsProps> = ({ locale = 'es', variant = 'cards' }) => {
-  if (variant === 'inline') {
-    return <InlineTrust signals={signals} locale={locale} />
-  }
-
-  if (variant === 'stats') {
-    return <StatsTrust signals={signals} locale={locale} />
-  }
+export const TrustSignals: FC = () => {
+  const { locale } = useLanguage()
 
   return (
-    <section className="section bg-roiba-arena">
-      <div className="container-wide">
+    <section className="py-14 md:py-20 bg-roiba-fondo-alt">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-roiba-dorado text-sm font-semibold uppercase tracking-wider">
-            {locale === 'es' ? 'Nuestra Diferencia' : 'Our Difference'}
-          </span>
-          <h2 className="font-serif text-3xl md:text-4xl text-roiba-verde mt-3 mb-4">
+          <h2 className="text-display-md font-serif text-roiba-verde mb-4">
             {locale === 'es' ? 'Por qué Grupo Roiba' : 'Why Grupo Roiba'}
           </h2>
-          <div className="divider" />
+          <div className="w-16 h-px bg-roiba-dorado mx-auto" />
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {signals.map((signal, index) => (
-            <div
-              key={signal.icon}
-              className={cn(
-                'group p-8 bg-white rounded-sm shadow-card',
-                'transition-all duration-300 hover:shadow-luxury hover:-translate-y-1',
-                'animate-fade-up',
-                index === 0 && 'animate-delay-100',
-                index === 1 && 'animate-delay-200',
-                index === 2 && 'animate-delay-300'
-              )}
-            >
-              {/* Icon */}
-              <div className="w-16 h-16 mb-6 rounded-full bg-roiba-dorado/10 flex items-center justify-center group-hover:bg-roiba-dorado/20 transition-colors">
-                <TrustIcon icon={signal.icon} className="w-8 h-8 text-roiba-dorado" />
-              </div>
-
-              {/* Stat Badge */}
-              {signal.stat && (
-                <div className="inline-flex items-baseline gap-1 mb-4">
-                  <span className="text-3xl font-bold text-roiba-dorado">
-                    {signal.stat.value}
-                  </span>
-                  <span className="text-sm text-roiba-verde/60">
-                    {signal.stat.label[locale]}
-                  </span>
-                </div>
-              )}
-
-              {/* Title */}
-              <h3 className="font-serif text-xl text-roiba-verde mb-3">
-                {signal.title[locale]}
-              </h3>
-
-              {/* Description */}
-              <p className="text-roiba-verde/70 leading-relaxed">
-                {signal.description[locale]}
-              </p>
-            </div>
+        {/* Cards Grid — ValueFlipCard style matching Nosotros values */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {signals.map((signal, i) => (
+            <RevealWrapper key={signal.title[locale]} variant="slide-left" delay={i * 100}>
+              <ValueFlipCard
+                title={signal.title[locale]}
+                description={signal.description[locale]}
+                image={signal.image}
+              />
+            </RevealWrapper>
           ))}
         </div>
       </div>
     </section>
   )
-}
-
-/* ===== INLINE VARIANT ===== */
-const InlineTrust: FC<{ signals: TrustSignal[]; locale: 'es' | 'en' }> = ({ signals, locale }) => {
-  return (
-    <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 py-8 border-y border-roiba-verde/10">
-      {signals.map((signal, index) => (
-        <div key={signal.icon} className="flex items-center gap-3">
-          <TrustIcon icon={signal.icon} className="w-6 h-6 text-roiba-dorado" />
-          <span className="text-roiba-verde font-medium">{signal.title[locale]}</span>
-          {index < signals.length - 1 && (
-            <span className="hidden md:block w-px h-6 bg-roiba-verde/20 ml-8" />
-          )}
-        </div>
-      ))}
-    </div>
-  )
-}
-
-/* ===== STATS VARIANT ===== */
-const StatsTrust: FC<{ signals: TrustSignal[]; locale: 'es' | 'en' }> = ({ signals, locale }) => {
-  return (
-    <div className="grid grid-cols-3 gap-4 md:gap-8">
-      {signals.map((signal) => (
-        <div key={signal.icon} className="text-center">
-          {signal.stat && (
-            <>
-              <p className="text-4xl md:text-5xl font-bold text-roiba-dorado mb-2">
-                {signal.stat.value}
-              </p>
-              <p className="text-sm text-roiba-verde/60">{signal.stat.label[locale]}</p>
-            </>
-          )}
-        </div>
-      ))}
-    </div>
-  )
-}
-
-/* ===== ICONS ===== */
-const TrustIcon: FC<{ icon: TrustSignal['icon']; className?: string }> = ({ icon, className }) => {
-  const icons = {
-    experience: (
-      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 8v4l3 3" />
-        <circle cx="12" cy="12" r="10" />
-      </svg>
-    ),
-    legal: (
-      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="M9 12l2 2 4-4" />
-      </svg>
-    ),
-    direct: (
-      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-      </svg>
-    ),
-  }
-
-  return icons[icon] || null
 }
 
 export default TrustSignals

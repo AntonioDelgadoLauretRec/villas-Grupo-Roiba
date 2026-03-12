@@ -6,7 +6,7 @@ import FloatingWhatsApp from '@/components/ui/FloatingWhatsApp'
 import CookieConsent from '@/components/ui/CookieConsent'
 
 import { LanguageProvider } from '@/lib/i18n/LanguageContext'
-import GoogleAnalytics from '@/components/ui/GoogleAnalytics'
+import GoogleAnalytics, { GTMNoScript } from '@/components/ui/GoogleAnalytics'
 
 export const metadata: Metadata = {
   title: {
@@ -83,6 +83,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col">
         <GoogleAnalytics />
+        <GTMNoScript />
         <LanguageProvider>
         {/* JSON-LD Structured Data — Organization + LocalBusiness */}
         <script

@@ -65,10 +65,7 @@ export default function VillasContent({ villas }: { villas: Villa[] }) {
         <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            {tx.heroEyebrow}
-          </p>
-          <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
+          <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6 md:whitespace-nowrap">
             {tx.heroTitle}
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
@@ -145,11 +142,8 @@ export default function VillasContent({ villas }: { villas: Villa[] }) {
           </p>
           <h2 className="text-display-md font-serif text-white mb-6">{tx.ctaTitle}</h2>
           <p className="text-white/60 text-body-lg mb-12 leading-relaxed">{tx.ctaDesc}</p>
-          <Link
-            href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold hover:bg-roiba-dorado-light transition-all duration-300 text-micro uppercase tracking-widest"
-          >
-            {tx.ctaButton}
+          <Link href="/contacto" className="btn-roiba-primary px-10 inline-block">
+            <span>{tx.ctaButton}</span>
           </Link>
         </div>
       </section>

@@ -27,10 +27,10 @@ export const dictionaries = {
       title2: 'paraíso',
     },
     stats: {
-      proyectos: 'Años en proyectos residenciales y hoteleros',
-      satisfaccion: 'Dirección técnica en proyectos de este rango',
-      paises: 'España y República Dominicana',
-      retrasos: 'Supervisión directa de ingenieros en cada proyecto',
+      proyectos: 'Experiencia',
+      satisfaccion: 'Dirección técnica',
+      paises: 'Países',
+      retrasos: 'Supervisión directa',
     },
     about: {
       eyebrow: 'Sobre Grupo Roiba',
@@ -132,7 +132,7 @@ export const dictionaries = {
     procesoPage: {
       heroEyebrow: 'Método Roiba',
       heroTitle: 'Método Roiba',
-      heroSubtitle: 'Seis fases. Un objetivo: avanzar sin incertidumbre.',
+      heroSubtitle: 'Nuestro compromiso: avanzar con claridad, control y sin incertidumbre.',
       intro: 'Este proceso aplica cuando gestionamos un proyecto de principio a fin. Si intervienes en una fase intermedia (por ejemplo, solo supervisión de obra ya iniciada), adaptamos las etapas relevantes. Cada fase tiene entregables definidos, puntos de decisión claros y supervisión técnica directa.',
       ctaEyebrow: '¿En qué fase está tu proyecto?',
       ctaTitle: 'Cuéntanos dónde estás y te proponemos cómo intervenir',
@@ -271,10 +271,10 @@ export const dictionaries = {
       title2: 'paradise',
     },
     stats: {
-      proyectos: 'Years in residential and hotel projects',
-      satisfaccion: 'Technical management in projects of this range',
-      paises: 'Spain and Dominican Republic',
-      retrasos: 'Direct engineer supervision on every project',
+      proyectos: 'Experience',
+      satisfaccion: 'Technical management',
+      paises: 'Countries',
+      retrasos: 'Direct supervision',
     },
     about: {
       eyebrow: 'About Grupo Roiba',
@@ -375,7 +375,7 @@ export const dictionaries = {
     procesoPage: {
       heroEyebrow: 'Roiba Method',
       heroTitle: 'The Roiba Method',
-      heroSubtitle: 'Six phases. One goal: moving forward without uncertainty.',
+      heroSubtitle: 'Our commitment: moving forward with clarity, control and without uncertainty.',
       intro: 'This process applies when we manage a project from start to finish. If you join at an intermediate phase (e.g., supervision of an already started construction), we adapt the relevant stages. Each phase has defined deliverables, clear decision points and direct technical supervision.',
       ctaEyebrow: 'What phase is your project in?',
       ctaTitle: 'Tell us where you are and we\'ll propose how to intervene',
