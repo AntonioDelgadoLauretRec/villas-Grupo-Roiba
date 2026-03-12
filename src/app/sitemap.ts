@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/inversores', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/nosotros', priority: 0.6, changeFrequency: 'monthly' as const },
     { path: '/contacto', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/blog', priority: 0.7, changeFrequency: 'weekly' as const },
     { path: '/privacidad', priority: 0.2, changeFrequency: 'yearly' as const },
     { path: '/terminos', priority: 0.2, changeFrequency: 'yearly' as const },
     { path: '/cookies', priority: 0.2, changeFrequency: 'yearly' as const },

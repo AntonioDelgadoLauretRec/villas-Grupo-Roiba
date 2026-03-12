@@ -4,6 +4,7 @@ import { FC, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { trackFormSubmit } from '@/lib/analytics'
 
 type LeadType = 'inversion' | 'servicios'
 
@@ -138,6 +139,7 @@ export const ContactForm: FC = () => {
 
       if (!response.ok) throw new Error('Error')
 
+      trackFormSubmit('contact_form', formData.lead_type)
       setSubmitStatus('success')
       setFormData({
         lead_type: 'inversion',

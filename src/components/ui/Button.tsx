@@ -30,7 +30,7 @@ export const Button: FC<ButtonProps> = ({
   const variants = {
     primary: cn(
       'bg-roiba-dorado text-roiba-verde overflow-hidden group',
-      'hover:text-white'
+      'hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(201,169,110,0.30)]'
     ),
     secondary: cn(
       'border border-roiba-verde text-roiba-verde bg-transparent',
@@ -56,7 +56,7 @@ export const Button: FC<ButtonProps> = ({
     >
       {variant === 'primary' && (
         <span
-          className="absolute inset-0 bg-roiba-verde transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out-expo"
+          className="absolute inset-0 bg-roiba-dorado-light transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"
           aria-hidden="true"
         />
       )}

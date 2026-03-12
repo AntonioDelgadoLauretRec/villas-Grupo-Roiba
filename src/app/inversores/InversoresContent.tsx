@@ -7,6 +7,7 @@ import { ContactForm } from '@/components/sections/ContactForm'
 import InvestorsCarousel from '@/components/sections/InvestorsCarousel'
 import BrochureSection from '@/components/home/BrochureSection'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { trackFormSubmit } from '@/lib/analytics'
 
 const GUIDE_TEXT = {
   es: {
@@ -51,7 +52,7 @@ export default function InversoresContent() {
           source: 'investor-guide',
         }),
       })
-      if (res.ok) { setGuideStatus('success'); setGuideEmail('') }
+      if (res.ok) { trackFormSubmit('investor_guide', 'inversores'); setGuideStatus('success'); setGuideEmail('') }
       else setGuideStatus('error')
     } catch { setGuideStatus('error') }
   }
@@ -136,8 +137,8 @@ export default function InversoresContent() {
                 disabled={guideStatus === 'loading'}
                 className="group relative px-8 py-3.5 bg-roiba-dorado text-roiba-verde text-[11px] font-semibold tracking-[0.15em] uppercase overflow-hidden transition-all duration-500 disabled:opacity-60 whitespace-nowrap"
               >
-                <span className="absolute inset-0 bg-roiba-verde transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" aria-hidden="true" />
-                <span className="relative z-10 group-hover:text-white transition-colors duration-500">
+                <span className="absolute inset-0 bg-roiba-dorado-light transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" aria-hidden="true" />
+                <span className="relative z-10 transition-colors duration-300">
                   {guideStatus === 'loading' ? '...' : guide.cta}
                 </span>
               </button>

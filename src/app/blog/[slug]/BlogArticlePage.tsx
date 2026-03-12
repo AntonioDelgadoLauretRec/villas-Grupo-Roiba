@@ -1,8 +1,10 @@
 'use client'
 
+import { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { trackBlogView } from '@/lib/analytics'
 
 interface ArticleData {
   title: string
@@ -72,6 +74,13 @@ export default function BlogArticlePage({
   const article = dbArticle || (staticArticle ? staticArticle[locale] : null)
   const inlineImages = ARTICLE_IMAGES[slug] || []
 
+  // Track blog view
+  useEffect(() => {
+    if (article) {
+      trackBlogView(slug, article.title)
+    }
+  }, [slug, article])
+
   if (!article) {
     return (
       <main>
@@ -93,21 +102,19 @@ export default function BlogArticlePage({
     )
   }
 
-  // Split content at first </h2> to insert an image after the first section
+  // Split content at </h2> tags to insert images between sections
   const insertImageInContent = () => {
     if (inlineImages.length === 0) return article.content
 
     const parts = article.content.split('</h2>')
     if (parts.length < 3) return article.content
 
-    // Insert first image after 2nd section heading
-    const imgTag1 = `<figure class="my-8 rounded-sm overflow-hidden"><img src="${inlineImages[0].src}" alt="${inlineImages[0].alt[locale]}" class="w-full h-auto rounded-sm" loading="lazy" /><figcaption class="text-center text-xs text-roiba-verde/40 mt-3 italic">${inlineImages[0].alt[locale]}</figcaption></figure>`
+    const imgTag1 = `<figure class="my-12 -mx-4 md:-mx-8"><img src="${inlineImages[0].src}" alt="${inlineImages[0].alt[locale]}" class="w-full h-auto" loading="lazy" /><figcaption class="text-center text-xs text-roiba-verde/40 mt-4 italic font-sans tracking-wide">${inlineImages[0].alt[locale]}</figcaption></figure>`
 
     let result = parts[0] + '</h2>' + parts[1] + '</h2>' + imgTag1
 
-    // Insert second image after 4th section if available
     if (inlineImages.length > 1 && parts.length >= 5) {
-      const imgTag2 = `<figure class="my-8 rounded-sm overflow-hidden"><img src="${inlineImages[1].src}" alt="${inlineImages[1].alt[locale]}" class="w-full h-auto rounded-sm" loading="lazy" /><figcaption class="text-center text-xs text-roiba-verde/40 mt-3 italic">${inlineImages[1].alt[locale]}</figcaption></figure>`
+      const imgTag2 = `<figure class="my-12 -mx-4 md:-mx-8"><img src="${inlineImages[1].src}" alt="${inlineImages[1].alt[locale]}" class="w-full h-auto" loading="lazy" /><figcaption class="text-center text-xs text-roiba-verde/40 mt-4 italic font-sans tracking-wide">${inlineImages[1].alt[locale]}</figcaption></figure>`
       result += parts[2] + '</h2>' + parts[3] + '</h2>' + imgTag2
       result += parts.slice(4).join('</h2>')
     } else {
@@ -121,8 +128,8 @@ export default function BlogArticlePage({
 
   return (
     <main>
-      {/* Hero */}
-      <section className="relative py-24 md:py-32 bg-roiba-verde overflow-hidden">
+      {/* Hero — Full-width editorial cover */}
+      <section className="relative py-28 md:py-36 lg:py-44 bg-roiba-verde overflow-hidden">
         <Image
           src={article.image}
           alt={article.title}
@@ -131,78 +138,100 @@ export default function BlogArticlePage({
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-roiba-verde/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde via-roiba-verde/70 to-roiba-verde/40" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-4xl mx-auto px-6 text-center z-10">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="px-3 py-1 bg-roiba-dorado/20 text-roiba-dorado text-[10px] font-semibold tracking-wider uppercase rounded-sm">
-              {article.category}
-            </span>
-          </div>
-          <h1 className="font-serif text-display-md md:text-display-lg text-white mb-6 leading-tight">
+          <span className="inline-block px-4 py-1.5 bg-roiba-dorado/15 text-roiba-dorado text-[10px] font-semibold tracking-[0.2em] uppercase mb-8 backdrop-blur-sm">
+            {article.category}
+          </span>
+          <h1 className="font-serif text-[clamp(28px,5vw,52px)] text-white leading-[1.15] mb-8 text-balance">
             {article.title}
           </h1>
-          <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
-          <div className="flex items-center justify-center gap-4 text-white/50 text-sm">
-            <span>{article.date}</span>
-            <span>&middot;</span>
+          <div className="w-20 h-px bg-roiba-dorado mx-auto mb-8" />
+          <div className="flex items-center justify-center gap-4 text-white/45 text-[13px] font-sans tracking-wide">
+            <time>{article.date}</time>
+            <span className="w-1 h-1 bg-roiba-dorado/40 rounded-full" />
             <span>{article.readTime}</span>
           </div>
         </div>
       </section>
 
-      {/* Back link */}
-      <div className="bg-roiba-arena-light border-b border-roiba-verde/[0.06]">
-        <div className="max-w-3xl mx-auto px-6 py-4">
+      {/* Breadcrumb navigation */}
+      <nav className="bg-white border-b border-roiba-verde/[0.06]">
+        <div className="max-w-[720px] mx-auto px-6 py-4">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-roiba-verde/50 hover:text-roiba-dorado transition-colors text-sm font-medium"
+            className="inline-flex items-center gap-2 text-roiba-verde/40 hover:text-roiba-dorado transition-colors text-[13px] font-sans font-medium tracking-wide"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 3l-4 4 4 4"/></svg>
             {tx.back}
           </Link>
         </div>
-      </div>
+      </nav>
 
-      {/* Excerpt highlight */}
-      <section className="py-8 md:py-10 bg-roiba-arena-light border-b border-roiba-verde/[0.06]">
-        <div className="max-w-3xl mx-auto px-6">
-          <p className="text-body-lg text-roiba-verde/60 leading-relaxed italic font-serif border-l-2 border-roiba-dorado pl-6">
-            {article.excerpt}
-          </p>
+      {/* Excerpt — editorial pull quote */}
+      <section className="py-10 md:py-14 bg-[#FAFBFC]">
+        <div className="max-w-[720px] mx-auto px-6">
+          <blockquote className="relative pl-8 md:pl-10">
+            <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-roiba-dorado to-roiba-dorado/20" />
+            <p className="text-[clamp(17px,2vw,20px)] text-roiba-verde/55 leading-[1.8] font-serif italic">
+              {article.excerpt}
+            </p>
+          </blockquote>
         </div>
       </section>
 
-      {/* Article content */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-3xl mx-auto px-6">
+      {/* Article body — premium editorial typography */}
+      <article className="py-14 md:py-20 bg-white">
+        <div className="max-w-[720px] mx-auto px-6">
           <div
-            className="prose prose-lg max-w-none
-              prose-headings:font-serif prose-headings:text-roiba-verde prose-headings:mt-10 prose-headings:mb-4
-              prose-h2:text-[clamp(1.4rem,2.5vw,1.75rem)] prose-h2:leading-tight prose-h2:border-b prose-h2:border-roiba-dorado/20 prose-h2:pb-3
-              prose-p:text-roiba-verde/70 prose-p:leading-[1.85] prose-p:text-[1.05rem]
-              prose-li:text-roiba-verde/70 prose-li:leading-relaxed
+            className="
+              prose prose-lg max-w-none
+
+              prose-headings:font-serif prose-headings:text-roiba-verde prose-headings:font-normal
+              prose-h2:text-[clamp(1.5rem,3vw,1.85rem)] prose-h2:leading-[1.25] prose-h2:mt-14 prose-h2:mb-5
+              prose-h2:relative prose-h2:pb-4
+              prose-h3:text-[1.2rem] prose-h3:mt-10 prose-h3:mb-3
+
+              prose-p:text-[#2D3748] prose-p:text-[1.05rem] prose-p:leading-[1.9] prose-p:mb-6
+              prose-p:font-sans
+
+              prose-li:text-[#2D3748] prose-li:text-[1.02rem] prose-li:leading-[1.8]
+              prose-li:mb-2
+              prose-ul:my-6 prose-ol:my-6
+              prose-ul:pl-0 prose-ol:pl-0
+
               prose-strong:text-roiba-verde prose-strong:font-semibold
-              prose-ul:my-4 prose-li:my-1.5
-              prose-figure:my-8
-              prose-img:rounded-sm
-              prose-figcaption:text-center prose-figcaption:text-xs prose-figcaption:text-roiba-verde/40"
+              prose-a:text-roiba-dorado prose-a:underline prose-a:underline-offset-4 prose-a:decoration-roiba-dorado/30 hover:prose-a:decoration-roiba-dorado
+
+              prose-blockquote:border-l-[3px] prose-blockquote:border-roiba-dorado/40
+              prose-blockquote:bg-[#FAFBFC] prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-sm
+              prose-blockquote:text-roiba-verde/60 prose-blockquote:italic prose-blockquote:font-serif
+              prose-blockquote:not-italic prose-blockquote:my-8
+
+              prose-figure:my-12
+              prose-img:rounded-none
+              prose-figcaption:text-center prose-figcaption:text-xs prose-figcaption:text-roiba-verde/35 prose-figcaption:mt-4 prose-figcaption:font-sans prose-figcaption:tracking-wide
+
+              [&_h2]:after:content-[''] [&_h2]:after:block [&_h2]:after:w-12 [&_h2]:after:h-[2px] [&_h2]:after:bg-roiba-dorado/30 [&_h2]:after:mt-4
+            "
             dangerouslySetInnerHTML={{ __html: enrichedContent }}
           />
         </div>
-      </section>
+      </article>
 
-      {/* CTA */}
-      <section className="relative py-14 md:py-20 bg-roiba-verde overflow-hidden">
+      {/* CTA — matching gold shimmer */}
+      <section className="relative py-16 md:py-24 bg-roiba-verde overflow-hidden">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
-        <div className="relative max-w-3xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-display-md text-white mb-8">{tx.cta}</h2>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-roiba-dorado/[0.08] to-transparent" />
+        <div className="relative max-w-3xl mx-auto px-6 text-center z-10">
+          <div className="w-12 h-px bg-roiba-dorado/40 mx-auto mb-8" />
+          <h2 className="font-serif text-[clamp(26px,4vw,42px)] text-white leading-[1.2] mb-10">{tx.cta}</h2>
           <Link
             href="/contacto"
-            className="group relative inline-flex items-center justify-center px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold tracking-wider uppercase text-sm rounded-sm overflow-hidden transition-all duration-500"
+            className="btn-roiba-primary px-12"
           >
-            <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" aria-hidden="true" />
-            <span className="relative z-10">{tx.ctaButton}</span>
+            <span>{tx.ctaButton}</span>
           </Link>
         </div>
       </section>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { trackFormSubmit } from '@/lib/analytics'
 
 export default function BrochureSection({ variant = 'light' }: { variant?: 'light' | 'dark' }) {
   const [email, setEmail] = useState('')
@@ -28,6 +29,7 @@ export default function BrochureSection({ variant = 'light' }: { variant?: 'ligh
         }),
       })
       if (res.ok) {
+        trackFormSubmit('brochure_download', 'brochure_section')
         setStatus('success')
         setEmail('')
       } else {
@@ -82,8 +84,8 @@ export default function BrochureSection({ variant = 'light' }: { variant?: 'ligh
               disabled={status === 'loading'}
               className="group relative px-8 py-3.5 bg-roiba-dorado text-roiba-verde text-[11px] font-semibold tracking-[0.15em] uppercase overflow-hidden transition-all duration-500 disabled:opacity-60 whitespace-nowrap"
             >
-              <span className="absolute inset-0 bg-roiba-verde transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" aria-hidden="true" />
-              <span className="relative z-10 group-hover:text-white transition-colors duration-500">
+              <span className="absolute inset-0 bg-roiba-dorado-light transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" aria-hidden="true" />
+              <span className="relative z-10 transition-colors duration-300">
                 {status === 'loading' ? '...' : t.brochure.cta}
               </span>
             </button>

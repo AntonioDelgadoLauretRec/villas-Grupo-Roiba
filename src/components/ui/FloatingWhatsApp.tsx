@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { COMPANY } from '@/lib/utils'
+import { trackWhatsApp } from '@/lib/analytics'
 
 export default function FloatingWhatsApp() {
   const [visible, setVisible] = useState(false)
@@ -19,6 +20,7 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"
+      onClick={() => trackWhatsApp('floating_button')}
       className={`fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 safe-area-bottom ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}
     >
       <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">

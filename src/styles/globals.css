@@ -358,17 +358,16 @@
          font-sans text-[10px] font-semibold tracking-[0.18em] uppercase
          px-8 py-4 bg-roiba-dorado text-roiba-verde
          hover:-translate-y-0.5
-         transition-all duration-500;
+         transition-all duration-300;
   box-shadow: none;
 }
 .btn-roiba-primary:hover {
-  @apply text-white;
-  box-shadow: 0 12px 40px rgba(12,35,64,0.25);
+  box-shadow: 0 12px 40px rgba(201,169,110,0.30);
 }
 .btn-roiba-primary::before {
   content: '';
-  @apply absolute inset-0 bg-roiba-verde
-         transition-transform duration-500;
+  @apply absolute inset-0 bg-roiba-dorado-light
+         transition-transform duration-300;
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateX(-101%);
 }
