@@ -12,9 +12,9 @@ import { useLanguage } from '@/lib/i18n/LanguageContext'
 const TEXT = {
   es: {
     heroTag: 'Quiénes Somos',
-    heroTitle: 'Un equipo con años de experiencia',
+    heroTitle: 'El equipo de Grupo Roiba',
     heroDesc:
-      'Más de 20 años ejecutando y supervisando proyectos residenciales y hoteleros en España y el Caribe',
+      'Más de 20 años ejecutando y supervisando proyectos residenciales en España y el Caribe.',
 
     origenTag: 'Origen',
     origenTitle: 'Cómo nace Grupo Roiba',
@@ -31,7 +31,7 @@ const TEXT = {
       'La planificación técnica rigurosa, el control económico y de plazos, la supervisión continua de la ejecución y la coordinación eficiente de todos los agentes son los principios que guían nuestro trabajo diario. Los fundadores participan directamente en cada proyecto, asegurando que el nivel de exigencia se mantenga en todo momento.',
 
     equipoTag: 'Profesionales',
-    equipoTitle: 'Un equipo con años de experiencia',
+    equipoTitle: 'El equipo de Grupo Roiba',
     equipoDesc:
       'Grupo Roiba está dirigido por profesionales con una sólida experiencia en el desarrollo de proyectos de edificación en España y el Caribe, tanto en el ámbito residencial como hotelero.',
 
@@ -82,7 +82,7 @@ const TEXT = {
         title: 'Calidad',
         description:
           'Materiales y sistemas constructivos seleccionados conforme al estándar del proyecto. Supervisión de acabados en cada partida antes de dar la fase por cerrada.',
-        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=70&fit=crop',
       },
       {
         title: 'Compromiso',
@@ -111,9 +111,9 @@ const TEXT = {
   },
   en: {
     heroTag: 'About Us',
-    heroTitle: 'A team with years of experience',
+    heroTitle: 'The Grupo Roiba Team',
     heroDesc:
-      'Over 20 years executing and supervising residential and hospitality projects in Spain and the Caribbean',
+      'Over 20 years executing and supervising residential projects in Spain and the Caribbean.',
 
     origenTag: 'Origin',
     origenTitle: 'How Grupo Roiba was born',
@@ -130,7 +130,7 @@ const TEXT = {
       'Rigorous technical planning, budget and schedule control, continuous execution supervision, and efficient coordination of all stakeholders are the principles that guide our daily work. The founders participate directly in every project, ensuring that the level of demand is maintained at all times.',
 
     equipoTag: 'Professionals',
-    equipoTitle: 'A team with years of experience',
+    equipoTitle: 'The Grupo Roiba Team',
     equipoDesc:
       'Grupo Roiba is led by professionals with solid experience in building development projects in Spain and the Caribbean, in both the residential and hospitality sectors.',
 
@@ -181,7 +181,7 @@ const TEXT = {
         title: 'Quality',
         description:
           'Materials and construction systems selected according to the project standard. Finish inspection in every trade before closing the phase.',
-        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=70&fit=crop',
       },
       {
         title: 'Commitment',
@@ -264,7 +264,7 @@ export default function NosotrosContent() {
             <RevealWrapper variant="fade-up" delay={0} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
               <div className="relative w-full aspect-square overflow-hidden">
                 <Image
-                  src="/images/Ivan.png"
+                  src="/images/Ivan.webp"
                   alt="Iván Barrios Martín"
                   fill
                   className="object-cover object-top grayscale"
@@ -293,7 +293,7 @@ export default function NosotrosContent() {
             <RevealWrapper variant="fade-up" delay={200} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
               <div className="relative w-full aspect-square overflow-hidden">
                 <Image
-                  src="/images/Juan Ramon.png"
+                  src="/images/Juan Ramon.webp"
                   alt="Juan Ramón Ojeda González"
                   fill
                   className="object-cover object-top grayscale"

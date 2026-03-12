@@ -23,7 +23,8 @@ export const Button: FC<ButtonProps> = ({
     'font-sans font-medium tracking-wider uppercase',
     'transition-all duration-500 ease-out-expo',
     'disabled:opacity-50 disabled:cursor-not-allowed',
-    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roiba-dorado'
+    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-roiba-dorado',
+    'active:scale-[0.98]'
   )
 
   const variants = {

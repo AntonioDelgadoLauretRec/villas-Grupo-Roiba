@@ -92,9 +92,10 @@ export default function BlogContent({ dbArticles }: { dbArticles?: Article[] }) 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {articles.map((article) => (
-              <article
+              <Link
                 key={article.slug}
-                className="group bg-white rounded-sm overflow-hidden border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
+                href={`/blog/${article.slug}`}
+                className="group bg-white rounded-sm overflow-hidden border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500 block"
               >
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -123,7 +124,7 @@ export default function BlogContent({ dbArticles }: { dbArticles?: Article[] }) 
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
                   </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -136,11 +137,8 @@ export default function BlogContent({ dbArticles }: { dbArticles?: Article[] }) 
           <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">{tx.ctaEyebrow}</p>
           <h2 className="font-serif text-display-md text-white mb-6">{tx.ctaTitle}</h2>
           <p className="text-white/60 text-body-lg mb-12 leading-relaxed">{tx.ctaDesc}</p>
-          <Link
-            href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado-light text-roiba-verde font-semibold rounded-sm hover:bg-roiba-dorado transition-colors duration-300 text-lg"
-          >
-            {tx.ctaButton}
+          <Link href="/contacto" className="btn-roiba-primary px-10 inline-block">
+            <span>{tx.ctaButton}</span>
           </Link>
         </div>
       </section>

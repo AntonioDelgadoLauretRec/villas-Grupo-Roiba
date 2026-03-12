@@ -17,18 +17,44 @@ interface ArticleData {
 const TEXT = {
   es: {
     back: 'Volver al blog',
-    related: 'Artículos relacionados',
     cta: 'Hablemos de su proyecto',
+    ctaButton: 'Solicitar información',
     notFound: 'Artículo no encontrado',
     notFoundDesc: 'El artículo que busca no existe o ha sido retirado.',
   },
   en: {
     back: 'Back to blog',
-    related: 'Related articles',
     cta: 'Let\'s talk about your project',
+    ctaButton: 'Request information',
     notFound: 'Article not found',
     notFoundDesc: 'The article you are looking for does not exist or has been removed.',
   },
+}
+
+// Contextual images to enrich article bodies
+const ARTICLE_IMAGES: Record<string, { src: string; alt: { es: string; en: string } }[]> = {
+  'por-que-invertir-punta-cana-2025': [
+    { src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&fit=crop', alt: { es: 'Playa de Punta Cana', en: 'Punta Cana beach' } },
+    { src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&q=80&fit=crop', alt: { es: 'Inversión inmobiliaria', en: 'Real estate investment' } },
+  ],
+  'guia-legal-comprar-propiedad-republica-dominicana': [
+    { src: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80&fit=crop', alt: { es: 'Documentación legal', en: 'Legal documentation' } },
+    { src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=80&fit=crop', alt: { es: 'Acuerdo de compraventa', en: 'Purchase agreement' } },
+  ],
+  'proceso-construccion-villa-lujo-caribe': [
+    { src: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80&fit=crop', alt: { es: 'Construcción en el Caribe', en: 'Construction in the Caribbean' } },
+    { src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&fit=crop', alt: { es: 'Villa terminada', en: 'Completed villa' } },
+  ],
+  'fiscalidad-inversores-extranjeros-rd': [
+    { src: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80&fit=crop', alt: { es: 'Planificación fiscal', en: 'Tax planning' } },
+  ],
+  'cap-cana-vs-bavaro-donde-construir': [
+    { src: 'https://images.unsplash.com/photo-1580541631950-7282082b53ce?w=900&q=80&fit=crop', alt: { es: 'Cap Cana', en: 'Cap Cana' } },
+    { src: 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=900&q=80&fit=crop', alt: { es: 'Bávaro', en: 'Bavaro' } },
+  ],
+  'materiales-construccion-tropical-caribe': [
+    { src: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=900&q=80&fit=crop', alt: { es: 'Materiales de construcción', en: 'Construction materials' } },
+  ],
 }
 
 export default function BlogArticlePage({
@@ -44,6 +70,7 @@ export default function BlogArticlePage({
   const tx = TEXT[locale]
 
   const article = dbArticle || (staticArticle ? staticArticle[locale] : null)
+  const inlineImages = ARTICLE_IMAGES[slug] || []
 
   if (!article) {
     return (
@@ -65,6 +92,32 @@ export default function BlogArticlePage({
       </main>
     )
   }
+
+  // Split content at first </h2> to insert an image after the first section
+  const insertImageInContent = () => {
+    if (inlineImages.length === 0) return article.content
+
+    const parts = article.content.split('</h2>')
+    if (parts.length < 3) return article.content
+
+    // Insert first image after 2nd section heading
+    const imgTag1 = `<figure class="my-8 rounded-sm overflow-hidden"><img src="${inlineImages[0].src}" alt="${inlineImages[0].alt[locale]}" class="w-full h-auto rounded-sm" loading="lazy" /><figcaption class="text-center text-xs text-roiba-verde/40 mt-3 italic">${inlineImages[0].alt[locale]}</figcaption></figure>`
+
+    let result = parts[0] + '</h2>' + parts[1] + '</h2>' + imgTag1
+
+    // Insert second image after 4th section if available
+    if (inlineImages.length > 1 && parts.length >= 5) {
+      const imgTag2 = `<figure class="my-8 rounded-sm overflow-hidden"><img src="${inlineImages[1].src}" alt="${inlineImages[1].alt[locale]}" class="w-full h-auto rounded-sm" loading="lazy" /><figcaption class="text-center text-xs text-roiba-verde/40 mt-3 italic">${inlineImages[1].alt[locale]}</figcaption></figure>`
+      result += parts[2] + '</h2>' + parts[3] + '</h2>' + imgTag2
+      result += parts.slice(4).join('</h2>')
+    } else {
+      result += parts.slice(2).join('</h2>')
+    }
+
+    return result
+  }
+
+  const enrichedContent = insertImageInContent()
 
   return (
     <main>
@@ -92,7 +145,7 @@ export default function BlogArticlePage({
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
           <div className="flex items-center justify-center gap-4 text-white/50 text-sm">
             <span>{article.date}</span>
-            <span>·</span>
+            <span>&middot;</span>
             <span>{article.readTime}</span>
           </div>
         </div>
@@ -100,7 +153,7 @@ export default function BlogArticlePage({
 
       {/* Back link */}
       <div className="bg-roiba-arena-light border-b border-roiba-verde/[0.06]">
-        <div className="max-w-4xl mx-auto px-6 py-4">
+        <div className="max-w-3xl mx-auto px-6 py-4">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-roiba-verde/50 hover:text-roiba-dorado transition-colors text-sm font-medium"
@@ -111,18 +164,30 @@ export default function BlogArticlePage({
         </div>
       </div>
 
+      {/* Excerpt highlight */}
+      <section className="py-8 md:py-10 bg-roiba-arena-light border-b border-roiba-verde/[0.06]">
+        <div className="max-w-3xl mx-auto px-6">
+          <p className="text-body-lg text-roiba-verde/60 leading-relaxed italic font-serif border-l-2 border-roiba-dorado pl-6">
+            {article.excerpt}
+          </p>
+        </div>
+      </section>
+
       {/* Article content */}
-      <section className="py-12 md:py-16 bg-roiba-arena-light">
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-3xl mx-auto px-6">
           <div
             className="prose prose-lg max-w-none
               prose-headings:font-serif prose-headings:text-roiba-verde prose-headings:mt-10 prose-headings:mb-4
-              prose-h2:text-heading
-              prose-p:text-roiba-verde/70 prose-p:leading-relaxed
-              prose-li:text-roiba-verde/70
+              prose-h2:text-[clamp(1.4rem,2.5vw,1.75rem)] prose-h2:leading-tight prose-h2:border-b prose-h2:border-roiba-dorado/20 prose-h2:pb-3
+              prose-p:text-roiba-verde/70 prose-p:leading-[1.85] prose-p:text-[1.05rem]
+              prose-li:text-roiba-verde/70 prose-li:leading-relaxed
               prose-strong:text-roiba-verde prose-strong:font-semibold
-              prose-ul:my-4 prose-li:my-1"
-            dangerouslySetInnerHTML={{ __html: article.content }}
+              prose-ul:my-4 prose-li:my-1.5
+              prose-figure:my-8
+              prose-img:rounded-sm
+              prose-figcaption:text-center prose-figcaption:text-xs prose-figcaption:text-roiba-verde/40"
+            dangerouslySetInnerHTML={{ __html: enrichedContent }}
           />
         </div>
       </section>
@@ -134,9 +199,10 @@ export default function BlogArticlePage({
           <h2 className="font-serif text-display-md text-white mb-8">{tx.cta}</h2>
           <Link
             href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado-light text-roiba-verde font-semibold rounded-sm hover:bg-roiba-dorado transition-colors duration-300 text-lg"
+            className="group relative inline-flex items-center justify-center px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold tracking-wider uppercase text-sm rounded-sm overflow-hidden transition-all duration-500"
           >
-            {locale === 'es' ? 'Solicitar información' : 'Request information'}
+            <span className="absolute inset-0 bg-white transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" aria-hidden="true" />
+            <span className="relative z-10">{tx.ctaButton}</span>
           </Link>
         </div>
       </section>

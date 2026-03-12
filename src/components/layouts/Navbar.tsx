@@ -87,9 +87,9 @@ export function Navbar() {
           </button>
           <Link
             href="/contacto"
-            className="px-6 py-2.5 bg-[#E8C877] text-[#0C2340] text-sm font-semibold rounded-lg hover:bg-[#C9A96E] transition-all duration-300"
+            className="btn-roiba-primary !px-6 !py-2.5"
           >
-            {t.nav.contactar}
+            <span>{t.nav.contactar}</span>
           </Link>
         </div>
 
@@ -139,9 +139,9 @@ export function Navbar() {
           <Link
             href="/contacto"
             onClick={() => setMobileOpen(false)}
-            className="mt-4 px-8 py-3 bg-[#E8C877] text-[#0C2340] font-semibold rounded-lg"
+            className="btn-roiba-primary mt-4 !px-8 !py-3"
           >
-            {t.nav.contactar}
+            <span>{t.nav.contactar}</span>
           </Link>
         </div>
       </div>

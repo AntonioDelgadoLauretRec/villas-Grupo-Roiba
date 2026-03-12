@@ -142,11 +142,8 @@ export default function VillasContent({ villas }: { villas: Villa[] }) {
           </p>
           <h2 className="text-display-md font-serif text-white mb-6">{tx.ctaTitle}</h2>
           <p className="text-white/60 text-body-lg mb-12 leading-relaxed">{tx.ctaDesc}</p>
-          <Link
-            href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold hover:bg-roiba-dorado-light transition-all duration-300 text-micro uppercase tracking-widest"
-          >
-            {tx.ctaButton}
+          <Link href="/contacto" className="btn-roiba-primary px-10 inline-block">
+            <span>{tx.ctaButton}</span>
           </Link>
         </div>
       </section>
