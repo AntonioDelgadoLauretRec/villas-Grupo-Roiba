@@ -109,42 +109,67 @@ export function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden fixed inset-0 top-0 bg-[#0C2340] z-40 transition-transform duration-300 ${
-          mobileOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="flex flex-col items-center justify-center h-full gap-8">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className={`text-2xl font-medium transition-colors ${
-                pathname === item.href
-                  ? 'text-[#E8C877]'
-                  : 'text-white hover:text-[#E8C877]'
-              }`}
-            >
-              {item.name}
-            </Link>
-          ))}
+      {/* Mobile Menu — full-screen overlay */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-[9999] bg-[#0C2340]"
+          style={{ touchAction: 'none' }}
+        >
+          {/* Close button (X) — top right */}
           <button
-            onClick={toggleLang}
-            className="text-sm font-semibold tracking-wider uppercase text-white/60 hover:text-[#E8C877] transition-colors px-4 py-2 border border-white/20 rounded"
-          >
-            {locale === 'es' ? 'English' : 'Español'}
-          </button>
-          <Link
-            href="/contacto"
             onClick={() => setMobileOpen(false)}
-            className="btn-roiba-primary mt-4 !px-8 !py-3"
+            className="absolute top-5 right-6 text-white p-2 z-10"
+            aria-label="Cerrar menú"
           >
-            <span>{t.nav.contactar}</span>
-          </Link>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Logo — top left */}
+          <div className="absolute top-5 left-6">
+            <Image
+              src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
+              alt="Grupo Roiba"
+              width={140}
+              height={76}
+              className="h-9 w-auto brightness-0 invert"
+            />
+          </div>
+
+          {/* Nav links */}
+          <div className="flex flex-col items-center justify-center h-full gap-7 px-6">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`text-2xl font-medium transition-colors ${
+                  pathname === item.href
+                    ? 'text-[#E8C877]'
+                    : 'text-white hover:text-[#E8C877]'
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="w-12 h-px bg-[#C9A96E]/30 my-2" />
+            <button
+              onClick={toggleLang}
+              className="text-sm font-semibold tracking-wider uppercase text-white/60 hover:text-[#E8C877] transition-colors px-4 py-2 border border-white/20 rounded"
+            >
+              {locale === 'es' ? 'English' : 'Español'}
+            </button>
+            <Link
+              href="/contacto"
+              onClick={() => setMobileOpen(false)}
+              className="btn-roiba-primary mt-2 !px-8 !py-3"
+            >
+              <span>{t.nav.contactar}</span>
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   )
 }
