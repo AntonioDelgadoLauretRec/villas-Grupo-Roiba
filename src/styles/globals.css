@@ -332,22 +332,28 @@
     border-bottom: 1px solid rgba(12,35,64,0.08);
     gap: 0 !important;
     scrollbar-width: none;
+    max-width: 100%;
   }
   .process-tabs-row::-webkit-scrollbar { display: none; }
   .process-tabs-row > button {
-    min-width: 140px !important;
+    min-width: 130px !important;
     flex-shrink: 0;
     scroll-snap-align: start;
     border-left: none !important;
     border-bottom: 2px solid transparent;
   }
   .process-tabs-row > button.active-tab {
-    border-bottom-color: #C9A96E; /* dorado refinado mate */
+    border-bottom-color: #C9A96E;
+  }
+
+  /* Prevent process detail card from overflowing */
+  .container-editorial {
+    overflow-x: hidden;
   }
 }
 @media (max-width: 480px) {
   .services-scroll > * { min-width: min(88vw, 280px) !important; }
-  .process-tabs-row > button { min-width: 120px !important; }
+  .process-tabs-row > button { min-width: 110px !important; }
 }
 
 /* ===== GLOBAL BUTTON SYSTEM ===== */
@@ -421,6 +427,58 @@
 /* Focus states accesibles */
 :focus-visible {
   @apply outline-2 outline-offset-2 outline-roiba-dorado;
+}
+
+/* ===== MOBILE OVERFLOW PREVENTION ===== */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ===== iOS / SAFARI MOBILE FIXES ===== */
+
+/* Fix iOS Safari 100vh including address bar */
+@supports (-webkit-touch-callout: none) {
+  .min-h-\[100dvh\] {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Prevent iOS tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix iOS font size adjustment on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* iOS safe area padding for footer and full-width elements */
+@supports (padding: env(safe-area-inset-bottom)) {
+  footer {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Fix iOS momentum scrolling for horizontal scroll containers */
+.scrollbar-luxury,
+.services-scroll,
+.process-tabs-row {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Fix iOS Safari sticky positioning quirks */
+@supports (-webkit-touch-callout: none) {
+  .lg\:sticky {
+    position: relative;
+  }
+  @media (min-width: 1024px) {
+    .lg\:sticky {
+      position: sticky;
+    }
+  }
 }
 
 /* Reduced motion */
