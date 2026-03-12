@@ -168,8 +168,7 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
           {/* Subtitle — appears with scroll/delay */}
           <div className={`transition-all duration-700 ease-out ${showSubtitle ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <p className="font-sans text-[clamp(14px,1.5vw,18px)] font-light text-white/80
-                           max-w-lg mb-10 leading-[1.7] tracking-wide mx-auto lg:mx-0
-                           line-clamp-2">
+                           max-w-lg mb-10 leading-[1.7] tracking-wide mx-auto lg:mx-0">
               {t.hero.subtitle}
             </p>
           </div>

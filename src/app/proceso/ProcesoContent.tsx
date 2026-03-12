@@ -21,7 +21,7 @@ const ENFOQUE_TEXT = {
 }
 
 export default function ProcesoContent() {
-  const { locale, t } = useLanguage()
+  const { locale } = useLanguage()
   const enfoque = ENFOQUE_TEXT[locale]
 
   return (
@@ -34,16 +34,7 @@ export default function ProcesoContent() {
         backgroundImage="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=85&fit=crop"
       />
 
-      {/* Intro */}
-      <section className="py-16 md:py-20 px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-body-lg text-roiba-verde/70 leading-relaxed">
-            {t.procesoPage.intro}
-          </p>
-        </div>
-      </section>
-
-      {/* Nuestro Enfoque — moved from Nosotros */}
+      {/* Nuestro Enfoque */}
       <section className="py-12 md:py-16 px-6 bg-roiba-fondo-alt">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-display-md font-serif text-roiba-texto mb-3 text-center">

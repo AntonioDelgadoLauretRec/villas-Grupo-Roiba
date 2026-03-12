@@ -50,25 +50,25 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
         </RevealWrapper>
 
         <RevealWrapper variant="fade-up" delay={200} className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-0 lg:gap-12">
-          <div className="flex flex-col gap-1 process-tabs-row">
+          <div className="flex flex-col gap-0 process-tabs-row bg-roiba-verde rounded-sm overflow-hidden border border-white/[0.08]">
             {PROCESS.map((s, i) => (
               <button
                 key={i}
                 onClick={() => setActive(i)}
                 className={`flex items-center gap-4 px-6 py-4 text-left w-full transition-all duration-400 border-l-[3px] ${
                   active === i
-                    ? 'border-l-roiba-dorado bg-white/[0.06] active-tab'
-                    : 'border-l-transparent hover:bg-white/[0.03]'
+                    ? 'border-l-roiba-dorado bg-white/[0.10] active-tab'
+                    : 'border-l-transparent hover:bg-white/[0.05]'
                 }`}
               >
-                <span className={`font-serif text-[28px] font-light min-w-[40px] transition-colors duration-400 ${active === i ? 'text-roiba-dorado-light' : 'text-white/20'}`}>
+                <span className={`font-serif text-[28px] font-light min-w-[40px] transition-colors duration-400 ${active === i ? 'text-roiba-dorado' : 'text-roiba-dorado/40'}`}>
                   {s.num}
                 </span>
                 <div>
-                  <div className={`font-sans text-[13px] font-semibold tracking-wide transition-colors duration-400 ${active === i ? 'text-white' : 'text-white/60'}`}>
+                  <div className={`font-sans text-[13px] font-semibold tracking-wide transition-colors duration-400 ${active === i ? 'text-white' : 'text-white/70'}`}>
                     {s.title}
                   </div>
-                  <div className="font-sans text-[11px] text-white/40 mt-0.5">{s.subtitle}</div>
+                  <div className="font-sans text-[11px] text-white/50 mt-0.5">{s.subtitle}</div>
                 </div>
               </button>
             ))}

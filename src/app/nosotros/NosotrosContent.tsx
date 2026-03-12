@@ -12,7 +12,7 @@ import { useLanguage } from '@/lib/i18n/LanguageContext'
 const TEXT = {
   es: {
     heroTag: 'Quiénes Somos',
-    heroTitle: 'El equipo detrás de cada proyecto',
+    heroTitle: 'Un equipo con años de experiencia',
     heroDesc:
       'Más de 20 años ejecutando y supervisando proyectos residenciales y hoteleros en España y el Caribe',
 
@@ -111,7 +111,7 @@ const TEXT = {
   },
   en: {
     heroTag: 'About Us',
-    heroTitle: 'The team behind every project',
+    heroTitle: 'A team with years of experience',
     heroDesc:
       'Over 20 years executing and supervising residential and hospitality projects in Spain and the Caribbean',
 
@@ -231,11 +231,11 @@ export default function NosotrosContent() {
         <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto text-center z-10">
-          <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
+          <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6 md:whitespace-nowrap">
             {tx.heroTitle}
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
-          <p className="text-body-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-body-lg text-white/70 max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap">
             {tx.heroDesc}
           </p>
         </div>
@@ -244,27 +244,16 @@ export default function NosotrosContent() {
       {/* -- 2. EL EQUIPO -- */}
       <section className="py-12 md:py-16 px-6 bg-roiba-fondo-alt">
         <div className="max-w-7xl mx-auto">
-          {/* section header */}
-          <RevealWrapper variant="fade-up" className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-display-md font-serif text-roiba-texto mb-6">
-              {tx.equipoTitle}
-            </h2>
-            <div className="w-16 h-px bg-roiba-dorado mx-auto mb-8" />
-            <p className="text-body-lg text-roiba-texto-suave leading-relaxed">
-              {tx.equipoDesc}
-            </p>
-          </RevealWrapper>
-
           {/* profiles grid */}
           <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
             {/* Profile 1 — Iván */}
             <RevealWrapper variant="fade-up" delay={0} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
+              <div className="relative w-full aspect-square overflow-hidden">
                 <Image
                   src="/images/Ivan.png"
                   alt="Iván Barrios Martín"
                   fill
-                  className="object-cover object-[center_15%] scale-110 grayscale"
+                  className="object-cover object-top grayscale"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/30 to-transparent" />
@@ -288,12 +277,12 @@ export default function NosotrosContent() {
 
             {/* Profile 2 — Juan Ramón */}
             <RevealWrapper variant="fade-up" delay={200} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
+              <div className="relative w-full aspect-square overflow-hidden">
                 <Image
                   src="/images/Juan Ramon.png"
                   alt="Juan Ramón Ojeda González"
                   fill
-                  className="object-cover object-[center_15%] scale-110 grayscale"
+                  className="object-cover object-top grayscale"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-roiba-verde/30 to-transparent" />

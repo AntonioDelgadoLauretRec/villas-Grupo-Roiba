@@ -447,7 +447,7 @@ export default function ServiciosContent() {
             {tx.hero.titleBreak}
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
-          <p className="text-white/70 text-body-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/70 text-body-lg max-w-3xl mx-auto leading-relaxed">
             {tx.hero.description}
           </p>
         </div>

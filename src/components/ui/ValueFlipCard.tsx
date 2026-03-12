@@ -16,6 +16,7 @@ export default function ValueFlipCard({ title, description, image }: ValueFlipCa
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => setHovered(h => !h)}
       className="relative h-[200px] cursor-pointer overflow-hidden border border-white/[0.08] rounded-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(0,0,0,0.2)]"
     >
       {/* Background image */}

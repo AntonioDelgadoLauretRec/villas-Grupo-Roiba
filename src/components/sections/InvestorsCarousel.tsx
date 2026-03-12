@@ -22,7 +22,7 @@ const DEFAULT_SLIDES = [
   {
     title: 'Polo y Estilo de Vida Ecuestre',
     description: 'Cap Cana cuenta con el Polo Club más exclusivo del Caribe, con torneos internacionales y una comunidad ecuestre activa. Un estilo de vida reservado a destinos premium.',
-    image: 'https://images.unsplash.com/photo-1529158062015-cad636e205a0?w=3840&q=90&fit=crop',
+    image: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=3840&q=90&fit=crop',
   },
   {
     title: 'Marina y Clubes Náuticos',
