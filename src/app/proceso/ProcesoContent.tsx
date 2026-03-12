@@ -17,7 +17,7 @@ export default function ProcesoContent() {
       />
 
       {/* Intro */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-16 md:py-20 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-body-lg text-roiba-verde/70 leading-relaxed">
             {t.procesoPage.intro}

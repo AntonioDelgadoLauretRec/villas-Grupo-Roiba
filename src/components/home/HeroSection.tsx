@@ -11,39 +11,95 @@ const DEFAULT_HERO_IMAGES = [
   'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=90&fit=crop',
 ]
 
-// Videos ordered by priority. The component will try them sequentially.
-// Mix of local files and free CDN sources (Pexels license / Mixkit / Coverr).
-// From the browser, these URLs load correctly — server-side curl may fail.
 const VIDEO_SOURCES = [
-  // Local videos (if uploaded by the user)
   '/videos/hero-drone.mp4',
   '/videos/hero-bg.mp4',
-  // Mixkit – free stock video, no CORS restrictions
   'https://assets.mixkit.co/videos/4816/4816-720.mp4',
   'https://assets.mixkit.co/videos/4883/4883-720.mp4',
   'https://assets.mixkit.co/videos/1171/1171-720.mp4',
-  // Pexels – aerial tropical beach / Caribbean
   'https://videos.pexels.com/video-files/1093662/1093662-hd_1920_1080_30fps.mp4',
-  // Pexels – luxury pool villa drone
   'https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_30fps.mp4',
-  // Pexels – turquoise beach aerial
   'https://videos.pexels.com/video-files/2169880/2169880-hd_1920_1080_30fps.mp4',
 ]
+
+function HeroEmailCapture() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const { t } = useLanguage()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return
+
+    setStatus('loading')
+    try {
+      // Mock function — Supabase integration TBD
+      await new Promise(resolve => setTimeout(resolve, 800))
+      setStatus('success')
+      setEmail('')
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-sm font-sans text-sm font-medium
+                       animate-fade-in">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M6 10l3 3 5-6" /><circle cx="10" cy="10" r="8" />
+        </svg>
+        {t.hero.emailSuccess}
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto lg:mx-0">
+      <input
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder={t.hero.emailPlaceholder}
+        className="flex-1 px-5 py-3.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-sm text-sm font-sans text-white placeholder:text-white/50 focus:border-roiba-dorado focus:ring-1 focus:ring-roiba-dorado outline-none transition-all"
+      />
+      <button
+        type="submit"
+        disabled={status === 'loading'}
+        className="px-8 py-3.5 bg-roiba-dorado-light text-roiba-verde text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-roiba-dorado transition-all duration-300 disabled:opacity-60 whitespace-nowrap rounded-sm"
+      >
+        {status === 'loading' ? '...' : t.hero.emailCta}
+      </button>
+    </form>
+  )
+}
 
 export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
   const HERO_IMAGES = dbImages && dbImages.length > 0 ? dbImages : DEFAULT_HERO_IMAGES
   const [imgIdx, setImgIdx] = useState(0)
   const [videoReady, setVideoReady] = useState(false)
   const [videoFailed, setVideoFailed] = useState(false)
+  const [showSubtitle, setShowSubtitle] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const attemptRef = useRef(0)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const loadedRef = useRef(false)
   const { t } = useLanguage()
 
-  // Try loading videos one at a time via JS — more reliable than <source> elements
-  // because we get per-source error feedback and can control the flow.
-  // Includes a timeout per attempt: HTTP 403 sometimes doesn't fire onError.
+  // Show subtitle with scroll or after delay
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 80) setShowSubtitle(true)
+    }
+    const timer = setTimeout(() => setShowSubtitle(true), 2500)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      clearTimeout(timer)
+    }
+  }, [])
+
   const tryNext = useCallback(() => {
     if (loadedRef.current) return
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
@@ -61,13 +117,11 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
     vid.src = VIDEO_SOURCES[idx]
     vid.load()
 
-    // Timeout: if this source doesn't fire canplaythrough in 6s, try next
     timeoutRef.current = setTimeout(() => {
       if (!loadedRef.current) tryNext()
     }, 6000)
   }, [])
 
-  // Handle video successfully loaded
   const handleCanPlay = useCallback(() => {
     if (loadedRef.current) return
     loadedRef.current = true
@@ -79,13 +133,11 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
     }
   }, [])
 
-  // Handle video error — try next source immediately
   const handleError = useCallback(() => {
     if (loadedRef.current) return
     tryNext()
   }, [tryNext])
 
-  // Start loading the first video on mount
   useEffect(() => {
     const vid = videoRef.current
     if (!vid) return
@@ -95,7 +147,6 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
     vid.src = VIDEO_SOURCES[idx]
     vid.load()
 
-    // Timeout for the first attempt
     timeoutRef.current = setTimeout(() => {
       if (!loadedRef.current) tryNext()
     }, 6000)
@@ -105,7 +156,7 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
     }
   }, [tryNext])
 
-  // Image carousel fallback
+  // Image carousel — crossfade 800ms
   useEffect(() => {
     if (videoReady) return
     const timer = setInterval(() => setImgIdx((p) => (p + 1) % HERO_IMAGES.length), 6000)
@@ -125,16 +176,16 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
           preload="auto"
           onCanPlayThrough={handleCanPlay}
           onError={handleError}
-          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-[800ms] ease-in-out ${videoReady ? 'opacity-100' : 'opacity-0'}`}
         />
       )}
 
-      {/* Background — Image Slideshow (visible until video loads, or permanently if video fails) */}
+      {/* Background — Image Slideshow (crossfade 800ms) */}
       {!videoReady &&
         HERO_IMAGES.map((src, i) => (
           <div
             key={i}
-            className={`absolute inset-0 transition-opacity duration-[1500ms] z-0 ${imgIdx === i ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 transition-opacity duration-[800ms] ease-in-out z-0 ${imgIdx === i ? 'opacity-100' : 'opacity-0'}`}
           >
             <Image
               src={src}
@@ -150,55 +201,39 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
       {/* Overlay */}
       <div className={`absolute inset-0 z-[1] ${videoReady ? 'bg-roiba-verde/35' : 'bg-roiba-verde/50'}`} />
 
-      {/* Content — Split layout */}
+      {/* Content */}
       <div className="relative z-[2] w-full max-w-7xl mx-auto px-6 lg:px-16
                        flex flex-col lg:flex-row items-center min-h-[100dvh] pt-24 pb-16">
 
-        {/* Columna izquierda — texto */}
+        {/* Left column — text */}
         <div className="lg:w-1/2 lg:pr-16 text-center lg:text-left">
-          {/* eyebrow */}
-          <p className="font-sans text-[9px] font-medium tracking-[0.45em] uppercase
-                         text-roiba-dorado mb-8 animate-fade-in [animation-delay:0.3s] opacity-0">
-            {t.hero.eyebrow}
-          </p>
-
-          {/* headline con reveal por líneas */}
-          <h1 className="font-serif text-[clamp(44px,5.5vw,76px)] font-light text-white
-                          leading-[1.06] tracking-tight mb-0">
-            <span className="block overflow-hidden">
-              <span className="block animate-fade-up [animation-delay:0.5s] opacity-0">
-                {t.hero.title1}
-              </span>
-            </span>
-            <span className="block overflow-hidden">
-              <span className="block animate-fade-up [animation-delay:0.7s] opacity-0">
-                <span className="italic text-roiba-dorado-light font-light">
-                  {t.hero.titleAccent}
-                </span>
-              </span>
-            </span>
-            <span className="block overflow-hidden">
-              <span className="block animate-fade-up [animation-delay:0.9s] opacity-0">
-                {t.hero.title2}
-              </span>
-            </span>
+          {/* Main headline — slide from left */}
+          <h1 className="font-display text-[clamp(32px,5.5vw,52px)] font-bold text-white
+                          leading-[1.1] tracking-tight mb-0
+                          animate-slide-in-left [animation-delay:0.3s] opacity-0 [animation-fill-mode:forwards]">
+            {t.hero.title}
           </h1>
 
-          {/* línea dorada */}
+          {/* Gold line */}
           <div className="w-16 h-px bg-roiba-dorado my-8 mx-auto lg:mx-0
-                           animate-line-grow [animation-delay:1.1s] scale-x-0 origin-left" />
+                           animate-line-grow [animation-delay:0.8s] scale-x-0 origin-left" />
 
-          {/* subtítulo */}
-          <p className="font-sans text-[14px] font-light text-white/65
-                         max-w-md mb-10 leading-[1.8] tracking-wide mx-auto lg:mx-0
-                        animate-fade-in [animation-delay:1.2s] opacity-0">
-            {t.hero.subtitle}
-          </p>
+          {/* Subtitle — appears with scroll/delay */}
+          <div className={`transition-all duration-700 ease-out ${showSubtitle ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <p className="font-sans text-[clamp(14px,1.5vw,18px)] font-light text-white/80
+                           max-w-lg mb-10 leading-[1.7] tracking-wide mx-auto lg:mx-0">
+              {t.hero.subtitle}
+            </p>
+          </div>
+
+          {/* Email Lead Magnet */}
+          <div className="animate-fade-in [animation-delay:1.2s] opacity-0 [animation-fill-mode:forwards] mb-10">
+            <HeroEmailCapture />
+          </div>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start
                            animate-fade-up [animation-delay:1.4s] opacity-0">
-            {/* Botón primario */}
             <a href="/servicios" className="
               group relative overflow-hidden
               font-sans text-[10px] font-semibold tracking-[0.18em] uppercase
@@ -212,7 +247,6 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
                                 transition-transform duration-300 ease-out" />
             </a>
 
-            {/* Botón secundario ghost */}
             <a href="/contacto" className="
               font-sans text-[10px] font-medium tracking-[0.18em] uppercase
               px-10 py-4 bg-transparent text-white/75
@@ -224,44 +258,9 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
               {t.hero.ctaSecondary}
             </a>
           </div>
-
-          {/* Stats row */}
-          <div className="flex gap-10 mt-12 pt-8
-                           border-t border-white/10
-                          animate-fade-in [animation-delay:1.6s] opacity-0
-                          justify-center lg:justify-start">
-            <div>
-              <p className="font-serif text-[32px] font-light text-white leading-none tracking-tight">
-                15+
-              </p>
-              <p className="font-sans text-[8px] tracking-[0.28em] uppercase text-white/40 mt-2">
-                Proyectos
-              </p>
-            </div>
-            <div>
-              <p className="font-serif text-[32px] font-light text-white leading-none tracking-tight">
-                98%
-              </p>
-              <p className="font-sans text-[8px] tracking-[0.28em] uppercase text-white/40 mt-2">
-                Satisfacción
-              </p>
-            </div>
-            <div>
-              <p className="font-serif text-[32px] font-light
-                             text-[#F4EBD0] leading-none tracking-tight">
-                0
-              </p>
-              <p className="font-sans text-[8px] tracking-[0.28em] uppercase text-white/40 mt-2">
-                Retrasos
-              </p>
-              <p className="font-sans text-[8px] tracking-[0.15em] text-roiba-dorado mt-1 opacity-70">
-                en entrega
-              </p>
-            </div>
-          </div>
         </div>
 
-        {/* Columna derecha — vacía en mobile, decorativa en desktop */}
+        {/* Right column — decorative on desktop */}
         <div className="hidden lg:block lg:w-1/2" />
       </div>
 
