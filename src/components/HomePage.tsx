@@ -5,16 +5,14 @@ import HeroSection from './home/HeroSection'
 import StatsMarquee from './home/StatsMarquee'
 import AboutSection from './home/AboutSection'
 import ServicesGrid from './home/ServicesGrid'
-import ProcessTabs from './home/ProcessTabs'
 import TestimonialsSection from './home/TestimonialsSection'
 import CTASection from './home/CTASection'
 import BrochureSection from './home/BrochureSection'
 import BlogPreviewSection from './home/BlogPreviewSection'
-import type { Service, ProcessStep, Testimonial, BlogPost } from '@/types/admin'
+import type { Service, Testimonial, BlogPost } from '@/types/admin'
 
 interface HomePageProps {
   dbServices?: Service[]
-  dbProcessSteps?: ProcessStep[]
   dbTestimonials?: Testimonial[]
   dbHeroImages?: string[]
   dbStats?: { value: string; label: string }[]
@@ -24,7 +22,6 @@ interface HomePageProps {
 
 export default function HomePage({
   dbServices,
-  dbProcessSteps,
   dbTestimonials,
   dbHeroImages,
   dbStats,
@@ -39,7 +36,6 @@ export default function HomePage({
       <StatsMarquee dbStats={dbStats} />
       <AboutSection dbAbout={dbAbout} />
       <ServicesGrid dbServices={dbServices} />
-      <ProcessTabs dbSteps={dbProcessSteps} />
       <TestimonialsSection dbTestimonials={dbTestimonials} />
       <BrochureSection />
       <BlogPreviewSection dbPosts={dbBlogPosts} />

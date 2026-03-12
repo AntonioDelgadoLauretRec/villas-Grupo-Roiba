@@ -8,28 +8,28 @@ import { useLanguage } from '@/lib/i18n/LanguageContext'
 const TEXT = {
   es: {
     hero: {
-      tag: 'Capacidades Tecnicas',
-      title: 'Direccion tecnica, construccion',
-      titleBreak: 'y gestion integral',
+      tag: 'Capacidades Técnicas',
+      title: 'Dirección, Gestión',
+      titleBreak: 'y Calidad',
       description:
-        'Trabajamos en proyectos residenciales exclusivos desde tres lineas principales: servicios tecnicos independientes, construccion llave en mano y gestion post-entrega.',
+        'Trabajamos en proyectos residenciales exclusivos desde tres líneas principales: servicios técnicos independientes, construcción llave en mano y gestión post-entrega.',
     },
     scenarios: {
-      tag: 'Su Punto de Partida',
-      title: 'Como podemos ayudarle',
-      subtitle: 'Cada proyecto es distinto. Elija su situacion:',
+      tag: 'Tu Punto de Partida',
+      title: 'Cómo podemos ayudarte',
+      subtitle: 'Cada proyecto es distinto. Elige tu situación:',
       resultLabel: 'Resultado:',
       items: [
         {
           id: 'construir-desde-cero',
           situation: 'Tengo terreno, necesito construir desde cero',
           services: [
-            'Construccion llave en mano',
-            'Direccion tecnica integral',
+            'Construcción llave en mano',
+            'Dirección técnica integral',
             'Interiorismo y equipamiento',
             'Roiba Care (post-entrega)',
           ],
-          result: 'Su villa lista para habitar, con supervision directa de ingeniero.',
+          result: 'Tu villa lista para habitar, con supervisión directa de ingeniero.',
           cta: 'Ver el proceso completo',
           ctaHref: '/proceso',
           image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&fit=crop',
@@ -39,40 +39,40 @@ const TEXT = {
           situation:
             'Ya tengo arquitecto y constructor, necesito que alguien vigile que se haga bien',
           services: [
-            'Direccion tecnica independiente',
-            'Gestion de proyecto',
+            'Dirección técnica independiente',
+            'Gestión de proyecto',
             'Control de costes',
           ],
-          result: 'Supervision semanal in-situ con informes tecnicos directos.',
-          cta: 'Ver como supervisamos',
+          result: 'Supervisión semanal in-situ con informes técnicos directos.',
+          cta: 'Ver cómo supervisamos',
           ctaHref: '/contacto',
           image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&fit=crop',
         },
         {
           id: 'evaluando',
           situation:
-            'Estoy evaluando invertir pero necesito asesoramiento tecnico antes de decidir',
+            'Estoy evaluando invertir pero necesito asesoramiento técnico antes de decidir',
           services: [
-            'Asesoramiento tecnico',
+            'Asesoramiento técnico',
             'Due diligence de terrenos',
-            'Seguridad juridica',
-            'Analisis de viabilidad',
+            'Seguridad jurídica',
+            'Análisis de viabilidad',
           ],
-          result: 'Informe tecnico de viabilidad antes de comprometerse.',
-          cta: 'Solicitar analisis',
+          result: 'Informe técnico de viabilidad antes de comprometerte.',
+          cta: 'Solicitar análisis',
           ctaHref: '/contacto',
           image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop',
         },
         {
           id: 'gestion-post',
           situation:
-            'Mi propiedad ya esta construida, necesito gestion y mantenimiento profesional',
+            'Mi propiedad ya está construida, necesito gestión y mantenimiento profesional',
           services: [
             'Roiba Care',
             'Mantenimiento preventivo',
-            'Gestion operativa de la propiedad',
+            'Gestión operativa de la propiedad',
           ],
-          result: 'Su inversion protegida y operativa todo el ano.',
+          result: 'Tu inversión protegida y operativa todo el año.',
           cta: 'Ver planes de mantenimiento',
           ctaHref: '/contacto',
           image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&fit=crop',
@@ -83,115 +83,115 @@ const TEXT = {
       {
         id: 'servicios-tecnicos',
         lineTag: 'Para clientes con equipo propio',
-        lineTitle: 'Servicios Tecnicos Independientes',
+        lineTitle: 'Servicios Técnicos Independientes',
         lineIntro:
-          'Si ya tiene arquitecto, constructor o promotor, pero necesita supervision tecnica independiente para proteger su inversion.',
+          'Si ya tienes arquitecto, constructor o promotor, pero necesitas supervisión técnica independiente para proteger tu inversión.',
         image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80&fit=crop',
         services: [
           {
-            title: 'Direccion Tecnica',
+            title: 'Dirección Técnica',
             icon: '\uD83D\uDD0D',
             includes: [
-              'Supervision semanal in-situ por ingeniero',
-              'Validacion de calidad de materiales y ejecucion',
-              'Informes tecnicos fotograficos mensuales',
-              'Interlocucion directa con constructor',
+              'Supervisión semanal in-situ por ingeniero',
+              'Validación de calidad de materiales y ejecución',
+              'Informes técnicos fotográficos mensuales',
+              'Interlocución directa con constructor',
             ],
             forWhom: 'Inversores que construyen con equipo local',
-            duration: 'Desde fase de cimentacion hasta entrega',
-            ctaLabel: 'Solicitar informacion',
+            duration: 'Desde fase de cimentación hasta entrega',
+            ctaLabel: 'Solicitar información',
           },
           {
-            title: 'Gestion de Proyecto',
+            title: 'Gestión de Proyecto',
             icon: '\uD83D\uDCCB',
             includes: [
-              'Coordinacion de todos los agentes (arquitecto, constructor, ingenierias)',
+              'Coordinación de todos los agentes (arquitecto, constructor, ingenierías)',
               'Control de plazos y presupuesto',
-              'Gestion de cambios y extras',
+              'Gestión de cambios y extras',
               'Reporting semanal al cliente',
             ],
             forWhom: 'Clientes que no pueden estar presencialmente',
-            duration: 'Desde diseno hasta recepcion de llaves',
-            ctaLabel: 'Solicitar informacion',
+            duration: 'Desde diseño hasta recepción de llaves',
+            ctaLabel: 'Solicitar información',
           },
           {
-            title: 'Asesoramiento Tecnico y Due Diligence',
+            title: 'Asesoramiento Técnico y Due Diligence',
             icon: '\uD83D\uDCCA',
             includes: [
-              'Analisis de viabilidad tecnica de terrenos',
-              'Revision de proyectos existentes',
-              'Deteccion de riesgos constructivos',
-              'Estimacion de costes realista',
+              'Análisis de viabilidad técnica de terrenos',
+              'Revisión de proyectos existentes',
+              'Detección de riesgos constructivos',
+              'Estimación de costes realista',
             ],
-            forWhom: 'Inversores en fase de evaluacion',
+            forWhom: 'Inversores en fase de evaluación',
             duration: '1-2 semanas',
-            ctaLabel: 'Solicitar analisis de terreno',
+            ctaLabel: 'Solicitar análisis de terreno',
           },
         ],
       },
       {
         id: 'construccion-llave-en-mano',
-        lineTag: 'Para clientes que delegan la ejecucion completa',
-        lineTitle: 'Construccion Llave en Mano',
+        lineTag: 'Para clientes que delegan la ejecución completa',
+        lineTitle: 'Construcción Llave en Mano',
         lineIntro:
-          'Asumimos la responsabilidad total del proyecto: desde el diseno arquitectonico hasta la entrega de llaves, con supervision directa de los fundadores.',
+          'Asumimos la responsabilidad total del proyecto: desde el diseño arquitectónico hasta la entrega de llaves, con supervisión directa de los fundadores.',
         image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80&fit=crop',
         services: [
           {
-            title: 'Construccion de Villas a Medida',
+            title: 'Construcción de Villas a Medida',
             icon: '\uD83C\uDFD7\uFE0F',
             includes: [
-              'Desarrollo del proyecto arquitectonico',
-              'Tramitacion de permisos',
-              'Ejecucion de obra con equipo propio y subcontratas supervisadas',
+              'Desarrollo del proyecto arquitectónico',
+              'Tramitación de permisos',
+              'Ejecución de obra con equipo propio y subcontratas supervisadas',
               'Control de calidad en cada fase',
-              'Garantia estructural',
+              'Garantía estructural',
             ],
-            forWhom: 'Rango de proyecto: 250 m\u00B2 a 800 m\u00B2',
-            duration: '12-18 meses desde diseno',
-            ctaLabel: 'Ver proceso de construccion',
+            forWhom: 'Desde 250 m\u00B2',
+            duration: '12-18 meses desde diseño',
+            ctaLabel: 'Ver proceso de construcción',
           },
           {
             title: 'Interiorismo y Equipamiento',
             icon: '\uD83C\uDFA8',
             includes: [
-              'Diseno de interiores coherente con arquitectura',
-              'Seleccion de acabados y materiales',
+              'Diseño de interiores coherente con arquitectura',
+              'Selección de acabados y materiales',
               'Mobiliario fijo y equipamiento',
-              'Coordinacion de instalaciones especiales (domotica, AV)',
+              'Coordinación de instalaciones especiales (domótica, AV)',
             ],
             forWhom: 'Proyectos llave en mano o reformas integrales',
-            duration: 'Segun alcance del proyecto',
-            ctaLabel: 'Solicitar informacion',
+            duration: 'Según alcance del proyecto',
+            ctaLabel: 'Solicitar información',
           },
         ],
       },
       {
         id: 'gestion-post-entrega',
-        lineTag: 'Para propietarios que necesitan gestion continua',
-        lineTitle: 'Gestion Post-Entrega',
+        lineTag: 'Para propietarios que necesitan gestión continua',
+        lineTitle: 'Gestión Post-Entrega',
         lineIntro:
-          'Su villa es una inversion que requiere mantenimiento profesional para preservar su valor y operatividad a lo largo del tiempo.',
+          'Tu villa es una inversión que requiere mantenimiento profesional para preservar su valor y operatividad a lo largo del tiempo.',
         image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80&fit=crop',
         services: [
           {
             title: 'Roiba Care (Mantenimiento Integral)',
             icon: '\uD83D\uDEE1\uFE0F',
             includes: [
-              'Inspecciones tecnicas trimestrales',
+              'Inspecciones técnicas trimestrales',
               'Mantenimiento preventivo de instalaciones',
-              'Gestion de incidencias',
-              'Renovacion de acabados segun desgaste',
+              'Gestión de incidencias',
+              'Renovación de acabados según desgaste',
             ],
             forWhom: 'Propietarios no residentes',
             duration: 'Servicio permanente',
             ctaLabel: 'Ver planes de mantenimiento',
           },
           {
-            title: 'Seguridad Juridica en la Inversion',
+            title: 'Seguridad Jurídica en la Inversión',
             icon: '\u2696\uFE0F',
             includes: [
-              'Verificacion de titulos de propiedad',
+              'Verificación de títulos de propiedad',
               'Due diligence legal previo a compra',
               'Asesoramiento en estructura de tenencia',
             ],
@@ -203,20 +203,20 @@ const TEXT = {
       },
     ],
     cta: {
-      tag: '\u00BFQue necesita?',
-      title: 'Expliquenos su proyecto y le proponemos un enfoque',
+      tag: '¿Qué necesitas?',
+      title: 'Explícanos tu proyecto y te proponemos un enfoque',
       description:
-        'Podemos trabajar solo en la fase que necesite o asumir el proyecto completo. Respuesta del equipo tecnico en 48 horas.',
+        'Podemos trabajar solo en la fase que necesites o asumir el proyecto completo. Respuesta del equipo técnico en 48 horas.',
       button: 'Contactar al equipo',
     },
-    forWhomLabel: 'Para quien',
-    durationLabel: 'Duracion',
+    forWhomLabel: 'Para quién',
+    durationLabel: 'Duración',
   },
   en: {
     hero: {
       tag: 'Technical Capabilities',
-      title: 'Technical management, construction',
-      titleBreak: 'and comprehensive management',
+      title: 'Direction, Management',
+      titleBreak: 'and Quality',
       description:
         'We work on exclusive residential projects through three main areas: independent technical services, turnkey construction, and post-delivery management.',
     },
@@ -353,7 +353,7 @@ const TEXT = {
               'Quality control at every phase',
               'Structural warranty',
             ],
-            forWhom: 'Project range: 250 m\u00B2 to 800 m\u00B2',
+            forWhom: 'From 250 m\u00B2',
             duration: '12-18 months from design',
             ctaLabel: 'See construction process',
           },
@@ -457,7 +457,7 @@ export default function ServiciosContent() {
       </section>
 
       {/* ============================================ */}
-      {/* 2. CLIENT SCENARIOS -- with images            */}
+      {/* 2. CLIENT SCENARIOS                           */}
       {/* ============================================ */}
       <section className="py-14 md:py-20 bg-roiba-fondo-alt">
         <div className="max-w-7xl mx-auto px-6">
@@ -478,7 +478,6 @@ export default function ServiciosContent() {
                 key={scenario.id}
                 className="group bg-white border border-roiba-verde/[0.06] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
               >
-                {/* Image header */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src={scenario.image}
@@ -513,14 +512,7 @@ export default function ServiciosContent() {
                     className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-verde transition-colors"
                   >
                     {scenario.cta}
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    >
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <path d="M3 7h8M8 4l3 3-3 3" />
                     </svg>
                   </Link>
@@ -532,7 +524,7 @@ export default function ServiciosContent() {
       </section>
 
       {/* ============================================ */}
-      {/* 3. BUSINESS LINES -- with hero images + cards  */}
+      {/* 3. BUSINESS LINES                             */}
       {/* ============================================ */}
       {tx.businessLines.map((line, lineIdx) => {
         const bgColor = lineIdx % 2 === 0 ? 'bg-white' : 'bg-roiba-fondo-alt'
@@ -544,7 +536,7 @@ export default function ServiciosContent() {
             className={`py-14 md:py-20 ${bgColor}`}
           >
             <div className="max-w-7xl mx-auto px-6">
-              {/* Line Header with background image */}
+              {/* Line Header */}
               <div className="relative rounded-sm overflow-hidden mb-12">
                 <div className="relative h-56 md:h-64">
                   <Image
@@ -569,15 +561,13 @@ export default function ServiciosContent() {
                 </div>
               </div>
 
-              {/* Services within this line */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Services cards — responsive grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {line.services.map((svc, svcIdx) => (
                   <div
                     key={svcIdx}
-                    className="group bg-white rounded-sm p-8 md:p-10 shadow-sm border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
+                    className="group bg-white rounded-lg p-8 shadow-sm border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
                   >
-                    {/* Gold top accent on hover */}
-                    <div className="w-full h-[2px] bg-roiba-dorado/0 group-hover:bg-roiba-dorado transition-colors duration-500 -mt-8 md:-mt-10 mb-8 md:mb-10 -mx-8 md:-mx-10 px-0" style={{ width: 'calc(100% + 4rem)', marginLeft: '-2rem', marginRight: '-2rem' }} />
                     <h3 className="font-serif text-xl text-roiba-verde mb-5 font-medium">
                       {svc.title}
                     </h3>
@@ -618,14 +608,7 @@ export default function ServiciosContent() {
                       className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-verde transition-colors group-hover:translate-x-1 duration-300"
                     >
                       {svc.ctaLabel}
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 14 14"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      >
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M3 7h8M8 4l3 3-3 3" />
                       </svg>
                     </Link>

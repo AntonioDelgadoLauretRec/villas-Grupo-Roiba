@@ -25,17 +25,13 @@ const TEXT = {
 
     enfoqueTag: 'Cómo Trabajamos',
     enfoqueTitle: 'Enfoque de Trabajo',
-    enfoqueIntro: 'Cada proyecto se aborda con un enfoque estructurado basado en:',
-    enfoqueItems: [
-      'Planificación técnica rigurosa',
-      'Control económico y de plazos',
-      'Supervisión continua de la ejecución',
-      'Coordinación eficiente de todos los agentes',
-      'Implicación directa de los fundadores en cada proyecto',
-    ],
+    enfoqueContent:
+      'En Grupo Roiba, creemos que la construcción de excelencia requiere una comprensión profunda de tus necesidades. Nuestro enfoque integra tres pilares fundamentales: escucha activa con tus requerimientos, análisis exhaustivo de viabilidad técnica y ejecución rigurosa en cada etapa. Cada proyecto es único, y nosotros adaptamos nuestra metodología para garantizar que tus visiones se materialicen con precisión.',
+    enfoqueContent2:
+      'La planificación técnica rigurosa, el control económico y de plazos, la supervisión continua de la ejecución y la coordinación eficiente de todos los agentes son los principios que guían nuestro trabajo diario. Los fundadores participan directamente en cada proyecto, asegurando que el nivel de exigencia se mantenga en todo momento.',
 
     equipoTag: 'Profesionales',
-    equipoTitle: 'El Equipo',
+    equipoTitle: 'Un equipo con años de experiencia',
     equipoDesc:
       'Grupo Roiba está dirigido por profesionales con una sólida experiencia en el desarrollo de proyectos de edificación en España y el Caribe, tanto en el ámbito residencial como hotelero.',
 
@@ -96,13 +92,15 @@ const TEXT = {
       },
     ],
 
+    portfolioTag: 'Trayectoria',
+    portfolioTitle: 'Experiencias que dejan huella',
     portfolioDesc:
       'Proyectos en los que los socios de Grupo Roiba han participado a lo largo de su trayectoria profesional previa, en distintas empresas y roles. No son proyectos exclusivos de Grupo Roiba, sino referencias de la experiencia acumulada por el equipo fundador.',
 
     ctaTag: '¿Preparado para empezar?',
-    ctaTitle: 'Explíquenos qué necesita',
+    ctaTitle: 'Cuéntanos qué necesitas',
     ctaDesc:
-      'Supervisión, construcción completa o asesoramiento técnico. Le respondemos en 48 horas.',
+      'Supervisión, construcción completa o asesoramiento técnico. Te respondemos en 48 horas.',
     ctaButton: 'Hablar con el equipo',
   },
   en: {
@@ -120,17 +118,13 @@ const TEXT = {
 
     enfoqueTag: 'How We Work',
     enfoqueTitle: 'Work Approach',
-    enfoqueIntro: 'Each project is approached with a structured methodology based on:',
-    enfoqueItems: [
-      'Rigorous technical planning',
-      'Budget and schedule control',
-      'Continuous execution supervision',
-      'Efficient coordination of all stakeholders',
-      'Direct involvement of the founders in every project',
-    ],
+    enfoqueContent:
+      'At Grupo Roiba, we believe that construction excellence requires a deep understanding of your needs. Our approach integrates three fundamental pillars: active listening to your requirements, exhaustive analysis of technical feasibility, and rigorous execution at every stage. Every project is unique, and we adapt our methodology to ensure your vision materialises with precision.',
+    enfoqueContent2:
+      'Rigorous technical planning, budget and schedule control, continuous execution supervision, and efficient coordination of all stakeholders are the principles that guide our daily work. The founders participate directly in every project, ensuring that the level of demand is maintained at all times.',
 
     equipoTag: 'Professionals',
-    equipoTitle: 'The Team',
+    equipoTitle: 'A team with years of experience',
     equipoDesc:
       'Grupo Roiba is led by professionals with solid experience in building development projects in Spain and the Caribbean, in both the residential and hospitality sectors.',
 
@@ -191,6 +185,8 @@ const TEXT = {
       },
     ],
 
+    portfolioTag: 'Track Record',
+    portfolioTitle: 'Experiences That Leave a Mark',
     portfolioDesc:
       'Projects in which the partners of Grupo Roiba have participated throughout their prior professional careers, in different companies and roles. These are not exclusive Grupo Roiba projects, but references of the experience accumulated by the founding team.',
 
@@ -201,35 +197,6 @@ const TEXT = {
     ctaButton: 'Talk to the team',
   },
 }
-
-/* ─────────────────────── icons ─────────────────────── */
-
-const valueIcons = [
-  // Transparencia / Transparency
-  <svg key="eye" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" />
-  </svg>,
-  // Control
-  <svg key="bar" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 20V10M18 20V4M6 20v-4" />
-  </svg>,
-  // Rigor técnico / Technical Rigour
-  <svg key="wrench" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-  </svg>,
-  // Calidad / Quality
-  <svg key="star" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-  </svg>,
-  // Compromiso / Commitment
-  <svg key="heart" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-  </svg>,
-  // Confianza / Trust
-  <svg key="shield" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-  </svg>,
-]
 
 /* ─────────────────────── component ─────────────────────── */
 
@@ -265,7 +232,7 @@ export default function NosotrosContent() {
         </div>
       </section>
 
-      {/* -- 2. ORIGEN + ENFOQUE en dos columnas -- */}
+      {/* -- 2. ORIGEN + ENFOQUE -- */}
       <section className="py-12 md:py-16 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
@@ -286,7 +253,7 @@ export default function NosotrosContent() {
               </div>
             </RevealWrapper>
 
-            {/* Columna derecha: Enfoque de Trabajo */}
+            {/* Columna derecha: Enfoque de Trabajo — prose format */}
             <RevealWrapper variant="slide-left" delay={150}>
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
                 {tx.enfoqueTag}
@@ -295,17 +262,10 @@ export default function NosotrosContent() {
                 {tx.enfoqueTitle}
               </h2>
               <div className="w-16 h-px bg-roiba-dorado mb-8" />
-              <p className="text-body-lg text-roiba-texto-suave leading-relaxed mb-8">
-                {tx.enfoqueIntro}
-              </p>
-              <ul className="space-y-4">
-                {tx.enfoqueItems.map((item) => (
-                  <li key={item} className="flex items-start gap-4">
-                    <span className="mt-1.5 block w-2 h-2 rounded-full bg-roiba-dorado flex-shrink-0" />
-                    <span className="text-body-lg text-roiba-texto-suave">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="max-w-[800px] space-y-6 font-sans text-[18px] text-roiba-negro leading-[1.8]">
+                <p>{tx.enfoqueContent}</p>
+                <p>{tx.enfoqueContent2}</p>
+              </div>
             </RevealWrapper>
           </div>
         </div>
@@ -351,12 +311,12 @@ export default function NosotrosContent() {
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
                 {tx.ivanRole}
               </span>
-              <h3 className="text-heading font-serif text-roiba-verde mt-3 mb-1">
+              <h3 className="text-heading font-serif text-roiba-texto mt-3 mb-1">
                 Iván Barrios Martín
               </h3>
               <p className="text-caption text-roiba-dorado mb-6">{tx.ivanCaption}</p>
               <div className="w-10 h-px bg-roiba-dorado/50 mb-6" />
-              <div className="space-y-4 text-body text-roiba-verde/75 leading-relaxed">
+              <div className="space-y-4 text-body text-roiba-texto-suave leading-relaxed">
                 <p>{tx.ivanP1}</p>
                 <p>{tx.ivanP2}</p>
                 <p>{tx.ivanP3}</p>
@@ -364,12 +324,12 @@ export default function NosotrosContent() {
               </div>
             </RevealWrapper>
 
-            {/* Profile 2 — Ramón */}
+            {/* Profile 2 — Juan Ramón */}
             <RevealWrapper variant="fade-up" delay={200} className="bg-white rounded-sm shadow-sm border border-roiba-arena-dark/40 overflow-hidden">
               <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=85&fit=crop&crop=face,top"
-                  alt="Ramón Ojeda González"
+                  alt="Juan Ramón Ojeda González"
                   fill
                   className="object-cover object-top grayscale"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -381,7 +341,7 @@ export default function NosotrosContent() {
                 {tx.ramonRole}
               </span>
               <h3 className="text-heading font-serif text-roiba-texto mt-3 mb-1">
-                Ramón Ojeda González
+                Juan Ramón Ojeda González
               </h3>
               <p className="text-caption text-roiba-dorado mb-6">{tx.ramonCaption}</p>
               <div className="w-10 h-px bg-roiba-dorado/50 mb-6" />
@@ -401,28 +361,27 @@ export default function NosotrosContent() {
         <div className="h-px bg-roiba-dorado/30" />
       </div>
 
-      {/* -- 4. NUESTROS VALORES -- */}
-      <section className="relative py-12 md:py-16 px-6 bg-roiba-verde">
-        <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
+      {/* -- 4. NUESTROS VALORES -- white bg with image overlay cards */}
+      <section className="relative py-12 md:py-16 px-6 bg-white">
         <div className="relative max-w-7xl mx-auto">
           {/* section header */}
           <div className="max-w-3xl mx-auto text-center mb-16">
             <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
               {tx.valoresTag}
             </span>
-            <h2 className="text-display-md font-serif text-white mt-4 mb-4">
+            <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-4">
               {tx.valoresTitle}
             </h2>
-            <p className="text-subheading text-white/60 font-light mb-6">
+            <p className="text-subheading text-roiba-texto-suave font-light mb-6">
               {tx.valoresSubtitle}
             </p>
             <div className="w-16 h-px bg-roiba-dorado mx-auto mb-8" />
-            <p className="text-body-lg text-white/70 leading-relaxed">
+            <p className="text-body-lg text-roiba-texto-suave leading-relaxed">
               {tx.valoresDesc}
             </p>
           </div>
 
-          {/* values grid — hover flip cards */}
+          {/* values grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {tx.values.map(({ title, description }, i) => (
               <RevealWrapper key={title} variant="slide-left" delay={i * 100}>
@@ -433,10 +392,15 @@ export default function NosotrosContent() {
         </div>
       </section>
 
-      {/* -- 5. PORTFOLIO / PROYECTOS QUE TRASCIENDEN -- */}
+      {/* -- 5. PORTFOLIO / EXPERIENCIAS QUE DEJAN HUELLA -- */}
       <section className="py-12 md:py-16 bg-roiba-arena-light overflow-hidden">
-        {/* Updated intro copy */}
-        <div className="max-w-7xl mx-auto px-6 mb-4">
+        <div className="max-w-7xl mx-auto px-6 mb-8">
+          <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em] block mb-4">
+            {tx.portfolioTag}
+          </span>
+          <h2 className="text-display-md font-serif text-roiba-texto mb-4">
+            {tx.portfolioTitle}
+          </h2>
           <p className="text-body text-roiba-verde/60 max-w-2xl leading-relaxed">
             {tx.portfolioDesc}
           </p>
@@ -445,7 +409,7 @@ export default function NosotrosContent() {
       </section>
 
       {/* -- 6. CTA -- */}
-      <section className="relative py-12 md:py-16 px-6 bg-roiba-verde-dark">
+      <section className="relative py-12 md:py-16 px-6 bg-roiba-verde">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-3xl mx-auto text-center">
           <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em] mb-6 block">

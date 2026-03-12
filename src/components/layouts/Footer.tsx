@@ -35,57 +35,21 @@ export const Footer: FC = () => {
 
       <div className="h-px bg-gradient-to-r from-transparent via-roiba-dorado/40 to-transparent" />
 
-      <div className="container-editorial py-14 md:py-20 relative z-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
-          <div className="lg:col-span-4">
-            <div className="mb-8">
-              <Image
-                src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
-                alt="Grupo Roiba"
-                width={160}
-                height={88}
-                className="h-12 w-auto brightness-0 invert"
-              />
-            </div>
-
-            <p className="text-body text-white/50 font-light mb-8 max-w-sm leading-relaxed">
-              {t.footer.footerDesc}
-            </p>
-
-            <div className="space-y-3 text-caption text-white/40">
-              <div className="flex items-center gap-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-roiba-dorado/60 flex-shrink-0">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                </svg>
-                <span>Punta Cana, República Dominicana</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-roiba-dorado/60 flex-shrink-0">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-                </svg>
-                <a href="mailto:info@gruporoiba.com" className="hover:text-roiba-dorado-light transition-colors">
-                  info@gruporoiba.com
-                </a>
-              </div>
-            </div>
+      <div className="container-editorial py-12 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {/* Logo column */}
+          <div>
+            <Image
+              src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
+              alt="Grupo Roiba"
+              width={160}
+              height={88}
+              className="h-12 w-auto brightness-0 invert mb-6"
+            />
           </div>
 
-          <div className="lg:col-span-2">
-            <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado/60 mb-5">
-              {t.footer.empresa}
-            </h4>
-            <ul className="space-y-3">
-              {FOOTER_LINKS.empresa.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-body text-white/50 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
+          {/* Servicios column */}
+          <div>
             <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado/60 mb-5">
               {t.footer.serviciosLabel}
             </h4>
@@ -100,12 +64,13 @@ export const Footer: FC = () => {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
+          {/* Recursos / Empresa column */}
+          <div>
             <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado/60 mb-5">
-              {t.footer.legal}
+              {t.footer.empresa}
             </h4>
             <ul className="space-y-3">
-              {FOOTER_LINKS.legal.map((link) => (
+              {FOOTER_LINKS.empresa.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-body text-white/50 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
                     {link.label}
@@ -115,11 +80,30 @@ export const Footer: FC = () => {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
+          {/* Conectar column */}
+          <div>
             <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado/60 mb-5">
               {t.footer.conectar}
             </h4>
-            <div className="flex gap-3 mb-8">
+            <div className="space-y-3 text-caption text-white/50 mb-6">
+              <div className="flex items-center gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-roiba-dorado/60 flex-shrink-0">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>{t.footer.ubicacion}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-roiba-dorado/60 flex-shrink-0">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+                <a href={`mailto:${t.footer.email}`} className="hover:text-roiba-dorado-light transition-colors">
+                  {t.footer.email}
+                </a>
+              </div>
+            </div>
+
+            {/* Social icons */}
+            <div className="flex gap-3 mb-6">
               <a href="https://linkedin.com/company/gruporoiba" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center border border-white/10 text-white/40 hover:border-roiba-dorado hover:text-roiba-dorado-light hover:bg-roiba-dorado/10 transition-all duration-300 rounded-sm" aria-label="LinkedIn">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </a>
@@ -139,12 +123,23 @@ export const Footer: FC = () => {
       <div className="border-t border-white/[0.06]">
         <div className="container-editorial py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-caption text-white/30">
-              &copy; {currentYear} Grupo Roiba. {t.footer.rights}.
-            </p>
-            <p className="text-caption text-white/20 text-center md:text-right max-w-lg">
-              {t.footer.disclaimer}
-            </p>
+            <div>
+              <p className="text-caption text-white/30">
+                &copy; {currentYear} Grupo Roiba. {t.footer.rights}.
+              </p>
+              {t.footer.disclaimer && (
+                <p className="text-[10px] text-white/15 mt-1 max-w-xl">
+                  {t.footer.disclaimer}
+                </p>
+              )}
+            </div>
+            <div className="flex gap-4 text-caption text-white/20">
+              {FOOTER_LINKS.legal.map((link) => (
+                <Link key={link.href} href={link.href} className="hover:text-white/40 transition-colors">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

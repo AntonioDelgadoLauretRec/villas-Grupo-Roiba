@@ -2,8 +2,9 @@
 
 import { FC, useState, useRef, useCallback } from 'react'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
-const ROIBA_PHASES = [
+const PHASES_ES = [
   {
     number: '01',
     title: 'Análisis de Terreno',
@@ -54,15 +55,68 @@ const ROIBA_PHASES = [
   },
 ]
 
+const PHASES_EN = [
+  {
+    number: '01',
+    title: 'Land Analysis',
+    subtitle: 'Legal security in acquisition',
+    duration: '2-4 weeks',
+    deliverable: 'Legal and technical feasibility report',
+    description: 'Land acquisition is the first and most critical step of the project. Grupo Roiba works with a team of professionals specialised in real estate legal security in the Dominican Republic, responsible for verifying the legal status of the property before purchase. This process confirms ownership, detects potential encumbrances and ensures the land is suitable for the intended development.',
+  },
+  {
+    number: '02',
+    title: 'Project Validation',
+    subtitle: 'Technical and regulatory feasibility',
+    duration: '1-2 weeks',
+    deliverable: 'Technical and urban feasibility report',
+    description: 'We analyse the project from a technical and urban planning perspective to ensure feasibility before development. We evaluate site constraints, applicable regulations and construction criteria, ensuring the project can be executed according to required standards.',
+  },
+  {
+    number: '03',
+    title: 'Co-Design',
+    subtitle: 'Bespoke architecture and interiors',
+    duration: '4-6 weeks',
+    deliverable: 'Custom architectural project',
+    description: 'We define the project together with the client, adapting the home to their needs, lifestyle and investment goals. From this phase, architecture, interior design and functionality are integrated, ensuring design coherence and facilitating proper execution on site. Every project is unique and developed with a fully personalised approach.',
+  },
+  {
+    number: '04',
+    title: 'Detailed Budget',
+    subtitle: 'Economic control from the start',
+    duration: '1-2 weeks',
+    deliverable: 'Itemised breakdown + financial schedule',
+    description: 'We develop an itemised budget that allows you to understand the true scope of the investment before construction begins. This approach provides transparency and facilitates decision-making, avoiding deviations and maintaining economic control throughout the process.',
+  },
+  {
+    number: '05',
+    title: 'Construction',
+    subtitle: 'Execution under technical control',
+    duration: '12-18 months',
+    deliverable: 'Periodic progress reports',
+    description: 'We execute construction under a model based on rigorous planning, continuous supervision and quality control at every phase. We coordinate all project stakeholders, performing technical and financial monitoring that ensures compliance with timelines, costs and execution standards. The client receives periodic progress updates.',
+  },
+  {
+    number: '06',
+    title: 'Roiba Care',
+    subtitle: 'Post-delivery management and maintenance',
+    duration: 'Permanent',
+    deliverable: 'Maintenance + operational management',
+    description: 'The project does not end with property handover. Through Roiba Care, we offer a management and maintenance service designed to preserve property value and ensure proper functioning over time. This service is especially designed for owners who do not reside permanently.',
+  },
+]
+
 const SWIPE_THRESHOLD = 50
 
 export const ProcessTimeline: FC = () => {
+  const { locale, t } = useLanguage()
+  const PHASES = locale === 'en' ? PHASES_EN : PHASES_ES
   const [activePhase, setActivePhase] = useState(0)
   const touchRef = useRef<{ startX: number; startY: number } | null>(null)
 
   const goNext = useCallback(() => {
-    setActivePhase((prev) => Math.min(prev + 1, ROIBA_PHASES.length - 1))
-  }, [])
+    setActivePhase((prev) => Math.min(prev + 1, PHASES.length - 1))
+  }, [PHASES.length])
 
   const goPrev = useCallback(() => {
     setActivePhase((prev) => Math.max(prev - 1, 0))
@@ -90,7 +144,7 @@ export const ProcessTimeline: FC = () => {
     <section className="py-14 md:py-20 bg-roiba-fondo-alt relative overflow-hidden">
       {/* Número decorativo de fondo */}
       <div className="absolute top-16 right-0 text-[18rem] md:text-[26rem] font-serif text-roiba-verde/[0.025] leading-none select-none pointer-events-none">
-        {ROIBA_PHASES[activePhase].number}
+        {PHASES[activePhase].number}
       </div>
 
       <div className="container-editorial relative z-10">
@@ -103,7 +157,7 @@ export const ProcessTimeline: FC = () => {
               className="flex lg:flex-col overflow-x-auto lg:overflow-visible border-b-2 lg:border-b-0 lg:border-l-2 border-roiba-verde/10 snap-x snap-mandatory scrollbar-luxury"
               style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
             >
-              {ROIBA_PHASES.map((phase, idx) => (
+              {PHASES.map((phase, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActivePhase(idx)}
@@ -152,7 +206,7 @@ export const ProcessTimeline: FC = () => {
             {/* Mobile swipe hint */}
             <div className="flex lg:hidden items-center gap-2 mt-3 justify-center font-sans text-micro tracking-[0.12em] uppercase text-roiba-dorado/60">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 8H4M7 5L4 8l3 3"/></svg>
-              <span>Desliza para navegar</span>
+              <span>{locale === 'en' ? 'Swipe to navigate' : 'Desliza para navegar'}</span>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 8h8M9 5l3 3-3 3"/></svg>
             </div>
           </div>
@@ -172,14 +226,14 @@ export const ProcessTimeline: FC = () => {
               <div className="flex items-start gap-5 mb-7">
                 <span className="font-serif leading-none font-light text-roiba-verde/[0.07] select-none flex-shrink-0"
                   style={{ fontSize: 'clamp(4rem, 8vw, 6rem)' }}>
-                  {ROIBA_PHASES[activePhase].number}
+                  {PHASES[activePhase].number}
                 </span>
                 <div className="pt-1 flex-1 min-w-0">
                   <h3 className="text-heading font-serif text-roiba-verde mb-1.5 leading-tight">
-                    {ROIBA_PHASES[activePhase].title}
+                    {PHASES[activePhase].title}
                   </h3>
                   <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-dorado">
-                    {ROIBA_PHASES[activePhase].subtitle}
+                    {PHASES[activePhase].subtitle}
                   </p>
                 </div>
               </div>
@@ -189,25 +243,25 @@ export const ProcessTimeline: FC = () => {
 
               {/* Description */}
               <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed mb-9">
-                {ROIBA_PHASES[activePhase].description}
+                {PHASES[activePhase].description}
               </p>
 
               {/* Meta grid */}
               <div className="grid grid-cols-2 gap-6 pt-7 border-t border-roiba-verde/8">
                 <div>
                   <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-verde/35 mb-2">
-                    Duración estimada
+                    {t.procesoPage.duracionEstimada}
                   </p>
                   <p className="text-subheading font-serif text-roiba-verde leading-tight">
-                    {ROIBA_PHASES[activePhase].duration}
+                    {PHASES[activePhase].duration}
                   </p>
                 </div>
                 <div>
                   <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-verde/35 mb-2">
-                    Entregable
+                    {t.procesoPage.entregable}
                   </p>
                   <p className="text-body text-roiba-verde/80 leading-snug">
-                    {ROIBA_PHASES[activePhase].deliverable}
+                    {PHASES[activePhase].deliverable}
                   </p>
                 </div>
               </div>
@@ -217,7 +271,7 @@ export const ProcessTimeline: FC = () => {
                 <button
                   onClick={goPrev}
                   disabled={activePhase === 0}
-                  aria-label="Fase anterior"
+                  aria-label={t.procesoPage.faseAnterior}
                   className={cn(
                     'w-10 h-10 flex items-center justify-center border transition-all duration-300',
                     activePhase === 0
@@ -229,11 +283,11 @@ export const ProcessTimeline: FC = () => {
                 </button>
 
                 <div className="flex items-center gap-2">
-                  {ROIBA_PHASES.map((_, idx) => (
+                  {PHASES.map((_, idx) => (
                     <button
                       key={idx}
                       onClick={() => setActivePhase(idx)}
-                      aria-label={`Fase ${idx + 1}`}
+                      aria-label={`${locale === 'en' ? 'Phase' : 'Fase'} ${idx + 1}`}
                       className={cn(
                         'h-1.5 rounded-full transition-all duration-300',
                         activePhase === idx
@@ -246,11 +300,11 @@ export const ProcessTimeline: FC = () => {
 
                 <button
                   onClick={goNext}
-                  disabled={activePhase === ROIBA_PHASES.length - 1}
-                  aria-label="Fase siguiente"
+                  disabled={activePhase === PHASES.length - 1}
+                  aria-label={t.procesoPage.faseSiguiente}
                   className={cn(
                     'w-10 h-10 flex items-center justify-center border transition-all duration-300',
-                    activePhase === ROIBA_PHASES.length - 1
+                    activePhase === PHASES.length - 1
                       ? 'border-roiba-verde/10 text-roiba-verde/20 cursor-not-allowed'
                       : 'border-roiba-verde/20 text-roiba-verde/60 hover:border-roiba-dorado hover:text-roiba-dorado'
                   )}

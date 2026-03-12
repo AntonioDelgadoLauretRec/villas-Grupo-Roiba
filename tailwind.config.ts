@@ -53,7 +53,9 @@ const config: Config = {
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out forwards',
         'fade-up': 'fadeUp 0.8s ease-out forwards',
+        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
         'slide-in': 'slideIn 0.6s ease-out forwards',
+        'slide-in-left': 'slideInLeft 0.6s ease-out forwards',
         'slide-in-right': 'slideInRight 0.6s ease-out forwards',
         'reveal': 'reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'line-grow': 'lineGrow 0.8s ease-out forwards',
@@ -74,8 +76,16 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(30px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         slideIn: {
           '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        slideInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-100px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
         slideInRight: {
