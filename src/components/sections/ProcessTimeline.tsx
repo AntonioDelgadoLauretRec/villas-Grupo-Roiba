@@ -204,35 +204,35 @@ export const ProcessTimeline: FC = () => {
             </div>
 
             {/* Mobile swipe hint */}
-            <div className="flex lg:hidden items-center gap-2 mt-3 justify-center font-sans text-micro tracking-[0.12em] uppercase text-roiba-dorado/60">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 8H4M7 5L4 8l3 3"/></svg>
-              <span>{locale === 'en' ? 'Swipe to navigate' : 'Desliza para navegar'}</span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 8h8M9 5l3 3-3 3"/></svg>
+            <div className="flex lg:hidden items-center gap-2 mt-3 justify-end pr-2 font-sans text-micro tracking-[0.12em] uppercase text-roiba-dorado/60">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 8H4M7 5L4 8l3 3"/></svg>
+              <span className="whitespace-nowrap">{locale === 'en' ? 'Swipe' : 'Desliza'}</span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 8h8M9 5l3 3-3 3"/></svg>
             </div>
           </div>
 
           {/* ── Right: Active phase detail (swipeable on mobile) ── */}
           <div
-            className="lg:col-span-8 mt-6 lg:mt-0 lg:sticky lg:top-28"
+            className="lg:col-span-8 mt-6 lg:mt-0 lg:sticky lg:top-28 min-w-0"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
           >
             <div
               key={activePhase}
-              className="bg-white shadow-sm border border-roiba-verde/8 p-8 md:p-10 lg:p-12"
+              className="bg-white shadow-sm border border-roiba-verde/8 p-5 sm:p-8 md:p-10 lg:p-12 overflow-hidden"
               style={{ animation: 'fadeUp 0.4s ease both' }}
             >
               {/* Phase number + title row */}
-              <div className="flex items-start gap-5 mb-7">
+              <div className="flex items-start gap-3 sm:gap-5 mb-7">
                 <span className="font-serif leading-none font-light text-roiba-verde/[0.07] select-none flex-shrink-0"
-                  style={{ fontSize: 'clamp(4rem, 8vw, 6rem)' }}>
+                  style={{ fontSize: 'clamp(3rem, 8vw, 6rem)' }}>
                   {PHASES[activePhase].number}
                 </span>
                 <div className="pt-1 flex-1 min-w-0">
-                  <h3 className="text-heading font-serif text-roiba-verde mb-1.5 leading-tight">
+                  <h3 className="text-heading font-serif text-roiba-verde mb-1.5 leading-tight break-words">
                     {PHASES[activePhase].title}
                   </h3>
-                  <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-dorado">
+                  <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-dorado break-words">
                     {PHASES[activePhase].subtitle}
                   </p>
                 </div>
@@ -242,12 +242,12 @@ export const ProcessTimeline: FC = () => {
               <div className="w-full h-px bg-roiba-dorado/20 mb-7" />
 
               {/* Description */}
-              <p className="text-body-lg text-roiba-verde/65 font-light leading-relaxed mb-9">
+              <p className="text-body sm:text-body-lg text-roiba-verde/65 font-light leading-relaxed mb-9 break-words">
                 {PHASES[activePhase].description}
               </p>
 
               {/* Meta grid */}
-              <div className="grid grid-cols-2 gap-6 pt-7 border-t border-roiba-verde/8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-7 border-t border-roiba-verde/8">
                 <div>
                   <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-verde/35 mb-2">
                     {t.procesoPage.duracionEstimada}
@@ -260,7 +260,7 @@ export const ProcessTimeline: FC = () => {
                   <p className="text-micro font-sans font-semibold tracking-widest uppercase text-roiba-verde/35 mb-2">
                     {t.procesoPage.entregable}
                   </p>
-                  <p className="text-body text-roiba-verde/80 leading-snug">
+                  <p className="text-body text-roiba-verde/80 leading-snug break-words">
                     {PHASES[activePhase].deliverable}
                   </p>
                 </div>

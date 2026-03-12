@@ -150,13 +150,14 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
 
       {/* Content */}
       <div className="relative z-[2] w-full max-w-7xl mx-auto px-6 lg:px-16
-                       flex flex-col lg:flex-row items-center min-h-[100dvh] pt-24 pb-16">
+                       flex flex-col lg:flex-row items-center justify-center min-h-[100dvh] pt-24 pb-16">
 
         {/* Left column — text */}
         <div className="lg:w-1/2 lg:pr-16 text-center lg:text-left">
-          {/* Main headline — slide from left, single line */}
-          <h1 className="font-display text-[clamp(32px,5.5vw,52px)] font-bold text-white
-                          leading-[1.1] tracking-tight mb-0 whitespace-nowrap
+          {/* Main headline — slide from left, wraps on mobile */}
+          <h1 className="font-display text-[clamp(28px,5.5vw,52px)] font-bold text-white
+                          leading-[1.1] tracking-tight mb-0
+                          max-w-[calc(100vw-3rem)] lg:max-w-none lg:whitespace-nowrap
                           animate-slide-in-left [animation-delay:0.3s] opacity-0 [animation-fill-mode:forwards]">
             {t.hero.title}
           </h1>

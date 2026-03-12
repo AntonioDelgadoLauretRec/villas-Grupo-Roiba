@@ -533,7 +533,7 @@ export default function ServiciosContent() {
             <div className="max-w-7xl mx-auto px-6">
               {/* Line Header */}
               <div className="relative rounded-sm overflow-hidden mb-12">
-                <div className="relative h-56 md:h-64">
+                <div className="relative min-h-[14rem] md:min-h-[16rem]">
                   <Image
                     src={line.image}
                     alt={line.lineTitle}
@@ -542,7 +542,7 @@ export default function ServiciosContent() {
                     sizes="100vw"
                   />
                   <div className="absolute inset-0 bg-roiba-verde/75" />
-                  <div className="absolute inset-0 flex flex-col justify-center px-8 md:px-14">
+                  <div className="relative z-10 flex flex-col justify-center px-6 py-8 md:px-14 md:py-10 min-h-[14rem] md:min-h-[16rem]">
                     <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-3">
                       {line.lineTag}
                     </p>

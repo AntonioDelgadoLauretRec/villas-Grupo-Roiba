@@ -37,8 +37,8 @@ export const Footer: FC = () => {
 
       <div className="container-editorial py-12 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Logo column */}
-          <div className="flex items-start">
+          {/* Logo column — order 1 on mobile, 1 on desktop */}
+          <div className="flex items-start order-1 md:order-none">
             <Image
               src="/images/LOGO_GRUPOROIBA_path1-5-9_Color.svg"
               alt="Grupo Roiba"
@@ -48,8 +48,8 @@ export const Footer: FC = () => {
             />
           </div>
 
-          {/* Servicios column */}
-          <div>
+          {/* Servicios column — order 4 on mobile (bottom-right), order 2 on desktop */}
+          <div className="order-4 md:order-none">
             <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado/60 mb-5">
               {t.footer.serviciosLabel}
             </h4>
@@ -64,8 +64,8 @@ export const Footer: FC = () => {
             </ul>
           </div>
 
-          {/* Recursos / Empresa column */}
-          <div>
+          {/* Recursos / Empresa column — order 3 on mobile (bottom-left), order 3 on desktop */}
+          <div className="order-3 md:order-none">
             <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado/60 mb-5">
               {t.footer.empresa}
             </h4>
@@ -80,8 +80,8 @@ export const Footer: FC = () => {
             </ul>
           </div>
 
-          {/* Conectar column */}
-          <div>
+          {/* Conectar column — order 2 on mobile (top-right, next to logo), order 4 on desktop */}
+          <div className="order-2 md:order-none">
             <h4 className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado/60 mb-5">
               {t.footer.conectar}
             </h4>
