@@ -16,6 +16,12 @@ interface ArticleData {
   content: string
 }
 
+interface RelatedArticleMeta {
+  slug: string
+  es: { title: string; excerpt: string; image: string; category: string; date: string; readTime: string }
+  en: { title: string; excerpt: string; image: string; category: string; date: string; readTime: string }
+}
+
 const TEXT = {
   es: {
     back: 'Volver al blog',
@@ -23,6 +29,8 @@ const TEXT = {
     ctaButton: 'Solicitar información',
     notFound: 'Artículo no encontrado',
     notFoundDesc: 'El artículo que busca no existe o ha sido retirado.',
+    relatedTitle: 'Continúe explorando',
+    relatedRead: 'Leer artículo',
   },
   en: {
     back: 'Back to blog',
@@ -30,6 +38,8 @@ const TEXT = {
     ctaButton: 'Request information',
     notFound: 'Article not found',
     notFoundDesc: 'The article you are looking for does not exist or has been removed.',
+    relatedTitle: 'Continue exploring',
+    relatedRead: 'Read article',
   },
 }
 
@@ -63,10 +73,12 @@ export default function BlogArticlePage({
   slug,
   dbArticle,
   staticArticle,
+  relatedArticles = [],
 }: {
   slug: string
   dbArticle: ArticleData | null
   staticArticle?: { es: ArticleData; en: ArticleData }
+  relatedArticles?: RelatedArticleMeta[]
 }) {
   const { locale } = useLanguage()
   const tx = TEXT[locale]
@@ -222,6 +234,66 @@ export default function BlogArticlePage({
           />
         </div>
       </article>
+
+      {/* Related Articles */}
+      {relatedArticles.length > 0 && (
+        <section className="py-16 md:py-24 bg-[#F7F8FA]">
+          <div className="max-w-7xl mx-auto px-6">
+            {/* Section header */}
+            <div className="text-center mb-14">
+              <div className="w-10 h-px bg-roiba-dorado/40 mx-auto mb-8" />
+              <h2 className="font-serif text-[clamp(24px,3.5vw,36px)] text-roiba-verde leading-[1.2]">
+                {tx.relatedTitle}
+              </h2>
+            </div>
+
+            {/* Cards grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              {relatedArticles.map((ra) => {
+                const r = ra[locale]
+                return (
+                  <Link
+                    key={ra.slug}
+                    href={`/blog/${ra.slug}`}
+                    className="group bg-white rounded-sm overflow-hidden border border-roiba-verde/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-500 block"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <Image
+                        src={r.image}
+                        alt={r.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        loading="lazy"
+                      />
+                      <span className="absolute top-4 left-4 px-3 py-1 bg-roiba-verde/80 text-white text-[10px] font-semibold tracking-wider uppercase rounded-sm">
+                        {r.category}
+                      </span>
+                    </div>
+                    <div className="p-6">
+                      <div className="flex items-center gap-3 mb-3 text-[11px] text-roiba-verde/40 font-sans">
+                        <span>{r.date}</span>
+                        <span>·</span>
+                        <span>{r.readTime}</span>
+                      </div>
+                      <h3 className="font-serif text-lg text-roiba-verde leading-tight mb-3 group-hover:text-roiba-dorado transition-colors">
+                        {r.title}
+                      </h3>
+                      <p className="text-sm text-roiba-verde/55 leading-relaxed mb-4 line-clamp-2">
+                        {r.excerpt}
+                      </p>
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado group-hover:gap-3 transition-all">
+                        {tx.relatedRead}
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7h8M8 4l3 3-3 3"/></svg>
+                      </span>
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA — matching gold shimmer */}
       <section className="relative py-16 md:py-24 bg-roiba-verde overflow-hidden">

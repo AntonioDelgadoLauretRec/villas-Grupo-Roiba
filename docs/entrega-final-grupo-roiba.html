@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documento de Entrega Final — Grupo Roiba</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --azul: #0C2340;
+    --azul-light: #1B4B7A;
+    --dorado: #C9A96E;
+    --dorado-light: #E8C877;
+    --gris: #3D4A5C;
+    --gris-claro: #F7F8FA;
+    --blanco: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--gris);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    background: var(--blanco);
+  }
+
+  .serif { font-family: 'Cormorant Garamond', serif; }
+
+  /* ─── PORTADA ─── */
+  .cover {
+    min-height: 100vh;
+    background: var(--azul);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.15), transparent);
+  }
+  .cover-logo {
+    width: 180px;
+    margin-bottom: 3rem;
+    opacity: 0.9;
+  }
+  .cover-line {
+    width: 60px;
+    height: 1px;
+    background: var(--dorado);
+    margin: 0 auto 2.5rem;
+  }
+  .cover h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--blanco);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .cover .subtitle {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 4rem;
+  }
+  .cover .meta {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .cover .meta span {
+    color: var(--dorado);
+  }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section {
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(12,35,64,0.06);
+    page-break-inside: avoid;
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-tag {
+    font-size: 0.65rem;
+    color: var(--dorado);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--azul);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .section h2::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: rgba(201,169,110,0.35);
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--azul);
+    font-weight: 500;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p { margin-bottom: 1rem; font-weight: 300; font-size: 0.95rem; }
+
+  ul, ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+    font-weight: 300;
+    font-size: 0.95rem;
+  }
+  li { margin-bottom: 0.5rem; }
+  li::marker { color: var(--dorado); }
+
+  strong { color: var(--azul); font-weight: 600; }
+
+  /* ─── TABLE ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+  }
+  th {
+    background: var(--azul);
+    color: var(--blanco);
+    text-align: left;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid rgba(12,35,64,0.06);
+    font-weight: 300;
+  }
+  tr:nth-child(even) td { background: var(--gris-claro); }
+
+  /* ─── CARD ─── */
+  .card {
+    background: var(--gris-claro);
+    border-left: 3px solid var(--dorado);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  .card strong { display: block; margin-bottom: 0.25rem; }
+
+  /* ─── BADGE ─── */
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+  .badge-ok { background: rgba(16,185,129,0.1); color: #059669; }
+  .badge-pending { background: rgba(245,158,11,0.1); color: #D97706; }
+
+  /* ─── FOOTER ─── */
+  .doc-footer {
+    background: var(--azul);
+    padding: 3rem 2rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  .doc-footer p {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+  .doc-footer .line {
+    width: 40px;
+    height: 1px;
+    background: var(--dorado);
+    margin: 0 auto 1.5rem;
+  }
+
+  @media print {
+    .cover { min-height: auto; padding: 6rem 2rem; }
+    .section { page-break-inside: avoid; }
+    body { font-size: 11pt; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ PORTADA ═══════════════════ -->
+<div class="cover">
+  <svg class="cover-logo" viewBox="0 0 140 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" fill="white" font-family="Cormorant Garamond, serif" font-size="28" font-weight="400" letter-spacing="4">GRUPO ROIBA</text>
+  </svg>
+  <div class="cover-line"></div>
+  <h1>Documento de Entrega Final</h1>
+  <p class="subtitle">Desarrollo Web · gruporoiba.com</p>
+  <p class="meta"><span>Marzo 2026</span> · Versión 1.0</p>
+</div>
+
+<!-- ═══════════════════ CONTENIDO ═══════════════════ -->
+<div class="container">
+
+<!-- 1. RESUMEN EJECUTIVO -->
+<div class="section">
+  <p class="section-tag">01</p>
+  <h2>Resumen Ejecutivo</h2>
+  <p>Se presenta el sitio web corporativo de <strong>Grupo Roiba</strong> (gruporoiba.com), una plataforma digital de alto nivel diseñada para posicionar a la firma como referente en dirección técnica y construcción de villas en Punta Cana y el Caribe.</p>
+  <p>El proyecto incluye:</p>
+  <ul>
+    <li>Sitio web completo con 10+ páginas públicas y sistema bilingüe (ES/EN)</li>
+    <li>Blog editorial con 6 artículos y sección de artículos relacionados</li>
+    <li>Panel de administración completo con gestión de contenido, villas, blog, equipo y configuración</li>
+    <li>Sistema de captación de leads integrado con Supabase</li>
+    <li>Analítica web con Google Analytics / GTM</li>
+    <li>Diseño responsivo validado en desktop, Android e iOS</li>
+    <li>Optimización SEO con datos estructurados, sitemap y metadatos completos</li>
+  </ul>
+</div>
+
+<!-- 2. ESTRUCTURA DEL SITIO -->
+<div class="section">
+  <p class="section-tag">02</p>
+  <h2>Estructura del Sitio</h2>
+
+  <h3>Páginas públicas</h3>
+  <table>
+    <thead>
+      <tr><th>Ruta</th><th>Página</th><th>Descripción</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>/</td><td>Homepage</td><td>Landing principal con hero animado, servicios, proceso, villas, blog preview, CTA</td></tr>
+      <tr><td>/servicios</td><td>Servicios</td><td>Líneas de negocio: supervisión, construcción, interiorismo, gestión</td></tr>
+      <tr><td>/proceso</td><td>Proceso</td><td>Timeline interactivo de las fases de trabajo</td></tr>
+      <tr><td>/villas</td><td>Villas</td><td>Catálogo de villas con filtros y galería</td></tr>
+      <tr><td>/villas/[slug]</td><td>Detalle villa</td><td>Ficha individual con galería, especificaciones y CTA</td></tr>
+      <tr><td>/inversores</td><td>Inversores</td><td>Información para inversores: por qué Punta Cana, datos de mercado</td></tr>
+      <tr><td>/nosotros</td><td>Nosotros</td><td>Equipo fundador, valores, trayectoria, portfolio de proyectos</td></tr>
+      <tr><td>/blog</td><td>Blog</td><td>Listado editorial de artículos con grid de 3 columnas</td></tr>
+      <tr><td>/blog/[slug]</td><td>Artículo</td><td>Detalle editorial con artículos relacionados</td></tr>
+      <tr><td>/contacto</td><td>Contacto</td><td>Formulario de contacto con captación de leads</td></tr>
+      <tr><td>/por-que-punta-cana</td><td>Por qué Punta Cana</td><td>Página informativa sobre el destino y oportunidades</td></tr>
+      <tr><td>/privacidad</td><td>Privacidad</td><td>Política de privacidad</td></tr>
+      <tr><td>/terminos</td><td>Términos</td><td>Términos y condiciones</td></tr>
+      <tr><td>/cookies</td><td>Cookies</td><td>Política de cookies</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Rutas de administración</h3>
+  <table>
+    <thead>
+      <tr><th>Ruta</th><th>Función</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>/admin</td><td>Dashboard con estadísticas y accesos directos</td></tr>
+      <tr><td>/admin/villas</td><td>Gestión de villas (CRUD, galería, publicación)</td></tr>
+      <tr><td>/admin/projects</td><td>Gestión de proyectos</td></tr>
+      <tr><td>/admin/blog</td><td>Gestión de artículos del blog</td></tr>
+      <tr><td>/admin/servicios</td><td>Gestión de servicios</td></tr>
+      <tr><td>/admin/sub-servicios</td><td>Gestión de sub-servicios</td></tr>
+      <tr><td>/admin/proceso</td><td>Gestión de pasos del proceso</td></tr>
+      <tr><td>/admin/testimonios</td><td>Gestión de testimonios</td></tr>
+      <tr><td>/admin/equipo</td><td>Gestión del equipo</td></tr>
+      <tr><td>/admin/valores</td><td>Gestión de valores corporativos</td></tr>
+      <tr><td>/admin/pois</td><td>Puntos de interés en mapa</td></tr>
+      <tr><td>/admin/atracciones</td><td>Atracciones de Punta Cana</td></tr>
+      <tr><td>/admin/contenido</td><td>Editor de contenido global (JSON)</td></tr>
+      <tr><td>/admin/settings</td><td>Configuración: hero, contacto, SEO</td></tr>
+    </tbody>
+  </table>
+
+  <h3>API</h3>
+  <table>
+    <thead>
+      <tr><th>Endpoint</th><th>Método</th><th>Función</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>/api/leads</td><td>POST</td><td>Recepción de leads desde formulario de contacto</td></tr>
+      <tr><td>/api/villas</td><td>GET</td><td>Consulta de villas publicadas</td></tr>
+      <tr><td>/api/admin/settings</td><td>GET</td><td>Consulta de configuración del sitio</td></tr>
+      <tr><td>/sitemap.xml</td><td>GET</td><td>Sitemap dinámico para SEO</td></tr>
+      <tr><td>/robots.txt</td><td>GET</td><td>Directivas para crawlers</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 3. FUNCIONALIDADES IMPLEMENTADAS -->
+<div class="section">
+  <p class="section-tag">03</p>
+  <h2>Funcionalidades Implementadas</h2>
+
+  <h3>Sistema bilingüe (ES/EN)</h3>
+  <p>Toda la web soporta dos idiomas con cambio instantáneo desde cualquier página. El sistema utiliza un <strong>LanguageContext</strong> personalizado con React Context API. El idioma se persiste en localStorage y se aplica sin recarga de página.</p>
+
+  <h3>Diseño responsivo</h3>
+  <p>Diseño adaptativo con breakpoints en 640px (sm), 768px (md), 1024px (lg) y 1280px (xl). Se han aplicado correcciones específicas para:</p>
+  <ul>
+    <li><strong>iOS Safari:</strong> viewport-fit=cover, -webkit-fill-available, safe-area-insets, momentum scroll, sticky positioning</li>
+    <li><strong>Android:</strong> overflow prevention, tap highlight removal, text-size-adjust</li>
+    <li><strong>Scroll containers:</strong> scroll-snap para cards de servicios y tabs de proceso en móvil</li>
+  </ul>
+
+  <h3>Animaciones y microinteracciones</h3>
+  <ul>
+    <li>Scroll reveal system con Intersection Observer</li>
+    <li>Ken Burns effect en el hero de la homepage</li>
+    <li>Marquee horizontal de logos/confianza</li>
+    <li>Botones con efecto slide dorado al hacer hover</li>
+    <li>Cards con elevación y escala de imagen al hover</li>
+    <li>Flip cards en la sección de valores (Nosotros)</li>
+    <li>Carrusel de proyectos con auto-scroll</li>
+  </ul>
+
+  <h3>WhatsApp flotante</h3>
+  <p>Botón flotante de WhatsApp disponible en todas las páginas para contacto directo.</p>
+
+  <h3>Cookie Consent</h3>
+  <p>Banner de consentimiento de cookies conforme a normativa, con aceptar/rechazar.</p>
+
+  <h3>Seguridad</h3>
+  <ul>
+    <li>Content Security Policy (CSP) configurado via middleware</li>
+    <li>Protección de rutas admin con autenticación Supabase</li>
+    <li>Row Level Security (RLS) en todas las tablas de la base de datos</li>
+    <li>Validación de datos con Zod en todas las acciones del servidor</li>
+  </ul>
+</div>
+
+<!-- 4. BLOG Y SISTEMA EDITORIAL -->
+<div class="section">
+  <p class="section-tag">04</p>
+  <h2>Blog y Sistema Editorial</h2>
+
+  <h3>Artículos publicados</h3>
+  <table>
+    <thead>
+      <tr><th>Artículo</th><th>Categoría</th><th>Lectura</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Por qué invertir en Punta Cana en 2025</td><td>Inversión</td><td>8 min</td></tr>
+      <tr><td>Guía legal: comprar propiedad en RD</td><td>Legal</td><td>12 min</td></tr>
+      <tr><td>El proceso de construir una villa de lujo en el Caribe</td><td>Construcción</td><td>10 min</td></tr>
+      <tr><td>Fiscalidad para inversores extranjeros en RD</td><td>Fiscal</td><td>7 min</td></tr>
+      <tr><td>Cap Cana vs Bávaro: ¿dónde construir?</td><td>Destino</td><td>9 min</td></tr>
+      <tr><td>Materiales de construcción para clima tropical</td><td>Construcción</td><td>6 min</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Tipografía editorial</h3>
+  <ul>
+    <li><strong>H1 (hero):</strong> Cormorant Garamond, clamp(28px–52px), blanco sobre imagen</li>
+    <li><strong>H2 (secciones):</strong> Cormorant Garamond, clamp(1.6rem–2rem), con línea dorada decorativa</li>
+    <li><strong>H3 (subsecciones):</strong> Cormorant Garamond medium, clamp(1.2rem–1.45rem)</li>
+    <li><strong>Cuerpo:</strong> DM Sans light, 1.06rem, color #3D4A5C, interlineado 1.85</li>
+    <li><strong>Listas:</strong> Viñetas doradas personalizadas</li>
+    <li><strong>Pull quote:</strong> Serif italic con barra dorada lateral</li>
+  </ul>
+
+  <h3>Artículos relacionados</h3>
+  <p>Cada artículo incluye una sección de <strong>"Continúe explorando"</strong> que muestra 3 artículos relacionados seleccionados por afinidad temática:</p>
+  <ol>
+    <li>Artículos de la misma categoría tienen prioridad</li>
+    <li>Se completa con artículos de otras categorías si no hay suficientes</li>
+    <li>El artículo actual se excluye siempre de la selección</li>
+  </ol>
+  <p>La sección se ubica entre el cuerpo del artículo y el CTA final. Las cards son idénticas al estilo del listado del blog para mantener coherencia visual.</p>
+
+  <h3>Sistema híbrido de contenido</h3>
+  <p>Los artículos pueden provenir de dos fuentes:</p>
+  <ul>
+    <li><strong>Supabase (base de datos):</strong> artículos gestionados desde el panel de administración</li>
+    <li><strong>Datos estáticos:</strong> 6 artículos hardcoded como fallback si Supabase no está disponible</li>
+  </ul>
+  <p>El sistema intenta primero la base de datos. Si no encuentra el artículo o la conexión falla, recurre a los datos estáticos. Esto garantiza que el blog funcione siempre, independientemente del estado de la base de datos.</p>
+</div>
+
+<!-- 5. PANEL DE ADMINISTRACIÓN -->
+<div class="section">
+  <p class="section-tag">05</p>
+  <h2>Panel de Administración</h2>
+
+  <p>Panel completo accesible en <strong>/admin</strong> con autenticación Supabase y dos niveles de acceso:</p>
+  <ul>
+    <li><strong>Superadmin:</strong> acceso completo a todas las funcionalidades</li>
+    <li><strong>Editor:</strong> gestión de contenido sin acceso a configuración avanzada</li>
+  </ul>
+
+  <h3>Contenido gestionable</h3>
+  <table>
+    <thead>
+      <tr><th>Sección</th><th>Operaciones</th><th>Campos clave</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Villas</td><td>Crear, editar, eliminar, publicar/ocultar, galería</td><td>Título, descripción, imagen, precio, dormitorios, baños, m², SEO</td></tr>
+      <tr><td>Proyectos</td><td>Crear, editar, eliminar, publicar/ocultar, galería</td><td>Título, descripción, imagen, estado, fecha estimada</td></tr>
+      <tr><td>Blog</td><td>Crear, editar, eliminar, publicar/despublicar</td><td>Slug, título (ES/EN), extracto (ES/EN), contenido HTML (ES/EN), categoría, imagen</td></tr>
+      <tr><td>Servicios</td><td>CRUD, visibilidad</td><td>Slug, título, descripción, imagen, página destino</td></tr>
+      <tr><td>Sub-servicios</td><td>CRUD, visibilidad</td><td>Label, título, descripción, incluye (JSONB), nota</td></tr>
+      <tr><td>Proceso</td><td>CRUD, visibilidad, ordenación</td><td>Número, título, subtítulo, descripción, detalle, duración</td></tr>
+      <tr><td>Testimonios</td><td>CRUD, visibilidad</td><td>Cita, nombre, rol, localización</td></tr>
+      <tr><td>Equipo</td><td>CRUD, visibilidad</td><td>Nombre, cargo, biografía, imagen</td></tr>
+      <tr><td>Valores</td><td>CRUD, visibilidad</td><td>Título, descripción, imagen</td></tr>
+      <tr><td>POIs</td><td>CRUD, visibilidad</td><td>Nombre, descripción, categoría, latitud, longitud</td></tr>
+      <tr><td>Atracciones</td><td>CRUD, visibilidad</td><td>Slug, subtítulo, título, descripción, imagen</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Galería de imágenes</h3>
+  <p>Sistema de gestión de galerías para villas y proyectos con:</p>
+  <ul>
+    <li>Subida drag-and-drop a Supabase Storage (bucket público "media")</li>
+    <li>Validación de formato (JPG, PNG, WebP, AVIF) y tamaño (máx. 10 MB)</li>
+    <li>Reordenación de imágenes por arrastre</li>
+    <li>Generación automática de URLs públicas</li>
+  </ul>
+
+  <h3>Configuración global</h3>
+  <ul>
+    <li><strong>Hero:</strong> título, subtítulo, texto CTA, enlace CTA</li>
+    <li><strong>Contacto:</strong> email, teléfono, Instagram, dirección</li>
+    <li><strong>SEO:</strong> título del sitio, descripción global</li>
+    <li><strong>Contenido global:</strong> editor JSON para hero, imágenes, estadísticas, about, footer</li>
+  </ul>
+</div>
+
+<!-- 6. LEADS Y SUPABASE -->
+<div class="section">
+  <p class="section-tag">06</p>
+  <h2>Gestión de Leads con Supabase</h2>
+
+  <h3>Captación</h3>
+  <p>El formulario de contacto (<strong>/contacto</strong>) captura datos del interesado y los envía al endpoint <strong>/api/leads</strong>, que los almacena en la base de datos Supabase.</p>
+
+  <h3>Base de datos</h3>
+  <p>Supabase (PostgreSQL) gestiona todas las tablas del sistema:</p>
+  <ul>
+    <li><strong>admin_profiles:</strong> perfiles de administradores con roles</li>
+    <li><strong>site_settings:</strong> configuración global (key-value JSONB)</li>
+    <li><strong>villas / villa_images:</strong> catálogo de villas con galería</li>
+    <li><strong>projects / project_images:</strong> proyectos con galería</li>
+    <li><strong>blog_posts:</strong> artículos del blog</li>
+    <li><strong>services / sub_services:</strong> servicios y sub-servicios</li>
+    <li><strong>process_steps:</strong> fases del proceso de trabajo</li>
+    <li><strong>testimonials:</strong> testimonios de clientes</li>
+    <li><strong>team_members:</strong> miembros del equipo</li>
+    <li><strong>company_values:</strong> valores corporativos</li>
+    <li><strong>pois / attractions:</strong> puntos de interés y atracciones</li>
+  </ul>
+
+  <h3>Seguridad de datos</h3>
+  <p>Todas las tablas están protegidas con Row Level Security (RLS):</p>
+  <ul>
+    <li>Lectura pública solo para contenido publicado/visible</li>
+    <li>Escritura restringida a usuarios autenticados con perfil de admin</li>
+    <li>Función auxiliar <code>is_admin()</code> para verificar permisos</li>
+  </ul>
+
+  <h3>Migraciones</h3>
+  <p>Tres archivos de migración SQL en <code>supabase/migrations/</code>:</p>
+  <ol>
+    <li><strong>001_admin_schema.sql:</strong> Admin, villas, proyectos, settings, RLS</li>
+    <li><strong>002_seed_admin.sql:</strong> Instrucciones para crear usuarios admin</li>
+    <li><strong>003_content_schema.sql:</strong> Todas las tablas de contenido</li>
+  </ol>
+</div>
+
+<!-- 7. INTEGRACIONES Y TECNOLOGÍA -->
+<div class="section">
+  <p class="section-tag">07</p>
+  <h2>Integraciones y Tecnología</h2>
+
+  <h3>Stack tecnológico</h3>
+  <table>
+    <thead>
+      <tr><th>Componente</th><th>Tecnología</th><th>Versión</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Framework</td><td>Next.js (App Router)</td><td>13.5.6</td></tr>
+      <tr><td>Lenguaje</td><td>TypeScript</td><td>5.3+</td></tr>
+      <tr><td>UI</td><td>React</td><td>18.2</td></tr>
+      <tr><td>Estilos</td><td>Tailwind CSS</td><td>3.3</td></tr>
+      <tr><td>Animaciones</td><td>Framer Motion</td><td>12.35</td></tr>
+      <tr><td>Backend / DB</td><td>Supabase (PostgreSQL)</td><td>2.98</td></tr>
+      <tr><td>Autenticación</td><td>Supabase Auth</td><td>SSR</td></tr>
+      <tr><td>Storage</td><td>Supabase Storage</td><td>Bucket público</td></tr>
+      <tr><td>Validación</td><td>Zod</td><td>3.22</td></tr>
+      <tr><td>Analítica</td><td>Google Analytics / GTM</td><td>—</td></tr>
+      <tr><td>Runtime</td><td>Node.js</td><td>22.x</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Sistema de diseño</h3>
+  <table>
+    <thead>
+      <tr><th>Token</th><th>Valor</th><th>Uso</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>roiba-verde</td><td>#0C2340</td><td>Color primario (azul marino)</td></tr>
+      <tr><td>roiba-verde-light</td><td>#1B4B7A</td><td>Variante clara del primario</td></tr>
+      <tr><td>roiba-dorado</td><td>#C9A96E</td><td>Acento dorado</td></tr>
+      <tr><td>roiba-dorado-light</td><td>#E8C877</td><td>Hover dorado</td></tr>
+      <tr><td>roiba-arena</td><td>#FFFFFF</td><td>Fondo principal</td></tr>
+      <tr><td>Font serif</td><td>Cormorant Garamond</td><td>Títulos, headings</td></tr>
+      <tr><td>Font sans</td><td>DM Sans</td><td>Cuerpo, UI, botones</td></tr>
+    </tbody>
+  </table>
+
+  <h3>SEO</h3>
+  <ul>
+    <li><strong>Metadatos:</strong> título, descripción, keywords, Open Graph, Twitter Cards en todas las páginas</li>
+    <li><strong>Datos estructurados:</strong> JSON-LD con Organization, LocalBusiness, WebSite</li>
+    <li><strong>Sitemap:</strong> generación dinámica en /sitemap.xml</li>
+    <li><strong>Robots.txt:</strong> configuración para crawlers</li>
+    <li><strong>URLs canónicas:</strong> definidas en cada página</li>
+    <li><strong>Meta viewport:</strong> con viewport-fit=cover para iOS</li>
+  </ul>
+</div>
+
+<!-- 8. RESPONSIVE -->
+<div class="section">
+  <p class="section-tag">08</p>
+  <h2>Responsive: Desktop, Android, iOS</h2>
+
+  <h3>Validaciones realizadas</h3>
+  <table>
+    <thead>
+      <tr><th>Elemento</th><th>Desktop</th><th>Android</th><th>iOS</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Navegación / menú móvil</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Hero homepage</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Cards de servicios</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Tabs de proceso</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Catálogo de villas</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Blog — listado</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Blog — artículo</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Blog — artículos relacionados</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Formulario de contacto</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Nosotros — equipo</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Footer</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Botones / CTA</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+      <tr><td>Overflow lateral</td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td><td><span class="badge badge-ok">OK</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Correcciones iOS aplicadas</h3>
+  <ul>
+    <li>100vh fix con <code>-webkit-fill-available</code></li>
+    <li>Tap highlight desactivado</li>
+    <li>Momentum scrolling en contenedores horizontales</li>
+    <li>Safe area padding en footer</li>
+    <li>Sticky positioning fix para Safari</li>
+    <li>Text-size-adjust al 100%</li>
+    <li>Menú móvil con overlay z-[9999] y renderizado condicional</li>
+  </ul>
+
+  <h3>Correcciones Android aplicadas</h3>
+  <ul>
+    <li>Overflow-x hidden en html/body</li>
+    <li>Hero title wrapping en pantallas pequeñas</li>
+    <li>Cards de servicios con min-height relativa en vez de absoluta</li>
+    <li>Tabs de proceso con scroll horizontal snap</li>
+    <li>Footer con reordenación de columnas via CSS order</li>
+  </ul>
+</div>
+
+<!-- 9. ESTADO DE ENTREGA -->
+<div class="section">
+  <p class="section-tag">09</p>
+  <h2>Estado de Entrega</h2>
+
+  <table>
+    <thead>
+      <tr><th>Elemento</th><th>Estado</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Sitio web público completo (10+ páginas)</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Sistema bilingüe ES/EN</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Blog con 6 artículos y artículos relacionados</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Panel de administración</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Integración Supabase (DB + Auth + Storage)</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Captación de leads</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Google Analytics / GTM</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>SEO (sitemap, robots, datos estructurados)</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Responsive desktop/Android/iOS</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Seguridad (CSP, RLS, Zod)</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Cookie Consent</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>WhatsApp flotante</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Copy Nosotros (hero + equipo)</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+      <tr><td>Fotos equipo recortadas y alineadas</td><td><span class="badge badge-ok">Entregado</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="card">
+    <strong>Nota sobre Google Analytics</strong>
+    La integración con Google Analytics / Google Tag Manager está implementada en el código (componente GoogleAnalytics + GTMNoScript). El ID de medición debe configurarse en las variables de entorno del despliegue (NEXT_PUBLIC_GA_ID / NEXT_PUBLIC_GTM_ID) para que la analítica se active en producción.
+  </div>
+</div>
+
+<!-- 10. MEJORAS FUTURAS RECOMENDADAS -->
+<div class="section">
+  <p class="section-tag">10</p>
+  <h2>Mejoras Futuras Recomendadas</h2>
+
+  <h3>Funcionalidad</h3>
+  <ul>
+    <li><strong>Panel de leads:</strong> Interfaz en el admin para visualizar, filtrar y gestionar los leads capturados (actualmente solo se almacenan en BD)</li>
+    <li><strong>Notificaciones por email:</strong> Envío automático de email al recibir un nuevo lead (integración con servicio de correo transaccional)</li>
+    <li><strong>Sistema de tags para blog:</strong> Añadir etiquetas múltiples a los artículos para una relación más rica entre contenidos</li>
+    <li><strong>Buscador interno:</strong> Búsqueda full-text en artículos del blog y villas</li>
+    <li><strong>Página de destinos:</strong> Páginas individuales para Cap Cana, Bávaro y otras zonas con contenido enriquecido</li>
+  </ul>
+
+  <h3>Rendimiento y técnica</h3>
+  <ul>
+    <li><strong>Actualización de Next.js:</strong> Migrar a Next.js 14+ para aprovechar Server Components, Partial Prerendering y mejoras de rendimiento</li>
+    <li><strong>Optimización de imágenes:</strong> Migrar imágenes externas (Unsplash) a Supabase Storage con transformaciones automáticas</li>
+    <li><strong>ISR / revalidación:</strong> Implementar Incremental Static Regeneration en páginas con datos dinámicos</li>
+    <li><strong>Testing:</strong> Suite de tests (Jest + Testing Library) para componentes críticos y flujo de contacto</li>
+  </ul>
+
+  <h3>Marketing y conversión</h3>
+  <ul>
+    <li><strong>Landing pages específicas:</strong> Páginas de aterrizaje para campañas de Google Ads / Meta Ads</li>
+    <li><strong>Newsletter:</strong> Integración con plataforma de email marketing (Mailchimp, Brevo)</li>
+    <li><strong>Testimonios en vídeo:</strong> Sección de vídeos de clientes satisfechos</li>
+    <li><strong>Calculadora de inversión:</strong> Herramienta interactiva para estimar costes de construcción</li>
+  </ul>
+</div>
+
+</div><!-- /container -->
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<div class="doc-footer">
+  <div class="line"></div>
+  <p>GRUPO ROIBA · DOCUMENTO DE ENTREGA FINAL</p>
+  <p style="margin-top: 0.5rem;">gruporoiba.com · info@gruporoiba.com</p>
+  <p style="margin-top: 1rem; color: rgba(255,255,255,0.25);">Documento generado en marzo 2026</p>
+</div>
+
+</body>
+</html>
