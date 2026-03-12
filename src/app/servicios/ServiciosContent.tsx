@@ -459,7 +459,7 @@ export default function ServiciosContent() {
       {/* ============================================ */}
       {/* 2. CLIENT SCENARIOS -- with images            */}
       {/* ============================================ */}
-      <section className="py-14 md:py-20 bg-roiba-arena-light">
+      <section className="py-14 md:py-20 bg-roiba-fondo-alt">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-14">
             <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
@@ -535,7 +535,7 @@ export default function ServiciosContent() {
       {/* 3. BUSINESS LINES -- with hero images + cards  */}
       {/* ============================================ */}
       {tx.businessLines.map((line, lineIdx) => {
-        const bgColor = lineIdx % 2 === 0 ? 'bg-white' : 'bg-roiba-arena-light'
+        const bgColor = lineIdx % 2 === 0 ? 'bg-white' : 'bg-roiba-fondo-alt'
 
         return (
           <section
@@ -652,11 +652,8 @@ export default function ServiciosContent() {
           <p className="text-white/60 text-body-lg mb-12 leading-relaxed">
             {tx.cta.description}
           </p>
-          <Link
-            href="/contacto"
-            className="inline-block px-10 py-4 bg-roiba-dorado-light text-roiba-verde font-semibold rounded-sm hover:bg-roiba-dorado transition-colors duration-300 text-lg"
-          >
-            {tx.cta.button}
+          <Link href="/contacto" className="btn-roiba-primary px-10 inline-block">
+            <span>{tx.cta.button}</span>
           </Link>
         </div>
       </section>

@@ -19,11 +19,8 @@ export default function ProcesoCTA() {
         <p className="text-white/60 text-body-lg mb-12 leading-relaxed">
           {t.procesoPage.ctaDesc}
         </p>
-        <Link
-          href="/contacto"
-          className="inline-block px-10 py-4 bg-roiba-dorado text-roiba-verde font-semibold hover:bg-roiba-dorado-light transition-all duration-300 text-micro uppercase tracking-widest"
-        >
-          {t.procesoPage.ctaButton}
+        <Link href="/contacto" className="btn-roiba-primary px-10 inline-block">
+          <span>{t.procesoPage.ctaButton}</span>
         </Link>
       </div>
     </section>

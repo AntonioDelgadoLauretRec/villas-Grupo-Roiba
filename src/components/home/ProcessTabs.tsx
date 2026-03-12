@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { RevealWrapper } from '@/components/ui/RevealWrapper'
 import type { ProcessStep } from '@/types/admin'
 
 const PROCESS_ES = [
@@ -38,17 +39,17 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
       <div className="absolute top-1/2 -right-[5%] w-[400px] h-[400px] border border-white/[0.04] rounded-full -translate-y-1/2" />
 
       <div className="max-w-[1200px] mx-auto relative z-[2]">
-        <div className="text-center mb-16 md:mb-[72px]">
-          <span className="scroll-reveal block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">
+        <RevealWrapper variant="fade-up" className="text-center mb-16 md:mb-[72px]">
+          <span className="block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">
             {t.process.eyebrow}
           </span>
-          <h2 className="scroll-reveal delay-1 font-serif text-[clamp(32px,4vw,48px)] font-normal text-white">
+          <h2 className="font-serif text-[clamp(32px,4vw,48px)] font-normal text-white">
             {t.process.title}{' '}
             <span className="italic text-roiba-dorado-light">{t.process.titleAccent}</span>
           </h2>
-        </div>
+        </RevealWrapper>
 
-        <div className="scroll-reveal delay-2 grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-0 lg:gap-12">
+        <RevealWrapper variant="fade-up" delay={200} className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-0 lg:gap-12">
           <div className="flex flex-col gap-1 process-tabs-row">
             {PROCESS.map((s, i) => (
               <button
@@ -107,7 +108,7 @@ export default function ProcessTabs({ dbSteps }: { dbSteps?: ProcessStep[] }) {
               ))}
             </div>
           </div>
-        </div>
+        </RevealWrapper>
       </div>
     </section>
   )

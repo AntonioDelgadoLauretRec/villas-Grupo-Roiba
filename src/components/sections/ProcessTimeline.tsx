@@ -87,7 +87,7 @@ export const ProcessTimeline: FC = () => {
   }, [goNext, goPrev])
 
   return (
-    <section className="py-14 md:py-20 bg-roiba-arena-light relative overflow-hidden">
+    <section className="py-14 md:py-20 bg-roiba-fondo-alt relative overflow-hidden">
       {/* Número decorativo de fondo */}
       <div className="absolute top-16 right-0 text-[18rem] md:text-[26rem] font-serif text-roiba-verde/[0.025] leading-none select-none pointer-events-none">
         {ROIBA_PHASES[activePhase].number}

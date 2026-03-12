@@ -13,7 +13,7 @@ export default function AboutSection({ dbAbout }: { dbAbout?: AboutData }) {
   const { t } = useLanguage()
 
   return (
-    <section className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-roiba-arena-light">
+    <section className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-roiba-fondo-alt">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
         {/* Text */}
         <div>
@@ -26,10 +26,10 @@ export default function AboutSection({ dbAbout }: { dbAbout?: AboutData }) {
             <span className="italic text-roiba-dorado">{t.about.titleAccent}</span>
           </h2>
           <div className="scroll-reveal delay-2 w-12 h-0.5 bg-roiba-dorado mb-6" />
-          <p className="scroll-reveal delay-3 font-sans text-sm leading-[1.85] text-slate-500 mb-5">
+          <p className="scroll-reveal delay-3 font-sans text-sm leading-[1.85] text-roiba-texto-suave mb-5">
             {dbAbout?.paragraph1 || t.about.p1}
           </p>
-          <p className="scroll-reveal delay-4 font-sans text-sm leading-[1.85] text-slate-500">
+          <p className="scroll-reveal delay-4 font-sans text-sm leading-[1.85] text-roiba-texto-suave">
             {dbAbout?.paragraph2 || t.about.p2}
           </p>
         </div>
