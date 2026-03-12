@@ -34,17 +34,10 @@ export default function HeroSection({ dbImages }: { dbImages?: string[] }) {
   const loadedRef = useRef(false)
   const { t } = useLanguage()
 
-  // Show subtitle with scroll or after delay
+  // Show subtitle after a brief entrance delay
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 80) setShowSubtitle(true)
-    }
-    const timer = setTimeout(() => setShowSubtitle(true), 2500)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      clearTimeout(timer)
-    }
+    const timer = setTimeout(() => setShowSubtitle(true), 800)
+    return () => clearTimeout(timer)
   }, [])
 
   const tryNext = useCallback(() => {
