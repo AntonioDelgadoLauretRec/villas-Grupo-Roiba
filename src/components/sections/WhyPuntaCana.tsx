@@ -2,11 +2,12 @@
 
 import { FC, useEffect, useState, useCallback, useRef } from 'react'
 import Image from 'next/image'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 // ─── POI CATEGORIES ───
 type PoiCategory = 'playa' | 'golf' | 'marina' | 'resort' | 'aeropuerto' | 'ocio' | 'naturaleza' | 'gastronomia'
 
-const CATEGORY_META: Record<PoiCategory, { color: string; label: string }> = {
+const CATEGORY_META_ES: Record<PoiCategory, { color: string; label: string }> = {
   resort:       { color: '#C9A96E', label: 'Resorts & Comunidades' },
   playa:        { color: '#0EA5E9', label: 'Playas' },
   golf:         { color: '#22C55E', label: 'Golf' },
@@ -17,6 +18,17 @@ const CATEGORY_META: Record<PoiCategory, { color: string; label: string }> = {
   gastronomia:  { color: '#F59E0B', label: 'Gastronomía' },
 }
 
+const CATEGORY_META_EN: Record<PoiCategory, { color: string; label: string }> = {
+  resort:       { color: '#C9A96E', label: 'Resorts & Communities' },
+  playa:        { color: '#0EA5E9', label: 'Beaches' },
+  golf:         { color: '#22C55E', label: 'Golf' },
+  marina:       { color: '#3B82F6', label: 'Marina & Sailing' },
+  aeropuerto:   { color: '#94A3B8', label: 'Transport' },
+  ocio:         { color: '#A855F7', label: 'Leisure' },
+  naturaleza:   { color: '#10B981', label: 'Nature' },
+  gastronomia:  { color: '#F59E0B', label: 'Gastronomy' },
+}
+
 // Category order for sorted legend
 const CAT_ORDER: PoiCategory[] = ['resort', 'playa', 'golf', 'marina', 'gastronomia', 'ocio', 'naturaleza', 'aeropuerto']
 
@@ -24,7 +36,7 @@ function CatDot({ cat, size = 10 }: { cat: PoiCategory; size?: number }) {
   return (
     <span
       className="inline-block rounded-full flex-shrink-0"
-      style={{ width: size, height: size, background: CATEGORY_META[cat].color }}
+      style={{ width: size, height: size, background: CATEGORY_META_ES[cat].color }}
     />
   )
 }
@@ -77,7 +89,7 @@ function buildMapUrl(lat: number, lng: number, zoom: number, marker = false) {
 
 const DEFAULT_MAP_URL = buildMapUrl(18.54, -68.39, 11)
 
-const ATTRACTIONS = [
+const ATTRACTIONS_ES = [
   {
     id: 'playas', subtitle: 'Costa Caribeña', title: 'Playas de Arena Blanca',
     description: 'Las playas de Punta Cana y Cap Cana figuran de forma recurrente entre las mejores del mundo según Condé Nast Traveler, Travel + Leisure y TripAdvisor. Arena blanca de coral, aguas turquesa cristalinas y palmeras de cocotero componen un paisaje costero de belleza excepcional. Playa Juanillo, Playa Blanca y Cabeza de Toro son algunas de las joyas que adornan esta costa única de 48 kilómetros.',
@@ -130,6 +142,115 @@ const ATTRACTIONS = [
   },
 ]
 
+const ATTRACTIONS_EN = [
+  {
+    id: 'playas', subtitle: 'Caribbean Coast', title: 'White Sand Beaches',
+    description: 'Punta Cana and Cap Cana beaches consistently rank among the world\'s best according to Condé Nast Traveler, Travel + Leisure and TripAdvisor. White coral sand, crystal turquoise waters and coconut palms create a coastal landscape of exceptional beauty. Playa Juanillo, Playa Blanca and Cabeza de Toro are some of the gems along this unique 48-kilometre coastline.',
+    image: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'golf', subtitle: 'World-Class Golf', title: 'PGA Tour Venue',
+    description: 'Punta Cana hosts the Corales Puntacana Championship, an official PGA Tour event. The courses, designed by Jack Nicklaus, Tom Fazio and P.B. Dye, are set in spectacular landscapes among cliffs, mangroves and the Caribbean coastline. Over 54 championship-level holes.',
+    image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'gastronomia', subtitle: 'Fine Dining', title: 'Signature Gastronomy',
+    description: 'The SBG Restaurant, by 3-Michelin-star chef Nandu Jubany, elevates Mediterranean cuisine to a unique sensory experience. La Palapa by Eden Roc fuses European technique with tropical ingredients. The Platea concept transforms dinner into a high gastronomic culture show.',
+    image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'marina', subtitle: 'Premium Sailing', title: 'Blue Marlin Capital',
+    description: 'Marina Cap Cana is the largest-capacity marina in the Caribbean, with Blue Flag certification and over 150 berths for vessels up to 150 feet. Recognised as one of the world\'s top deep-sea fishing destinations.',
+    image: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'clubes', subtitle: 'Exclusive Social Life', title: 'Premier Social Clubs',
+    description: 'Eden Roc Cap Cana combines an infinity pool, signature restaurant and exclusive access to Playa Juanillo. Puntacana Resort & Club offers residents one of the most complete country clubs in the Caribbean, with tennis courts, pools and a luxury spa.',
+    image: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'naturaleza', subtitle: 'Natural Heritage', title: 'Nature Parks and Ecology',
+    description: 'East National Park protects 420 km² of tropical forests, mangroves and coral reefs, including the legendary Saona Island. Indigenous Eyes Ecological Park houses 12 freshwater lagoons. Hoyo Azul, a turquoise cenote, is one of the most photographed spots in the Caribbean.',
+    image: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'buceo', subtitle: 'Underwater World', title: 'Diving and Marine Life',
+    description: 'Living coral reefs, shipwrecks turned into artificial reefs and unique underwater caves. Between December and March, Samaná Bay offers the spectacle of humpback whales. One of the best diving destinations in the Western Hemisphere.',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'clima', subtitle: 'Perfect Climate', title: 'The Ideal Climate Year-Round',
+    description: 'With 340 sunny days a year and an average of 27°C, Punta Cana enjoys one of the most stable climates in the world. The dry season coincides with the European winter, making it the perfect refuge for international residents.',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'nocturna', subtitle: 'Entertainment', title: 'Nightlife and Leisure',
+    description: 'Imagine Punta Cana is a nightclub built inside a natural cave with capacity for 2,000 people. Coco Bongo is a benchmark for live entertainment. Cap Cana\'s beach clubs offer evenings with resident DJs and signature cocktails.',
+    image: 'https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1920&q=85&fit=crop',
+  },
+  {
+    id: 'ecuestre', subtitle: 'Equestrian Culture', title: 'Stables & Polo',
+    description: 'Polo club with regulation-size fields, riding schools and stables with international standards. Tournaments attract players from Argentina, Mexico, Spain and the United States.',
+    image: 'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1920&q=85&fit=crop',
+  },
+]
+
+// ─── i18n text for UI labels ───
+const UI_TEXT = {
+  es: {
+    liveLabel: 'Punta Cana — En directo',
+    sensation: 'Sensación',
+    humidity: 'Humedad',
+    wind: 'Viento',
+    status: 'Estado',
+    locationTag: 'Ubicación',
+    locationTitle: 'Punta Cana & Cap Cana',
+    locationP1: 'Situado en el extremo oriental de República Dominicana, Punta Cana es el principal polo turístico y residencial del Caribe. Cap Cana, su comunidad cerrada más exclusiva, ofrece 30.000 acres de desarrollo planificado con marina, campos de golf de campeonato, playas privadas y servicios de primer nivel internacional.',
+    locationP2: 'A tan solo 15 minutos del Aeropuerto Internacional de Punta Cana (PUJ) — el de mayor tráfico del Caribe, con vuelos directos desde más de 85 ciudades de Europa, Norteamérica y Sudamérica—, la zona combina accesibilidad global con la privacidad y exclusividad que demanda el comprador internacional.',
+    viewAll: 'Ver todo',
+    filterByCategory: 'Filtrar por categoría',
+    allPoints: 'Todos los puntos',
+    clearFilter: 'Limpiar filtro',
+    destinationTag: 'El Destino',
+    destinationTitle: 'Un estilo de vida excepcional',
+    destinationDesc: 'Más allá de la construcción de una villa, vivir en Punta Cana significa acceder a un ecosistema de privilegios únicos en el Caribe: playas de categoría mundial, gastronomía de autor, golf del PGA Tour, naturaleza virgen y un clima perfecto los 365 días del año.',
+    weatherClear: 'Despejado',
+    weatherMostlyClear: 'Mayormente despejado',
+    weatherPartlyCloudy: 'Parcialmente nublado',
+    weatherCloudy: 'Nublado',
+    weatherDrizzle: 'Llovizna',
+    weatherRain: 'Lluvia',
+    weatherStorm: 'Tormenta',
+    weatherVariable: 'Variable',
+  },
+  en: {
+    liveLabel: 'Punta Cana — Live',
+    sensation: 'Feels like',
+    humidity: 'Humidity',
+    wind: 'Wind',
+    status: 'Conditions',
+    locationTag: 'Location',
+    locationTitle: 'Punta Cana & Cap Cana',
+    locationP1: 'Located on the eastern tip of the Dominican Republic, Punta Cana is the Caribbean\'s leading tourist and residential hub. Cap Cana, its most exclusive gated community, offers 30,000 acres of planned development with a marina, championship golf courses, private beaches and world-class amenities.',
+    locationP2: 'Just 15 minutes from Punta Cana International Airport (PUJ) — the busiest in the Caribbean, with direct flights from over 85 cities in Europe, North America and South America — the area combines global accessibility with the privacy and exclusivity that international buyers demand.',
+    viewAll: 'View all',
+    filterByCategory: 'Filter by category',
+    allPoints: 'All points',
+    clearFilter: 'Clear filter',
+    destinationTag: 'The Destination',
+    destinationTitle: 'An exceptional lifestyle',
+    destinationDesc: 'Beyond building a villa, living in Punta Cana means accessing a unique ecosystem of privileges in the Caribbean: world-class beaches, signature gastronomy, PGA Tour golf, pristine nature and perfect climate 365 days a year.',
+    weatherClear: 'Clear',
+    weatherMostlyClear: 'Mostly clear',
+    weatherPartlyCloudy: 'Partly cloudy',
+    weatherCloudy: 'Cloudy',
+    weatherDrizzle: 'Drizzle',
+    weatherRain: 'Rain',
+    weatherStorm: 'Storm',
+    weatherVariable: 'Variable',
+  },
+}
+
 // ─── WEATHER ───
 function SunIcon() {
   return (
@@ -163,15 +284,15 @@ function getWeatherIcon(code: number) {
   if (code <= 3) return <CloudSunIcon />
   return <RainIcon />
 }
-function getWeatherLabel(code: number): string {
-  if (code === 0) return 'Despejado'
-  if (code === 1) return 'Mayormente despejado'
-  if (code === 2) return 'Parcialmente nublado'
-  if (code === 3) return 'Nublado'
-  if (code <= 59) return 'Llovizna'
-  if (code <= 69) return 'Lluvia'
-  if (code <= 99) return 'Tormenta'
-  return 'Variable'
+function getWeatherLabel(code: number, tx: typeof UI_TEXT.es): string {
+  if (code === 0) return tx.weatherClear
+  if (code === 1) return tx.weatherMostlyClear
+  if (code === 2) return tx.weatherPartlyCloudy
+  if (code === 3) return tx.weatherCloudy
+  if (code <= 59) return tx.weatherDrizzle
+  if (code <= 69) return tx.weatherRain
+  if (code <= 99) return tx.weatherStorm
+  return tx.weatherVariable
 }
 
 function usePuntaCanaWeather() {
@@ -199,6 +320,10 @@ function usePuntaCanaWeather() {
 // COMPONENT
 // ═══════════════════════════════════════════
 export const WhyPuntaCana: FC = () => {
+  const { locale } = useLanguage()
+  const tx = UI_TEXT[locale]
+  const CATEGORY_META = locale === 'en' ? CATEGORY_META_EN : CATEGORY_META_ES
+  const ATTRACTIONS = locale === 'en' ? ATTRACTIONS_EN : ATTRACTIONS_ES
   const weather = usePuntaCanaWeather()
   const [activePoi, setActivePoi] = useState<number | null>(null)
   const [mapUrl, setMapUrl] = useState(DEFAULT_MAP_URL)
@@ -257,17 +382,17 @@ export const WhyPuntaCana: FC = () => {
                   <span className="font-serif text-white/30 text-xl">°C</span>
                 </div>
                 <p className="text-micro font-sans font-medium tracking-[0.2em] uppercase text-roiba-dorado mt-1">
-                  Punta Cana — En directo
+                  {tx.liveLabel}
                 </p>
               </div>
             </div>
             <div className="hidden md:block w-px h-14 bg-white/10" />
             <div className="grid grid-cols-4 gap-x-8 gap-y-2 text-center md:text-left">
               {[
-                { l: 'Sensación', v: `${weather?.feelsLike ?? '—'}°C` },
-                { l: 'Humedad', v: `${weather?.humidity ?? '—'}%` },
-                { l: 'Viento', v: `${weather?.windSpeed ?? '—'} km/h` },
-                { l: 'Estado', v: weather ? getWeatherLabel(weather.weatherCode) : '—' },
+                { l: tx.sensation, v: `${weather?.feelsLike ?? '—'}°C` },
+                { l: tx.humidity, v: `${weather?.humidity ?? '—'}%` },
+                { l: tx.wind, v: `${weather?.windSpeed ?? '—'} km/h` },
+                { l: tx.status, v: weather ? getWeatherLabel(weather.weatherCode, tx) : '—' },
               ].map((d) => (
                 <div key={d.l}>
                   <p className="text-[10px] font-sans uppercase tracking-widest text-white/30 mb-0.5">{d.l}</p>
@@ -285,24 +410,17 @@ export const WhyPuntaCana: FC = () => {
           {/* Centered header */}
           <div className="max-w-3xl mx-auto text-center mb-12 md:mb-14">
             <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mb-4 block">
-              Ubicación
+              {tx.locationTag}
             </span>
             <h2 className="text-display-md md:text-display-lg font-serif text-roiba-verde mb-5">
-              Punta Cana & Cap Cana
+              {tx.locationTitle}
             </h2>
             <div className="w-12 h-px bg-roiba-dorado mx-auto mb-5" />
             <p className="text-body-lg text-roiba-verde/60 font-light leading-relaxed text-justify mb-3">
-              Situado en el extremo oriental de República Dominicana, Punta Cana es el
-              principal polo turístico y residencial del Caribe. Cap Cana, su comunidad
-              cerrada más exclusiva, ofrece 30.000 acres de desarrollo planificado con
-              marina, campos de golf de campeonato, playas privadas y servicios de primer
-              nivel internacional.
+              {tx.locationP1}
             </p>
             <p className="text-body text-roiba-verde/45 leading-relaxed text-justify">
-              A tan solo 15 minutos del Aeropuerto Internacional de Punta Cana (PUJ) —
-              el de mayor tráfico del Caribe, con vuelos directos desde más de 85 ciudades
-              de Europa, Norteamérica y Sudamérica—, la zona combina accesibilidad global
-              con la privacidad y exclusividad que demanda el comprador internacional.
+              {tx.locationP2}
             </p>
           </div>
 
@@ -325,7 +443,7 @@ export const WhyPuntaCana: FC = () => {
                   onClick={() => { setActivePoi(null); setMapUrl(DEFAULT_MAP_URL) }}
                   className="absolute top-3 right-3 z-10 bg-white/95 backdrop-blur-sm text-roiba-verde text-micro font-sans font-semibold uppercase tracking-wider px-3 py-1.5 border border-roiba-verde/15 hover:bg-roiba-dorado hover:text-roiba-verde hover:border-roiba-dorado transition-colors"
                 >
-                  Ver todo
+                  {tx.viewAll}
                 </button>
               )}
             </div>
@@ -348,7 +466,7 @@ export const WhyPuntaCana: FC = () => {
                     <svg className="w-4 h-4 text-roiba-dorado" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <path d="M2 4h12M4 8h8M6 12h4" strokeLinecap="round" />
                     </svg>
-                    Filtrar por categoría
+                    {tx.filterByCategory}
                   </>
                 )}
                 <svg className={`w-3 h-3 ml-1 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -368,7 +486,7 @@ export const WhyPuntaCana: FC = () => {
                     }`}
                   >
                     <span className="w-2 h-2 rounded-full bg-roiba-verde/40 flex-shrink-0" />
-                    Todos los puntos
+                    {tx.allPoints}
                   </button>
                   <div className="h-px bg-roiba-verde/8" />
                   {CAT_ORDER.map((cat) => (
@@ -398,7 +516,7 @@ export const WhyPuntaCana: FC = () => {
                 onClick={() => handleFilterSelect(null)}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-roiba-verde/5 text-roiba-verde/60 text-[11px] font-sans tracking-wider uppercase border border-roiba-verde/10 hover:bg-roiba-verde/10 transition-colors"
               >
-                Limpiar filtro
+                {tx.clearFilter}
                 <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M3 3l6 6M9 3l-6 6" strokeLinecap="round" />
                 </svg>
@@ -445,18 +563,15 @@ export const WhyPuntaCana: FC = () => {
         <div className="container-editorial">
           <div className="max-w-3xl mx-auto text-center mb-14 md:mb-16">
             <span className="text-micro font-sans font-medium tracking-widest uppercase text-roiba-dorado mb-4 block">
-              El Destino
+              {tx.destinationTag}
             </span>
             <h2 className="text-display-md md:text-display-lg font-serif text-roiba-verde mb-5">
               Punta Cana —{' '}
-              <span className="italic">Un estilo de vida excepcional</span>
+              <span className="italic">{tx.destinationTitle}</span>
             </h2>
             <div className="w-12 h-px bg-roiba-dorado mx-auto mb-5" />
             <p className="text-body-lg text-roiba-verde/60 font-light leading-relaxed text-justify">
-              Más allá de la construcción de una villa, vivir en Punta Cana significa acceder a
-              un ecosistema de privilegios únicos en el Caribe: playas de categoría mundial,
-              gastronomía de autor, golf del PGA Tour, naturaleza virgen y un clima perfecto
-              los 365 días del año.
+              {tx.destinationDesc}
             </p>
           </div>
 

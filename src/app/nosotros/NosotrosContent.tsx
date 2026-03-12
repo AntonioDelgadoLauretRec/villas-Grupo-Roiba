@@ -311,12 +311,12 @@ export default function NosotrosContent() {
               <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
                 {tx.ivanRole}
               </span>
-              <h3 className="text-heading font-serif text-roiba-verde mt-3 mb-1">
+              <h3 className="text-heading font-serif text-roiba-texto mt-3 mb-1">
                 Iván Barrios Martín
               </h3>
               <p className="text-caption text-roiba-dorado mb-6">{tx.ivanCaption}</p>
               <div className="w-10 h-px bg-roiba-dorado/50 mb-6" />
-              <div className="space-y-4 text-body text-roiba-verde/75 leading-relaxed">
+              <div className="space-y-4 text-body text-roiba-texto-suave leading-relaxed">
                 <p>{tx.ivanP1}</p>
                 <p>{tx.ivanP2}</p>
                 <p>{tx.ivanP3}</p>

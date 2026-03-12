@@ -123,9 +123,16 @@ export const Footer: FC = () => {
       <div className="border-t border-white/[0.06]">
         <div className="container-editorial py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-caption text-white/30">
-              &copy; {currentYear} Grupo Roiba. {t.footer.rights}.
-            </p>
+            <div>
+              <p className="text-caption text-white/30">
+                &copy; {currentYear} Grupo Roiba. {t.footer.rights}.
+              </p>
+              {t.footer.disclaimer && (
+                <p className="text-[10px] text-white/15 mt-1 max-w-xl">
+                  {t.footer.disclaimer}
+                </p>
+              )}
+            </div>
             <div className="flex gap-4 text-caption text-white/20">
               {FOOTER_LINKS.legal.map((link) => (
                 <Link key={link.href} href={link.href} className="hover:text-white/40 transition-colors">
