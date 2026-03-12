@@ -64,37 +64,37 @@ const TEXT = {
         title: 'Transparencia',
         description:
           'Comunicación directa y continua. El cliente tiene acceso al estado del proyecto, costes actualizados y justificación de cada decisión técnica en cualquier momento.',
-        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=70&fit=crop',
       },
       {
         title: 'Control',
         description:
           'Supervisión técnica en cada fase bajo una misma dirección. Integramos planificación, ejecución en campo y seguimiento económico para detectar desviaciones antes de que escalen.',
-        image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=70&fit=crop',
       },
       {
         title: 'Rigor técnico',
         description:
           'Criterio profesional en cada decisión. Desde la selección de sistemas constructivos hasta los materiales de acabado, priorizamos durabilidad, eficiencia y adecuación al entorno.',
-        image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=70&fit=crop',
       },
       {
         title: 'Calidad',
         description:
           'Materiales y sistemas constructivos seleccionados conforme al estándar del proyecto. Supervisión de acabados en cada partida antes de dar la fase por cerrada.',
-        image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=70&fit=crop',
       },
       {
         title: 'Compromiso',
         description:
           'Los fundadores participan personalmente en la dirección o supervisión de cada obra, asumiendo responsabilidad directa sobre su correcta ejecución.',
-        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=70&fit=crop',
       },
       {
         title: 'Confianza',
         description:
           'Cada proyecto es el inicio de una relación a largo plazo. La confianza se construye entregando lo acordado, en plazo, sin excepciones ni excusas.',
-        image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=70&fit=crop',
       },
     ],
 
@@ -163,37 +163,37 @@ const TEXT = {
         title: 'Transparency',
         description:
           'Direct and continuous communication. The client has access to the project status, updated costs, and the rationale behind every technical decision at any time.',
-        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=70&fit=crop',
       },
       {
         title: 'Control',
         description:
           'Technical supervision at every phase under a single management structure. We integrate planning, field execution, and financial tracking to detect deviations before they escalate.',
-        image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=70&fit=crop',
       },
       {
         title: 'Technical Rigour',
         description:
           'Professional judgement in every decision. From the selection of construction systems to finishing materials, we prioritise durability, efficiency, and suitability to the environment.',
-        image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=70&fit=crop',
       },
       {
         title: 'Quality',
         description:
           'Materials and construction systems selected according to the project standard. Finish inspection in every trade before closing the phase.',
-        image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=70&fit=crop',
       },
       {
         title: 'Commitment',
         description:
           'The founders personally participate in the management or supervision of every project, assuming direct responsibility for its proper execution.',
-        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=70&fit=crop',
       },
       {
         title: 'Trust',
         description:
           'Every project is the start of a long-term relationship. Trust is built by delivering what was agreed, on time, with no exceptions or excuses.',
-        image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=70&fit=crop',
+        image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=70&fit=crop',
       },
     ],
 
@@ -231,11 +231,11 @@ export default function NosotrosContent() {
         <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto text-center z-10">
-          <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6 md:whitespace-nowrap">
+          <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
             {tx.heroTitle}
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
-          <p className="text-body-lg text-white/70 max-w-3xl mx-auto leading-relaxed md:whitespace-nowrap">
+          <p className="text-body-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
             {tx.heroDesc}
           </p>
         </div>
@@ -244,6 +244,20 @@ export default function NosotrosContent() {
       {/* -- 2. EL EQUIPO -- */}
       <section className="py-12 md:py-16 px-6 bg-roiba-fondo-alt">
         <div className="max-w-7xl mx-auto">
+          {/* section header */}
+          <div className="max-w-3xl mx-auto text-center mb-14">
+            <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
+              {tx.equipoTag}
+            </span>
+            <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-4">
+              {tx.equipoTitle}
+            </h2>
+            <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
+            <p className="text-body-lg text-roiba-texto-suave leading-relaxed">
+              {tx.equipoDesc}
+            </p>
+          </div>
+
           {/* profiles grid */}
           <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
             {/* Profile 1 — Iván */}
@@ -345,6 +359,20 @@ export default function NosotrosContent() {
 
       {/* -- 5. PORTFOLIO -- */}
       <section className="py-12 md:py-16 bg-roiba-arena-light overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-10">
+          <div className="text-center">
+            <span className="text-roiba-dorado text-micro uppercase tracking-[0.2em]">
+              {tx.portfolioTag}
+            </span>
+            <h2 className="text-display-md font-serif text-roiba-texto mt-4 mb-4">
+              {tx.portfolioTitle}
+            </h2>
+            <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
+            <p className="text-body-lg text-roiba-texto-suave leading-relaxed max-w-3xl mx-auto">
+              {tx.portfolioDesc}
+            </p>
+          </div>
+        </div>
         <ProjectCarousel />
       </section>
 

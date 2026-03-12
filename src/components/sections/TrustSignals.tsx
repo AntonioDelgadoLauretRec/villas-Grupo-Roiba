@@ -21,7 +21,7 @@ const signals: TrustSignal[] = [
       es: 'Más de cuatro décadas ejecutando y supervisando proyectos residenciales y hoteleros en España y República Dominicana.',
       en: 'Over four decades executing and supervising residential and hotel projects in Spain and the Dominican Republic.',
     },
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=70&fit=crop',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=70&fit=crop',
   },
   {
     title: {
@@ -32,7 +32,7 @@ const signals: TrustSignal[] = [
       es: 'Due diligence completa, títulos verificados y cumplimiento normativo antes de cualquier inversión.',
       en: 'Complete due diligence, verified titles, and regulatory compliance before any investment.',
     },
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=70&fit=crop',
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=70&fit=crop',
   },
   {
     title: {
@@ -43,7 +43,7 @@ const signals: TrustSignal[] = [
       es: 'Sin intermediarios ni comisiones ocultas. Comunicación directa con los fundadores y el equipo técnico.',
       en: 'No middlemen or hidden commissions. Direct communication with founders and technical team.',
     },
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=70&fit=crop',
+    image: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=600&q=70&fit=crop',
   },
 ]
 

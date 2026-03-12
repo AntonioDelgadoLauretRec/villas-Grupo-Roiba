@@ -442,9 +442,7 @@ export default function ServiciosContent() {
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-6 text-center z-10">
           <h1 className="font-serif text-display-lg md:text-display-xl text-white mb-8">
-            {tx.hero.title}
-            <br />
-            {tx.hero.titleBreak}
+            {tx.hero.title} {tx.hero.titleBreak}
           </h1>
           <div className="w-16 h-px bg-roiba-dorado mx-auto mb-6" />
           <p className="text-white/70 text-body-lg max-w-3xl mx-auto leading-relaxed">
