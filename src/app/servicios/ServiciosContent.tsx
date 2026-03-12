@@ -441,9 +441,6 @@ export default function ServiciosContent() {
         <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-5xl mx-auto px-6 text-center z-10">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            {tx.hero.tag}
-          </p>
           <h1 className="font-serif text-display-lg md:text-display-xl text-white mb-8">
             {tx.hero.title}
             <br />

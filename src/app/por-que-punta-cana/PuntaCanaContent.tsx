@@ -13,9 +13,6 @@ export default function PuntaCanaContent() {
       <section className="relative bg-roiba-verde py-20 md:py-24 px-6 overflow-hidden">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            {t.puntaCanaPage.heroEyebrow}
-          </p>
           <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
             {t.puntaCanaPage.heroTitle}
           </h1>
@@ -32,9 +29,6 @@ export default function PuntaCanaContent() {
       <section className="relative py-14 md:py-20 bg-roiba-verde overflow-hidden">
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
-          <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-            {t.puntaCanaPage.ctaEyebrow}
-          </p>
           <h2 className="text-display-md font-serif text-white mb-6">
             {t.puntaCanaPage.ctaTitle}
           </h2>

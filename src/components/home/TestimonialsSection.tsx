@@ -53,17 +53,17 @@ export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials
   const item = TESTIMONIALS[idx]
 
   return (
-    <section className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-roiba-verde relative overflow-hidden">
-      <div className="absolute top-[10%] left-[8%] font-serif text-[clamp(200px,25vw,400px)] font-light text-roiba-dorado/[0.03] leading-none select-none pointer-events-none">
+    <section className="py-12 md:py-16 px-4 md:px-8 lg:px-16 bg-white relative overflow-hidden">
+      <div className="absolute top-[10%] left-[8%] font-serif text-[clamp(200px,25vw,400px)] font-light text-roiba-verde/[0.03] leading-none select-none pointer-events-none">
         &ldquo;
       </div>
 
       <div className="max-w-[900px] mx-auto relative z-[2]">
         <div className="scroll-reveal text-center mb-14">
           <span className="block font-sans text-micro font-semibold tracking-[0.3em] uppercase text-roiba-dorado mb-4">{t.testimonials.eyebrow}</span>
-          <h2 className="font-serif text-[clamp(32px,4vw,48px)] font-normal text-white">
+          <h2 className="font-serif text-[clamp(32px,4vw,48px)] font-normal text-roiba-verde">
             {t.testimonials.title}{' '}
-            <span className="italic text-roiba-dorado-light">{t.testimonials.titleAccent}</span>
+            <span className="italic text-roiba-dorado">{t.testimonials.titleAccent}</span>
           </h2>
         </div>
 
@@ -84,13 +84,13 @@ export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials
                   </svg>
                 ))}
               </div>
-              <p className="font-serif text-[clamp(18px,2.5vw,24px)] font-normal italic text-white/85 leading-[1.65] max-w-[720px] mx-auto mb-8">
+              <p className="font-serif text-[clamp(18px,2.5vw,24px)] font-normal italic text-roiba-verde/85 leading-[1.65] max-w-[720px] mx-auto mb-8">
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
               <div className="w-10 h-px bg-roiba-dorado/40 mx-auto mb-6" />
-              <p className="font-sans text-[13px] font-semibold text-white tracking-wide mb-1">{testimonial.name}</p>
+              <p className="font-sans text-[13px] font-semibold text-roiba-verde tracking-wide mb-1">{testimonial.name}</p>
               <p className="font-sans text-[11px] text-roiba-dorado mb-0.5">{testimonial.role}</p>
-              <p className="font-sans text-[11px] text-white/30">{testimonial.location}</p>
+              <p className="font-sans text-[11px] text-roiba-verde/30">{testimonial.location}</p>
             </div>
           ))}
         </div>
@@ -101,7 +101,7 @@ export default function TestimonialsSection({ dbTestimonials }: { dbTestimonials
               key={i}
               onClick={() => setIdx(i)}
               aria-label={`Testimonio ${i + 1}`}
-              className={`h-2 rounded-full transition-all duration-400 ${idx === i ? 'w-8 bg-roiba-dorado' : 'w-2 bg-white/[0.12] hover:bg-white/25'}`}
+              className={`h-2 rounded-full transition-all duration-400 ${idx === i ? 'w-8 bg-roiba-dorado' : 'w-2 bg-roiba-verde/[0.12] hover:bg-roiba-verde/25'}`}
             />
           ))}
         </div>

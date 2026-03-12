@@ -219,9 +219,6 @@ export default function NosotrosContent() {
         <div className="absolute inset-0 bg-roiba-verde/75" />
         <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto text-center z-10">
-          <span className="inline-block text-roiba-dorado text-micro uppercase tracking-[0.2em] mb-6">
-            {tx.heroTag}
-          </span>
           <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
             {tx.heroTitle}
           </h1>

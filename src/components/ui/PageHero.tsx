@@ -39,9 +39,6 @@ export default function PageHero({ eyebrowKey, titleKey, descKey, backgroundImag
       <div className="absolute inset-0 bg-roiba-verde/75" />
       <div className="absolute inset-0 bg-grain opacity-[0.03] pointer-events-none" />
       <div className="max-w-4xl mx-auto text-center relative z-10">
-        <p className="text-roiba-dorado uppercase tracking-[0.25em] text-micro font-medium mb-6">
-          {getText(eyebrowKey)}
-        </p>
         <h1 className="text-display-lg md:text-display-xl font-serif text-white mb-6">
           {getText(titleKey)}
         </h1>

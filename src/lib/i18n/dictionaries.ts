@@ -27,10 +27,10 @@ export const dictionaries = {
       title2: 'paraíso',
     },
     stats: {
-      proyectos: 'Años en proyectos residenciales y hoteleros',
-      satisfaccion: 'Dirección técnica en proyectos de este rango',
-      paises: 'España y República Dominicana',
-      retrasos: 'Supervisión directa de ingenieros en cada proyecto',
+      proyectos: 'Experiencia',
+      satisfaccion: 'Dirección técnica',
+      paises: 'Países',
+      retrasos: 'Supervisión directa',
     },
     about: {
       eyebrow: 'Sobre Grupo Roiba',
@@ -271,10 +271,10 @@ export const dictionaries = {
       title2: 'paradise',
     },
     stats: {
-      proyectos: 'Years in residential and hotel projects',
-      satisfaccion: 'Technical management in projects of this range',
-      paises: 'Spain and Dominican Republic',
-      retrasos: 'Direct engineer supervision on every project',
+      proyectos: 'Experience',
+      satisfaccion: 'Technical management',
+      paises: 'Countries',
+      retrasos: 'Direct supervision',
     },
     about: {
       eyebrow: 'About Grupo Roiba',

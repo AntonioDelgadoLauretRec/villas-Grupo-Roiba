@@ -44,7 +44,7 @@ export const Footer: FC = () => {
               alt="Grupo Roiba"
               width={160}
               height={88}
-              className="h-12 w-auto brightness-0 invert mb-6"
+              className="h-16 w-auto brightness-0 invert mb-6"
             />
           </div>
 
@@ -112,10 +112,6 @@ export const Footer: FC = () => {
               </a>
             </div>
 
-            <Link href="/contacto" className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-roiba-dorado hover:text-roiba-dorado-light transition-colors">
-              {t.footer.hablemos}
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 7h8M8 4l3 3-3 3" /></svg>
-            </Link>
           </div>
         </div>
       </div>
