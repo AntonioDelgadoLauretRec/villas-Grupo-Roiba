@@ -481,6 +481,21 @@ html {
   }
 }
 
+/* ===== BLOG ARTICLE PROSE ===== */
+.blog-article-prose img {
+  border-radius: 0;
+}
+.blog-article-prose figure {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+@media (min-width: 768px) {
+  .blog-article-prose figure {
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

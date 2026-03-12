@@ -12,9 +12,9 @@ import { useLanguage } from '@/lib/i18n/LanguageContext'
 const TEXT = {
   es: {
     heroTag: 'Quiénes Somos',
-    heroTitle: 'El equipo de Grupo Roiba',
+    heroTitle: 'El criterio detrás de cada proyecto',
     heroDesc:
-      'Más de 20 años ejecutando y supervisando proyectos residenciales en España y el Caribe.',
+      'Más de 20 años dirigiendo residencias de alto nivel en España y el Caribe.',
 
     origenTag: 'Origen',
     origenTitle: 'Cómo nace Grupo Roiba',
@@ -30,10 +30,10 @@ const TEXT = {
     enfoqueContent2:
       'La planificación técnica rigurosa, el control económico y de plazos, la supervisión continua de la ejecución y la coordinación eficiente de todos los agentes son los principios que guían nuestro trabajo diario. Los fundadores participan directamente en cada proyecto, asegurando que el nivel de exigencia se mantenga en todo momento.',
 
-    equipoTag: 'Profesionales',
-    equipoTitle: 'El equipo de Grupo Roiba',
+    equipoTag: 'Experiencia que inspira confianza',
+    equipoTitle: 'Quiénes somos',
     equipoDesc:
-      'Grupo Roiba está dirigido por profesionales con una sólida experiencia en el desarrollo de proyectos de edificación en España y el Caribe, tanto en el ámbito residencial como hotelero.',
+      'Grupo Roiba está formado por profesionales con una sólida trayectoria en el desarrollo, dirección y supervisión de proyectos residenciales y hoteleros de alto nivel, con un enfoque preciso, riguroso y orientado a la excelencia.',
 
     ivanRole: 'Socio Director',
     ivanCaption: 'Socio Director · Ingeniero · 20+ años',
@@ -111,9 +111,9 @@ const TEXT = {
   },
   en: {
     heroTag: 'About Us',
-    heroTitle: 'The Grupo Roiba Team',
+    heroTitle: 'The criteria behind every project',
     heroDesc:
-      'Over 20 years executing and supervising residential projects in Spain and the Caribbean.',
+      'Over 20 years leading high-end residences in Spain and the Caribbean.',
 
     origenTag: 'Origin',
     origenTitle: 'How Grupo Roiba was born',
@@ -129,10 +129,10 @@ const TEXT = {
     enfoqueContent2:
       'Rigorous technical planning, budget and schedule control, continuous execution supervision, and efficient coordination of all stakeholders are the principles that guide our daily work. The founders participate directly in every project, ensuring that the level of demand is maintained at all times.',
 
-    equipoTag: 'Professionals',
-    equipoTitle: 'The Grupo Roiba Team',
+    equipoTag: 'Experience that inspires trust',
+    equipoTitle: 'Who we are',
     equipoDesc:
-      'Grupo Roiba is led by professionals with solid experience in building development projects in Spain and the Caribbean, in both the residential and hospitality sectors.',
+      'Grupo Roiba is formed by professionals with a solid track record in the development, management and supervision of high-end residential and hospitality projects, with a precise, rigorous and excellence-driven approach.',
 
     ivanRole: 'Managing Partner',
     ivanCaption: 'Managing Partner · Engineer · 20+ years',
