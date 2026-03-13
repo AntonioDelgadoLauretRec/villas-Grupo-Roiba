@@ -5,6 +5,22 @@ import Image from 'next/image'
 
 const PROJECTS = [
   {
+    name: 'Cayucos 11',
+    location: 'Cap Cana, Punta Cana',
+    status: 'Completada',
+    type: 'Villa de lujo',
+    year: '2024',
+    image: '/images/projects/cayuco-11-cap-cana.png',
+  },
+  {
+    name: 'Iguanas 45',
+    location: 'Cap Cana, Punta Cana',
+    status: 'Completada',
+    type: 'Villa de lujo',
+    year: '2024',
+    image: '/images/projects/iguanas-45-cap-cana.png',
+  },
+  {
     name: 'Finest Punta Cana',
     location: 'Punta Cana, República Dominicana',
     status: 'Completada',

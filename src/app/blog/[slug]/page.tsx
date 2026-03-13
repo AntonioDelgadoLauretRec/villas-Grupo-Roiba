@@ -368,6 +368,26 @@ interface ArticleData {
   content: string
 }
 
+// Compute related articles by category affinity
+function getRelatedArticles(currentSlug: string, maxCount = 3) {
+  const current = ARTICLES[currentSlug]
+  if (!current) return []
+
+  const currentCategoryEs = current.es.category
+  const otherSlugs = Object.keys(ARTICLES).filter((s) => s !== currentSlug)
+
+  // Same category first, then others
+  const sameCategory = otherSlugs.filter((s) => ARTICLES[s].es.category === currentCategoryEs)
+  const diffCategory = otherSlugs.filter((s) => ARTICLES[s].es.category !== currentCategoryEs)
+  const ordered = [...sameCategory, ...diffCategory].slice(0, maxCount)
+
+  return ordered.map((s) => ({
+    slug: s,
+    es: { title: ARTICLES[s].es.title, excerpt: ARTICLES[s].es.excerpt, image: ARTICLES[s].es.image, category: ARTICLES[s].es.category, date: ARTICLES[s].es.date, readTime: ARTICLES[s].es.readTime },
+    en: { title: ARTICLES[s].en.title, excerpt: ARTICLES[s].en.excerpt, image: ARTICLES[s].en.image, category: ARTICLES[s].en.category, date: ARTICLES[s].en.date, readTime: ARTICLES[s].en.readTime },
+  }))
+}
+
 export default async function BlogSlugPage({ params }: { params: { slug: string } }) {
   const { slug } = params
 
@@ -398,12 +418,14 @@ export default async function BlogSlugPage({ params }: { params: { slug: string 
   }
 
   const staticArticle = ARTICLES[slug]
+  const relatedArticles = getRelatedArticles(slug, 3)
 
   return (
     <BlogArticlePage
       slug={slug}
       dbArticle={dbArticle}
       staticArticle={staticArticle ? { es: staticArticle.es, en: staticArticle.en } : undefined}
+      relatedArticles={relatedArticles}
     />
   )
 }
